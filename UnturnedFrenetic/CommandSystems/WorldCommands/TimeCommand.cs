@@ -9,6 +9,24 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
 {
     public class TimeCommand : AbstractCommand
     {
+        // <--[command]
+        // @Name time
+        // @Arguments <time>
+        // @Short Changes the world time.
+        // @Updated 2015/11/28
+        // @Authors mcmonkey
+        // @Group World
+        // @Description
+        // This sets the world time to the specified unsigned integer value.
+        // TODO: Explain more!
+        // @Example
+        // // This sets the time to a daylight hour.
+        // time 0
+        // @Example
+        // // This sets the time tot a nighttime hour.
+        // time 25000
+        // -->
+
         public TimeCommand()
         {
             Name = "time";
