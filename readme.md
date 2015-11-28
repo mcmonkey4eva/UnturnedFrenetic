@@ -5,6 +5,7 @@ A mod for Unturned; adds a full high-power script engine to allow dynamic moddin
 
 # First time building
 
+- Copy Assembly-CSharp.dll from Unturned's Managed folder to the Injector/Release folder
 - Open UnturnedFreneticInjector.sln in Visual Studio 2015
 - VS2015 -> Build -> Build Solution
 - Open your favorite command line, EG Bash, Powershell, Cmd, or whatever - open in the Injector's release folder
