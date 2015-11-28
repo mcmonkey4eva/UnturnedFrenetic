@@ -1,0 +1,10 @@
+obj/
+debug/
+*.suo
+*.user
+*.exe
+x64/
+.vs/
+*.psess
+*.userprefs
+Assembly-CSharp.Patched.dll
