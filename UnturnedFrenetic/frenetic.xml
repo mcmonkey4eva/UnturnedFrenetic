@@ -326,20 +326,23 @@
             </summary>
             <param name="system">The relevant command system.</param>
         </member>
-        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanPreScriptEvent.Init">
+        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanPreScriptEvent.RegisterPriority(System.Int32)">
             <summary>
-            Init the script event, registers it with the Run command.
+            Register a specific priority with the underlying event.
             </summary>
+            <param name="prio">The priority.</param>
         </member>
-        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanPreScriptEvent.Destroy">
+        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanPreScriptEvent.DeregisterPriority(System.Int32)">
             <summary>
-            Destroys the script event, unregisters it with the run command.
+            Deregister a specific priority with the underlying event.
             </summary>
+            <param name="prio">The priority.</param>
         </member>
-        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanPreScriptEvent.Run(Frenetic.CommandSystem.QueueCmds.ScriptRanPreEventArgs)">
+        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanPreScriptEvent.Run(System.Int32,Frenetic.CommandSystem.QueueCmds.ScriptRanPreEventArgs)">
             <summary>
             Runs the script event with the given input.
             </summary>
+            <param name="prio">The priority to run with.</param>
             <param name="oevt">The details of the script to be ran.</param>
             <returns>The event details after firing.</returns>
         </member>
@@ -372,20 +375,23 @@
             </summary>
             <param name="system">The relevant command system.</param>
         </member>
-        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanPostScriptEvent.Init">
+        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanPostScriptEvent.RegisterPriority(System.Int32)">
             <summary>
-            Init the script event, registers it with the Run command.
+            Register a specific priority with the underlying event.
             </summary>
+            <param name="prio">The priority.</param>
         </member>
-        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanPostScriptEvent.Destroy">
+        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanPostScriptEvent.DeregisterPriority(System.Int32)">
             <summary>
-            Destroys the script event, unregisters it with the run command.
+            Deregister a specific priority with the underlying event.
             </summary>
+            <param name="prio">The priority.</param>
         </member>
-        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanPostScriptEvent.Run(Frenetic.CommandSystem.QueueCmds.ScriptRanPostEventArgs)">
+        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanPostScriptEvent.Run(System.Int32,Frenetic.CommandSystem.QueueCmds.ScriptRanPostEventArgs)">
             <summary>
             Runs the script event with the given input.
             </summary>
+            <param name="prio">The priority to run with.</param>
             <param name="oevt">The details to the script that was ran.</param>
             <returns>The event details after firing.</returns>
         </member>
@@ -418,20 +424,23 @@
             </summary>
             <param name="system">The relevant command system.</param>
         </member>
-        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanScriptEvent.Init">
+        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanScriptEvent.RegisterPriority(System.Int32)">
             <summary>
-            Init the script event, registers it with the Run command.
+            Register a specific priority with the underlying event.
             </summary>
+            <param name="prio">The priority.</param>
         </member>
-        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanScriptEvent.Destroy">
+        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanScriptEvent.DeregisterPriority(System.Int32)">
             <summary>
-            Destroys the script event, unregisters it with the run command.
+            Deregister a specific priority with the underlying event.
             </summary>
+            <param name="prio">The priority.</param>
         </member>
-        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanScriptEvent.Run(Frenetic.CommandSystem.QueueCmds.ScriptRanEventArgs)">
+        <member name="M:Frenetic.CommandSystem.CommandEvents.ScriptRanScriptEvent.Run(System.Int32,Frenetic.CommandSystem.QueueCmds.ScriptRanEventArgs)">
             <summary>
             Runs the script event with the given input.
             </summary>
+            <param name="prio">The priority to run with.</param>
             <param name="oevt">The details of the script to be ran.</param>
             <returns>The event details after firing.</returns>
         </member>
@@ -998,7 +1007,7 @@
             <para/>Fires when a a script is going to be ran, cancellable.
             <para/>Contains the name of the script only.
             <para/>Second: <see cref="F:Frenetic.CommandSystem.QueueCmds.RunCommand.OnScriptRanEvent"/>.
-            Third: <see cref="F:Frenetic.CommandSystem.QueueCmds.RunCommand.OnScriptRanPostEvent"/>
+            <para/>Third: <see cref="F:Frenetic.CommandSystem.QueueCmds.RunCommand.OnScriptRanPostEvent"/>
             </summary>
         </member>
         <member name="F:Frenetic.CommandSystem.QueueCmds.RunCommand.OnScriptRanEvent">
@@ -1007,7 +1016,7 @@
             <para/>Fires when a a script is about to be ran, cancellable.
             <para/>Contains a validly constructed <see cref="T:Frenetic.CommandSystem.CommandScript"/> object.
             <para/>First: <see cref="F:Frenetic.CommandSystem.QueueCmds.RunCommand.OnScriptRanPreEvent"/>.
-            Third: <see cref="F:Frenetic.CommandSystem.QueueCmds.RunCommand.OnScriptRanPostEvent"/>.
+            <para/>Third: <see cref="F:Frenetic.CommandSystem.QueueCmds.RunCommand.OnScriptRanPostEvent"/>.
             </summary>
         </member>
         <member name="F:Frenetic.CommandSystem.QueueCmds.RunCommand.OnScriptRanPostEvent">
@@ -1015,7 +1024,7 @@
             The third event fired in a sequence of three.
             <para/>Fires when a a script has been ran, monitor-only.
             <para/>First: <see cref="F:Frenetic.CommandSystem.QueueCmds.RunCommand.OnScriptRanPreEvent"/>.
-            Second: <see cref="F:Frenetic.CommandSystem.QueueCmds.RunCommand.OnScriptRanEvent"/>.
+            <para/>Second: <see cref="F:Frenetic.CommandSystem.QueueCmds.RunCommand.OnScriptRanEvent"/>.
             </summary>
         </member>
         <member name="M:Frenetic.CommandSystem.QueueCmds.RunCommand.Execute(Frenetic.CommandSystem.CommandEntry)">
@@ -1102,7 +1111,20 @@
         <member name="F:Frenetic.CommandSystem.ScriptEvent.Handlers">
             <summary>
             All scripts that handle this event.
+            TODO: SortedSet?
             </summary>
+        </member>
+        <member name="M:Frenetic.CommandSystem.ScriptEvent.RegisterPriority(System.Int32)">
+            <summary>
+            Register a specific priority with the underlying event.
+            </summary>
+            <param name="prio">The priority.</param>
+        </member>
+        <member name="M:Frenetic.CommandSystem.ScriptEvent.DeregisterPriority(System.Int32)">
+            <summary>
+            Deregister a specific priority with the underlying event.
+            </summary>
+            <param name="prio">The priority.</param>
         </member>
         <member name="M:Frenetic.CommandSystem.ScriptEvent.RegisterEventHandler(System.Int32,Frenetic.CommandSystem.CommandScript)">
             <summary>
@@ -1147,7 +1169,7 @@
             Quickly sorts the event handlers.
             </summary>
         </member>
-        <member name="M:Frenetic.CommandSystem.ScriptEvent.Call">
+        <member name="M:Frenetic.CommandSystem.ScriptEvent.Call(System.Int32)">
             <summary>
             Calls the event.
             </summary>
@@ -1175,6 +1197,19 @@
             Create a copy of this script event, safe to run.
             </summary>
             <returns>The copy.</returns>
+        </member>
+        <member name="T:Frenetic.EnumExtensions">
+            <summary>
+            Adds HasFlag to the CVarFlag enum, for .NET 3.5 usage of a .NET 4.0 trick.
+            </summary>
+        </member>
+        <member name="M:Frenetic.EnumExtensions.HasFlag(Frenetic.CVarFlag,Frenetic.CVarFlag)">
+            <summary>
+            Returns whether the Flag set has a specific flag.
+            </summary>
+            <param name="tenum">The flag set.</param>
+            <param name="val">The specific flag.</param>
+            <returns>Whether it is had.</returns>
         </member>
         <member name="T:Frenetic.CVarFlag">
             <summary>
@@ -1438,23 +1473,13 @@
             <summary>
             Handles events, with a simple priority system.
             Not particularly asyncable.
-            Fires in the event added, can be fired in an alternately order by directly adding to <see cref="F:Frenetic.FreneticEventHandler`1.First"/> or <see cref="F:Frenetic.FreneticEventHandler`1.Last"/>.
+            Fires in priority order.
             </summary>
             <typeparam name="T">The event arguments type to use.</typeparam>
         </member>
-        <member name="F:Frenetic.FreneticEventHandler`1.First">
+        <member name="F:Frenetic.FreneticEventHandler`1.InternalActions">
             <summary>
-            The handlers that are fired earliest.
-            </summary>
-        </member>
-        <member name="F:Frenetic.FreneticEventHandler`1.Normal">
-            <summary>
-            The handlers that are fired after the early handlers.
-            </summary>
-        </member>
-        <member name="F:Frenetic.FreneticEventHandler`1.Last">
-            <summary>
-            The handlers that are fired last.
+            All handlers in the event.
             </summary>
         </member>
         <member name="M:Frenetic.FreneticEventHandler`1.Fire(`0)">
@@ -1463,21 +1488,108 @@
             </summary>
             <param name="args">The arguments to fire with.</param>
         </member>
-        <member name="M:Frenetic.FreneticEventHandler`1.op_Addition(Frenetic.FreneticEventHandler{`0},System.Action{`0})">
+        <member name="M:Frenetic.FreneticEventHandler`1.Add(System.Action{System.Int32,`0},System.Int32)">
             <summary>
-            Adds an action to an event.
+            Adds an event entry with a specific priority.
+            </summary>
+            <param name="act">The action to run.</param>
+            <param name="priority">The priority of the action.</param>
+        </member>
+        <member name="M:Frenetic.FreneticEventHandler`1.Contains(System.Action{System.Int32,`0},System.Int32)">
+            <summary>
+            Returns whether the given action is contained with the given priority.
+            </summary>
+            <param name="act">The action to test for.</param>
+            <param name="priority">The priority of the action.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Frenetic.FreneticEventHandler`1.Remove(System.Action{System.Int32,`0},System.Int32)">
+            <summary>
+            Remove an event entry with a specific priority.
+            </summary>
+            <param name="act">The action to no longer run.</param>
+            <param name="priority">The priority of the action.</param>
+        </member>
+        <member name="M:Frenetic.FreneticEventHandler`1.op_Addition(Frenetic.FreneticEventHandler{`0},System.Action{System.Int32,`0})">
+            <summary>
+            Adds an action to an event, with a default priority of exactly zero (0).
             </summary>
             <param name="evt">The original event.</param>
             <param name="act">The action to add.</param>
             <returns>The input event.</returns>
         </member>
-        <member name="M:Frenetic.FreneticEventHandler`1.op_Subtraction(Frenetic.FreneticEventHandler{`0},System.Action{`0})">
+        <member name="M:Frenetic.FreneticEventHandler`1.op_Subtraction(Frenetic.FreneticEventHandler{`0},System.Action{System.Int32,`0})">
             <summary>
             Removes an action from an event.
             </summary>
             <param name="evt">The original event.</param>
             <param name="act">The action to remove.</param>
             <returns>The input event.</returns>
+        </member>
+        <member name="T:Frenetic.FreneticEventEntry`1">
+            <summary>
+            Represents a prioritized event entry.
+            </summary>
+            <typeparam name="T">The type of the event arguments.</typeparam>
+        </member>
+        <member name="M:Frenetic.FreneticEventEntry`1.#ctor(System.Action{System.Int32,`0})">
+            <summary>
+            Constructs a prioritized event entry.
+            </summary>
+            <param name="a">The action to use.</param>
+        </member>
+        <member name="F:Frenetic.FreneticEventEntry`1.Priority">
+            <summary>
+            The priority by which the action is run.
+            </summary>
+        </member>
+        <member name="F:Frenetic.FreneticEventEntry`1.Act">
+            <summary>
+            The action used.
+            </summary>
+        </member>
+        <member name="M:Frenetic.FreneticEventEntry`1.CompareTo(Frenetic.FreneticEventEntry{`0})">
+            <summary>
+            Compares this event entry to another.
+            </summary>
+            <param name="other">The other.</param>
+            <returns>The relative priority.</returns>
+        </member>
+        <member name="M:Frenetic.FreneticEventEntry`1.Equals(Frenetic.FreneticEventEntry{`0})">
+            <summary>
+            Returns whether this event entry is equal to another.
+            </summary>
+            <param name="other">The other.</param>
+            <returns>Whether they are equal.</returns>
+        </member>
+        <member name="M:Frenetic.FreneticEventEntry`1.Equals(System.Object)">
+            <summary>
+            Returns whether this event entry is equal to another.
+            </summary>
+            <param name="obj">The other.</param>
+            <returns>Whether they are equal.</returns>
+        </member>
+        <member name="M:Frenetic.FreneticEventEntry`1.GetHashCode">
+            <summary>
+            Returns the hash code (merely the priority) of this event enty.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Frenetic.FreneticEventEntry`1.op_Equality(Frenetic.FreneticEventEntry{`0},Frenetic.FreneticEventEntry{`0})">
+            <summary>
+            Returns whether two event entries are equal.
+            </summary>
+            <param name="x">The first entry.</param>
+            <param name="y">The second entry.</param>
+            <returns>Whether they are equal.</returns>
+        </member>
+        <member name="M:Frenetic.FreneticEventEntry`1.op_Inequality(Frenetic.FreneticEventEntry{`0},Frenetic.FreneticEventEntry{`0})">
+            <summary>
+            Returns whether two event entries are NOT equal.
+            </summary>
+            <param name="x">The first entry.</param>
+            <param name="y">The second entry.</param>
+            <returns>Whether they are NOT equal.</returns>
         </member>
         <member name="M:Frenetic.FreneticUtilities.StringToLong(System.String)">
             <summary>
