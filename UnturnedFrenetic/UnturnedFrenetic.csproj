@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Assembly-CSharp.Patched">
+      <HintPath>..\UnturnedFreneticInjector\bin\Release\Assembly-CSharp.Patched.dll</HintPath>
+    </Reference>
     <Reference Include="Frenetic">
       <HintPath>.\Frenetic.dll</HintPath>
     </Reference>

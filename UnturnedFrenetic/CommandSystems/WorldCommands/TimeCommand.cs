@@ -24,7 +24,7 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
                 return;
             }
             uint ti = Utilities.StringToUInt(entry.GetArgument(0));
-            UnturnedFreneticMod.SetWorldTime(ti);
+            SDG.Unturned.LightingManager.time = ti;
             entry.Good("World time set to " + ti + "!");
         }
     }
