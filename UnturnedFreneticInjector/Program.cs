@@ -19,12 +19,19 @@ namespace UnturnedFreneticInjector
             Assembly thisasm = Assembly.GetCallingAssembly();
             foreach (Type type in thisasm.GetTypes())
             {
-                if (!type.IsAbstract && type.BaseType == typeof(Injectable))
+                try
                 {
-                    Console.WriteLine("Running: " + type.Name);
-                    Injectable obj = (Injectable)Activator.CreateInstance(type);
-                    obj.InjectInto(mod);
-                    Console.WriteLine("Ran: " + type.Name);
+                    if (!type.IsAbstract && type.BaseType == typeof(Injectable))
+                    {
+                        Console.WriteLine("Running: " + type.Name);
+                        Injectable obj = (Injectable)Activator.CreateInstance(type);
+                        obj.InjectInto(mod);
+                        Console.WriteLine("Ran: " + type.Name);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Failed to handle " + type.Name + " -> " + ex.ToString());
                 }
             }
             Console.WriteLine("Ran all injectables. Saving...");
