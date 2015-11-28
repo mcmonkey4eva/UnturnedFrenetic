@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Frenetic;
 using Frenetic.CommandSystem;
+using UnturnedFrenetic.CommandSystems.WorldCommands;
 
 namespace UnturnedFrenetic.CommandSystems
 {
@@ -19,6 +20,7 @@ namespace UnturnedFrenetic.CommandSystems
             System = new Commands();
             System.Output = output;
             System.Init();
+            System.RegisterCommand(new TimeCommand());
         }
     }
 }

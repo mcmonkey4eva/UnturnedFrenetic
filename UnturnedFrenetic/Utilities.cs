@@ -132,7 +132,7 @@ namespace UnturnedFrenetic
         }
 
         /// <summary>
-        /// Converts a string to a ushort Returns 0 if the string is not a valid ushort.
+        /// Converts a string to a ushort. Returns 0 if the string is not a valid ushort.
         /// </summary>
         /// <param name="input">The string to convert.</param>
         /// <returns>The converted ushort.</returns>
@@ -150,7 +150,25 @@ namespace UnturnedFrenetic
         }
 
         /// <summary>
-        /// Converts a string to a int Returns 0 if the string is not a valid int.
+        /// Converts a string to a uint. Returns 0 if the string is not a valid uint.
+        /// </summary>
+        /// <param name="input">The string to convert.</param>
+        /// <returns>The converted uint.</returns>
+        public static uint StringToUInt(string input)
+        {
+            uint output;
+            if (uint.TryParse(input, out output))
+            {
+                return output;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Converts a string to a int. Returns 0 if the string is not a valid int.
         /// </summary>
         /// <param name="input">The string to convert.</param>
         /// <returns>The converted int.</returns>

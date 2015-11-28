@@ -26,12 +26,19 @@ namespace UnturnedFrenetic
                 Instance.CommandSystem.System.ExecuteCommands(input, null);
             }
         }
-
+        
         public UnturnedFreneticCommands CommandSystem;
 
         public void Setup()
         {
             CommandSystem = new UnturnedFreneticCommands(this, new UnturnedFreneticOutputter() { TheMod = this });
+        }
+        
+        public static Action<uint> SetWorldTime;
+
+        public static void SetSetWorldTime(Action<uint> method)
+        {
+            SetWorldTime = method;
         }
     }
 }

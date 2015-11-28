@@ -45,6 +45,7 @@
     <Compile Include="CommandSystems\UnturnedFreneticCommands.cs" />
     <Compile Include="CommandSystems\UnturnedFreneticCVars.cs" />
     <Compile Include="CommandSystems\UnturnedFreneticOutputter.cs" />
+    <Compile Include="CommandSystems\WorldCommands\TimeCommand.cs" />
     <Compile Include="SysConsole.cs" />
     <Compile Include="UnturnedFreneticMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

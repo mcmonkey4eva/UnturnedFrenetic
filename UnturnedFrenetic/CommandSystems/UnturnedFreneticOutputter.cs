@@ -24,10 +24,7 @@ namespace UnturnedFrenetic.CommandSystems
 
         public override void Good(string tagged_text, DebugMode mode)
         {
-            if (mode <= DebugMode.FULL)
-            {
-                SysConsole.Output(OutputType.INFO, TheMod.CommandSystem.System.TagSystem.ParseTagsFromText(tagged_text, "^r^7", null, mode));
-            }
+            SysConsole.Output(OutputType.INFO, TheMod.CommandSystem.System.TagSystem.ParseTagsFromText(tagged_text, "^r^2", null, mode));
         }
 
         public override string ReadTextFile(string name)
