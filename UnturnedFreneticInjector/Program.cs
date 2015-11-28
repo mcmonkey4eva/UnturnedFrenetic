@@ -18,11 +18,15 @@ namespace UnturnedFreneticInjector
                 Decompile();
                 return;
             }
-            Console.WriteLine("Reading file and loading assembly...");
+            Console.WriteLine("Reading game file and loading game assembly...");
             AssemblyDefinition assemblyCSharpdll = AssemblyDefinition.ReadAssembly("Assembly-CSharp.dll");
-            ModuleDefinition mod = assemblyCSharpdll.MainModule;
+            ModuleDefinition gamedef = assemblyCSharpdll.MainModule;
+            Console.WriteLine("Reading mod file and loading mod assembly...");
+            AssemblyDefinition unturnedFrenetic = AssemblyDefinition.ReadAssembly("UnturnedFrenetic.dll");
+            ModuleDefinition moddef = unturnedFrenetic.MainModule;
             Console.WriteLine("Loaded. Running all injectables...");
             Assembly thisasm = Assembly.GetCallingAssembly();
+            gamedef.AssemblyReferences.Add(new AssemblyNameReference("UnturnedFrenetic", new Version(1, 0, 0, 0)));
             foreach (Type type in thisasm.GetTypes())
             {
                 try
@@ -31,7 +35,7 @@ namespace UnturnedFreneticInjector
                     {
                         Console.WriteLine("Running: " + type.Name);
                         Injectable obj = (Injectable)Activator.CreateInstance(type);
-                        obj.InjectInto(mod);
+                        obj.InjectInto(gamedef, moddef);
                         Console.WriteLine("Ran: " + type.Name);
                     }
                 }

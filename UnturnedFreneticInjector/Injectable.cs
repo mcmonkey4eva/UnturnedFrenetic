@@ -20,6 +20,6 @@ namespace UnturnedFreneticInjector
             return null;
         }
 
-        public abstract void InjectInto(ModuleDefinition mdef);
+        public abstract void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef);
     }
 }

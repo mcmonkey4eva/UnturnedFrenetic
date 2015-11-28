@@ -9,14 +9,14 @@ namespace UnturnedFreneticInjector.Injectables
 {
     class CommandDebugInjectable : Injectable
     {
-        public override void InjectInto(ModuleDefinition mdef)
+        public override void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef)
         {
-            TypeDefinition debugtype = mdef.GetType("SDG.Unturned.CommandDebug");
+            TypeDefinition debugtype = gamedef.GetType("SDG.Unturned.CommandDebug");
             MethodDefinition method = GetMethod(debugtype, "execute");
             MethodBody body = method.Body;
             // Load the output string onto the stack
             body.Instructions.Insert(3, Instruction.Create(OpCodes.Ldstr, "Hello World! This is the first working Unturned Frenetic Injector :)"));
-            TypeDefinition windowtype = mdef.GetType("SDG.Unturned.CommandWindow");
+            TypeDefinition windowtype = gamedef.GetType("SDG.Unturned.CommandWindow");
             MethodDefinition logmethod = GetMethod(windowtype, "Log", 1);
             // Log the string
             body.Instructions.Insert(4, Instruction.Create(OpCodes.Call, logmethod.GetElementMethod()));
