@@ -26,12 +26,28 @@ namespace UnturnedFrenetic
                 Instance.CommandSystem.System.ExecuteCommands(input, null);
             }
         }
+
+        public void Tick(float delta)
+        {
+            CommandSystem.System.Tick(delta);
+        }
         
         public UnturnedFreneticCommands CommandSystem;
+
+        public void EnableForLevel()
+        {
+            UnityEngine.GameObject game = new UnityEngine.GameObject("UnturnedFreneticGameObject");
+            if (game.GetComponent<UnturnedFreneticTicker>() != null)
+            {
+                return;
+            }
+            game.AddComponent<UnturnedFreneticTicker>();
+        }
 
         public void Setup()
         {
             CommandSystem = new UnturnedFreneticCommands(this, new UnturnedFreneticOutputter() { TheMod = this });
+            SDG.Unturned.Level.onPostLevelLoaded += (o) => EnableForLevel();
         }
     }
 }
