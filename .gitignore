@@ -11,3 +11,5 @@ Assembly-CSharp.Patched.dll
 *.pdb
 *.manifest
 *.il
+*.dll
+*.xml

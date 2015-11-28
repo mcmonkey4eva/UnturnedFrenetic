@@ -60,12 +60,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UnturnedFrenetic\UnturnedFrenetic.csproj">
-      <Project>{a740751a-f83a-4299-a675-e5542518da61}</Project>
-      <Name>UnturnedFrenetic</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
