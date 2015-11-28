@@ -24,6 +24,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             }
             switch (data.Input[0])
             {
+                // <--[tag]
+                // @Name PlayerTag.name
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns the name of the player.
+                // @Example "bob" .name returns "bob".
+                // -->
                 case "name":
                     return new TextTag(Name).Handle(data.Shrink());
                 default:

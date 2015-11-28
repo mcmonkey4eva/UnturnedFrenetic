@@ -10,6 +10,12 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 {
     public class PlayerTagBase : TemplateTags
     {
+        // <--[tag]
+        // @Base player[<TextTag>]
+        // @Group Entities
+        // @ReturnType PlayerTag
+        // @Returns the input text as a PlayerTag. (Soon: A player object!)
+        // -->
         public PlayerTagBase()
         {
             Name = "player";
