@@ -132,10 +132,10 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Name PlayerTag.vision
                 // @Group Status
                 // @ReturnType TextTag
-                // @Returns the player's current vision.
-                // @Example "bob" .vision returns "124".
+                // @Returns the player's current vision obscurity level, for example caused by berries.
+                // @Example "bob" .vision returns "20".
                 // -->
-                case "vision": // TODO: find purpose, it seems to be more of a "blindness" level, as it starts from 0
+                case "vision":
                     return new TextTag(Internal.player.life.vision).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.is_bleeding
