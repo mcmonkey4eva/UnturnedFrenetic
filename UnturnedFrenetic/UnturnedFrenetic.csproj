@@ -34,8 +34,9 @@
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>.\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-CSharp.Patched">
-      <HintPath>..\UnturnedFreneticInjector\bin\Release\Assembly-CSharp.Patched.dll</HintPath>
+    <Reference Include="Assembly-CSharp.Patched, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\UnturnedFreneticInjector\bin\Debug\Assembly-CSharp.Patched.dll</HintPath>
     </Reference>
     <Reference Include="Frenetic">
       <HintPath>.\Frenetic.dll</HintPath>
@@ -51,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandSystems\EntityCommands\SpawnCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\GiveCommand.cs" />
     <Compile Include="CommandSystems\UnturnedFreneticCommands.cs" />
     <Compile Include="CommandSystems\UnturnedFreneticCVars.cs" />

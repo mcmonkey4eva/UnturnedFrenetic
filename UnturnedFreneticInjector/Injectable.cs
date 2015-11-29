@@ -20,6 +20,18 @@ namespace UnturnedFreneticInjector
             return null;
         }
 
+        public FieldDefinition GetField(TypeDefinition type, string name)
+        {
+            foreach (FieldDefinition method in type.Fields)
+            {
+                if (method.Name == name)
+                {
+                    return method;
+                }
+            }
+            return null;
+        }
+
         public abstract void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef);
     }
 }

@@ -50,6 +50,7 @@
     <Compile Include="Injectable.cs" />
     <Compile Include="Injectables\AllHashesLegalInjectable.cs" />
     <Compile Include="Injectables\CommandDebugInjectable.cs" />
+    <Compile Include="Injectables\ExposeAnimalManagerMethodsInjectable.cs" />
     <Compile Include="Injectables\StartTheModInjectable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

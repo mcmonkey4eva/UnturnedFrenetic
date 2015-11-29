@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using Frenetic;
 using Frenetic.CommandSystem;
+using UnturnedFrenetic.CommandSystems.EntityCommands;
+using UnturnedFrenetic.CommandSystems.PlayerCommands;
 using UnturnedFrenetic.CommandSystems.WorldCommands;
 using UnturnedFrenetic.TagSystems.TagBases;
-using UnturnedFrenetic.CommandSystems.PlayerCommands;
 
 namespace UnturnedFrenetic.CommandSystems
 {
@@ -18,20 +19,29 @@ namespace UnturnedFrenetic.CommandSystems
 
         public UnturnedFreneticCommands(UnturnedFreneticMod mod, Outputter output)
         {
-            TheMod = mod;
-            System = new Commands();
-            System.Output = output;
-            System.Init();
-            // Player Commands
-            System.RegisterCommand(new GiveCommand());
-            // World Commands
-            System.RegisterCommand(new TimeCommand());
-            // Tag Objects
-            System.TagSystem.Register(new AnimalAssetTagBase());
-            System.TagSystem.Register(new AnimalTagBase());
-            System.TagSystem.Register(new ItemTagBase());
-            System.TagSystem.Register(new LocationTagBase());
-            System.TagSystem.Register(new PlayerTagBase());
+            try
+            {
+                TheMod = mod;
+                System = new Commands();
+                System.Output = output;
+                System.Init();
+                // Entity Commands
+                System.RegisterCommand(new SpawnCommand());
+                // Player Commands
+                System.RegisterCommand(new GiveCommand());
+                // World Commands
+                System.RegisterCommand(new TimeCommand());
+                // Tag Objects
+                System.TagSystem.Register(new AnimalAssetTagBase());
+                System.TagSystem.Register(new AnimalTagBase());
+                System.TagSystem.Register(new ItemTagBase());
+                System.TagSystem.Register(new LocationTagBase());
+                System.TagSystem.Register(new PlayerTagBase());
+            }
+            catch (Exception ex)
+            {
+                SysConsole.Output(OutputType.ERROR, "Error registering commands: " + ex.ToString());
+            }
         }
     }
 }
