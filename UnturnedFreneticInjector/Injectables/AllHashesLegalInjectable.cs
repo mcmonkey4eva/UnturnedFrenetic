@@ -11,6 +11,10 @@ namespace UnturnedFreneticInjector.Injectables
     {
         public override void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef)
         {
+            // This code removes the check "if (!Hash.verifyHash(array3, Level.hash))" and "if (!ReadWrite.appIn(array4, (byte)objects[7]))"
+            // from the provider's receiveServer method.
+            // This allows the client to connect to the server even if the hash doesn't line up right.
+            // Our own client cannot connect to our own server without this.
             TypeDefinition providertype = gamedef.GetType("SDG.Unturned.Provider");
             MethodDefinition receivemethod = GetMethod(providertype, "receiveServer", 5);
             MethodBody rmb = receivemethod.Body;

@@ -11,6 +11,10 @@ namespace UnturnedFreneticInjector.Injectables
     {
         public override void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef)
         {
+            // This injects a debug output message to the "debug" command, as well as allowing execution
+            // of Frenetic command via the debug command.
+            // To use, simple input: debug echo "Hello world!"
+            // Replace the command after debug with any valid Frenetic-enabled command.
             TypeDefinition debugtype = gamedef.GetType("SDG.Unturned.CommandDebug");
             MethodDefinition method = GetMethod(debugtype, "execute");
             ParameterDefinition paramstr = method.Parameters[1];
