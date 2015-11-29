@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandSystems\PlayerCommands\GiveCommand.cs" />
     <Compile Include="CommandSystems\UnturnedFreneticCommands.cs" />
     <Compile Include="CommandSystems\UnturnedFreneticCVars.cs" />
     <Compile Include="CommandSystems\UnturnedFreneticOutputter.cs" />

@@ -6,6 +6,7 @@ using Frenetic;
 using Frenetic.CommandSystem;
 using UnturnedFrenetic.CommandSystems.WorldCommands;
 using UnturnedFrenetic.TagSystems.TagBases;
+using UnturnedFrenetic.CommandSystems.PlayerCommands;
 
 namespace UnturnedFrenetic.CommandSystems
 {
@@ -21,7 +22,11 @@ namespace UnturnedFrenetic.CommandSystems
             System = new Commands();
             System.Output = output;
             System.Init();
+            // Player Commands
+            System.RegisterCommand(new GiveCommand());
+            // World Commands
             System.RegisterCommand(new TimeCommand());
+            // Tag Objects
             System.TagSystem.Register(new PlayerTagBase());
         }
     }
