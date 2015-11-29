@@ -35,7 +35,7 @@ namespace UnturnedFreneticInjector.Injectables
             // Return so we don't get random debug spam.
             body.Instructions.Insert(8, Instruction.Create(OpCodes.Ret));
             // Load the output string onto the stack.
-            body.Instructions.Insert(9, Instruction.Create(OpCodes.Ldstr, "Hello World! This is the first working Unturned Frenetic Injector :)"));
+            body.Instructions.Insert(9, Instruction.Create(OpCodes.Ldstr, "Frenetic loaded properly!"));
             // Log the string.
             body.Instructions.Insert(10, Instruction.Create(OpCodes.Call, logmethod));
             // Redirect the result of the IF to our new method.
