@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Frenetic.TagHandlers;
 using Frenetic.TagHandlers.Objects;
+using SDG.Unturned;
+using UnityEngine;
 
 namespace UnturnedFrenetic.TagSystems.TagObjects
 {
@@ -73,6 +75,27 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "z":
                     return new TextTag(Z).Handle(data.Shrink());
+                // <--[tag]
+                // @Name LocationTag.find_animals_within[<TextTag>]
+                // @Group General Information
+                // @ReturnType ListTag<AnimalTag>
+                // @Returns a list of all animals within the specified range (spherical).
+                // @Example "0,1,2" .find_animals_within[10] returns "2|3|17".
+                // -->
+                case "find_animals_within":
+                    {
+                        List<TemplateObject> animals = new List<TemplateObject>();
+                        Vector3 vec3 = new Vector3(X, Y, Z);
+                        float range = Utilities.StringToFloat(data.GetModifier(0));
+                        foreach (Animal animal in AnimalManager.animals)
+                        {
+                            if ((animal.transform.position - vec3).sqrMagnitude <= range * range)
+                            {
+                                animals.Add(new AnimalTag(animal));
+                            }
+                        }
+                        return new ListTag(animals).Handle(data.Shrink());
+                    }
                 default:
                     return new TextTag(ToString()).Handle(data);
             }
