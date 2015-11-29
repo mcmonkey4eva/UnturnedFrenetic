@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Frenetic.CommandSystem;
+using SDG.Unturned;
 using UnturnedFrenetic.TagSystems.TagObjects;
+using Frenetic.TagHandlers;
 
 namespace UnturnedFrenetic.CommandSystems.PlayerCommands
 {
@@ -35,9 +37,10 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
             {
                 amount = (byte)Utilities.StringToUInt(entry.GetArgument(2));
             }
-            if (SDG.Unturned.ItemTool.tryForceGiveItem(player.Internal.player, item, amount))
+            if (ItemTool.tryForceGiveItem(player.Internal.player, item, amount))
             {
-                entry.Good("Successfully gave item!");
+                ItemAsset itemAsset = (ItemAsset)Assets.find(EAssetType.ITEM, item);
+                entry.Good("Successfully gave a " + TagParser.Escape(itemAsset.name) + "!");
             }
             else
             {
