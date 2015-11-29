@@ -16,7 +16,7 @@ A mod for Unturned; adds a full high-power script engine to allow dynamic moddin
 - Copy Injector/Release/Assembly-CSharp.Patched.dll to Unturned's Managed/Assembly-CSharp.dll
 - Copy UnturnedFrenetic/Release/Frenetic.dll and UnturnedFrenetic.dll to Unturned's Managed folder as well.
 - Launch the Unturned server!
-- Be warned, your local client may no longer be able to play games until you revert Assembly-CSharp.dll to its original form. Make sure you are running off a server box!
+- Be warned, your local client may no longer be able to play on other servers until you revert Assembly-CSharp.dll to its original form. Make sure you are running off a server box!
 
 # Warning
 
