@@ -66,8 +66,17 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "is_pro":
                     return new TextTag(Internal.isPro).Handle(data.Shrink());
                 // <--[tag]
+                // @Name PlayerTag.agro
+                // @Group Status
+                // @ReturnType TextTag
+                // @Returns the number of zombies agro'd by this player currently.
+                // @Example "bob" .agro returns "5".
+                // -->
+                case "agro":
+                    return new TextTag(Internal.player.agro).Handle(data.Shrink());
+                // <--[tag]
                 // @Name PlayerTag.health
-                // @Group Attributes
+                // @Group Status
                 // @ReturnType TextTag
                 // @Returns the player's current health level. Maximum health level is 100.
                 // @Example "bob" .health returns "56".
@@ -76,7 +85,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     return new TextTag(Internal.player.life.health).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.food
-                // @Group Attributes
+                // @Group Status
                 // @ReturnType TextTag
                 // @Returns the player's current food level. Maximum food level is 100.
                 // @Example "bob" .food returns "89".
@@ -85,7 +94,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     return new TextTag(Internal.player.life.food).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.water
-                // @Group Attributes
+                // @Group Status
                 // @ReturnType TextTag
                 // @Returns the player's current water level. Maximum water level is 100.
                 // @Example "bob" .water returns "74".
@@ -94,7 +103,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     return new TextTag(Internal.player.life.water).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.virus
-                // @Group Attributes
+                // @Group Status
                 // @ReturnType TextTag
                 // @Returns the player's current virus level. Maximum virus level is 100.
                 // @Example "bob" .virus returns "37".
@@ -103,7 +112,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     return new TextTag(Internal.player.life.virus).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.stamina
-                // @Group Attributes
+                // @Group Status
                 // @ReturnType TextTag
                 // @Returns the player's current stamina level. Maximum stamina level is 100.
                 // @Example "bob" .stamina returns "13".
@@ -112,7 +121,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     return new TextTag(Internal.player.life.stamina).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.oxygen
-                // @Group Attributes
+                // @Group Status
                 // @ReturnType TextTag
                 // @Returns the player's current oxygen level. Maximum oxygen level is 100.
                 // @Example "bob" .oxygen returns "42".
@@ -121,7 +130,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     return new TextTag(Internal.player.life.oxygen).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.vision
-                // @Group Attributes
+                // @Group Status
                 // @ReturnType TextTag
                 // @Returns the player's current vision.
                 // @Example "bob" .vision returns "124".
@@ -130,7 +139,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     return new TextTag(Internal.player.life.vision).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.is_bleeding
-                // @Group Attributes
+                // @Group Status
                 // @ReturnType TextTag
                 // @Returns whether the player is bleeding.
                 // @Example "bob" .is_bleeding returns "false".
@@ -139,7 +148,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     return new TextTag(Internal.player.life.isBleeding).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.is_broken
-                // @Group Attributes
+                // @Group Status
                 // @ReturnType TextTag
                 // @Returns whether the player has a broken limb.
                 // @Example "bob" .is_broken returns "true".
@@ -148,7 +157,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     return new TextTag(Internal.player.life.isBroken).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.is_freezing
-                // @Group Attributes
+                // @Group Status
                 // @ReturnType TextTag
                 // @Returns whether the player is currently freezing.
                 // @Example "bob" .is_freezing returns "false".
