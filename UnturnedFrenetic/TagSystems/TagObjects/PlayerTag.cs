@@ -4,18 +4,32 @@ using System.Linq;
 using System.Text;
 using Frenetic.TagHandlers;
 using Frenetic.TagHandlers.Objects;
+using SDG.Unturned;
 
 namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     class PlayerTag : TemplateObject
     {
-        public string Name;
+        public SteamPlayer Internal;
 
-        public PlayerTag(string name)
+        public string Name;
+        
+        public PlayerTag(SteamPlayer p, string name)
         {
+            Internal = p;
             Name = name;
         }
 
+        public static PlayerTag For(string name)
+        {
+            SteamPlayer p = PlayerTool.getSteamPlayer(name);
+            if (p == null)
+            {
+                return null;
+            }
+            return new PlayerTag(p, name);
+        }
+        
         public override string Handle(TagData data)
         {
             if (data.Input.Count == 0)
@@ -32,7 +46,16 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Example "bob" .name returns "bob".
                 // -->
                 case "name":
-                    return new TextTag(Name).Handle(data.Shrink());
+                    return new TextTag(Internal.playerID.playerName).Handle(data.Shrink());
+                // <--[tag]
+                // @Name PlayerTag.steam_id
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns the name of the player.
+                // @Example "bob" .steam_id returns "1000".
+                // -->
+                case "steam_id":
+                    return new TextTag(Internal.playerID.steamID.ToString()).Handle(data.Shrink());
                 default:
                     return new TextTag(ToString()).Handle(data);
             }
@@ -40,7 +63,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 
         public override string ToString()
         {
-            return Name;
+            return Internal.playerID.steamID.ToString();
         }
     }
 }

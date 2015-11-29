@@ -14,7 +14,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
         // @Base player[<TextTag>]
         // @Group Entities
         // @ReturnType PlayerTag
-        // @Returns the input text as a PlayerTag. (Soon: A player object!)
+        // @Returns the player corresponding to the given name.
         // -->
         public PlayerTagBase()
         {
@@ -24,8 +24,12 @@ namespace UnturnedFrenetic.TagSystems.TagBases
         public override string Handle(TagData data)
         {
             string pname = data.GetModifier(0);
-            // TODO: validate name
-            return new PlayerTag(pname).Handle(data.Shrink());
+            PlayerTag ptag = PlayerTag.For(pname);
+            if (ptag == null)
+            {
+                return new TextTag("{NULL}").Handle(data.Shrink());
+            }
+            return ptag.Handle(data.Shrink());
         }
     }
 }
