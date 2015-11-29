@@ -57,7 +57,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Group General Information
                 // @ReturnType TextTag
                 // @Returns the animal ID number of the animal.
-                // @Example "2" .id returns "1".
+                // @Example "2" .aid returns "1".
                 // -->
                 case "aid":
                     return new TextTag(Internal.index).Handle(data.Shrink());
@@ -66,20 +66,19 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Group General Information
                 // @ReturnType TextTag
                 // @Returns this animal's instance ID number.
-                // @Example "2" .id returns "2".
+                // @Example "2" .iid returns "2".
                 // -->
                 case "iid":
                     return new TextTag(Internal.gameObject.GetInstanceID()).Handle(data.Shrink());
                 // <--[tag]
-                // @Name AnimalTag.asset_id
+                // @Name AnimalTag.asset
                 // @Group General Information
-                // @ReturnType TextTag
-                // @Returns the ID number of the animal asset.
-                // @Example "2" .id returns "6".
+                // @ReturnType AnimalAssetTag
+                // @Returns the animal asset that this animal is based off.
+                // @Example "2" .asset returns "Cow".
                 // -->
-                case "asset_id":
-                    return new TextTag(Internal.id).Handle(data.Shrink());
-                // TODO: Return the actual asset as .asset!
+                case "asset":
+                    return new AnimalAssetTag(Internal.asset).Handle(data.Shrink());
                 default:
                     return new TextTag(ToString()).Handle(data);
             }
