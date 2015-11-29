@@ -66,7 +66,6 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "id":
                     return new TextTag(Internal.id).Handle(data.Shrink());
-                // TODO: Return the actual asset as .asset!
                 default:
                     return new TextTag(ToString()).Handle(data);
             }

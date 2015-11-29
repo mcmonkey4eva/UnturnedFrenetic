@@ -79,6 +79,15 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "asset":
                     return new AnimalAssetTag(Internal.asset).Handle(data.Shrink());
+                // <--[tag]
+                // @Name AnimalTag.location
+                // @Group Status
+                // @ReturnType LocationTag
+                // @Returns the animal's current world position.
+                // @Example "2" .location returns "(5, 10, 15)".
+                // -->
+                case "location":
+                    return new LocationTag(Internal.transform.position).Handle(data.Shrink());
                 default:
                     return new TextTag(ToString()).Handle(data);
             }
