@@ -6,13 +6,13 @@ using SDG.Unturned;
 
 namespace UnturnedFrenetic
 {
-    class UnturnedGenericCommand : Command
+    class UnturnedPreCommand : Command
     {
-        public UnturnedGenericCommand()
+        public UnturnedPreCommand()
         {
-            this._command = "generic";
-            this._info = "Backup if all other commands fail!";
-            this._help = "Backup if all other commands fail!";
+            this._command = "precmd";
+            this._info = "Fires before all other commands!";
+            this._help = "Fires before all other commands!";
         }
 
         public override bool check(Steamworks.CSteamID executorID, string method, string parameter)
@@ -27,9 +27,8 @@ namespace UnturnedFrenetic
 
         public bool Execute(Steamworks.CSteamID executorID, string method, string parameter)
         {
-            // TODO: Fire unknown command event!
-            SysConsole.Output(OutputType.WARNING, "Unknown command: " + method + " " + parameter);
-            return true;
+            // TODO: Fire input command event!
+            return false;
         }
     }
 }
