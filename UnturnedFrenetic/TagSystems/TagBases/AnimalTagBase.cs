@@ -23,9 +23,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 
         public override string Handle(TagData data)
         {
-            ushort aID;
-            bool valid = ushort.TryParse(data.GetModifier(0), out aID);
-            AnimalTag atag = AnimalTag.For(aID);
+            AnimalTag atag = AnimalTag.For(Utilities.StringToInt(data.GetModifier(0)));
             if (atag == null)
             {
                 return new TextTag("{NULL}").Handle(data.Shrink());

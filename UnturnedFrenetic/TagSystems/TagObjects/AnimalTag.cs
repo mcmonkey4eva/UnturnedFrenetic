@@ -18,9 +18,16 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             Internal = animal;
         }
 
-        public static AnimalTag For(ushort aID)
+        public static AnimalTag For(int aID)
         {
-            Animal animal = AnimalManager.getAnimal(aID);
+            Animal animal = null;
+            foreach (Animal anim in AnimalManager.animals)
+            {
+                if (anim.gameObject.GetInstanceID() == aID)
+                {
+                    animal = anim;
+                }
+            }
             if (animal == null)
             {
                 return null;
@@ -50,19 +57,29 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Group General Information
                 // @ReturnType TextTag
                 // @Returns the animal ID number of the animal.
-                // @Example "2" .id returns "2".
+                // @Example "2" .id returns "1".
                 // -->
                 case "aid":
                     return new TextTag(Internal.index).Handle(data.Shrink());
                 // <--[tag]
-                // @Name AnimalTag.id
+                // @Name AnimalTag.iid
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns this animal's instance ID number.
+                // @Example "2" .id returns "2".
+                // -->
+                case "iid":
+                    return new TextTag(Internal.gameObject.GetInstanceID()).Handle(data.Shrink());
+                // <--[tag]
+                // @Name AnimalTag.asset_id
                 // @Group General Information
                 // @ReturnType TextTag
                 // @Returns the ID number of the animal asset.
                 // @Example "2" .id returns "6".
                 // -->
-                case "id":
+                case "asset_id":
                     return new TextTag(Internal.id).Handle(data.Shrink());
+                // TODO: Return the actual asset as .asset!
                 default:
                     return new TextTag(ToString()).Handle(data);
             }
@@ -70,7 +87,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 
         public override string ToString()
         {
-            return Internal.index.ToString();
+            return Internal.gameObject.GetInstanceID().ToString();
         }
     }
 }

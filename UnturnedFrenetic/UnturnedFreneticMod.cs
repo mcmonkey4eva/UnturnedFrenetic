@@ -24,6 +24,7 @@ namespace UnturnedFrenetic
         {
             SDG.Unturned.Commander.commands.Insert(0, new UnturnedPreCommand());
             SDG.Unturned.Commander.commands.Add(new UnturnedGenericCommand());
+            ItemTag.Init();
         }
 
         public static void RunCommands(string input)
@@ -34,6 +35,8 @@ namespace UnturnedFrenetic
             }
         }
 
+        public static long cID = 1;
+        
         public void Tick(float delta)
         {
             CommandSystem.System.Tick(delta);
@@ -49,7 +52,6 @@ namespace UnturnedFrenetic
                 return;
             }
             game.AddComponent<UnturnedFreneticTicker>();
-            ItemTag.Init();
         }
 
         public void Setup()
