@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnturnedFrenetic.CommandSystems;
+using UnturnedFrenetic.TagSystems.TagObjects;
 
 namespace UnturnedFrenetic
 {
@@ -48,6 +49,7 @@ namespace UnturnedFrenetic
                 return;
             }
             game.AddComponent<UnturnedFreneticTicker>();
+            ItemTag.Init();
         }
 
         public void Setup()

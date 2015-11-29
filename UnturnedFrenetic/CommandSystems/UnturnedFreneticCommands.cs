@@ -27,6 +27,7 @@ namespace UnturnedFrenetic.CommandSystems
             // World Commands
             System.RegisterCommand(new TimeCommand());
             // Tag Objects
+            System.TagSystem.Register(new ItemTagBase());
             System.TagSystem.Register(new PlayerTagBase());
         }
     }

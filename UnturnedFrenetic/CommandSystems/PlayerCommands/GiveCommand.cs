@@ -31,16 +31,20 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
                 entry.Bad("Invalid player!");
                 return;
             }
-            ushort item = Utilities.StringToUShort(entry.GetArgument(1));
+            ItemTag item = ItemTag.For(entry.GetArgument(1));
+            if (item == null)
+            {
+                entry.Bad("Invalid item!");
+                return;
+            }
             byte amount = 1;
             if (entry.Arguments.Count > 2)
             {
                 amount = (byte)Utilities.StringToUInt(entry.GetArgument(2));
             }
-            if (ItemTool.tryForceGiveItem(player.Internal.player, item, amount))
+            if (ItemTool.tryForceGiveItem(player.Internal.player, item.Internal.id, amount))
             {
-                ItemAsset itemAsset = (ItemAsset)Assets.find(EAssetType.ITEM, item);
-                entry.Good("Successfully gave a " + TagParser.Escape(itemAsset.name) + "!");
+                entry.Good("Successfully gave a " + TagParser.Escape(item.Internal.name) + "!");
             }
             else
             {
