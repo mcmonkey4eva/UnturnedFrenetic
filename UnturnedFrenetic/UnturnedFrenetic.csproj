@@ -64,11 +64,13 @@
     <Compile Include="TagSystems\TagBases\AnimalTagBase.cs" />
     <Compile Include="TagSystems\TagBases\ItemTagBase.cs" />
     <Compile Include="TagSystems\TagBases\PlayerTagBase.cs" />
+    <Compile Include="TagSystems\TagBases\ZombieTagBase.cs" />
     <Compile Include="TagSystems\TagObjects\AnimalAssetTag.cs" />
     <Compile Include="TagSystems\TagObjects\AnimalTag.cs" />
     <Compile Include="TagSystems\TagObjects\ItemTag.cs" />
     <Compile Include="TagSystems\TagObjects\LocationTag.cs" />
     <Compile Include="TagSystems\TagObjects\PlayerTag.cs" />
+    <Compile Include="TagSystems\TagObjects\ZombieTag.cs" />
     <Compile Include="UnturnedFreneticMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnturnedFreneticTicker.cs" />
