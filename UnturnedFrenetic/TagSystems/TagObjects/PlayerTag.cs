@@ -51,11 +51,20 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Name PlayerTag.steam_id
                 // @Group General Information
                 // @ReturnType TextTag
-                // @Returns the name of the player.
+                // @Returns the Steam ID number of the player.
                 // @Example "bob" .steam_id returns "1000".
                 // -->
                 case "steam_id":
                     return new TextTag(Internal.playerID.steamID.ToString()).Handle(data.Shrink());
+                // <--[tag]
+                // @Name PlayerTag.is_pro
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns whether the player is considered pro.
+                // @Example "bob" .is_pro returns "true".
+                // -->
+                case "is_pro":
+                    return new TextTag(Internal.isPro).Handle(data.Shrink());
                 default:
                     return new TextTag(ToString()).Handle(data);
             }
