@@ -76,8 +76,8 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Returns this zombie's specialty. Value can be: NORMAL, MEGA, CRAWLER, SPRINTER.
                 // @Example "2" .specialty returns "NORMAL".
                 // -->
-                case "type":
-                    return new TextTag(Internal.type).Handle(data.Shrink());
+                case "specialty":
+                    return new TextTag(Internal.speciality.ToString()).Handle(data.Shrink());
                 // <--[tag]
                 // @Name ZombieTag.location
                 // @Group Status
