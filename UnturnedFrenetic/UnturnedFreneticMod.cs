@@ -19,6 +19,12 @@ namespace UnturnedFrenetic
             SysConsole.Output(OutputType.INIT, "Unturned Frenetic mod loaded! Releasing back to main game...");
         }
 
+        public static void InitSecondary()
+        {
+            SDG.Unturned.Commander.commands.Insert(0, new UnturnedPreCommand());
+            SDG.Unturned.Commander.commands.Add(new UnturnedGenericCommand());
+        }
+
         public static void RunCommands(string input)
         {
             if (!string.IsNullOrEmpty(input))

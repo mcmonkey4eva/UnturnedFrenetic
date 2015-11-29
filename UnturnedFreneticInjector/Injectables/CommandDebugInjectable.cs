@@ -16,11 +16,11 @@ namespace UnturnedFreneticInjector.Injectables
             ParameterDefinition paramstr = method.Parameters[1];
             TypeDefinition modmaintype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
             MethodDefinition modruncommands = GetMethod(modmaintype, "RunCommands", 1);
-            MethodReference game_modruncommands = gamedef.Import(modruncommands);
+            MethodReference game_modruncommands = gamedef.ImportReference(modruncommands);
             TypeDefinition windowtype = gamedef.GetType("SDG.Unturned.CommandWindow");
             MethodDefinition logmethod = GetMethod(windowtype, "Log", 1);
             MethodDefinition isnullorempty = GetMethod(gamedef.TypeSystem.String.Resolve(), "IsNullOrEmpty", 1);
-            MethodReference game_isnullorempty = gamedef.Import(isnullorempty);
+            MethodReference game_isnullorempty = gamedef.ImportReference(isnullorempty);
             MethodBody body = method.Body;
             // Load the parameter onto the stack.
             body.Instructions.Insert(3, Instruction.Create(OpCodes.Ldarg_S, paramstr));

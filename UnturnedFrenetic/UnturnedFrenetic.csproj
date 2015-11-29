@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>.\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp.Patched">
       <HintPath>..\UnturnedFreneticInjector\bin\Release\Assembly-CSharp.Patched.dll</HintPath>
     </Reference>
@@ -58,6 +61,8 @@
     <Compile Include="UnturnedFreneticMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnturnedFreneticTicker.cs" />
+    <Compile Include="UnturnedPreCommand.cs" />
+    <Compile Include="UnturnedGenericCommand.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup />
