@@ -96,6 +96,30 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         }
                         return new ListTag(animals).Handle(data.Shrink());
                     }
+                // <--[tag]
+                // @Name LocationTag.find_zombies_within[<TextTag>]
+                // @Group General Information
+                // @ReturnType ListTag<ZombieTag>
+                // @Returns a list of all zombies within the specified range (spherical).
+                // @Example "0,1,2" .find_zombies_within[10] returns "2|3|17".
+                // -->
+                case "find_zombies_within":
+                    {
+                        List<TemplateObject> zombies = new List<TemplateObject>();
+                        Vector3 vec3 = new Vector3(X, Y, Z);
+                        float range = Utilities.StringToFloat(data.GetModifier(0));
+                        for (int i = 0; i < ZombieManager.regions.Length; i++)
+                        {
+                            foreach (Zombie zombie in ZombieManager.regions[i].zombies)
+                            {
+                                if ((zombie.transform.position - vec3).sqrMagnitude <= range * range)
+                                            {
+                                    zombies.Add(new ZombieTag(zombie, i));
+                                }
+                            }
+                        }
+                        return new ListTag(zombies).Handle(data.Shrink());
+                    }
                 default:
                     return new TextTag(ToString()).Handle(data);
             }
