@@ -8,7 +8,7 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 
 namespace UnturnedFrenetic.TagSystems.TagBases
 {
-    class ItemAssetTagBase : TemplateTags
+    public class ItemAssetTagBase : TemplateTags
     {
         // <--[tag]
         // @Base item_asset[<TextTag>]
@@ -18,7 +18,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
         // -->
         public ItemAssetTagBase()
         {
-            Name = "item";
+            Name = "item_asset";
         }
 
         public override string Handle(TagData data)

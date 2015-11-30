@@ -112,6 +112,30 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
                 return;
             }
+            else if (etype.Type == EntityAssetType.ITEM)
+            {
+                ItemAssetTag asset = ItemAssetTag.For(targetAssetType);
+                if (asset == null)
+                {
+                    entry.Bad("Invalid item type!");
+                    return;
+                }
+                byte x = (byte)((loc.X + 4096f) / Regions.REGION_SIZE);
+                byte y = (byte)((loc.Y + 4096f) / Regions.REGION_SIZE);
+                ItemManager.manager.spawnItem(x, y, asset.Internal.id, 1, asset.Internal.quality, asset.Internal.getState(), loc.ToVector3());
+                // TODO: make this work :(
+                ItemManager.manager.channel.send("tellItem", ESteamCall.CLIENTS, x, y, ItemManager.ITEM_REGIONS, ESteamPacket.UPDATE_RELIABLE_BUFFER, new object[]
+                {
+                        x,
+                        y,
+                        asset.Internal.id,
+                        1,
+                        asset.Internal.quality,
+                        asset.Internal.getState(),
+                        loc.ToVector3()
+                });
+                entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+            }
             else
             {
                 entry.Bad("Invalid or unspawnable entity type!");

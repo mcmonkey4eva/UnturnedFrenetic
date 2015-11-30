@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Frenetic.TagHandlers;
-using SDG.Unturned;
 using Frenetic.TagHandlers.Objects;
+using SDG.Unturned;
 
 namespace UnturnedFrenetic.TagSystems.TagObjects
 {
@@ -28,6 +28,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     continue;
                 }
                 ItemsMap.Add(namelow, (ItemAsset)asset);
+                EntityType.ITEMS.Add(namelow, new EntityType(asset.name, EntityAssetType.ITEM));
             }
             SysConsole.Output(OutputType.INIT, "Loaded " + Items.Count + " base items!");
         }

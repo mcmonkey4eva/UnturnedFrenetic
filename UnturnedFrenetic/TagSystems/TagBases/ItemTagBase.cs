@@ -8,27 +8,27 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 
 namespace UnturnedFrenetic.TagSystems.TagBases
 {
-    public class AnimalTagBase : TemplateTags
+    public class ItemTagBase : TemplateTags
     {
         // <--[tag]
-        // @Base animal[<TextTag>]
-        // @Group Entities
-        // @ReturnType AnimalTag
-        // @Returns the animal entity corresponding to the given ID number.
+        // @Base item_asset[<TextTag>]
+        // @Group Items
+        // @ReturnType ItemTag
+        // @Returns the item entity corresponding to the given name or ID.
         // -->
-        public AnimalTagBase()
+        public ItemTagBase()
         {
-            Name = "animal";
+            Name = "item";
         }
 
         public override string Handle(TagData data)
         {
-            AnimalTag atag = AnimalTag.For(Utilities.StringToInt(data.GetModifier(0)));
-            if (atag == null)
+            ItemTag itag = ItemTag.For(Utilities.StringToInt(data.GetModifier(0)));
+            if (itag == null)
             {
                 return new TextTag("{NULL}").Handle(data.Shrink());
             }
-            return atag.Handle(data.Shrink());
+            return itag.Handle(data.Shrink());
         }
     }
 }

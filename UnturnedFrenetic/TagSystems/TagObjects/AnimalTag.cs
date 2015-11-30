@@ -20,19 +20,14 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 
         public static AnimalTag For(int aID)
         {
-            Animal animal = null;
-            foreach (Animal anim in AnimalManager.animals)
+            foreach (Animal animal in AnimalManager.animals)
             {
-                if (anim.gameObject.GetInstanceID() == aID)
+                if (animal.gameObject.GetInstanceID() == aID)
                 {
-                    animal = anim;
+                    return new AnimalTag(animal);
                 }
             }
-            if (animal == null)
-            {
-                return null;
-            }
-            return new AnimalTag(animal);
+            return null;
         }
 
         public override string Handle(TagData data)

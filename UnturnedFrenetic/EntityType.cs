@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnturnedFrenetic.TagSystems.TagObjects;
 
 namespace UnturnedFrenetic
 {
@@ -15,9 +16,12 @@ namespace UnturnedFrenetic
         public static EntityType WOLF = new EntityType("Wolf", EntityAssetType.ANIMAL);
         public static EntityType ZOMBIE = new EntityType("Zombie", EntityAssetType.ZOMBIE);
 
+        public static Dictionary<string, EntityType> ITEMS = new Dictionary<string, EntityType>();
+
         public static EntityType ValueOf(string name)
         {
-            switch (name.ToLower())
+            name = name.ToLower();
+            switch (name)
             {
                 case "bear":
                     return BEAR;
@@ -34,7 +38,13 @@ namespace UnturnedFrenetic
                 case "zombie":
                     return ZOMBIE;
                 default:
-                    return null;
+                    {
+                        if (ITEMS.ContainsKey(name))
+                        {
+                            return ITEMS[name];
+                        }
+                        return null;
+                    }
             }
         }
 
@@ -52,6 +62,7 @@ namespace UnturnedFrenetic
     public enum EntityAssetType
     {
         ANIMAL = 0,
-        ZOMBIE = 1
+        ZOMBIE = 1,
+        ITEM = 2
     }
 }

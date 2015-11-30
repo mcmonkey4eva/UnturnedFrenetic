@@ -8,7 +8,7 @@ using SDG.Unturned;
 
 namespace UnturnedFrenetic.TagSystems.TagObjects
 {
-    class PlayerTag : TemplateObject
+    public class PlayerTag : TemplateObject
     {
         public SteamPlayer Internal;
 
