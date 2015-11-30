@@ -128,7 +128,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "find_animals_within":
                     {
                         List<TemplateObject> animals = new List<TemplateObject>();
-                        Vector3 vec3 = new Vector3(X, Y, Z);
+                        Vector3 vec3 = ToVector3();
                         float range = Utilities.StringToFloat(data.GetModifier(0));
                         foreach (Animal animal in AnimalManager.animals)
                         {
@@ -149,7 +149,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "find_zombies_within":
                     {
                         List<TemplateObject> zombies = new List<TemplateObject>();
-                        Vector3 vec3 = new Vector3(X, Y, Z);
+                        Vector3 vec3 = ToVector3();
                         float range = Utilities.StringToFloat(data.GetModifier(0));
                         for (int i = 0; i < ZombieManager.regions.Length; i++)
                         {
@@ -173,13 +173,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "find_items_within":
                     {
                         List<TemplateObject> items = new List<TemplateObject>();
-                        Vector3 vec3 = new Vector3(X, Y, Z);
+                        Vector3 vec3 = ToVector3();
                         float range = Utilities.StringToFloat(data.GetModifier(0));
-                        foreach (InteractableItem item in GameObject.FindObjectsOfType<InteractableItem>())
+                        foreach (Transform item in LevelItems.models)
                         {
-                            if ((item.gameObject.transform.position - vec3).sqrMagnitude <= range * range)
+                            if ((item.position - vec3).sqrMagnitude <= range * range)
                             {
-                                items.Add(new ItemTag(item));
+                                items.Add(new ItemTag(item.GetComponent<InteractableItem>()));
                             }
                         }
                         return new ListTag(items).Handle(data.Shrink());
@@ -194,7 +194,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "find_vehicles_within":
                     {
                         List<TemplateObject> vehicles = new List<TemplateObject>();
-                        Vector3 vec3 = new Vector3(X, Y, Z);
+                        Vector3 vec3 = ToVector3();
                         float range = Utilities.StringToFloat(data.GetModifier(0));
                         foreach (InteractableVehicle veh in VehicleManager.vehicles)
                         {
