@@ -123,8 +123,29 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                         entry.Bad("Invalid item type!");
                         return;
                     }
-                    ItemManager.dropItem(new Item(asset.Internal.id, 1, asset.Internal.quality), loc.ToVector3(), false, Dedicator.isDedicated, true);
-                    entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                    byte x;
+                    byte y;
+                    if (Regions.tryGetCoordinate(loc.ToVector3(), out x, out y))
+                    {
+                        Item item = new Item(asset.Internal.id, 1, asset.Internal.quality);
+                        ItemManager.regions[x, y].items.Add(new ItemData(item, loc.ToVector3(), Dedicator.isDedicated));
+                        ItemManager.manager.channel.send("tellItem", ESteamCall.CLIENTS, x, y, ItemManager.ITEM_REGIONS, ESteamPacket.UPDATE_RELIABLE_BUFFER, new object[]
+                        {
+                            x,
+                            y,
+                            item.id,
+                            item.amount,
+                            item.quality,
+                            item.state,
+                            loc.ToVector3()
+                        });
+
+                        entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                    }
+                    else
+                    {
+                        entry.Bad("Trying to spawn item outside any valid item regions!");
+                    }
                 }
                 else
                 {
