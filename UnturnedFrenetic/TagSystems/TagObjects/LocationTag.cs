@@ -163,6 +163,48 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         }
                         return new ListTag(zombies).Handle(data.Shrink());
                     }
+                // <--[tag]
+                // @Name LocationTag.find_items_within[<TextTag>]
+                // @Group World
+                // @ReturnType ListTag<ItemTag>
+                // @Returns a list of all items within the specified range (spherical).
+                // @Example "0,1,2" .find_items_within[10] returns "2|3|17".
+                // -->
+                case "find_items_within":
+                    {
+                        List<TemplateObject> items = new List<TemplateObject>();
+                        Vector3 vec3 = new Vector3(X, Y, Z);
+                        float range = Utilities.StringToFloat(data.GetModifier(0));
+                        foreach (InteractableItem item in GameObject.FindObjectsOfType<InteractableItem>())
+                        {
+                            if ((item.gameObject.transform.position - vec3).sqrMagnitude <= range * range)
+                            {
+                                items.Add(new ItemTag(item));
+                            }
+                        }
+                        return new ListTag(items).Handle(data.Shrink());
+                    }
+                // <--[tag]
+                // @Name LocationTag.find_vehicles_within[<TextTag>]
+                // @Group World
+                // @ReturnType ListTag<VehicleTag>
+                // @Returns a list of all vehicles within the specified range (spherical).
+                // @Example "0,1,2" .find_vehicles_within[10] returns "2|3|17".
+                // -->
+                case "find_vehicles_within":
+                    {
+                        List<TemplateObject> vehicles = new List<TemplateObject>();
+                        Vector3 vec3 = new Vector3(X, Y, Z);
+                        float range = Utilities.StringToFloat(data.GetModifier(0));
+                        foreach (InteractableVehicle veh in VehicleManager.vehicles)
+                        {
+                            if ((veh.gameObject.transform.position - vec3).sqrMagnitude <= range * range)
+                            {
+                                vehicles.Add(new VehicleTag(veh));
+                            }
+                        }
+                        return new ListTag(vehicles).Handle(data.Shrink());
+                    }
                 default:
                     return new TextTag(ToString()).Handle(data);
             }
