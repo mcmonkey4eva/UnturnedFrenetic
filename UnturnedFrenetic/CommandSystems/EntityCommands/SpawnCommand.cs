@@ -96,18 +96,25 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                         entry.Bad("Invalid animal type!");
                         return;
                     }
+                    // TODO: Make this bit optional!
+                    RaycastHit rch;
+                    while (Physics.Raycast(loc.ToVector3(), new Vector3(0, 1, 0), out rch, 5))
+                    {
+                        loc.Y += 3;
+                    }
+                    // END TODO
                     AnimalManager.manager.addAnimal(asset.Internal.id, loc.ToVector3(), 0, false);
                     Animal animal = AnimalManager.animals[AnimalManager.animals.Count - 1];
                     foreach (SteamPlayer player in PlayerTool.getSteamPlayers())
                     {
                         AnimalManager.manager.channel.openWrite();
-                        AnimalManager.manager.channel.write((ushort)AnimalManager.animals.Count);
+                        AnimalManager.manager.channel.write((ushort)1);
                         AnimalManager.manager.channel.write(new object[]
                         {
-                    animal.id,
-                    animal.transform.position,
-                    MeasurementTool.angleToByte(animal.transform.rotation.eulerAngles.y),
-                    animal.isDead
+                            animal.id,
+                            animal.transform.position,
+                            MeasurementTool.angleToByte(animal.transform.rotation.eulerAngles.y),
+                            animal.isDead
                         });
                         AnimalManager.manager.channel.closeWrite("tellAnimals", player.playerID.steamID, ESteamPacket.UPDATE_RELIABLE_CHUNK_BUFFER);
                     }
