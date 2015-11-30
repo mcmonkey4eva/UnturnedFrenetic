@@ -33,7 +33,13 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 return;
             }
             string targetAssetType = entry.GetArgument(0).ToLower();
-            if (targetAssetType == "zombie")
+            EntityType etype = EntityType.ValueOf(targetAssetType);
+            if (etype == null)
+            {
+                entry.Bad("Invalid entity type!");
+                return;
+            }
+            if (etype.Type == EntityAssetType.ZOMBIE)
             {
                 UnityEngine.Vector3 vec3 = loc.ToVector3();
                 byte reg = 0; // TODO: Optionally specifiable
@@ -79,29 +85,37 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 entry.Good("Successfully spawned a zombie at " + TagParser.Escape(loc.ToString()) + "! (WARNING: IT WILL BE INVISIBLE CURRENTLY - SEE THE COMPLAINTS FILE)");
                 return;
             }
-            AnimalAssetTag asset = AnimalAssetTag.For(targetAssetType);
-            if (asset == null)
+            else if (etype.Type == EntityAssetType.ANIMAL)
             {
-                entry.Bad("Invalid entity type!");
-                return;
-            }
-            AnimalManager.manager.addAnimal(asset.Internal.id, loc.ToVector3(), 0, false);
-            Animal animal = AnimalManager.animals[AnimalManager.animals.Count - 1];
-            foreach (SteamPlayer player in PlayerTool.getSteamPlayers())
-            {
-                AnimalManager.manager.channel.openWrite();
-                AnimalManager.manager.channel.write((ushort)AnimalManager.animals.Count);
-                AnimalManager.manager.channel.write(new object[]
+                AnimalAssetTag asset = AnimalAssetTag.For(targetAssetType);
+                if (asset == null)
                 {
+                    entry.Bad("Invalid animal type!");
+                    return;
+                }
+                AnimalManager.manager.addAnimal(asset.Internal.id, loc.ToVector3(), 0, false);
+                Animal animal = AnimalManager.animals[AnimalManager.animals.Count - 1];
+                foreach (SteamPlayer player in PlayerTool.getSteamPlayers())
+                {
+                    AnimalManager.manager.channel.openWrite();
+                    AnimalManager.manager.channel.write((ushort)AnimalManager.animals.Count);
+                    AnimalManager.manager.channel.write(new object[]
+                    {
                     animal.id,
                     animal.transform.position,
                     MeasurementTool.angleToByte(animal.transform.rotation.eulerAngles.y),
                     animal.isDead
-                });
-                AnimalManager.manager.channel.closeWrite("tellAnimals", player.playerID.steamID, ESteamPacket.UPDATE_RELIABLE_CHUNK_BUFFER);
+                    });
+                    AnimalManager.manager.channel.closeWrite("tellAnimals", player.playerID.steamID, ESteamPacket.UPDATE_RELIABLE_CHUNK_BUFFER);
+                }
+                // TODO: Maybe add the animal as a var to the current commandqueue.
+                entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                return;
             }
-            // TODO: Maybe add the animal as a var to the current commandqueue.
-            entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+            else
+            {
+                entry.Bad("Invalid or unspawnable entity type!");
+            }
         }
     }
 }

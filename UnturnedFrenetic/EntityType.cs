@@ -7,26 +7,49 @@ namespace UnturnedFrenetic
 {
     public class EntityType
     {
-        public static EntityType BEAR = new EntityType("Bear", EntityTypeType.ANIMAL);
-        public static EntityType COW = new EntityType("Cow", EntityTypeType.ANIMAL);
-        public static EntityType DEER = new EntityType("Deer", EntityTypeType.ANIMAL);
-        public static EntityType MOOSE = new EntityType("Moose", EntityTypeType.ANIMAL);
-        public static EntityType Pig = new EntityType("Pig", EntityTypeType.ANIMAL);
-        public static EntityType Wolf = new EntityType("Wolf", EntityTypeType.ANIMAL);
-        public static EntityType ZOMBIE = new EntityType("Zombie", EntityTypeType.ZOMBIE);
+        public static EntityType BEAR = new EntityType("Bear", EntityAssetType.ANIMAL);
+        public static EntityType COW = new EntityType("Cow", EntityAssetType.ANIMAL);
+        public static EntityType DEER = new EntityType("Deer", EntityAssetType.ANIMAL);
+        public static EntityType MOOSE = new EntityType("Moose", EntityAssetType.ANIMAL);
+        public static EntityType PIG = new EntityType("Pig", EntityAssetType.ANIMAL);
+        public static EntityType WOLF = new EntityType("Wolf", EntityAssetType.ANIMAL);
+        public static EntityType ZOMBIE = new EntityType("Zombie", EntityAssetType.ZOMBIE);
 
-        public string Name;
-
-        public EntityTypeType Type;
-
-        public EntityType(string name, EntityTypeType type)
+        public static EntityType ValueOf(string name)
         {
-            Name = name;
+            switch (name.ToLower())
+            {
+                case "bear":
+                    return BEAR;
+                case "cow":
+                    return COW;
+                case "deer":
+                    return DEER;
+                case "moose":
+                    return MOOSE;
+                case "pig":
+                    return PIG;
+                case "wolf":
+                    return WOLF;
+                case "zombie":
+                    return ZOMBIE;
+                default:
+                    return null;
+            }
+        }
+
+        public string AssetName;
+
+        public EntityAssetType Type;
+
+        public EntityType(string assetname, EntityAssetType type)
+        {
+            AssetName = assetname;
             Type = type;
         }
     }
 
-    public enum EntityTypeType
+    public enum EntityAssetType
     {
         ANIMAL = 0,
         ZOMBIE = 1
