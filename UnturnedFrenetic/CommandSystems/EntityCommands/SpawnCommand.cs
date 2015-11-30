@@ -26,16 +26,63 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 ShowUsage(entry);
                 return;
             }
-            AnimalAssetTag asset = AnimalAssetTag.For(entry.GetArgument(0));
-            if (asset == null)
-            {
-                entry.Bad("Invalid entity type!");
-                return;
-            }
             LocationTag loc = LocationTag.For(entry.GetArgument(1));
             if (loc == null)
             {
                 entry.Bad("Invalid location!");
+                return;
+            }
+            string targetAssetType = entry.GetArgument(0).ToLower();
+            if (targetAssetType == "zombie")
+            {
+                UnityEngine.Vector3 vec3 = loc.ToVector3();
+                byte reg = 0; // TODO: Optionally specifiable
+                float closest = float.MaxValue;
+                for (int r = 0; r < LevelZombies.zombies.Length; r++)
+                {
+                    for (int i = 0; i < LevelZombies.zombies[r].Count; i++)
+                    {
+                        float dist = (LevelZombies.zombies[r][i].point - vec3).sqrMagnitude;
+                        if (dist < closest)
+                        {
+                            closest = dist;
+                            reg = (byte)r;
+                        }
+                    }
+                }
+                ZombieManager.manager.addZombie(reg, 0, 0, 0, 0, 0, 0, 0, 0, vec3, 0, false);
+                Zombie zombie = ZombieManager.regions[reg].zombies[ZombieManager.regions[reg].zombies.Count - 1];
+                // TODO: Make this actually work!
+                /*
+                foreach (SteamPlayer player in PlayerTool.getSteamPlayers())
+                {
+                    ZombieManager.manager.channel.openWrite();
+                    ZombieManager.manager.channel.write(reg);
+                    ZombieManager.manager.channel.write((ushort)1);
+                    ZombieManager.manager.channel.write(new object[]
+                        {
+                            zombie.type,
+                            (byte)zombie.speciality,
+                            zombie.shirt,
+                            zombie.pants,
+                            zombie.hat,
+                            zombie.gear,
+                            zombie.move,
+                            zombie.idle,
+                            zombie.transform.position,
+                            MeasurementTool.angleToByte(zombie.transform.rotation.eulerAngles.y),
+                            zombie.isDead
+                        });
+                    ZombieManager.manager.channel.closeWrite("tellZombies", player.playerID.steamID, ESteamPacket.UPDATE_RELIABLE_CHUNK_BUFFER);
+                }
+                */
+                entry.Good("Successfully spawned a zombie at " + TagParser.Escape(loc.ToString()) + "! (WARNING: IT WILL BE INVISIBLE CURRENTLY - SEE THE COMPLAINTS FILE)");
+                return;
+            }
+            AnimalAssetTag asset = AnimalAssetTag.For(targetAssetType);
+            if (asset == null)
+            {
+                entry.Bad("Invalid entity type!");
                 return;
             }
             AnimalManager.manager.addAnimal(asset.Internal.id, loc.ToVector3(), 0, false);

@@ -113,7 +113,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                             foreach (Zombie zombie in ZombieManager.regions[i].zombies)
                             {
                                 if ((zombie.transform.position - vec3).sqrMagnitude <= range * range)
-                                            {
+                                {
                                     zombies.Add(new ZombieTag(zombie, i));
                                 }
                             }
