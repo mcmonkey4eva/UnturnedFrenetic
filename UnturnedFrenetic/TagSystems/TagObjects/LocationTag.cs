@@ -76,8 +76,51 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "z":
                     return new TextTag(Z).Handle(data.Shrink());
                 // <--[tag]
+                // @Name LocationTag.add[<LocationTag>]
+                // @Group Mathematics
+                // @ReturnType LocationTag
+                // @Returns the result of adding the specified location to this location.
+                // @Example "0,1,2" .add[2,1,0] returns "2,2,2".
+                // -->
+                case "add":
+                    {
+                        LocationTag modif = LocationTag.For(data.GetModifier(0));
+                        return new LocationTag(X + modif.X, Y + modif.Y, Z + modif.Z).Handle(data.Shrink());
+                    }
+                // <--[tag]
+                // @Name LocationTag.subtract[<LocationTag>]
+                // @Group Mathematics
+                // @ReturnType LocationTag
+                // @Returns the result of subtracting the specified location from this location.
+                // @Example "0,1,2" .subtract[0,1,2] returns "0,0,0".
+                // -->
+                case "subtract":
+                    {
+                        LocationTag modif = LocationTag.For(data.GetModifier(0));
+                        return new LocationTag(X - modif.X, Y - modif.Y, Z - modif.Z).Handle(data.Shrink());
+                    }
+                // <--[tag]
+                // @Name LocationTag.length
+                // @Group Mathematics
+                // @ReturnType TextTag
+                // @Returns the length from this location to the origin.
+                // @Warning this tag requires a square root operation, which is a tiny bit slow internally. Consider using <@link tag LocationTag.length_squared>.
+                // @Example "0,2,0" .length returns "2".
+                // -->
+                case "length":
+                    return new TextTag(ToVector3().magnitude).Handle(data.Shrink());
+                // <--[tag]
+                // @Name LocationTag.length_squared
+                // @Group Mathematics
+                // @ReturnType TextTag
+                // @Returns the square of the length from this location to the origin.
+                // @Example "0,2,0" .length_squared returns "4".
+                // -->
+                case "length_squared":
+                    return new TextTag(ToVector3().sqrMagnitude).Handle(data.Shrink());
+                // <--[tag]
                 // @Name LocationTag.find_animals_within[<TextTag>]
-                // @Group General Information
+                // @Group World
                 // @ReturnType ListTag<AnimalTag>
                 // @Returns a list of all animals within the specified range (spherical).
                 // @Example "0,1,2" .find_animals_within[10] returns "2|3|17".
@@ -98,7 +141,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     }
                 // <--[tag]
                 // @Name LocationTag.find_zombies_within[<TextTag>]
-                // @Group General Information
+                // @Group World
                 // @ReturnType ListTag<ZombieTag>
                 // @Returns a list of all zombies within the specified range (spherical).
                 // @Example "0,1,2" .find_zombies_within[10] returns "2|3|17".
