@@ -3,21 +3,15 @@ Unturned Frenetic
 
 A mod for Unturned; adds a full high-power script engine to allow dynamic modding!
 
-# First time building
+# Building notes
 
-- Copy Assembly-CSharp.dll from Unturned's Managed folder to the Injector/Release folder
-- Open UnturnedFreneticInjector.sln in Visual Studio 2015
-- VS2015 -> Build -> Build Solution
-- Copy Injector/Release/Assembly-CSharp.dll to Assembly-CSharp.Patched.dll (temporarily)
-- Open UnturnedFrenetic.sln in Visual Studio 2015
-- VS2015 -> Build -> Build Solution
-- Open your favorite command line, EG Bash, Powershell, Cmd, or whatever - open in the Injector's release folder
-- Run the injector via command line
-- Copy Injector/Release/Assembly-CSharp.Patched.dll to Unturned's Managed/Assembly-CSharp.dll
-- Copy UnturnedFrenetic/Release/Frenetic.dll and UnturnedFrenetic.dll to Unturned's Managed folder as well.
-- Launch the Unturned server!
-- Be warned, your local client may no longer be able to play on other servers until you revert Assembly-CSharp.dll to its original form. Make sure you are running off a server box!
+- 1. You will need a release build of FreneticUnturned to use as the basis for the injector's first run. (After this, you can use a locally compiled copy.)
+- 2. You can invert note 1 if you only need to build the mod itself and not the injector. (Use a release copy of the injection patched result as the basis for building the mod itself.)
+- 3. Run the injector via a command line so you can see the output.
+- 4. The two sub-projects rely on each other and each cannot function without the other (this causes note 1).
+- 5. This project heavily uses complicated internal code... if you can't figure out how to compile it from what's available in this repository, you probably shouldn't be editing the code.
 
-# Warning
+# Warnings
 
-Avast (and possibly other AV's) don't currently seem to like the injector much, and may freeze up.
+- Your local client may have trouble playing on other servers until you revert Assembly-CSharp.dll to its original form. Make sure you are running off a server box!
+- Avast (and possibly other AV's) don't currently seem to like the injector much, and may freeze up. Disable them before running the injector!
