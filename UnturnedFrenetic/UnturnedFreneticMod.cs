@@ -53,6 +53,7 @@ namespace UnturnedFrenetic
             game.AddComponent<UnturnedFreneticTicker>();
             ItemAssetTag.Init();
             AnimalAssetTag.Init();
+            VehicleAssetTag.Init();
         }
 
         public void Setup()

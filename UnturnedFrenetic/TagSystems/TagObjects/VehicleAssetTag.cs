@@ -17,7 +17,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
         {
             Vehicles = new List<VehicleAsset>();
             VehiclesMap = new Dictionary<string, VehicleAsset>();
-            Asset[] assets = Assets.find(EAssetType.ITEM);
+            Asset[] assets = Assets.find(EAssetType.VEHICLE);
             foreach (Asset asset in assets)
             {
                 Vehicles.Add((VehicleAsset)asset);
