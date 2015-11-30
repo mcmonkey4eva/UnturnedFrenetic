@@ -20,10 +20,9 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 
         public static ItemTag For(int instanceID)
         {
-            InteractableItem item = null;
-            foreach (InteractableItem it in GameObject.FindObjectsOfType<InteractableItem>())
+            foreach (InteractableItem item in GameObject.FindObjectsOfType<InteractableItem>())
             {
-                if (it.gameObject.GetInstanceID() == instanceID)
+                if (item.gameObject.GetInstanceID() == instanceID)
                 {
                     return new ItemTag(item);
                 }

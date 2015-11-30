@@ -14,7 +14,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
         // @Base location[<TextTag>]
         // @Group Mathematics
         // @ReturnType LocationTag
-        // @Returns the item corresponding to the given name or ID.
+        // @Returns the location at the corresponding coordinates.
         // -->
         public LocationTagBase()
         {

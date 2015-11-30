@@ -17,6 +17,7 @@ namespace UnturnedFrenetic
         public static EntityType ZOMBIE = new EntityType("Zombie", EntityAssetType.ZOMBIE);
 
         public static Dictionary<string, EntityType> ITEMS = new Dictionary<string, EntityType>();
+        public static Dictionary<string, EntityType> VEHICLES = new Dictionary<string, EntityType>();
 
         public static EntityType ValueOf(string name)
         {
@@ -43,6 +44,10 @@ namespace UnturnedFrenetic
                         {
                             return ITEMS[name];
                         }
+                        if (VEHICLES.ContainsKey(name))
+                        {
+                            return VEHICLES[name];
+                        }
                         return null;
                     }
             }
@@ -63,6 +68,7 @@ namespace UnturnedFrenetic
     {
         ANIMAL = 0,
         ZOMBIE = 1,
-        ITEM = 2
+        ITEM = 2,
+        VEHICLE = 3
     }
 }

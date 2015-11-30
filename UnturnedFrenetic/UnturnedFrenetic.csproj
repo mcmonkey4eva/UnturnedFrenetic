@@ -61,6 +61,8 @@
     <Compile Include="EntityType.cs" />
     <Compile Include="SysConsole.cs" />
     <Compile Include="TagSystems\TagBases\AnimalAssetTagBase.cs" />
+    <Compile Include="TagSystems\TagBases\VehicleTagBase.cs" />
+    <Compile Include="TagSystems\TagBases\VehicleAssetTagBase.cs" />
     <Compile Include="TagSystems\TagBases\ItemTagBase.cs" />
     <Compile Include="TagSystems\TagBases\LocationTagBase.cs" />
     <Compile Include="TagSystems\TagBases\AnimalTagBase.cs" />
@@ -69,6 +71,8 @@
     <Compile Include="TagSystems\TagBases\ZombieTagBase.cs" />
     <Compile Include="TagSystems\TagObjects\AnimalAssetTag.cs" />
     <Compile Include="TagSystems\TagObjects\AnimalTag.cs" />
+    <Compile Include="TagSystems\TagObjects\VehicleTag.cs" />
+    <Compile Include="TagSystems\TagObjects\VehicleAssetTag.cs" />
     <Compile Include="TagSystems\TagObjects\ItemAssetTag.cs" />
     <Compile Include="TagSystems\TagObjects\ItemTag.cs" />
     <Compile Include="TagSystems\TagObjects\LocationTag.cs" />

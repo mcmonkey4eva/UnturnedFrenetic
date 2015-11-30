@@ -8,22 +8,23 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 
 namespace UnturnedFrenetic.TagSystems.TagBases
 {
-    public class ItemTagBase : TemplateTags
+    public class VehicleAssetTagBase : TemplateTags
     {
         // <--[tag]
-        // @Base item[<TextTag>]
+        // @Base vehicle_asset[<TextTag>]
         // @Group Entities
-        // @ReturnType ItemTag
-        // @Returns the item entity corresponding to the given ID number.
+        // @ReturnType VehicleTag
+        // @Returns the vehicle asset corresponding to the given name or ID.
         // -->
-        public ItemTagBase()
+        public VehicleAssetTagBase()
         {
-            Name = "item";
+            Name = "vehicle_asset";
         }
 
         public override string Handle(TagData data)
         {
-            ItemTag itag = ItemTag.For(Utilities.StringToInt(data.GetModifier(0)));
+            string iname = data.GetModifier(0);
+            VehicleAssetTag itag = VehicleAssetTag.For(iname);
             if (itag == null)
             {
                 return new TextTag("{NULL}").Handle(data.Shrink());

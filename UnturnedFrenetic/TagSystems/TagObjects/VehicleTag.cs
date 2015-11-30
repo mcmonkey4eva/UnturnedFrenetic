@@ -6,25 +6,24 @@ using Frenetic.TagHandlers;
 using Frenetic.TagHandlers.Objects;
 using SDG.Unturned;
 
-
 namespace UnturnedFrenetic.TagSystems.TagObjects
 {
-    public class AnimalTag : TemplateObject
+    public class VehicleTag : TemplateObject
     {
-        public Animal Internal;
+        public InteractableVehicle Internal;
 
-        public AnimalTag(Animal animal)
+        public VehicleTag(InteractableVehicle vehicle)
         {
-            Internal = animal;
+            Internal = vehicle;
         }
 
-        public static AnimalTag For(int aID)
+        public static VehicleTag For(int instanceID)
         {
-            foreach (Animal animal in AnimalManager.animals)
+            foreach (InteractableVehicle vehicle in VehicleManager.vehicles)
             {
-                if (animal.gameObject.GetInstanceID() == aID)
+                if (vehicle.gameObject.GetInstanceID() == instanceID)
                 {
-                    return new AnimalTag(animal);
+                    return new VehicleTag(vehicle);
                 }
             }
             return null;
@@ -39,46 +38,46 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             switch (data.Input[0])
             {
                 // <--[tag]
-                // @Name AnimalTag.name
+                // @Name VehicleTag.name
                 // @Group General Information
                 // @ReturnType TextTag
-                // @Returns the name of the animal's type.
-                // @Example "2" .name returns "Cow".
+                // @Returns the name of the vehicle's type.
+                // @Example "2" .name returns "APC_Forest".
                 // -->
                 case "name":
                     return new TextTag(Internal.asset.name).Handle(data.Shrink());
                 // <--[tag]
-                // @Name AnimalTag.aid
+                // @Name VehicleTag.vid
                 // @Group General Information
                 // @ReturnType TextTag
-                // @Returns the animal ID number of the animal.
-                // @Example "2" .aid returns "1".
+                // @Returns the vehicle ID number of the vehicle.
+                // @Example "2" .iid returns "1".
                 // -->
-                case "aid":
+                case "vid":
                     return new TextTag(Internal.index).Handle(data.Shrink());
                 // <--[tag]
-                // @Name AnimalTag.iid
+                // @Name VehicleTag.iid
                 // @Group General Information
                 // @ReturnType TextTag
-                // @Returns this animal's instance ID number.
+                // @Returns this vehicle's instance ID number.
                 // @Example "2" .iid returns "2".
                 // -->
                 case "iid":
                     return new TextTag(Internal.gameObject.GetInstanceID()).Handle(data.Shrink());
                 // <--[tag]
-                // @Name AnimalTag.asset
+                // @Name VehicleTag.asset
                 // @Group General Information
-                // @ReturnType AnimalAssetTag
-                // @Returns the animal asset that this animal is based off.
-                // @Example "2" .asset returns "Cow".
+                // @ReturnType VehicleAssetTag
+                // @Returns the vehicle asset that this vehicle is based off.
+                // @Example "2" .asset returns "Rifle_Maple".
                 // -->
                 case "asset":
-                    return new AnimalAssetTag(Internal.asset).Handle(data.Shrink());
+                    return new VehicleAssetTag(Internal.asset).Handle(data.Shrink());
                 // <--[tag]
-                // @Name AnimalTag.location
+                // @Name VehicleTag.location
                 // @Group Status
                 // @ReturnType LocationTag
-                // @Returns the animal's current world position.
+                // @Returns the vehicle's current world position.
                 // @Example "2" .location returns "(5, 10, 15)".
                 // -->
                 case "location":
