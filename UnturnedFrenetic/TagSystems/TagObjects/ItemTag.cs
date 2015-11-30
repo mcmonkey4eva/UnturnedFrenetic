@@ -24,7 +24,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 string namelow = asset.name.ToLower();
                 if (ItemsMap.ContainsKey(namelow))
                 {
-                    SysConsole.Output(OutputType.INIT, "MINOR: multiple assets named " + namelow);
+                    SysConsole.Output(OutputType.INIT, "MINOR: multiple item assets named " + namelow);
                     continue;
                 }
                 ItemsMap.Add(namelow, (ItemAsset)asset);

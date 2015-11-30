@@ -10,18 +10,54 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class AnimalAssetTag: TemplateObject
     {
-        public static AnimalAssetTag For(string name)
+        public static List<AnimalAsset> Animals;
+        public static Dictionary<string, AnimalAsset> AnimalsMap;
+
+        public static void Init()
         {
-            name = name.ToLower();
-            // TODO: Possibly preregister?
-            foreach (Asset asset in Assets.find(EAssetType.ANIMAL))
+            Animals = new List<AnimalAsset>();
+            AnimalsMap = new Dictionary<string, AnimalAsset>();
+            Asset[] assets = Assets.find(EAssetType.ANIMAL);
+            foreach (Asset asset in assets)
             {
-                if (asset.name.ToLower() == name)
+                Animals.Add((AnimalAsset)asset);
+                string namelow = asset.name.ToLower();
+                if (AnimalsMap.ContainsKey(namelow))
                 {
-                    return new AnimalAssetTag((AnimalAsset)asset);
+                    SysConsole.Output(OutputType.INIT, "MINOR: multiple animal assets named " + namelow);
+                    continue;
+                }
+                AnimalsMap.Add(namelow, (AnimalAsset)asset);
+            }
+            StringBuilder sb = new StringBuilder(Animals.Count * 20);
+            for (int i = 0; i < Animals.Count; i++)
+            {
+                sb.Append(Animals[i].name);
+                if (i + 1 < Animals.Count)
+                {
+                    sb.Append(", ");
                 }
             }
-            return null;
+            SysConsole.Output(OutputType.INIT, "Loaded " + Animals.Count + " base animals: " + sb.ToString());
+        }
+
+        public static AnimalAssetTag For(string nameorid)
+        {
+            ushort id;
+            AnimalAsset asset;
+            if (ushort.TryParse(nameorid, out id))
+            {
+                asset = (AnimalAsset)Assets.find(EAssetType.ANIMAL, id);
+            }
+            else
+            {
+                AnimalsMap.TryGetValue(nameorid.ToLower(), out asset);
+            }
+            if (asset == null)
+            {
+                return null;
+            }
+            return new AnimalAssetTag(asset);
         }
 
         public AnimalAsset Internal;
