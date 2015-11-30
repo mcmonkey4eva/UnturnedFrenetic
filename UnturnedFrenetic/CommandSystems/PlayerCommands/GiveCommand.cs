@@ -31,7 +31,7 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
                 entry.Bad("Invalid player!");
                 return;
             }
-            ItemTag item = ItemTag.For(entry.GetArgument(1));
+            ItemAssetTag item = ItemAssetTag.For(entry.GetArgument(1));
             if (item == null)
             {
                 entry.Bad("Invalid item!");

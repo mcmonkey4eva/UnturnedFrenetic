@@ -51,7 +51,7 @@ namespace UnturnedFrenetic
                 return;
             }
             game.AddComponent<UnturnedFreneticTicker>();
-            ItemTag.Init();
+            ItemAssetTag.Init();
             AnimalAssetTag.Init();
         }
 

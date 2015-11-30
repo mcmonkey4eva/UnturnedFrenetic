@@ -34,7 +34,7 @@ namespace UnturnedFrenetic.CommandSystems
                 // Tag Objects
                 System.TagSystem.Register(new AnimalAssetTagBase());
                 System.TagSystem.Register(new AnimalTagBase());
-                System.TagSystem.Register(new ItemTagBase());
+                System.TagSystem.Register(new ItemAssetTagBase());
                 System.TagSystem.Register(new LocationTagBase());
                 System.TagSystem.Register(new PlayerTagBase());
                 System.TagSystem.Register(new ZombieTagBase());

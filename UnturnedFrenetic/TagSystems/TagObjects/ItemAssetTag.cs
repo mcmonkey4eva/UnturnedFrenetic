@@ -8,7 +8,7 @@ using Frenetic.TagHandlers.Objects;
 
 namespace UnturnedFrenetic.TagSystems.TagObjects
 {
-    public class ItemTag: TemplateObject
+    public class ItemAssetTag: TemplateObject
     {
         public static List<ItemAsset> Items;
         public static Dictionary<string, ItemAsset> ItemsMap;
@@ -32,7 +32,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             SysConsole.Output(OutputType.INIT, "Loaded " + Items.Count + " base items!");
         }
 
-        public static ItemTag For(string nameorid)
+        public static ItemAssetTag For(string nameorid)
         {
             ushort id;
             ItemAsset asset;
@@ -48,10 +48,10 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             {
                 return null;
             }
-            return new ItemTag(asset);
+            return new ItemAssetTag(asset);
         }
 
-        public ItemTag(ItemAsset asset)
+        public ItemAssetTag(ItemAsset asset)
         {
             Internal = asset;
         }

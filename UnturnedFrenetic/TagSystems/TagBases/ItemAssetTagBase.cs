@@ -8,15 +8,15 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 
 namespace UnturnedFrenetic.TagSystems.TagBases
 {
-    class ItemTagBase : TemplateTags
+    class ItemAssetTagBase : TemplateTags
     {
         // <--[tag]
-        // @Base item[<TextTag>]
+        // @Base item_asset[<TextTag>]
         // @Group Items
         // @ReturnType ItemTag
-        // @Returns the item corresponding to the given name or ID.
+        // @Returns the item asset corresponding to the given name or ID.
         // -->
-        public ItemTagBase()
+        public ItemAssetTagBase()
         {
             Name = "item";
         }
@@ -24,7 +24,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
         public override string Handle(TagData data)
         {
             string iname = data.GetModifier(0);
-            ItemTag itag = ItemTag.For(iname);
+            ItemAssetTag itag = ItemAssetTag.For(iname);
             if (itag == null)
             {
                 return new TextTag("{NULL}").Handle(data.Shrink());

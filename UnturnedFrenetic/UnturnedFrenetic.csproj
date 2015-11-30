@@ -63,12 +63,12 @@
     <Compile Include="TagSystems\TagBases\AnimalAssetTagBase.cs" />
     <Compile Include="TagSystems\TagBases\LocationTagBase.cs" />
     <Compile Include="TagSystems\TagBases\AnimalTagBase.cs" />
-    <Compile Include="TagSystems\TagBases\ItemTagBase.cs" />
+    <Compile Include="TagSystems\TagBases\ItemAssetTagBase.cs" />
     <Compile Include="TagSystems\TagBases\PlayerTagBase.cs" />
     <Compile Include="TagSystems\TagBases\ZombieTagBase.cs" />
     <Compile Include="TagSystems\TagObjects\AnimalAssetTag.cs" />
     <Compile Include="TagSystems\TagObjects\AnimalTag.cs" />
-    <Compile Include="TagSystems\TagObjects\ItemTag.cs" />
+    <Compile Include="TagSystems\TagObjects\ItemAssetTag.cs" />
     <Compile Include="TagSystems\TagObjects\LocationTag.cs" />
     <Compile Include="TagSystems\TagObjects\PlayerTag.cs" />
     <Compile Include="TagSystems\TagObjects\ZombieTag.cs" />
