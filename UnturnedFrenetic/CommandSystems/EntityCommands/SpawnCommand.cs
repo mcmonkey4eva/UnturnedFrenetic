@@ -16,7 +16,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         public SpawnCommand()
         {
             Name = "spawn";
-            Arguments = "<entity type> <location>";
+            Arguments = "<entity type> <location>"; // TODO: Direction!
             Description = "Spawns an entity at the location.";
         }
 
@@ -61,7 +61,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     }
                     ZombieManager.manager.addZombie(reg, 0, 0, 0, 0, 0, 0, 0, 0, vec3, 0, false);
                     Zombie zombie = ZombieManager.regions[reg].zombies[ZombieManager.regions[reg].zombies.Count - 1];
-                    // TODO: Make this actually work!
+                    // TODO: Make this actually work! (See complaints file!)
                     /*
                     foreach (SteamPlayer player in PlayerTool.getSteamPlayers())
                     {
@@ -86,7 +86,6 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     }
                     */
                     entry.Good("Successfully spawned a zombie at " + TagParser.Escape(loc.ToString()) + "! (WARNING: IT WILL BE INVISIBLE CURRENTLY - SEE THE COMPLAINTS FILE)");
-                    return;
                 }
                 else if (etype.Type == EntityAssetType.ANIMAL)
                 {
@@ -118,9 +117,26 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                         });
                         AnimalManager.manager.channel.closeWrite("tellAnimals", player.playerID.steamID, ESteamPacket.UPDATE_RELIABLE_CHUNK_BUFFER);
                     }
-                    // TODO: Maybe add the animal as a var to the current commandqueue.
                     entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
                     return;
+                }
+                else if (etype.Type == EntityAssetType.VEHICLE)
+                {
+                    VehicleAssetTag asset = VehicleAssetTag.For(targetAssetType);
+                    if (asset == null)
+                    {
+                        entry.Bad("Invalid vehicle type!");
+                        return;
+                    }
+                    // TODO: Make this bit optional!
+                    RaycastHit rch;
+                    while (Physics.Raycast(loc.ToVector3(), new Vector3(0, 1, 0), out rch, 5))
+                    {
+                        loc.Y += 3;
+                    }
+                    // END TODO
+                    VehicleManager.spawnVehicle(asset.Internal.id, loc.ToVector3(), Quaternion.identity);
+                    entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
                 }
                 else if (etype.Type == EntityAssetType.ITEM)
                 {
@@ -146,7 +162,6 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                             item.state,
                             loc.ToVector3()
                         });
-
                         entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
                     }
                     else
@@ -163,6 +178,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             {
                 entry.Bad("Failed to spawn entity: " + ex.ToString());
             }
+            // TODO: Maybe add the spawned object as a var to the current commandqueue.
         }
     }
 }

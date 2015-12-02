@@ -40,13 +40,14 @@ namespace UnturnedFrenetic
                     return ZOMBIE;
                 default:
                     {
-                        if (ITEMS.ContainsKey(name))
+                        EntityType et;
+                        if (ITEMS.TryGetValue(name, out et))
                         {
-                            return ITEMS[name];
+                            return et;
                         }
-                        if (VEHICLES.ContainsKey(name))
+                        if (VEHICLES.TryGetValue(name, out et))
                         {
-                            return VEHICLES[name];
+                            return et;
                         }
                         return null;
                     }
