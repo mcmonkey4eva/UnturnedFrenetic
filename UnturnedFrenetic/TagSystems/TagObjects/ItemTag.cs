@@ -20,11 +20,11 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 
         public static ItemTag For(int instanceID)
         {
-            for (byte b = 0; b < Regions.WORLD_SIZE; b += 1)
+            for (byte x = 0; x < Regions.WORLD_SIZE; x++)
             {
-                for (byte b2 = 0; b2 < Regions.WORLD_SIZE; b2 += 1)
+                for (byte y = 0; y < Regions.WORLD_SIZE; y++)
                 {
-                    foreach (Transform transform in ItemManager.regions[b, b2].models)
+                    foreach (Transform transform in ItemManager.regions[x, y].models)
                     {
                         InteractableItem item = transform.GetChild(0).gameObject.GetComponent<InteractableItem>();
                         if (instanceID == item.gameObject.GetInstanceID())

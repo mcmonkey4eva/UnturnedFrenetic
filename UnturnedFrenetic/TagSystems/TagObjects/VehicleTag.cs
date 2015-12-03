@@ -69,7 +69,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Group General Information
                 // @ReturnType VehicleAssetTag
                 // @Returns the vehicle asset that this vehicle is based off.
-                // @Example "2" .asset returns "Rifle_Maple".
+                // @Example "2" .asset returns "APC_Forest".
                 // -->
                 case "asset":
                     return new VehicleAssetTag(Internal.asset).Handle(data.Shrink());
