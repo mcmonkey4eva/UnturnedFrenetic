@@ -19,8 +19,9 @@ namespace UnturnedFreneticInjector.Injectables
             TypeDefinition providertype = gamedef.GetType("SDG.Unturned.Provider");
             MethodDefinition awakemethod = GetMethod(providertype, "Awake");
             MethodBody awakebody = awakemethod.Body;
-            // Call the mod initialization.
+            // Call: the mod initialization.
             awakebody.Instructions.Insert(0, Instruction.Create(OpCodes.Call, initmethod));
+            // Call: the mod secondary initialization.
             awakebody.Instructions.Insert(109, Instruction.Create(OpCodes.Call, initmethod2));
         }
     }

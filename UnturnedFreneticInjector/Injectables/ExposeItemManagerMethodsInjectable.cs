@@ -12,6 +12,8 @@ namespace UnturnedFreneticInjector.Injectables
         public override void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef)
         {
             // Expose the "spawnItem" method in ItemManager for easier use.
+            // Then, add all items spawned internally to the item manager's model list as physical entities.
+            // This allows us to have better control over items and make them more interactive.
             TypeDefinition type = gamedef.GetType("SDG.Unturned.ItemManager");
             MethodDefinition spawnItemMethod = GetMethod(type, "spawnItem", 7);
             spawnItemMethod.IsPrivate = false;
