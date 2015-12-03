@@ -22,83 +22,76 @@ namespace UnturnedFreneticInjector.Injectables
             FieldDefinition fieldregions = GetField(type, "regions");
             fieldregions.IsPrivate = false;
             fieldregions.IsPublic = true;
-
             // Keep track of items by using models
             TypeDefinition itemTracker = moddef.GetType("UnturnedFrenetic.ItemModelTracker");
             // (Item, Vector3)
             MethodReference trackItemMethod = gamedef.ImportReference(GetMethod(itemTracker, "Track", 2));
-            Instruction callTrackItem = Instruction.Create(OpCodes.Call, trackItemMethod);
             // (byte, byte, int)
             MethodReference untrackItemMethod = gamedef.ImportReference(GetMethod(itemTracker, "Untrack", 3));
-            Instruction callUntrackItem = Instruction.Create(OpCodes.Call, untrackItemMethod);
-
             // For getting 'point' property from ItemSpawnpoint objects
             MethodDefinition getPointProperty = GetMethod(gamedef.GetType("SDG.Unturned.ItemSpawnpoint"), "get_point", 0);
-
             // Track dropItem
             MethodDefinition dropItemMethod = GetMethod(type, "dropItem", 5);
             InjectInstructions(dropItemMethod.Body, 88, new Instruction[]
             {
-                // Item item
+                // Load: Item item
                 Instruction.Create(OpCodes.Ldarg_0),
-                // Vector3 point
+                // Load: Vector3 point
                 Instruction.Create(OpCodes.Ldarg_1),
                 // ItemModelTracker.Track(item, point);
-                callTrackItem
+                Instruction.Create(OpCodes.Call, trackItemMethod)
             });
-
             // Track generateItems
             MethodDefinition generateItemsMethod = GetMethod(type, "generateItems", 2);
             InjectInstructions(generateItemsMethod.Body, 68, new Instruction[]
             {
-                // Item newItem
+                // Load: Item newItem
                 Instruction.Create(OpCodes.Ldloc, generateItemsMethod.Body.Variables[7]),
-                // Vector3 itemSpawnpoint2.point
+                // Load: ItemSpawnpoint itemSpawnpoint2
                 Instruction.Create(OpCodes.Ldloc_S, generateItemsMethod.Body.Variables[5]),
+                // Call: 'get_point' on  itemSpawnpoint2 -> add the Vector3 result to the stack.
                 Instruction.Create(OpCodes.Callvirt, getPointProperty),
-                // ItemModelTracker.Track(newItem, itemSpawnpoint2.point);
-                callTrackItem
+                // Call: ItemModelTracker.Track(newItem, itemSpawnpoint2.point);
+                Instruction.Create(OpCodes.Call, trackItemMethod)
             });
-
             // Track respawnItems
             MethodDefinition respawnItemsMethod = GetMethod(type, "respawnItems", 0);
             InjectInstructions(respawnItemsMethod.Body, 111, new Instruction[]
             {
-                // Item item2
+                // Load: Item item2
                 Instruction.Create(OpCodes.Ldloc_3),
-                // Vector3 itemSpawnpoint.point
+                // Load: ItemSpawnpoint itemSpawnpoint
                 Instruction.Create(OpCodes.Ldloc_0),
+                // Call: 'get_point' on  itemSpawnpoint2 -> add the Vector3 result to the stack.
                 Instruction.Create(OpCodes.Callvirt, getPointProperty),
-                // ItemModelTracker.Track(newItem, itemSpawnpoint2.point);
-                callTrackItem
+                // Call: ItemModelTracker.Track(newItem, itemSpawnpoint2.point);
+                Instruction.Create(OpCodes.Call, trackItemMethod)
             });
-
             // Untrack askTakeItem
             MethodDefinition askTakeItemMethod = GetMethod(type, "askTakeItem", 4);
             InjectInstructions(askTakeItemMethod.Body, 95, new Instruction[]
             {
-                // byte x
+                // Load: byte x
                 Instruction.Create(OpCodes.Ldarg_2),
-                // byte y
+                // Load: byte y
                 Instruction.Create(OpCodes.Ldarg_3),
-                // ushort num
+                // Load: ushort num
                 Instruction.Create(OpCodes.Ldloc_2),
-                // ItemModelTracker.Untrack(x, y, num);
-                callUntrackItem
+                // Call: ItemModelTracker.Untrack(x, y, num);
+                Instruction.Create(OpCodes.Call, untrackItemMethod)
             });
-
             // Untrack despawnItems
             MethodDefinition despawnItemsMethod = GetMethod(type, "despawnItems", 0);
             InjectInstructions(despawnItemsMethod.Body, 50, new Instruction[]
             {
-                // ItemManager.despawnItems_X
+                // Load: ItemManager.despawnItems_X
                 Instruction.Create(OpCodes.Ldsfld, GetField(type, "despawnItems_X")),
-                // ItemManager.despawnItems_Y
+                // Load: ItemManager.despawnItems_Y
                 Instruction.Create(OpCodes.Ldsfld, GetField(type, "despawnItems_Y")),
-                // int i
+                // Load: int i
                 Instruction.Create(OpCodes.Ldloc_0),
-                // ItemModelTracker.Untrack(ItemManager.despawnItems_X, ItemManager.despawnItems_Y, i);
-                callUntrackItem
+                // Call: ItemModelTracker.Untrack(ItemManager.despawnItems_X, ItemManager.despawnItems_Y, i);
+                Instruction.Create(OpCodes.Call, untrackItemMethod)
             });
         }
     }
