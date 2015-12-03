@@ -59,6 +59,7 @@
     <Compile Include="CommandSystems\UnturnedFreneticOutputter.cs" />
     <Compile Include="CommandSystems\WorldCommands\TimeCommand.cs" />
     <Compile Include="EntityType.cs" />
+    <Compile Include="ItemModelTracker.cs" />
     <Compile Include="SysConsole.cs" />
     <Compile Include="TagSystems\TagBases\AnimalAssetTagBase.cs" />
     <Compile Include="TagSystems\TagBases\VehicleTagBase.cs" />

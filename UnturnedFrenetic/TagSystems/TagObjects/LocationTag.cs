@@ -175,11 +175,17 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         List<TemplateObject> items = new List<TemplateObject>();
                         Vector3 vec3 = ToVector3();
                         float range = Utilities.StringToFloat(data.GetModifier(0));
-                        foreach (Transform item in LevelItems.models)
+                        for (byte b = 0; b < Regions.WORLD_SIZE; b += 1)
                         {
-                            if ((item.position - vec3).sqrMagnitude <= range * range)
+                            for (byte b2 = 0; b2 < Regions.WORLD_SIZE; b2 += 1)
                             {
-                                items.Add(new ItemTag(item.GetComponent<InteractableItem>()));
+                                foreach (Transform item in ItemManager.regions[b, b2].models)
+                                {
+                                    if ((item.position - vec3).sqrMagnitude <= range * range)
+                                    {
+                                        items.Add(new ItemTag(item.GetChild(0).gameObject.GetComponent<InteractableItem>()));
+                                    }
+                                }
                             }
                         }
                         return new ListTag(items).Handle(data.Shrink());

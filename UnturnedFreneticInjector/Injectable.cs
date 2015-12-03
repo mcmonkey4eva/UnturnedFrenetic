@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mono.Cecil;
+using Mono.Cecil.Cil;
 
 namespace UnturnedFreneticInjector
 {
@@ -30,6 +31,15 @@ namespace UnturnedFreneticInjector
                 }
             }
             return null;
+        }
+
+        public void InjectInstructions(MethodBody body, int line, Instruction[] instructions)
+        {
+            foreach (Instruction instr in instructions)
+            {
+                body.Instructions.Insert(line, instr);
+                line++;
+            }
         }
 
         public abstract void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef);
