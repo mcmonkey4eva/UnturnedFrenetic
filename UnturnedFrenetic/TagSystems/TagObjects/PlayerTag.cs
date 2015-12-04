@@ -13,13 +13,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
         public SteamPlayer Internal;
 
         public string Name;
-        
-        public PlayerTag(SteamPlayer p, string name)
+
+        public PlayerTag(SteamPlayer p)
         {
             Internal = p;
-            Name = name;
+            Name = p.playerID.playerName;
         }
-
+        
         public static PlayerTag For(string name)
         {
             SteamPlayer p = PlayerTool.getSteamPlayer(name);
@@ -27,7 +27,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             {
                 return null;
             }
-            return new PlayerTag(p, name);
+            return new PlayerTag(p);
         }
         
         public override string Handle(TagData data)

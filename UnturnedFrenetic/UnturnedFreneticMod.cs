@@ -5,6 +5,9 @@ using System.Text;
 using System.IO;
 using UnturnedFrenetic.CommandSystems;
 using UnturnedFrenetic.TagSystems.TagObjects;
+using SDG.Unturned;
+using UnturnedFrenetic.EventSystems;
+using UnturnedFrenetic.EventSystems.PlayerEvents;
 
 namespace UnturnedFrenetic
 {
@@ -23,8 +26,8 @@ namespace UnturnedFrenetic
 
         public static void InitSecondary()
         {
-            SDG.Unturned.Commander.commands.Insert(0, new UnturnedPreCommand());
-            SDG.Unturned.Commander.commands.Add(new UnturnedGenericCommand());
+            Commander.commands.Insert(0, new UnturnedPreCommand());
+            Commander.commands.Add(new UnturnedGenericCommand());
         }
 
         public static void RunCommands(string input)
@@ -80,8 +83,16 @@ namespace UnturnedFrenetic
         public void Setup()
         {
             CommandSystem = new UnturnedFreneticCommands(this, new UnturnedFreneticOutputter() { TheMod = this });
-            SDG.Unturned.Level.onPostLevelLoaded += (o) => EnableForLevel();
+            UnturnedFreneticEvents.RegisterAll(CommandSystem.System);
+            Provider.onEnemyConnected += onPlayerConnected; // TODO: Perhaps inject our own, more trustworthy event for this.
+            Level.onPostLevelLoaded += (o) => EnableForLevel();
             AutorunScripts();
+        }
+
+        void onPlayerConnected(SteamPlayer player)
+        {
+            // TODO: Cancellable!
+            UnturnedFreneticEvents.OnPlayerConnected.Fire(new PlayerConnectedEventArgs() { Player = new PlayerTag(player) });
         }
     }
 }
