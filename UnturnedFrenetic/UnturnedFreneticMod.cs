@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using UnturnedFrenetic.CommandSystems;
 using UnturnedFrenetic.TagSystems.TagObjects;
 
@@ -56,10 +57,31 @@ namespace UnturnedFrenetic
             VehicleAssetTag.Init();
         }
 
+        public void AutorunScripts()
+        {
+            string[] scripts = Directory.GetFiles(Environment.CurrentDirectory + "/scripts/", "*.cfg", SearchOption.AllDirectories);
+            foreach (string script in scripts)
+            {
+                try
+                {
+                    string cmd = File.ReadAllText(script).Replace("\r", "\n").Replace("\0", "\\0");
+                    if (cmd.StartsWith("/// AUTORUN\n"))
+                    {
+                        CommandSystem.System.ExecuteCommands(cmd, null);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    SysConsole.Output("Handling autorun script '" + script.Replace(Environment.CurrentDirectory, "") + "'", ex);
+                }
+            }
+        }
+
         public void Setup()
         {
             CommandSystem = new UnturnedFreneticCommands(this, new UnturnedFreneticOutputter() { TheMod = this });
             SDG.Unturned.Level.onPostLevelLoaded += (o) => EnableForLevel();
+            AutorunScripts();
         }
     }
 }

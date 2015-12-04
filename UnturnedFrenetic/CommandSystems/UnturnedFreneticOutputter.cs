@@ -29,7 +29,7 @@ namespace UnturnedFrenetic.CommandSystems
 
         public override string ReadTextFile(string name)
         {
-            return File.ReadAllText(name.Replace("..", "_")); // TODO: Proper sandbox!
+            return File.ReadAllText(Environment.CurrentDirectory + "/scripts/" + name.Replace("..", "_")); // TODO: Proper sandbox!
         }
 
         public override void UnknownCommand(CommandQueue queue, string basecommand, string[] arguments)
