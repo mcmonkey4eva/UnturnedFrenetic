@@ -155,7 +155,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "is_broken":
                     return new TextTag(Internal.player.life.isBroken).Handle(data.Shrink());
-                // <--[tag]
+                // BROKEN: [tag]
                 // @Name PlayerTag.is_freezing
                 // @Group Status
                 // @ReturnType TextTag
@@ -163,7 +163,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Example "bob" .is_freezing returns "false".
                 // -->
                 case "is_freezing":
-                    return new TextTag(Internal.player.life.isFreezing).Handle(data.Shrink());
+            // TODO:        return new TextTag(Internal.player.life.isFreezing).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.location
                 // @Group Status

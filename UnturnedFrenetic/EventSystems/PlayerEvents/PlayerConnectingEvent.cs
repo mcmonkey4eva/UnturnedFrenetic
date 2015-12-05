@@ -6,31 +6,32 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 using Frenetic;
 using Frenetic.CommandSystem;
 using Frenetic.TagHandlers;
+using Frenetic.TagHandlers.Objects;
 
 namespace UnturnedFrenetic.EventSystems.PlayerEvents
 {
     // <--[event]
-    // @Name PlayerConnectedEvent
-    // @Fired When a player has connected.
+    // @Name PlayerConnectingEvent
+    // @Fired When a player is connected.
     // @Updated 2015/12/04
     // @Authors mcmonkey
     // @Group Player
-    // @Cancellable false
+    // @Cancellable true
     // @Description
-    // This event will fire after a player connects to the server.
-    // @Var player PlayerTag returns the player that connected.
+    // This event will fire before a player connects to the server.
+    // @Var player_name TextTag returns the player that is connecting.
     // -->
     /// <summary>
-    /// PlayerConnectedScriptEvent, called by player connection.
+    /// PlayerConnectingScriptEvent, called by player connection.
     /// </summary>
-    public class PlayerConnectedScriptEvent : ScriptEvent
+    public class PlayerConnectingScriptEvent : ScriptEvent
     {
         /// <summary>
         /// Constructs the PlayerConnected script event.
         /// </summary>
         /// <param name="system">The relevant command system.</param>
-        public PlayerConnectedScriptEvent(Commands system)
-            : base(system, "playerconnectedevent", false)
+        public PlayerConnectingScriptEvent(Commands system)
+            : base(system, "playerconnectingevent", true)
         {
         }
 
@@ -40,9 +41,9 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         /// <param name="prio">The priority.</param>
         public override void RegisterPriority(int prio)
         {
-            if (!UnturnedFreneticEvents.OnPlayerConnected.Contains(Run, prio))
+            if (!UnturnedFreneticEvents.OnPlayerConnecting.Contains(Run, prio))
             {
-                UnturnedFreneticEvents.OnPlayerConnected.Add(Run, prio);
+                UnturnedFreneticEvents.OnPlayerConnecting.Add(Run, prio);
             }
         }
 
@@ -52,9 +53,9 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         /// <param name="prio">The priority.</param>
         public override void DeregisterPriority(int prio)
         {
-            if (UnturnedFreneticEvents.OnPlayerConnected.Contains(Run, prio))
+            if (UnturnedFreneticEvents.OnPlayerConnecting.Contains(Run, prio))
             {
-                UnturnedFreneticEvents.OnPlayerConnected.Remove(Run, prio);
+                UnturnedFreneticEvents.OnPlayerConnecting.Remove(Run, prio);
             }
         }
 
@@ -64,17 +65,19 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         /// <param name="prio">The priority to run with.</param>
         /// <param name="oevt">The details of the script to be ran.</param>
         /// <returns>The event details after firing.</returns>
-        public void Run(int prio, PlayerConnectedEventArgs oevt)
+        public void Run(int prio, PlayerConnectingEventArgs oevt)
         {
-            PlayerConnectedScriptEvent evt = (PlayerConnectedScriptEvent)Duplicate();
-            evt.Player = oevt.Player;
+            PlayerConnectingScriptEvent evt = (PlayerConnectingScriptEvent)Duplicate();
+            evt.Cancelled = oevt.Cancelled;
+            evt.PlayerName = new TextTag(oevt.PlayerName);
             evt.Call(prio);
+            oevt.Cancelled = evt.Cancelled;
         }
 
         /// <summary>
-        /// The player that connected.
+        /// The name of the player that is connecting.
         /// </summary>
-        public PlayerTag Player;
+        public TextTag PlayerName;
 
         /// <summary>
         /// Get all variables according the script event's current values.
@@ -82,7 +85,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         public override Dictionary<string, TemplateObject> GetVariables()
         {
             Dictionary<string, TemplateObject> vars = base.GetVariables();
-            vars.Add("player", Player);
+            vars.Add("player_name", PlayerName);
             return vars;
         }
 
@@ -98,8 +101,10 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         }
     }
 
-    public class PlayerConnectedEventArgs : EventArgs
+    public class PlayerConnectingEventArgs : EventArgs
     {
-        public PlayerTag Player;
+        public string PlayerName;
+
+        public bool Cancelled = false;
     }
 }

@@ -38,6 +38,18 @@ namespace UnturnedFrenetic
             }
         }
 
+        public static bool PlayerConnecting(SteamPending pending)
+        {
+            PlayerConnectingEventArgs evt = new PlayerConnectingEventArgs();
+            evt.PlayerName = pending.playerID.playerName;
+            UnturnedFreneticEvents.OnPlayerConnecting.Fire(evt);
+            if (evt.Cancelled)
+            {
+                Provider.reject(pending.playerID.steamID, ESteamRejection.WHITELISTED); // TODO: Customizable rejection reason!
+            }
+            return evt.Cancelled;
+        }
+
         public static long cID = 1;
         
         public void Tick(float delta)
@@ -84,15 +96,9 @@ namespace UnturnedFrenetic
         {
             CommandSystem = new UnturnedFreneticCommands(this, new UnturnedFreneticOutputter() { TheMod = this });
             UnturnedFreneticEvents.RegisterAll(CommandSystem.System);
-            Provider.onEnemyConnected += onPlayerConnected; // TODO: Perhaps inject our own, more trustworthy event for this.
+            Provider.onEnemyConnected += (player) => UnturnedFreneticEvents.OnPlayerConnected.Fire(new PlayerConnectedEventArgs() { Player = new PlayerTag(player) });
             Level.onPostLevelLoaded += (o) => EnableForLevel();
             AutorunScripts();
-        }
-
-        void onPlayerConnected(SteamPlayer player)
-        {
-            // TODO: Cancellable!
-            UnturnedFreneticEvents.OnPlayerConnected.Fire(new PlayerConnectedEventArgs() { Player = new PlayerTag(player) });
         }
     }
 }

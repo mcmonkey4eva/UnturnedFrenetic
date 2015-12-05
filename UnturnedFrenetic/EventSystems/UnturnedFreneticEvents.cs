@@ -12,12 +12,12 @@ namespace UnturnedFrenetic.EventSystems
     {
         public static void RegisterAll(Commands system)
         {
+            system.RegisterEvent(new PlayerConnectingScriptEvent(system));
             system.RegisterEvent(new PlayerConnectedScriptEvent(system));
         }
 
-        /// <summary>
-        /// Fires when a new player connects to the server.
-        /// </summary>
+        public static FreneticEventHandler<PlayerConnectingEventArgs> OnPlayerConnecting = new FreneticEventHandler<PlayerConnectingEventArgs>();
+
         public static FreneticEventHandler<PlayerConnectedEventArgs> OnPlayerConnected = new FreneticEventHandler<PlayerConnectedEventArgs>();
     }
 }

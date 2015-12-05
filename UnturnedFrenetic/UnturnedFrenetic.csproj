@@ -59,6 +59,7 @@
     <Compile Include="CommandSystems\UnturnedFreneticOutputter.cs" />
     <Compile Include="CommandSystems\WorldCommands\TimeCommand.cs" />
     <Compile Include="EntityType.cs" />
+    <Compile Include="EventSystems\PlayerEvents\PlayerConnectingEvent.cs" />
     <Compile Include="EventSystems\PlayerEvents\PlayerConnectedEvent.cs" />
     <Compile Include="EventSystems\UnturnedFreneticEvents.cs" />
     <Compile Include="ItemModelTracker.cs" />
