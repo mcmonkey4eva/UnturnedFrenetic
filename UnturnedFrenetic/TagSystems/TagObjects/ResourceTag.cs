@@ -55,7 +55,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name ResourceTag.asset
                 // @Group General Information
-                // @ReturnType ItemAssetTag
+                // @ReturnType ResourceAssetTag
                 // @Returns the resource asset that this resource is based off.
                 // @Example "2" .asset returns "Bush_Jade".
                 // -->

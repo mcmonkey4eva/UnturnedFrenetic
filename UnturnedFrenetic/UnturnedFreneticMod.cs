@@ -72,6 +72,7 @@ namespace UnturnedFrenetic
             VehicleAssetTag.Init();
             WorldObjectAssetTag.Init();
             ResourceAssetTag.Init();
+            BarricadeTag.Init();
         }
 
         public void AutorunScripts()
