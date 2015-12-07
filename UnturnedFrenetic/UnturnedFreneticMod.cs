@@ -70,6 +70,7 @@ namespace UnturnedFrenetic
             ItemAssetTag.Init();
             AnimalAssetTag.Init();
             VehicleAssetTag.Init();
+            WorldObjectAssetTag.Init();
         }
 
         public void AutorunScripts()

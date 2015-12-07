@@ -211,6 +211,33 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         }
                         return new ListTag(vehicles).Handle(data.Shrink());
                     }
+                // <--[tag]
+                // @Name LocationTag.find_world_objects_within[<TextTag>]
+                // @Group World
+                // @ReturnType ListTag<WorldObjectTag>
+                // @Returns a list of all world objects within the specified range (spherical).
+                // @Example "0,1,2" .find_world_objects_within[10] returns "2|3|17".
+                // -->
+                case "find_world_objects_within":
+                    {
+                        // TODO: handle this better, it makes me sad
+                        List<TemplateObject> worldObjects = new List<TemplateObject>();
+                        Collider[] hitColliders = Physics.OverlapSphere(ToVector3(), Utilities.StringToFloat(data.GetModifier(0)));
+                        List<int> ids = new List<int>();
+                        foreach (Collider collider in hitColliders)
+                        {
+                            if (collider.gameObject.transform.parent == LevelObjects.models)
+                            {
+                                int id = collider.gameObject.GetInstanceID();
+                                if (!ids.Contains(id))
+                                {
+                                    worldObjects.Add(WorldObjectTag.For(id));
+                                    ids.Add(id);
+                                }
+                            }
+                        }
+                        return new ListTag(worldObjects).Handle(data.Shrink());
+                    }
                 default:
                     return new TextTag(ToString()).Handle(data);
             }

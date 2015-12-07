@@ -1,0 +1,83 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Frenetic.TagHandlers;
+using Frenetic.TagHandlers.Objects;
+using SDG.Unturned;
+
+namespace UnturnedFrenetic.TagSystems.TagObjects
+{
+    public class WorldObjectTag : TemplateObject
+    {
+        public LevelObject Internal;
+
+        public WorldObjectTag(LevelObject obj)
+        {
+            Internal = obj;
+        }
+
+        public static WorldObjectTag For(int instanceID)
+        {
+            for (byte x = 0; x < Regions.WORLD_SIZE; x++)
+            {
+                for (byte y = 0; y < Regions.WORLD_SIZE; y++)
+                {
+                    foreach (LevelObject levelObject in LevelObjects.objects[x, y])
+                    {
+                        if (levelObject.transform != null && instanceID == levelObject.transform.gameObject.GetInstanceID())
+                        {
+                            return new WorldObjectTag(levelObject);
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        public override string Handle(TagData data)
+        {
+            if (data.Input.Count == 0)
+            {
+                return ToString();
+            }
+            switch (data.Input[0])
+            {
+                // <--[tag]
+                // @Name WorldObjectTag.iid
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns this world object's instance ID number.
+                // @Example "2" .iid returns "2".
+                // -->
+                case "iid":
+                    return new TextTag(Internal.transform.gameObject.GetInstanceID()).Handle(data.Shrink());
+                // <--[tag]
+                // @Name WorldObjectTag.asset
+                // @Group General Information
+                // @ReturnType ItemAssetTag
+                // @Returns the world object asset that this world object is based off.
+                // @Example "2" .asset returns "Tower_Military_0".
+                // -->
+                case "asset":
+                    return new WorldObjectAssetTag(Internal.asset).Handle(data.Shrink());
+                // <--[tag]
+                // @Name WorldObjectTag.location
+                // @Group Status
+                // @ReturnType LocationTag
+                // @Returns the world object's current world position.
+                // @Example "2" .location returns "(5, 10, 15)".
+                // -->
+                case "location":
+                    return new LocationTag(Internal.transform.position).Handle(data.Shrink());
+                default:
+                    return new TextTag(ToString()).Handle(data);
+            }
+        }
+
+        public override string ToString()
+        {
+            return Internal.transform.gameObject.GetInstanceID().ToString();
+        }
+    }
+}

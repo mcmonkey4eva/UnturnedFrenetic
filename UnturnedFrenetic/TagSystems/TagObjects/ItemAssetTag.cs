@@ -68,28 +68,28 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             switch (data.Input[0])
             {
                 // <--[tag]
-                // @Name ItemTag.name
+                // @Name ItemAssetTag.name
                 // @Group General Information
                 // @ReturnType TextTag
-                // @Returns the name of the item.
+                // @Returns the name of the item asset.
                 // @Example "Rifle_Maple" .name returns "Rifle_Maple".
                 // -->
                 case "name":
                     return new TextTag(Internal.name).Handle(data.Shrink());
                 // <--[tag]
-                // @Name ItemTag.is_pro
+                // @Name ItemAssetTag.is_pro
                 // @Group General Information
                 // @ReturnType TextTag
-                // @Returns whether the item is considered pro.
+                // @Returns whether the item asset is considered pro.
                 // @Example "Rifle_Maple" .is_pro returns "false".
                 // -->
                 case "is_pro":
                     return new TextTag(Internal.isPro).Handle(data.Shrink());
                 // <--[tag]
-                // @Name ItemTag.id
+                // @Name ItemAssetTag.id
                 // @Group General Information
                 // @ReturnType TextTag
-                // @Returns the internal ID of the item.
+                // @Returns the internal ID of the item asset.
                 // @Example "Rifle_Maple" .id returns "474".
                 // -->
                 case "id":
