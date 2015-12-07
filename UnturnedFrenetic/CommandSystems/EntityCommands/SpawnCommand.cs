@@ -183,6 +183,17 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                         entry.Bad("Trying to spawn item outside any valid item regions!");
                     }
                 }
+                else if (etype.Type == EntityAssetType.BARRICADE)
+                {
+                    ItemAssetTag asset = ItemAssetTag.For(targetAssetType.Substring("barricade_".Length));
+                    if (asset == null)
+                    {
+                        entry.Bad("Invalid item barricade type!");
+                        return;
+                    }
+                    BarricadeManager.dropBarricade(new Barricade(asset.Internal.id), null, loc.ToVector3(), 0, 0, 0, 0, 0);
+                    entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                }
                 else
                 {
                     entry.Bad("Invalid or unspawnable entity type!");

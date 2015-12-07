@@ -42,8 +42,8 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     BarricadesMap.Add(namelow, (ItemBarricadeAsset)asset);
                     EntityType.BARRICADES.Add(namelow, new EntityType(asset.name, EntityAssetType.BARRICADE));
                 }
-                SysConsole.Output(OutputType.INIT, "Loaded " + Barricades.Count + " base item barricades!");
             }
+            SysConsole.Output(OutputType.INIT, "Loaded " + Barricades.Count + " base item barricades!");
         }
 
         public static BarricadeTag For(int instanceID)
