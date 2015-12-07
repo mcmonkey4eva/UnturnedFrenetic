@@ -29,16 +29,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 }
                 AnimalsMap.Add(namelow, (AnimalAsset)asset);
             }
-            StringBuilder sb = new StringBuilder(Animals.Count * 20);
-            for (int i = 0; i < Animals.Count; i++)
-            {
-                sb.Append(Animals[i].name);
-                if (i + 1 < Animals.Count)
-                {
-                    sb.Append(", ");
-                }
-            }
-            SysConsole.Output(OutputType.INIT, "Loaded " + Animals.Count + " base animals: " + sb.ToString());
+            SysConsole.Output(OutputType.INIT, "Loaded " + Animals.Count + " base animals!");
         }
 
         public static AnimalAssetTag For(string nameorid)
