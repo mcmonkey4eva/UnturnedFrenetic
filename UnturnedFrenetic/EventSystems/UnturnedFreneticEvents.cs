@@ -14,10 +14,13 @@ namespace UnturnedFrenetic.EventSystems
         {
             system.RegisterEvent(new PlayerConnectingScriptEvent(system));
             system.RegisterEvent(new PlayerConnectedScriptEvent(system));
+            system.RegisterEvent(new PlayerDisconnectedScriptEvent(system));
         }
 
         public static FreneticEventHandler<PlayerConnectingEventArgs> OnPlayerConnecting = new FreneticEventHandler<PlayerConnectingEventArgs>();
 
         public static FreneticEventHandler<PlayerConnectedEventArgs> OnPlayerConnected = new FreneticEventHandler<PlayerConnectedEventArgs>();
+
+        public static FreneticEventHandler<PlayerDisconnectedEventArgs> OnPlayerDisconnected = new FreneticEventHandler<PlayerDisconnectedEventArgs>();
     }
 }
