@@ -67,6 +67,7 @@
     <Compile Include="SysConsole.cs" />
     <Compile Include="TagSystems\TagBases\AnimalAssetTagBase.cs" />
     <Compile Include="TagSystems\TagBases\BarricadeTagBase.cs" />
+    <Compile Include="TagSystems\TagBases\EntityTagBase.cs" />
     <Compile Include="TagSystems\TagBases\ResourceAssetTagBase.cs" />
     <Compile Include="TagSystems\TagBases\WorldObjectAssetTagBase.cs" />
     <Compile Include="TagSystems\TagBases\ResourceTagBase.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="TagSystems\TagBases\PlayerTagBase.cs" />
     <Compile Include="TagSystems\TagBases\ZombieTagBase.cs" />
     <Compile Include="TagSystems\TagObjects\AnimalAssetTag.cs" />
+    <Compile Include="TagSystems\TagObjects\EntityTag.cs" />
     <Compile Include="TagSystems\TagObjects\AnimalTag.cs" />
     <Compile Include="TagSystems\TagObjects\BarricadeTag.cs" />
     <Compile Include="TagSystems\TagObjects\ResourceAssetTag.cs" />

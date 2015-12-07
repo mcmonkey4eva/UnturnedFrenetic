@@ -18,11 +18,11 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             Internal = animal;
         }
 
-        public static AnimalTag For(int aID)
+        public static AnimalTag For(int instanceID)
         {
             foreach (Animal animal in AnimalManager.animals)
             {
-                if (animal.gameObject.GetInstanceID() == aID)
+                if (animal.gameObject.GetInstanceID() == instanceID)
                 {
                     return new AnimalTag(animal);
                 }
