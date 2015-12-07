@@ -13,6 +13,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
 {
     class SpawnCommand : AbstractCommand
     {
+        // TODO: Meta!
         public SpawnCommand()
         {
             Name = "spawn";
@@ -44,7 +45,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 }
                 if (etype.Type == EntityAssetType.ZOMBIE)
                 {
-                    UnityEngine.Vector3 vec3 = loc.ToVector3();
+                    Vector3 vec3 = loc.ToVector3();
                     byte reg = 0; // TODO: Optionally specifiable
                     float closest = float.MaxValue;
                     for (int r = 0; r < LevelZombies.zombies.Length; r++)
@@ -137,6 +138,18 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     // END TODO
                     VehicleManager.spawnVehicle(asset.Internal.id, loc.ToVector3(), Quaternion.identity);
                     entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                }
+                else if (etype.Type == EntityAssetType.WORLD_OBJECT)
+                {
+                    WorldObjectAssetTag asset = WorldObjectAssetTag.For(targetAssetType);
+                    if (asset == null)
+                    {
+                        entry.Bad("Invalid world object type!");
+                        return;
+                    }
+                    LevelObjects.addObject(loc.ToVector3(), Quaternion.identity, asset.Internal.id);
+                    // TODO: Network!
+                    entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) +"! (WARNING: IT WILL BE INVISIBLE CURRENTLY - SEE THE COMPLAINTS FILE)");
                 }
                 else if (etype.Type == EntityAssetType.ITEM)
                 {
