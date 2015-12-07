@@ -13,7 +13,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
         // <--[tag]
         // @Base item_asset[<TextTag>]
         // @Group Items
-        // @ReturnType ItemTag
+        // @ReturnType ItemAssetTag
         // @Returns the item asset corresponding to the given name or ID.
         // -->
         public ItemAssetTagBase()

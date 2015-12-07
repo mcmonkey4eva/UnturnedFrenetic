@@ -66,7 +66,9 @@
     <Compile Include="ItemModelTracker.cs" />
     <Compile Include="SysConsole.cs" />
     <Compile Include="TagSystems\TagBases\AnimalAssetTagBase.cs" />
+    <Compile Include="TagSystems\TagBases\ResourceAssetTagBase.cs" />
     <Compile Include="TagSystems\TagBases\WorldObjectAssetTagBase.cs" />
+    <Compile Include="TagSystems\TagBases\ResourceTagBase.cs" />
     <Compile Include="TagSystems\TagBases\WorldObjectTagBase.cs" />
     <Compile Include="TagSystems\TagBases\VehicleTagBase.cs" />
     <Compile Include="TagSystems\TagBases\VehicleAssetTagBase.cs" />
@@ -78,7 +80,9 @@
     <Compile Include="TagSystems\TagBases\ZombieTagBase.cs" />
     <Compile Include="TagSystems\TagObjects\AnimalAssetTag.cs" />
     <Compile Include="TagSystems\TagObjects\AnimalTag.cs" />
+    <Compile Include="TagSystems\TagObjects\ResourceAssetTag.cs" />
     <Compile Include="TagSystems\TagObjects\WorldObjectAssetTag.cs" />
+    <Compile Include="TagSystems\TagObjects\ResourceTag.cs" />
     <Compile Include="TagSystems\TagObjects\WorldObjectTag.cs" />
     <Compile Include="TagSystems\TagObjects\VehicleTag.cs" />
     <Compile Include="TagSystems\TagObjects\VehicleAssetTag.cs" />

@@ -191,6 +191,33 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         return new ListTag(items).Handle(data.Shrink());
                     }
                 // <--[tag]
+                // @Name LocationTag.find_resources_within[<TextTag>]
+                // @Group World
+                // @ReturnType ListTag<ResourceTag>
+                // @Returns a list of all resources within the specified range (spherical).
+                // @Example "0,1,2" .find_resources_within[10] returns "2|3|17".
+                // -->
+                case "find_resources_within":
+                    {
+                        List<TemplateObject> resources = new List<TemplateObject>();
+                        Vector3 vec3 = ToVector3();
+                        float range = Utilities.StringToFloat(data.GetModifier(0));
+                        for (byte x = 0; x < Regions.WORLD_SIZE; x++)
+                        {
+                            for (byte y = 0; y < Regions.WORLD_SIZE; y++)
+                            {
+                                foreach (ResourceSpawnpoint resource in LevelGround.trees[x, y])
+                                {
+                                    if ((resource.model.position - vec3).sqrMagnitude <= range * range)
+                                    {
+                                        resources.Add(new ResourceTag(resource));
+                                    }
+                                }
+                            }
+                        }
+                        return new ListTag(resources).Handle(data.Shrink());
+                    }
+                // <--[tag]
                 // @Name LocationTag.find_vehicles_within[<TextTag>]
                 // @Group World
                 // @ReturnType ListTag<VehicleTag>
@@ -217,6 +244,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @ReturnType ListTag<WorldObjectTag>
                 // @Returns a list of all world objects within the specified range (spherical).
                 // @Example "0,1,2" .find_world_objects_within[10] returns "2|3|17".
+                // @Note any overlap will count; the object's center does not need to be in the sphere.
                 // -->
                 case "find_world_objects_within":
                     {

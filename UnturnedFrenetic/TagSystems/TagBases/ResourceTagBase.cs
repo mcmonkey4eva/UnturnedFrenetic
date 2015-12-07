@@ -8,23 +8,22 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 
 namespace UnturnedFrenetic.TagSystems.TagBases
 {
-    public class WorldObjectAssetTagBase : TemplateTags
+    public class ResourceTagBase : TemplateTags
     {
         // <--[tag]
-        // @Base world_object_asset[<TextTag>]
+        // @Base resource[<TextTag>]
         // @Group Entities
-        // @ReturnType WorldObjectAssetTag
-        // @Returns the world object asset corresponding to the given name or ID.
+        // @ReturnType ResourceTag
+        // @Returns the resource entity corresponding to the given ID number.
         // -->
-        public WorldObjectAssetTagBase()
+        public ResourceTagBase()
         {
-            Name = "world_object_asset";
+            Name = "resource";
         }
 
         public override string Handle(TagData data)
         {
-            string iname = data.GetModifier(0);
-            WorldObjectAssetTag itag = WorldObjectAssetTag.For(iname);
+            ResourceTag itag = ResourceTag.For(Utilities.StringToInt(data.GetModifier(0)));
             if (itag == null)
             {
                 return new TextTag("{NULL}").Handle(data.Shrink());

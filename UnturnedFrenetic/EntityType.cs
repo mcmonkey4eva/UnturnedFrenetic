@@ -19,6 +19,7 @@ namespace UnturnedFrenetic
         public static Dictionary<string, EntityType> ITEMS = new Dictionary<string, EntityType>();
         public static Dictionary<string, EntityType> VEHICLES = new Dictionary<string, EntityType>();
         public static Dictionary<string, EntityType> WORLD_OBJECTS = new Dictionary<string, EntityType>();
+        public static Dictionary<string, EntityType> RESOURCES = new Dictionary<string, EntityType>();
 
         public static EntityType ValueOf(string name)
         {
@@ -54,6 +55,10 @@ namespace UnturnedFrenetic
                         {
                             return et;
                         }
+                        if (RESOURCES.TryGetValue(name, out et))
+                        {
+                            return et;
+                        }
                         return null;
                     }
             }
@@ -76,6 +81,7 @@ namespace UnturnedFrenetic
         ZOMBIE = 1,
         ITEM = 2,
         VEHICLE = 3,
-        WORLD_OBJECT = 4
+        WORLD_OBJECT = 4,
+        RESOURCE = 5
     }
 }

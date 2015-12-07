@@ -10,17 +10,17 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class WorldObjectAssetTag: TemplateObject
     {
-        public static List<ObjectAsset> Items;
+        public static List<ObjectAsset> WorldObjects;
         public static Dictionary<string, ObjectAsset> WorldObjectsMap;
 
         public static void Init()
         {
-            Items = new List<ObjectAsset>();
+            WorldObjects = new List<ObjectAsset>();
             WorldObjectsMap = new Dictionary<string, ObjectAsset>();
             Asset[] assets = Assets.find(EAssetType.OBJECT);
             foreach (Asset asset in assets)
             {
-                Items.Add((ObjectAsset)asset);
+                WorldObjects.Add((ObjectAsset)asset);
                 string namelow = asset.name.ToLower();
                 if (WorldObjectsMap.ContainsKey(namelow))
                 {
@@ -30,7 +30,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 WorldObjectsMap.Add(namelow, (ObjectAsset)asset);
                 EntityType.WORLD_OBJECTS.Add(namelow, new EntityType(asset.name, EntityAssetType.WORLD_OBJECT));
             }
-            SysConsole.Output(OutputType.INIT, "Loaded " + Items.Count + " base world objects!");
+            SysConsole.Output(OutputType.INIT, "Loaded " + WorldObjects.Count + " base world objects!");
         }
 
         public static WorldObjectAssetTag For(string nameorid)

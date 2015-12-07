@@ -11,7 +11,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
     public class WorldObjectTagBase : TemplateTags
     {
         // <--[tag]
-        // @Base item[<TextTag>]
+        // @Base world_object[<TextTag>]
         // @Group Entities
         // @ReturnType WorldObjectTag
         // @Returns the world object entity corresponding to the given ID number.
