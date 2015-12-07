@@ -164,17 +164,8 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "temperature":
                     return new TextTag(Internal.player.life.temperature.ToString()).Handle(data.Shrink());
-                // <--[tag]
-                // @Name PlayerTag.location
-                // @Group Status
-                // @ReturnType LocationTag
-                // @Returns the player's current world position.
-                // @Example "bob" .location returns "(5, 10, 15)".
-                // -->
-                case "location":
-                    return new LocationTag(Internal.player.transform.position).Handle(data.Shrink());
                 default:
-                    return new TextTag(ToString()).Handle(data);
+                    return new EntityTag(Internal.player.gameObject).Handle(data);
             }
         }
 

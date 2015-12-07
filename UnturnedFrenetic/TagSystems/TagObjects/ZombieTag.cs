@@ -61,15 +61,6 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "region":
                     return new TextTag(InternalRegionID).Handle(data.Shrink());
                 // <--[tag]
-                // @Name ZombieTag.iid
-                // @Group General Information
-                // @ReturnType TextTag
-                // @Returns this zombie's instance ID number.
-                // @Example "2" .iid returns "2".
-                // -->
-                case "iid":
-                    return new TextTag(Internal.gameObject.GetInstanceID()).Handle(data.Shrink());
-                // <--[tag]
                 // @Name ZombieTag.specialty
                 // @Group General Information
                 // @ReturnType TextTag
@@ -78,17 +69,8 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "specialty":
                     return new TextTag(Internal.speciality.ToString()).Handle(data.Shrink());
-                // <--[tag]
-                // @Name ZombieTag.location
-                // @Group Status
-                // @ReturnType LocationTag
-                // @Returns the zombie's current world position.
-                // @Example "2" .location returns "(5, 10, 15)".
-                // -->
-                case "location":
-                    return new LocationTag(Internal.transform.position).Handle(data.Shrink());
                 default:
-                    return new TextTag(ToString()).Handle(data);
+                    return new EntityTag(Internal.gameObject).Handle(data);
             }
         }
 

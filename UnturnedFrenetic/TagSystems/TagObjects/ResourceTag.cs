@@ -44,15 +44,6 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             switch (data.Input[0])
             {
                 // <--[tag]
-                // @Name ResourceTag.iid
-                // @Group General Information
-                // @ReturnType TextTag
-                // @Returns this resource's instance ID number.
-                // @Example "2" .iid returns "2".
-                // -->
-                case "iid":
-                    return new TextTag(Internal.model.gameObject.GetInstanceID()).Handle(data.Shrink());
-                // <--[tag]
                 // @Name ResourceTag.asset
                 // @Group General Information
                 // @ReturnType ResourceAssetTag
@@ -61,17 +52,8 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "asset":
                     return new ResourceAssetTag(Internal.asset).Handle(data.Shrink());
-                // <--[tag]
-                // @Name ResourceTag.location
-                // @Group Status
-                // @ReturnType LocationTag
-                // @Returns the resource's current world position.
-                // @Example "2" .location returns "(5, 10, 15)".
-                // -->
-                case "location":
-                    return new LocationTag(Internal.model.position).Handle(data.Shrink());
                 default:
-                    return new TextTag(ToString()).Handle(data);
+                    return new EntityTag(Internal.model.gameObject).Handle(data);
             }
         }
 

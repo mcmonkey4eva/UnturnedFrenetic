@@ -74,15 +74,6 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             switch (data.Input[0])
             {
                 // <--[tag]
-                // @Name BarricadeTag.iid
-                // @Group General Information
-                // @ReturnType TextTag
-                // @Returns this barricade's instance ID number.
-                // @Example "2" .iid returns "2".
-                // -->
-                case "iid":
-                    return new TextTag(Internal.gameObject.GetInstanceID()).Handle(data.Shrink());
-                // <--[tag]
                 // @Name BarricadeTag.asset
                 // @Group General Information
                 // @ReturnType ItemAssetTag
@@ -91,17 +82,8 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "asset":
                     return ItemAssetTag.For(InternalData.barricade.id.ToString()).Handle(data.Shrink());
-                // <--[tag]
-                // @Name BarricadeTag.location
-                //// @Group Status
-                // @ReturnType LocationTag
-                // @Returns the resource's current world position.
-                // @Example "2" .location returns "(5, 10, 15)".
-                // -->
-                case "location":
-                    return new LocationTag(Internal.transform.position).Handle(data.Shrink());
                 default:
-                    return new TextTag(ToString()).Handle(data);
+                    return new EntityTag(Internal.gameObject).Handle(data);
             }
         }
 

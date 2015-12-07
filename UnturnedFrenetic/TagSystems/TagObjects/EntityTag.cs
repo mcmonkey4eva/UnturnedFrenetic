@@ -5,53 +5,29 @@ using System.Text;
 using Frenetic.TagHandlers;
 using Frenetic.TagHandlers.Objects;
 using SDG.Unturned;
-
+using UnityEngine;
 
 namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class EntityTag : TemplateObject
     {
-        public TemplateObject TagObject;
+        public GameObject Internal;
 
-        public EntityTag(TemplateObject tagObject)
+        public EntityTag(GameObject obj)
         {
-            TagObject = tagObject;
+            Internal = obj;
         }
 
         public static EntityTag For(int instanceID)
         {
-            // TODO: better way to handle this?
-            TemplateObject obj = null;
-            obj = AnimalTag.For(instanceID);
-            if (obj == null)
+            foreach (GameObject obj in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
             {
-                obj = BarricadeTag.For(instanceID);
+                if (obj.GetInstanceID() == instanceID)
+                {
+                    return new EntityTag(obj);
+                }
             }
-            if (obj == null)
-            {
-                obj = ItemTag.For(instanceID);
-            }
-            if (obj == null)
-            {
-                obj = ResourceTag.For(instanceID);
-            }
-            if (obj == null)
-            {
-                obj = VehicleTag.For(instanceID);
-            }
-            if (obj == null)
-            {
-                obj = WorldObjectTag.For(instanceID);
-            }
-            if (obj == null)
-            {
-                obj = ZombieTag.For(instanceID);
-            }
-            if (obj == null)
-            {
-                return null;
-            }
-            return new EntityTag(obj);
+            return null;
         }
 
         public override string Handle(TagData data)
@@ -62,15 +38,32 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             }
             switch (data.Input[0])
             {
-                // TODO: generic entity tags? such as entity_type to return "ZombieTag" etc?..
+                // <--[tag]
+                // @Name EntityTag.iid
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns this entity's instance ID number.
+                // @Example "2" .iid returns "2".
+                // -->
+                case "iid":
+                    return new TextTag(Internal.GetInstanceID()).Handle(data.Shrink());
+                // <--[tag]
+                // @Name EntityTag.location
+                // @Group Status
+                // @ReturnType LocationTag
+                // @Returns the entity's current world position.
+                // @Example "2" .location returns "(5, 10, 15)".
+                // -->
+                case "location":
+                    return new LocationTag(Internal.transform.position).Handle(data.Shrink());
                 default:
-                    return TagObject.Handle(data);
+                    return new TextTag(ToString()).Handle(data.Shrink());
             }
         }
 
         public override string ToString()
         {
-            return TagObject.ToString();
+            return Internal.GetInstanceID().ToString();
         }
     }
 }

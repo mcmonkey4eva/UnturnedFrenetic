@@ -51,19 +51,10 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Group General Information
                 // @ReturnType TextTag
                 // @Returns the vehicle ID number of the vehicle.
-                // @Example "2" .iid returns "1".
+                // @Example "2" .vid returns "1".
                 // -->
                 case "vid":
                     return new TextTag(Internal.index).Handle(data.Shrink());
-                // <--[tag]
-                // @Name VehicleTag.iid
-                // @Group General Information
-                // @ReturnType TextTag
-                // @Returns this vehicle's instance ID number.
-                // @Example "2" .iid returns "2".
-                // -->
-                case "iid":
-                    return new TextTag(Internal.gameObject.GetInstanceID()).Handle(data.Shrink());
                 // <--[tag]
                 // @Name VehicleTag.asset
                 // @Group General Information
@@ -73,17 +64,8 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "asset":
                     return new VehicleAssetTag(Internal.asset).Handle(data.Shrink());
-                // <--[tag]
-                // @Name VehicleTag.location
-                // @Group Status
-                // @ReturnType LocationTag
-                // @Returns the vehicle's current world position.
-                // @Example "2" .location returns "(5, 10, 15)".
-                // -->
-                case "location":
-                    return new LocationTag(Internal.transform.position).Handle(data.Shrink());
                 default:
-                    return new TextTag(ToString()).Handle(data);
+                    return new EntityTag(Internal.gameObject).Handle(data);
             }
         }
 

@@ -57,15 +57,6 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "aid":
                     return new TextTag(Internal.index).Handle(data.Shrink());
                 // <--[tag]
-                // @Name AnimalTag.iid
-                // @Group General Information
-                // @ReturnType TextTag
-                // @Returns this animal's instance ID number.
-                // @Example "2" .iid returns "2".
-                // -->
-                case "iid":
-                    return new TextTag(Internal.gameObject.GetInstanceID()).Handle(data.Shrink());
-                // <--[tag]
                 // @Name AnimalTag.asset
                 // @Group General Information
                 // @ReturnType AnimalAssetTag
@@ -74,17 +65,8 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "asset":
                     return new AnimalAssetTag(Internal.asset).Handle(data.Shrink());
-                // <--[tag]
-                // @Name AnimalTag.location
-                // @Group Status
-                // @ReturnType LocationTag
-                // @Returns the animal's current world position.
-                // @Example "2" .location returns "(5, 10, 15)".
-                // -->
-                case "location":
-                    return new LocationTag(Internal.transform.position).Handle(data.Shrink());
                 default:
-                    return new TextTag(ToString()).Handle(data);
+                    return new EntityTag(Internal.gameObject).Handle(data);
             }
         }
 
