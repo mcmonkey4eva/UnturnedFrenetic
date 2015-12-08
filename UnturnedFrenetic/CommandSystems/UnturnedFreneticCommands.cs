@@ -30,11 +30,13 @@ namespace UnturnedFrenetic.CommandSystems
                 // Player Commands
                 System.RegisterCommand(new GiveCommand());
                 // World Commands
+                System.RegisterCommand(new EffectCommand());
                 System.RegisterCommand(new TimeCommand());
                 // Tag Objects
                 System.TagSystem.Register(new AnimalAssetTagBase());
                 System.TagSystem.Register(new AnimalTagBase());
                 System.TagSystem.Register(new BarricadeTagBase());
+                System.TagSystem.Register(new EffectAssetTagBase());
                 System.TagSystem.Register(new EntityTagBase());
                 System.TagSystem.Register(new ItemAssetTagBase());
                 System.TagSystem.Register(new ItemTagBase());

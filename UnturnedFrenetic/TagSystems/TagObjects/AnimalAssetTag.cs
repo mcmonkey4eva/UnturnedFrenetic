@@ -85,7 +85,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "animal_name":
                     return new TextTag(Internal.animalName).Handle(data.Shrink());
                 // <--[tag]
-                // @Name AnimalTag.id
+                // @Name AnimalAssetTag.id
                 // @Group General Information
                 // @ReturnType TextTag
                 // @Returns the ID number of the animal asset.

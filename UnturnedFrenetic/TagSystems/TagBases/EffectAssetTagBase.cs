@@ -8,22 +8,22 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 
 namespace UnturnedFrenetic.TagSystems.TagBases
 {
-    public class AnimalAssetTagBase : TemplateTags
+    public class EffectAssetTagBase : TemplateTags
     {
         // <--[tag]
-        // @Base animal_asset[<TextTag>]
-        // @Group Entities
-        // @ReturnType AnimalAssetTag
-        // @Returns the animal asset corresponding to the given name or ID.
+        // @Base effect_asset[<TextTag>]
+        // @Group Effects
+        // @ReturnType EffectAssetTag
+        // @Returns the effect asset corresponding to the given name or ID.
         // -->
-        public AnimalAssetTagBase()
+        public EffectAssetTagBase()
         {
-            Name = "animal_asset";
+            Name = "effect_asset";
         }
 
         public override string Handle(TagData data)
         {
-            AnimalAssetTag atag = AnimalAssetTag.For(data.GetModifier(0));
+            EffectAssetTag atag = EffectAssetTag.For(data.GetModifier(0));
             if (atag == null)
             {
                 return new TextTag("{NULL}").Handle(data.Shrink());
