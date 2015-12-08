@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandSystems\EntityCommands\SpawnCommand.cs" />
+    <Compile Include="CommandSystems\PlayerCommands\TakeCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\GiveCommand.cs" />
     <Compile Include="CommandSystems\UnturnedFreneticCommands.cs" />
     <Compile Include="CommandSystems\UnturnedFreneticCVars.cs" />

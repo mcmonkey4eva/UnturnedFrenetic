@@ -29,6 +29,7 @@ namespace UnturnedFrenetic.CommandSystems
                 System.RegisterCommand(new SpawnCommand());
                 // Player Commands
                 System.RegisterCommand(new GiveCommand());
+                System.RegisterCommand(new TakeCommand());
                 // World Commands
                 System.RegisterCommand(new EffectCommand());
                 System.RegisterCommand(new TimeCommand());
