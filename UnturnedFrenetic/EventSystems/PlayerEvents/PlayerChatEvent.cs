@@ -7,6 +7,7 @@ using Frenetic;
 using Frenetic.CommandSystem;
 using Frenetic.TagHandlers;
 using Frenetic.TagHandlers.Objects;
+using SDG.Unturned;
 
 namespace UnturnedFrenetic.EventSystems.PlayerEvents
 {
@@ -20,9 +21,14 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
     // @Description
     // This event will fire when a player sends a chat message.
     // @Var player PlayerTag returns the player that is chatting.
-    // @Var chat_mode TextTag returns the mode the player is chatting in.
-    // @Var text TextTag returns the text contents of the chat.
+    // @Var chat_mode TextTag returns the mode the player is chatting in. Can be: GLOBAL, GROUP, LOCAL, SAY, WELCOME.
+    // @Var text TextTag returns the text contents of the chat message.
+    // @Var color ColorTag returns the color of the chat message.
+    // @Determination chat_mode:<TextTag> sets the chat mode of the message. Valid: GLOBAL, GROUP, LOCAL, SAY, WELCOME.
+    // @Determination text:<TextTag> sets the text contents of the message.
+    // @Determination color:<ColorTag> sets the color message.
     // -->
+
     /// <summary>
     /// PlayerChatScriptEvent, called by a player chatting.
     /// </summary>
@@ -76,6 +82,9 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             evt.Text = oevt.Text;
             evt.Color = oevt.Color;
             evt.Call(prio);
+            oevt.ChatMode = evt.ChatMode;
+            oevt.Text = evt.Text;
+            oevt.Color = evt.Color;
             oevt.Cancelled = evt.Cancelled;
         }
 
@@ -120,8 +129,30 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         /// <param name="mode">What debugmode to use.</param>
         public override void ApplyDetermination(string determ, string determLow, DebugMode mode)
         {
-            // TODO: change chat mode, text, or color
-            base.ApplyDetermination(determ, determLow, mode);
+            if (determLow.StartsWith("color:"))
+            {
+                Color = ColorTag.For(determ.Substring("color:".Length));
+            }
+            else if (determLow.StartsWith("text:"))
+            {
+                Text = new TextTag(determ.Substring("text:".Length));
+            }
+            else if (determLow.StartsWith("chat_mode:"))
+            {
+                try
+                {
+                    EChatMode chatmode = (EChatMode)Enum.Parse(typeof(EChatMode), determ.Substring("chat_mode:".Length).ToUpper());
+                    ChatMode = new TextTag(chatmode.ToString());
+                }
+                catch (ArgumentException)
+                {
+                    System.Output.Bad("Unknown chat mode specified in '<{text_color.emphasis}>" + TagParser.Escape(determ) + "<{text_color.base}>'. Valid: GLOBAL, GROUP, LOCAL, SAY, WELCOME.", mode);
+                }
+            }
+            else
+            {
+                base.ApplyDetermination(determ, determLow, mode);
+            }
         }
     }
 

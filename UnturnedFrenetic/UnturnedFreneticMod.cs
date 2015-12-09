@@ -40,7 +40,7 @@ namespace UnturnedFrenetic
             }
         }
 
-        public static bool PlayerChat(SteamPlayer steamPlayer, ref EChatMode mode, ref Color color, ref string text)
+        public static bool PlayerChat(SteamPlayer steamPlayer, ref byte modeByte, ref EChatMode mode, ref Color color, ref string text)
         {
             color = Color.white;
             if (steamPlayer.isAdmin)
@@ -57,6 +57,10 @@ namespace UnturnedFrenetic
             evt.Text = new TextTag(text);
             evt.Color = new ColorTag(color);
             UnturnedFreneticEvents.OnPlayerChat.Fire(evt);
+            mode = (EChatMode)Enum.Parse(typeof(EChatMode), evt.ChatMode.ToString());
+            modeByte = (byte)mode;
+            text = evt.Text.ToString();
+            color = evt.Color.Internal;
             return evt.Cancelled;
         }
 

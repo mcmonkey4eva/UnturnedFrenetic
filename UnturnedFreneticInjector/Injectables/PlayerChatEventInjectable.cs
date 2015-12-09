@@ -13,7 +13,7 @@ namespace UnturnedFreneticInjector.Injectables
         {
             // This injects a call to the mod's static PlayerChat method for the PlayerChatScriptEvent
             TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
-            MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "PlayerChat", 4));
+            MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "PlayerChat", 5));
             TypeDefinition managertype = gamedef.GetType("SDG.Unturned.ChatManager");
             MethodDefinition chatmethod = GetMethod(managertype, "askChat", 3);
             MethodBody chatbody = chatmethod.Body;
@@ -26,6 +26,8 @@ namespace UnturnedFreneticInjector.Injectables
                 {
                     // Load "steamPlayer" onto the stack.
                     Instruction.Create(OpCodes.Ldloc_0),
+                    // Load "mode" onto the stack.
+                    Instruction.Create(OpCodes.Ldarga_S, chatmethod.Parameters[1]),
                     // Load "eChatMode" onto the stack.
                     Instruction.Create(OpCodes.Ldloca_S, chatbody.Variables[1]),
                     // Load "color" onto the stack.
@@ -39,9 +41,9 @@ namespace UnturnedFreneticInjector.Injectables
                     // Otherwise,return now.
                     Instruction.Create(OpCodes.Ret)
                 });
-            chatbody.Instructions[58] = Instruction.Create(OpCodes.Br, chatbody.Instructions[112]);
-            chatbody.Instructions[84] = Instruction.Create(OpCodes.Br, chatbody.Instructions[112]);
-            chatbody.Instructions[110] = Instruction.Create(OpCodes.Br, chatbody.Instructions[112]);
+            chatbody.Instructions[59] = Instruction.Create(OpCodes.Br, chatbody.Instructions[113]);
+            chatbody.Instructions[85] = Instruction.Create(OpCodes.Br, chatbody.Instructions[113]);
+            chatbody.Instructions[111] = Instruction.Create(OpCodes.Br, chatbody.Instructions[113]);
         }
     }
 }
