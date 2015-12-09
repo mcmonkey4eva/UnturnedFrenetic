@@ -19,10 +19,23 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             Internal = p;
             Name = p.playerID.playerName;
         }
+
+        static SteamPlayer GetSteamPlayer(string nameorid)
+        {
+            string noilow = nameorid.ToLower();
+            for (int i = 0; i < Provider.clients.Count; i++)
+            {
+                if (Provider.clients[i].playerID.playerName == noilow || Provider.clients[i].playerID.steamID.ToString() == noilow)
+                {
+                    return Provider.clients[i];
+                }
+            }
+            return null;
+        }
         
         public static PlayerTag For(string name)
         {
-            SteamPlayer p = PlayerTool.getSteamPlayer(name);
+            SteamPlayer p = GetSteamPlayer(name);
             if (p == null)
             {
                 return null;
