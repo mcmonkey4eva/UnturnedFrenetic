@@ -187,12 +187,23 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 else if (etype.Type == EntityAssetType.BARRICADE)
                 {
                     ItemAssetTag asset = ItemAssetTag.For(targetAssetType.Substring("barricade_".Length));
-                    if (asset == null)
+                    if (asset == null || !(asset.Internal is ItemBarricadeAsset))
                     {
                         entry.Bad("Invalid item barricade type!");
                         return;
                     }
                     BarricadeManager.dropBarricade(new Barricade(asset.Internal.id), null, loc.ToVector3(), 0f, 0f, 0f, CSteamID.Nil.m_SteamID, CSteamID.Nil.m_SteamID);
+                    entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                }
+                else if (etype.Type == EntityAssetType.STRUCTURE)
+                {
+                    ItemAssetTag asset = ItemAssetTag.For(targetAssetType.Substring("structure_".Length));
+                    if (asset == null || !(asset.Internal is ItemStructureAsset))
+                    {
+                        entry.Bad("Invalid item structure type!");
+                        return;
+                    }
+                    StructureManager.dropStructure(new Structure(asset.Internal.id), loc.ToVector3(), 0f, CSteamID.Nil.m_SteamID, CSteamID.Nil.m_SteamID);
                     entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
                 }
                 else

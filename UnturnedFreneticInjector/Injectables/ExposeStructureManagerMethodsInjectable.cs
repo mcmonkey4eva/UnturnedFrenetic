@@ -6,12 +6,12 @@ using Mono.Cecil;
 
 namespace UnturnedFreneticInjector.Injectables
 {
-    public class ExposeBarricadeManagerMethodsInjectable: Injectable
+    public class ExposeStructureManagerMethodsInjectable: Injectable
     {
         public override void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef)
         {
-            // Expose the "manager" method in BarricadeManager for easier use.
-            TypeDefinition type = gamedef.GetType("SDG.Unturned.BarricadeManager");
+            // Expose the "manager" method in StructureManager for easier use.
+            TypeDefinition type = gamedef.GetType("SDG.Unturned.StructureManager");
             FieldDefinition field = GetField(type, "manager");
             field.IsPrivate = false;
             field.IsPublic = true;

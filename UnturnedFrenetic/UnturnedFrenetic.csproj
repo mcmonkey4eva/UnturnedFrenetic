@@ -68,6 +68,7 @@
     <Compile Include="EventSystems\UnturnedFreneticEvents.cs" />
     <Compile Include="ItemModelTracker.cs" />
     <Compile Include="SysConsole.cs" />
+    <Compile Include="TagSystems\TagBases\StructureTagBase.cs" />
     <Compile Include="TagSystems\TagBases\ColorTagBase.cs" />
     <Compile Include="TagSystems\TagBases\EffectAssetTagBase.cs" />
     <Compile Include="TagSystems\TagBases\AnimalAssetTagBase.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="TagSystems\TagBases\ItemAssetTagBase.cs" />
     <Compile Include="TagSystems\TagBases\PlayerTagBase.cs" />
     <Compile Include="TagSystems\TagBases\ZombieTagBase.cs" />
+    <Compile Include="TagSystems\TagObjects\StructureTag.cs" />
     <Compile Include="TagSystems\TagObjects\ColorTag.cs" />
     <Compile Include="TagSystems\TagObjects\EffectAssetTag.cs" />
     <Compile Include="TagSystems\TagObjects\AnimalAssetTag.cs" />

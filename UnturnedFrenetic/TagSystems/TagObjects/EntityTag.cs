@@ -20,7 +20,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 
         public static EntityTag For(int instanceID)
         {
-            foreach (GameObject obj in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
+            foreach (GameObject obj in Resources.FindObjectsOfTypeAll<GameObject>())
             {
                 if (obj.GetInstanceID() == instanceID)
                 {
