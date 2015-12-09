@@ -30,6 +30,54 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             return null;
         }
 
+        public bool TryGetPlayer(out PlayerTag tag)
+        {
+            SteamPlayer component = Internal.GetComponent<SteamPlayer>();
+            if (component != null)
+            {
+                tag = new PlayerTag(component);
+                return true;
+            }
+            tag = null;
+            return false;
+        }
+
+        public bool TryGetZombie(out ZombieTag tag)
+        {
+            Zombie component = Internal.GetComponent<Zombie>();
+            if (component != null)
+            {
+                tag = new ZombieTag(component);
+                return true;
+            }
+            tag = null;
+            return false;
+        }
+
+        public bool TryGetAnimal(out AnimalTag tag)
+        {
+            Animal component = Internal.GetComponent<Animal>();
+            if (component != null)
+            {
+                tag = new AnimalTag(component);
+                return true;
+            }
+            tag = null;
+            return false;
+        }
+
+        public bool TryGetItem(out ItemTag tag)
+        {
+            InteractableItem component = Internal.GetComponent<InteractableItem>();
+            if (component != null)
+            {
+                tag = new ItemTag(component);
+                return true;
+            }
+            tag = null;
+            return false;
+        }
+
         public override string Handle(TagData data)
         {
             if (data.Input.Count == 0)

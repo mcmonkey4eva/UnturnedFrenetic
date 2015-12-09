@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandSystems\EntityCommands\TeleportCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\SpawnCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\TakeCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\GiveCommand.cs" />

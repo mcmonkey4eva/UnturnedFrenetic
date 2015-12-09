@@ -11,12 +11,10 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
     public class ZombieTag : TemplateObject
     {
         public Zombie Internal;
-        public int InternalRegionID;
 
-        public ZombieTag(Zombie zombie, int regionID)
+        public ZombieTag(Zombie zombie)
         {
             Internal = zombie;
-            InternalRegionID = regionID;
         }
 
         public static ZombieTag For(int instanceID)
@@ -27,7 +25,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 {
                     if (zombie.gameObject.GetInstanceID() == instanceID)
                     {
-                        return new ZombieTag(zombie, i);
+                        return new ZombieTag(zombie);
                     }
                 }
             }
@@ -59,7 +57,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Example "2" .region returns "4"
                 // -->
                 case "region":
-                    return new TextTag(InternalRegionID).Handle(data.Shrink());
+                    return new TextTag(Internal.bound).Handle(data.Shrink());
                 // <--[tag]
                 // @Name ZombieTag.specialty
                 // @Group General Information
