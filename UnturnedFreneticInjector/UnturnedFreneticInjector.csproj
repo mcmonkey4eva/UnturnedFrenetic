@@ -55,6 +55,7 @@
     <Compile Include="Injectables\ExposeItemManagerMethodsInjectable.cs" />
     <Compile Include="Injectables\ExposeZombieManagerMethodsInjectable.cs" />
     <Compile Include="Injectables\ExposeAnimalManagerMethodsInjectable.cs" />
+    <Compile Include="Injectables\PlayerChatEventInjectable.cs" />
     <Compile Include="Injectables\PlayerConnectingEventInjectable.cs" />
     <Compile Include="Injectables\StartTheModInjectable.cs" />
     <Compile Include="Program.cs" />

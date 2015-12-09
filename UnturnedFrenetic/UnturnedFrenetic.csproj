@@ -61,6 +61,7 @@
     <Compile Include="CommandSystems\WorldCommands\EffectCommand.cs" />
     <Compile Include="CommandSystems\WorldCommands\TimeCommand.cs" />
     <Compile Include="EntityType.cs" />
+    <Compile Include="EventSystems\PlayerEvents\PlayerChatEvent.cs" />
     <Compile Include="EventSystems\PlayerEvents\PlayerDisconnectedEvent.cs" />
     <Compile Include="EventSystems\PlayerEvents\PlayerConnectingEvent.cs" />
     <Compile Include="EventSystems\PlayerEvents\PlayerConnectedEvent.cs" />

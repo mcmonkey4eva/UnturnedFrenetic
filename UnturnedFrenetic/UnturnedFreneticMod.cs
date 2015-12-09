@@ -8,6 +8,8 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 using SDG.Unturned;
 using UnturnedFrenetic.EventSystems;
 using UnturnedFrenetic.EventSystems.PlayerEvents;
+using UnityEngine;
+using Frenetic.TagHandlers.Objects;
 
 namespace UnturnedFrenetic
 {
@@ -36,6 +38,25 @@ namespace UnturnedFrenetic
             {
                 Instance.CommandSystem.System.ExecuteCommands(input, null);
             }
+        }
+
+        public static bool PlayerChat(SteamPlayer steamPlayer, ref EChatMode mode, ref Color color, ref string text)
+        {
+            color = Color.white;
+            if (steamPlayer.isAdmin)
+            {
+                color = Palette.ADMIN;
+            }
+            else if (steamPlayer.isPro)
+            {
+                color = Palette.PRO;
+            }
+            PlayerChatEventArgs evt = new PlayerChatEventArgs();
+            evt.Player = new PlayerTag(steamPlayer);
+            evt.ChatMode = new TextTag(mode.ToString());
+            evt.Text = new TextTag(text);
+            UnturnedFreneticEvents.OnPlayerChat.Fire(evt);
+            return evt.Cancelled;
         }
 
         public static bool PlayerConnecting(SteamPending pending)
