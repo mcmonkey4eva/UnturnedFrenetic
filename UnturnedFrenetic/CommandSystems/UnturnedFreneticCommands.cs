@@ -37,6 +37,7 @@ namespace UnturnedFrenetic.CommandSystems
                 System.TagSystem.Register(new AnimalAssetTagBase());
                 System.TagSystem.Register(new AnimalTagBase());
                 System.TagSystem.Register(new BarricadeTagBase());
+                System.TagSystem.Register(new ColorTagBase());
                 System.TagSystem.Register(new EffectAssetTagBase());
                 System.TagSystem.Register(new EntityTagBase());
                 System.TagSystem.Register(new ItemAssetTagBase());

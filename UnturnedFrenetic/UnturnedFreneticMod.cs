@@ -55,6 +55,7 @@ namespace UnturnedFrenetic
             evt.Player = new PlayerTag(steamPlayer);
             evt.ChatMode = new TextTag(mode.ToString());
             evt.Text = new TextTag(text);
+            evt.Color = new ColorTag(color);
             UnturnedFreneticEvents.OnPlayerChat.Fire(evt);
             return evt.Cancelled;
         }

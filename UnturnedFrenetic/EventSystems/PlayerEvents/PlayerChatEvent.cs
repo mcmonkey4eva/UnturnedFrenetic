@@ -74,6 +74,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             evt.Player = oevt.Player;
             evt.ChatMode = oevt.ChatMode;
             evt.Text = oevt.Text;
+            evt.Color = oevt.Color;
             evt.Call(prio);
             oevt.Cancelled = evt.Cancelled;
         }
@@ -89,9 +90,14 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         public TextTag ChatMode;
 
         /// <summary>
-        /// The text contents of the chat.
+        /// The text contents of the chat message.
         /// </summary>
         public TextTag Text;
+
+        /// <summary>
+        /// The color of the chat message.
+        /// </summary>
+        public ColorTag Color;
 
         /// <summary>
         /// Get all variables according the script event's current values.
@@ -102,6 +108,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             vars.Add("player", Player);
             vars.Add("chat_mode", ChatMode);
             vars.Add("text", Text);
+            vars.Add("color", Color);
             return vars;
         }
 
@@ -113,6 +120,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         /// <param name="mode">What debugmode to use.</param>
         public override void ApplyDetermination(string determ, string determLow, DebugMode mode)
         {
+            // TODO: change chat mode, text, or color
             base.ApplyDetermination(determ, determLow, mode);
         }
     }
@@ -122,7 +130,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         public PlayerTag Player;
         public TextTag ChatMode;
         public TextTag Text;
-        // TODO: public ColorTag(?) Color;
+        public ColorTag Color;
 
         public bool Cancelled = false;
     }
