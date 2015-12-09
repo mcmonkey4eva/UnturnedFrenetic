@@ -77,6 +77,15 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "name":
                     return new TextTag(Internal.name).Handle(data.Shrink());
                 // <--[tag]
+                // @Name ResourceAssetTag.formatted_name
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns the formatted name of the resource asset.
+                // @Example "Bush_Jade" .formatted_name returns "Bush Jade".
+                // -->
+                case "formatted_name":
+                    return new TextTag(Internal.resourceName).Handle(data.Shrink());
+                // <--[tag]
                 // @Name ResourceAssetTag.id
                 // @Group General Information
                 // @ReturnType TextTag

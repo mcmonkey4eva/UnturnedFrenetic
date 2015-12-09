@@ -77,6 +77,24 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "name":
                     return new TextTag(Internal.name).Handle(data.Shrink());
                 // <--[tag]
+                // @Name ItemAssetTag.formatted_name
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns the formatted name of the item asset, as in how players see the name.
+                // @Example "Rifle_Maple" .formatted_name returns "Maple Rifle".
+                // -->
+                case "formatted_name":
+                    return new TextTag(Internal.itemName).Handle(data.Shrink());
+                // <--[tag]
+                // @Name ItemAssetTag.description
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns the description of the item asset.
+                // @Example "Rifle_Maple" .description returns "Maple rifle chambered in Rifle ammunition.".
+                // -->
+                case "description":
+                    return new TextTag(Internal.itemDescription).Handle(data.Shrink());
+                // <--[tag]
                 // @Name ItemAssetTag.is_pro
                 // @Group General Information
                 // @ReturnType TextTag

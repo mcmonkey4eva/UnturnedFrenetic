@@ -77,6 +77,15 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "name":
                     return new TextTag(Internal.name).Handle(data.Shrink());
                 // <--[tag]
+                // @Name VehicleTag.formatted_name
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns the formatted name of the vehicle.
+                // @Example "APC_Forest" .formatted_name returns "Forest APC".
+                // -->
+                case "formatted_name":
+                    return new TextTag(Internal.vehicleName).Handle(data.Shrink());
+                // <--[tag]
                 // @Name VehicleTag.id
                 // @Group General Information
                 // @ReturnType TextTag

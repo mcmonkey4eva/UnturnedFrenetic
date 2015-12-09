@@ -77,6 +77,15 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "name":
                     return new TextTag(Internal.name).Handle(data.Shrink());
                 // <--[tag]
+                // @Name WorldObjectAssetTag.formatted_name
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns the formatted name of the world object asset.
+                // @Example "Tower_Military_0" .formatted_name returns "Military Tower #1".
+                // -->
+                case "formatted_name":
+                    return new TextTag(Internal.name).Handle(data.Shrink());
+                // <--[tag]
                 // @Name WorldObjectAssetTag.id
                 // @Group General Information
                 // @ReturnType TextTag
