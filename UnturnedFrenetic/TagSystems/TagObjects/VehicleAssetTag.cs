@@ -68,28 +68,28 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             switch (data.Input[0])
             {
                 // <--[tag]
-                // @Name VehicleTag.name
+                // @Name VehicleAssetTag.name
                 // @Group General Information
                 // @ReturnType TextTag
-                // @Returns the name of the vehicle.
+                // @Returns the name of the vehicle asset.
                 // @Example "APC_Forest" .name returns "APC_Forest".
                 // -->
                 case "name":
                     return new TextTag(Internal.name).Handle(data.Shrink());
                 // <--[tag]
-                // @Name VehicleTag.formatted_name
+                // @Name VehicleAssetTag.formatted_name
                 // @Group General Information
                 // @ReturnType TextTag
-                // @Returns the formatted name of the vehicle.
+                // @Returns the formatted name of the vehicle asset.
                 // @Example "APC_Forest" .formatted_name returns "Forest APC".
                 // -->
                 case "formatted_name":
                     return new TextTag(Internal.vehicleName).Handle(data.Shrink());
                 // <--[tag]
-                // @Name VehicleTag.id
+                // @Name VehicleAssetTag.id
                 // @Group General Information
                 // @ReturnType TextTag
-                // @Returns the internal ID of the item.
+                // @Returns the ID number of this vehicle asset.
                 // @Example "APC_Forest" .id returns "53".
                 // -->
                 case "id":

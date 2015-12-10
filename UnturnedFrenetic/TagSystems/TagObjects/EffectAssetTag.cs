@@ -84,6 +84,24 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "id":
                     return new TextTag(Internal.id).Handle(data.Shrink());
+                // <--[tag]
+                // @Name EffectAssetTag.lifetime
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns the lifetime of the effect asset.
+                // @Example "Concrete_Dynamic" .lifetime returns "20".
+                // -->
+                case "lifetime":
+                    return new TextTag(Internal.lifetime).Handle(data.Shrink());
+                // <--[tag]
+                // @Name EffectAssetTag.gore
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns whether the effect asset is marked as containing gore.
+                // @Example "Concrete_Dynamic" .gore returns "false".
+                // -->
+                case "gore":
+                    return new TextTag(Internal.gore).Handle(data.Shrink());
                 default:
                     return new TextTag(ToString()).Handle(data);
             }

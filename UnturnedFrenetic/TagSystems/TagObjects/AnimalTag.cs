@@ -57,6 +57,16 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "aid":
                     return new TextTag(Internal.index).Handle(data.Shrink());
                 // <--[tag]
+                // @Name AnimalTag.health
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns the animal's current health.
+                // @Example "2" .health returns "96".
+                // -->
+                case "health":
+                    return new TextTag(Internal.health).Handle(data.Shrink());
+                // <--[tag]
+                // <--[tag]
                 // @Name AnimalTag.asset
                 // @Group General Information
                 // @ReturnType AnimalAssetTag

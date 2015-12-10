@@ -64,6 +64,24 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "asset":
                     return new VehicleAssetTag(Internal.asset).Handle(data.Shrink());
+                // <--[tag]
+                // @Name VehicleTag.health
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns the current health of the vehicle.
+                // @Example "2" .health returns "99".
+                // -->
+                case "health":
+                    return new TextTag(Internal.health).Handle(data.Shrink());
+                // <--[tag]
+                // @Name VehicleTag.id
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns the current amount of fuel in the vehicle.
+                // @Example "2" .fuel returns "67".
+                // -->
+                case "fuel":
+                    return new TextTag(Internal.fuel).Handle(data.Shrink());
                 default:
                     return new EntityTag(Internal.gameObject).Handle(data);
             }

@@ -82,6 +82,15 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "asset":
                     return ItemAssetTag.For(InternalData.structure.id.ToString()).Handle(data.Shrink());
+                // <--[tag]
+                // @Name StructureTag.health
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns the current health of the structure.
+                // @Example "2" .health returns "1".
+                // -->
+                case "health":
+                    return new TextTag(InternalData.structure.health).Handle(data.Shrink());
                 default:
                     return new EntityTag(Internal.gameObject).Handle(data);
             }

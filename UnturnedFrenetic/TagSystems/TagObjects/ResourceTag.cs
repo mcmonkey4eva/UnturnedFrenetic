@@ -52,6 +52,15 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "asset":
                     return new ResourceAssetTag(Internal.asset).Handle(data.Shrink());
+                // <--[tag]
+                // @Name ResourceTag.health
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns the current health of the resource.
+                // @Example "2" .health returns "1".
+                // -->
+                case "health":
+                    return new TextTag(Internal.health).Handle(data.Shrink());
                 default:
                     return new EntityTag(Internal.model.gameObject).Handle(data);
             }

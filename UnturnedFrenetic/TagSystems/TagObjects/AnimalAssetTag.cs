@@ -93,6 +93,33 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "id":
                     return new TextTag(Internal.id).Handle(data.Shrink());
+                // <--[tag]
+                // @Name AnimalAssetTag.pelt
+                // @Group General Information
+                // @ReturnType ItemAssetTag
+                // @Returns the item asset for the pelt this animal drops when it dies.
+                // @Example "Cow" .pelt returns "Box_Milk".
+                // -->
+                case "pelt":
+                    return ItemAssetTag.For(Internal.pelt.ToString()).Handle(data.Shrink());
+                // <--[tag]
+                // @Name AnimalAssetTag.meat
+                // @Group General Information
+                // @ReturnType ItemAssetTag
+                // @Returns the item asset for the meat this animal drops when it dies.
+                // @Example "Cow" .meat returns "Beef_Raw".
+                // -->
+                case "meat":
+                    return ItemAssetTag.For(Internal.meat.ToString()).Handle(data.Shrink());
+                // <--[tag]
+                // @Name AnimalAssetTag.health
+                // @Group General Information
+                // @ReturnType TextTag
+                // @Returns the default health for this animal asset.
+                // @Example "Cow" .health returns "100".
+                // -->
+                case "health":
+                    return new TextTag(Internal.health).Handle(data.Shrink());
                 default:
                     return new TextTag(ToString()).Handle(data);
             }
