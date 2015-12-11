@@ -11,7 +11,21 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
 {
     class TakeCommand: AbstractCommand
     {
-        // TODO: Meta!
+        // <--[command]
+        // @Name take
+        // @Arguments <player> <item> [amount]
+        // @Short Takes the specified item from the player.
+        // @Updated 2015/12/07
+        // @Authors Morphan1
+        // @Group World
+        // @Description
+        // This removes the specified item with an optional amount argument (default 1).
+        // TODO: Explain more!
+        // @Example
+        // // This removes a single ham sandwich from mcmonkey4eva's inventory.
+        // take mcmonkey4eva sandwich_ham 
+        // -->
+
         public TakeCommand()
         {
             Name = "take";

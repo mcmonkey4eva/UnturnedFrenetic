@@ -11,7 +11,21 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
 {
     class GiveCommand: AbstractCommand
     {
-        // TODO: Meta!
+        // <--[command]
+        // @Name give
+        // @Arguments <player> <item> [amount]
+        // @Short Gives the specified item to the player.
+        // @Updated 2015/11/28
+        // @Authors Morphan1
+        // @Group World
+        // @Description
+        // This adds the specified item with an optional amount argument (default 1).
+        // TODO: Explain more!
+        // @Example
+        // // This adds a single carrot mcmonkey4eva's inventory.
+        // give mcmonkey4eva carrot
+        // -->
+
         public GiveCommand()
         {
             Name = "give";
