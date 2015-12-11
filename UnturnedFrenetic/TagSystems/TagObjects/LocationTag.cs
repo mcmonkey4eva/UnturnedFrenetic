@@ -62,7 +62,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Group General Information
                 // @ReturnType TextTag
                 // @Returns the Y coordinate of this location.
-                // @Example "0,1,2" .x returns "1".
+                // @Example "0,1,2" .y returns "1".
                 // -->
                 case "y":
                     return new TextTag(Y).Handle(data.Shrink());
@@ -71,7 +71,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Group General Information
                 // @ReturnType TextTag
                 // @Returns the Z coordinate of this location.
-                // @Example "0,1,2" .x returns "2".
+                // @Example "0,1,2" .z returns "2".
                 // -->
                 case "z":
                     return new TextTag(Z).Handle(data.Shrink());
