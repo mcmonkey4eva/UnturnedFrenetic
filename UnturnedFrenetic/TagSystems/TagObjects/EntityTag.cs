@@ -111,7 +111,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 
         public override string ToString()
         {
-            return Internal.GetInstanceID().ToString();
+            return "e:" + Internal.GetInstanceID().ToString();
         }
     }
 }

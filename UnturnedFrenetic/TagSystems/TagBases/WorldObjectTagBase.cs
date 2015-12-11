@@ -24,12 +24,17 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 
         public override string Handle(TagData data)
         {
-            WorldObjectTag itag = WorldObjectTag.For(Utilities.StringToInt(data.GetModifier(0)));
-            if (itag == null)
+            string modif = data.GetModifier(0);
+            if (modif.StartsWith("e:"))
+            {
+                modif = modif.Substring("e:".Length);
+            }
+            WorldObjectTag wotag = WorldObjectTag.For(Utilities.StringToInt(modif));
+            if (wotag == null)
             {
                 return new TextTag("{NULL}").Handle(data.Shrink());
             }
-            return itag.Handle(data.Shrink());
+            return wotag.Handle(data.Shrink());
         }
     }
 }

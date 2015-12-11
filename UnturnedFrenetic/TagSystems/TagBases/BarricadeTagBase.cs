@@ -24,12 +24,17 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 
         public override string Handle(TagData data)
         {
-            BarricadeTag itag = BarricadeTag.For(Utilities.StringToInt(data.GetModifier(0)));
-            if (itag == null)
+            string modif = data.GetModifier(0);
+            if (modif.StartsWith("e:"))
+            {
+                modif = modif.Substring("e:".Length);
+            }
+            BarricadeTag btag = BarricadeTag.For(Utilities.StringToInt(modif));
+            if (btag == null)
             {
                 return new TextTag("{NULL}").Handle(data.Shrink());
             }
-            return itag.Handle(data.Shrink());
+            return btag.Handle(data.Shrink());
         }
     }
 }

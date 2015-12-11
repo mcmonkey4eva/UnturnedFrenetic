@@ -24,7 +24,12 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 
         public override string Handle(TagData data)
         {
-            AnimalTag atag = AnimalTag.For(Utilities.StringToInt(data.GetModifier(0)));
+            string modif = data.GetModifier(0);
+            if (modif.StartsWith("e:"))
+            {
+                modif = modif.Substring("e:".Length);
+            }
+            AnimalTag atag = AnimalTag.For(Utilities.StringToInt(modif));
             if (atag == null)
             {
                 return new TextTag("{NULL}").Handle(data.Shrink());

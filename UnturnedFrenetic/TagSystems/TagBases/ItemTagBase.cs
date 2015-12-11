@@ -24,7 +24,12 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 
         public override string Handle(TagData data)
         {
-            ItemTag itag = ItemTag.For(Utilities.StringToInt(data.GetModifier(0)));
+            string modif = data.GetModifier(0);
+            if (modif.StartsWith("e:"))
+            {
+                modif = modif.Substring("e:".Length);
+            }
+            ItemTag itag = ItemTag.For(Utilities.StringToInt(modif));
             if (itag == null)
             {
                 return new TextTag("{NULL}").Handle(data.Shrink());

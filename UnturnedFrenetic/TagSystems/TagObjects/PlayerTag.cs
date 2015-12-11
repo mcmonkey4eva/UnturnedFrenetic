@@ -35,6 +35,19 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
         
         public static PlayerTag For(string name)
         {
+            if (name.StartsWith("e:")) // TODO: Better way to separate entities from steam IDs!
+            {
+                EntityTag e = EntityTag.For(Utilities.StringToInt(name));
+                if (e == null)
+                {
+                    return null;
+                }
+                name = e.Internal.GetComponent<Player>().name; // TODO: Better name variable?
+            }
+            else if (name.StartsWith("p:"))
+            {
+                name = name.Substring("p:".Length);
+            }
             SteamPlayer p = GetSteamPlayer(name);
             if (p == null)
             {

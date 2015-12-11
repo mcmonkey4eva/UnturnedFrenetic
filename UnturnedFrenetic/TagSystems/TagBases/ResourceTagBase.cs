@@ -24,12 +24,17 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 
         public override string Handle(TagData data)
         {
-            ResourceTag itag = ResourceTag.For(Utilities.StringToInt(data.GetModifier(0)));
-            if (itag == null)
+            string modif = data.GetModifier(0);
+            if (modif.StartsWith("e:"))
+            {
+                modif = modif.Substring("e:".Length);
+            }
+            ResourceTag rtag = ResourceTag.For(Utilities.StringToInt(modif));
+            if (rtag == null)
             {
                 return new TextTag("{NULL}").Handle(data.Shrink());
             }
-            return itag.Handle(data.Shrink());
+            return rtag.Handle(data.Shrink());
         }
     }
 }
