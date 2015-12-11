@@ -12,6 +12,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
     {
         // <--[tag]
         // @Base barricade[<TextTag>]
+        // @SubType EntityTag
         // @Group Entities
         // @ReturnType BarricadeTag
         // @Returns the barricade entity corresponding to the given ID number.

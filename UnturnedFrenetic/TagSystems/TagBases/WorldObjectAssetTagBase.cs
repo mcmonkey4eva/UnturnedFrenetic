@@ -12,7 +12,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
     {
         // <--[tag]
         // @Base world_object_asset[<TextTag>]
-        // @Group Entities
+        // @Group Assets
         // @ReturnType WorldObjectAssetTag
         // @Returns the world object asset corresponding to the given name or ID.
         // -->

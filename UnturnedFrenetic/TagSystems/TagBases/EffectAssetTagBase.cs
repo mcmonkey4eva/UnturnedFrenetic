@@ -12,7 +12,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
     {
         // <--[tag]
         // @Base effect_asset[<TextTag>]
-        // @Group Effects
+        // @Group Assets
         // @ReturnType EffectAssetTag
         // @Returns the effect asset corresponding to the given name or ID.
         // -->

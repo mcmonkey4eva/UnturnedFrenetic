@@ -12,6 +12,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
     {
         // <--[tag]
         // @Base zombie[<TextTag>]
+        // @SubType EntityTag
         // @Group Entities
         // @ReturnType ZombieTag
         // @Returns the zombie entity corresponding to the given ID number.

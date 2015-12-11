@@ -12,7 +12,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
     {
         // <--[tag]
         // @Base color[<TextTag>]
-        // @Group Entities
+        // @Group Mathematics
         // @ReturnType ColorTag
         // @Returns the color corresponding to the given RGBA value.
         // -->

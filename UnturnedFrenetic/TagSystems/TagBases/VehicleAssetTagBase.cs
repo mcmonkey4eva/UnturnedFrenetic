@@ -12,7 +12,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
     {
         // <--[tag]
         // @Base vehicle_asset[<TextTag>]
-        // @Group Entities
+        // @Group Assets
         // @ReturnType VehicleTag
         // @Returns the vehicle asset corresponding to the given name or ID.
         // -->

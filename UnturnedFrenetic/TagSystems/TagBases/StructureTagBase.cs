@@ -12,6 +12,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
     {
         // <--[tag]
         // @Base structure[<TextTag>]
+        // @SubType EntityTag
         // @Group Entities
         // @ReturnType StructureTag
         // @Returns the structure entity corresponding to the given ID number.

@@ -12,6 +12,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
     {
         // <--[tag]
         // @Base resource[<TextTag>]
+        // @SubType EntityTag
         // @Group Entities
         // @ReturnType ResourceTag
         // @Returns the resource entity corresponding to the given ID number.

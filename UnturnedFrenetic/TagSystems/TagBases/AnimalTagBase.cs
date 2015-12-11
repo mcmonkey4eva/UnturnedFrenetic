@@ -12,6 +12,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
     {
         // <--[tag]
         // @Base animal[<TextTag>]
+        // @SubType EntityTag
         // @Group Entities
         // @ReturnType AnimalTag
         // @Returns the animal entity corresponding to the given ID number.
