@@ -25,7 +25,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             string noilow = nameorid.ToLower();
             for (int i = 0; i < Provider.clients.Count; i++)
             {
-                if (Provider.clients[i].playerID.playerName == noilow || Provider.clients[i].playerID.steamID.ToString() == noilow)
+                if (Provider.clients[i].playerID.playerName.ToLower() == noilow || Provider.clients[i].playerID.steamID.ToString() == noilow)
                 {
                     return Provider.clients[i];
                 }
