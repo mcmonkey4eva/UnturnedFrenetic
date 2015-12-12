@@ -18,7 +18,7 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
         // @Short Tells a player a message (in chat).
         // @Updated 2015/12/11
         // @Authors mcmonkey
-        // @Group World
+        // @Group Player
         // @Description
         // This sends a chat message supposedly from a player to an actual player or group of players.
         // TODO: Explain more!

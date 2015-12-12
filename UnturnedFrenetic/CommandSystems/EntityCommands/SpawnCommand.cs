@@ -14,7 +14,20 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
 {
     class SpawnCommand : AbstractCommand
     {
-        // TODO: Meta!
+        // <--[command]
+        // @Name spawn
+        // @Arguments <entity type> <location>
+        // @Short Spawns an entity at the given location.
+        // @Updated 2015/12/11
+        // @Authors mcmonkey
+        // @Group Entity
+        // @Description
+        // This spawns an entity into the world at the given location.
+        // TODO: Explain more!
+        // @Example
+        // // This spawns a deer at the location (50, 50, 50).
+        // spawn deer 50,50,50;
+        // -->
         public SpawnCommand()
         {
             Name = "spawn";

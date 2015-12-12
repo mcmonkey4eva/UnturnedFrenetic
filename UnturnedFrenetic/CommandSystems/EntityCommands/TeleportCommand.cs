@@ -10,7 +10,20 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
 {
     class TeleportCommand : AbstractCommand
     {
-        // TODO: Meta!
+        // <--[command]
+        // @Name teleport
+        // @Arguments <entity> <location>
+        // @Short Teleports an entity to the given location.
+        // @Updated 2015/12/11
+        // @Authors Morphan1
+        // @Group Entity
+        // @Description
+        // This teleports an entity from its current location to a new location.
+        // TODO: Explain more!
+        // @Example
+        // // This teleports the entity with ID 1 at the location (50, 50, 50).
+        // spawn 1 50,50,50;
+        // -->
         public TeleportCommand()
         {
             Name = "teleport";
