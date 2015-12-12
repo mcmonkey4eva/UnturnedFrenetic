@@ -15,6 +15,9 @@ namespace UnturnedFreneticInjector.Injectables
             TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
             MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "PlayerChat", 5));
             TypeDefinition managertype = gamedef.GetType("SDG.Unturned.ChatManager");
+            FieldDefinition managerfield = GetField(managertype, "manager");
+            managerfield.IsPrivate = false;
+            managerfield.IsPublic = true;
             MethodDefinition chatmethod = GetMethod(managertype, "askChat", 3);
             MethodBody chatbody = chatmethod.Body;
             // Remove old color handling

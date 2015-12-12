@@ -22,8 +22,8 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
         // This removes the specified item with an optional amount argument (default 1).
         // TODO: Explain more!
         // @Example
-        // // This removes a single ham sandwich from mcmonkey4eva's inventory.
-        // take mcmonkey4eva sandwich_ham 
+        // // This removes a single ham sandwich from mcmonkey's inventory.
+        // take mcmonkey sandwich_ham;
         // -->
 
         public TakeCommand()

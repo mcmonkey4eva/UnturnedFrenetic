@@ -1761,17 +1761,17 @@
             Informational output type, 3.
             </summary>
         </member>
-        <member name="T:Frenetic.TagHandlers.Common.ColorTags">
+        <member name="T:Frenetic.TagHandlers.Common.TextColorTags">
             <summary>
-            Returns the various default color objects within the tag system.
+            Returns the various default colors within the tag system.
             </summary>
         </member>
-        <member name="M:Frenetic.TagHandlers.Common.ColorTags.#ctor">
+        <member name="M:Frenetic.TagHandlers.Common.TextColorTags.#ctor">
             <summary>
             Construct the ColorTags - for internal use only.
             </summary>
         </member>
-        <member name="M:Frenetic.TagHandlers.Common.ColorTags.Handle(Frenetic.TagHandlers.TagData)">
+        <member name="M:Frenetic.TagHandlers.Common.TextColorTags.Handle(Frenetic.TagHandlers.TagData)">
             <summary>
             Handles a 'color' tag.
             </summary>

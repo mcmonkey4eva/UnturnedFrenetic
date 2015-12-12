@@ -21,10 +21,10 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
         // TODO: Explain more!
         // @Example
         // // This sets the time to a daylight hour.
-        // time 0
+        // time 0;
         // @Example
         // // This sets the time tot a nighttime hour.
-        // time 25000
+        // time 25000;
         // -->
 
         public TimeCommand()
