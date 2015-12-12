@@ -186,6 +186,24 @@ namespace UnturnedFrenetic
         }
 
         /// <summary>
+        /// Converts a string to a byte. Returns 0 if the string is not a valid byte.
+        /// </summary>
+        /// <param name="input">The string to convert.</param>
+        /// <returns>The converted int.</returns>
+        public static byte StringToByte(string input)
+        {
+            byte output;
+            if (byte.TryParse(input, out output))
+            {
+                return output;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
         /// Returns a string representation of the specified time.
         /// </summary>
         /// <returns>The time as a string.</returns>

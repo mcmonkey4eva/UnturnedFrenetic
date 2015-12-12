@@ -10,6 +10,7 @@ using UnturnedFrenetic.EventSystems;
 using UnturnedFrenetic.EventSystems.PlayerEvents;
 using UnityEngine;
 using Frenetic.TagHandlers.Objects;
+using Steamworks;
 
 namespace UnturnedFrenetic
 {
@@ -73,6 +74,15 @@ namespace UnturnedFrenetic
             {
                 Provider.reject(pending.playerID.steamID, ESteamRejection.WHITELISTED); // TODO: Customizable rejection reason!
             }
+            return evt.Cancelled;
+        }
+
+        public static bool PlayerDamaged(Player player, ref byte amount, ref Vector3 ragdoll, ref EDeathCause deathCause, ref ELimb limb, ref CSteamID killer)
+        {
+            PlayerDamagedEventArgs evt = new PlayerDamagedEventArgs();
+            evt.Player = new PlayerTag(player.channel.owner);
+            UnturnedFreneticEvents.OnPlayerDamaged.Fire(evt);
+            amount = Utilities.StringToByte(evt.Amount.ToString());
             return evt.Cancelled;
         }
 
