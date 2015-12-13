@@ -10,6 +10,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class ZombieTag : TemplateObject
     {
+        // <--[object]
+        // @Type ZombieTag
+        // @SubType EntityTag
+        // @Group Entities
+        // @Description Represents a spawned zombie in the world.
+        // -->
+
         public Zombie Internal;
 
         public ZombieTag(Zombie zombie)

@@ -10,6 +10,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class VehicleTag : TemplateObject
     {
+        // <--[object]
+        // @Type VehicleTag
+        // @SubType EntityTag
+        // @Group Entities
+        // @Description Represents a spawned vehicle in the world.
+        // -->
+
         public InteractableVehicle Internal;
 
         public VehicleTag(InteractableVehicle vehicle)

@@ -10,6 +10,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class EffectAssetTag: TemplateObject
     {
+        // <--[object]
+        // @Type EffectAssetTag
+        // @SubType TextTag
+        // @Group Assets
+        // @Description Represents an asset used to spawn an effect.
+        // -->
+
         public static List<EffectAsset> Effects;
         public static Dictionary<string, EffectAsset> EffectsMap;
 

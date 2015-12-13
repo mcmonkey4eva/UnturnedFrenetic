@@ -10,6 +10,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class VehicleAssetTag: TemplateObject
     {
+        // <--[object]
+        // @Type VehicleAssetTag
+        // @SubType TextTag
+        // @Group Assets
+        // @Description Represents an asset used to spawn a vehicle.
+        // -->
+
         public static List<VehicleAsset> Vehicles;
         public static Dictionary<string, VehicleAsset> VehiclesMap;
 

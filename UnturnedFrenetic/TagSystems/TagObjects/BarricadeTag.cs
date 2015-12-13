@@ -11,6 +11,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class BarricadeTag : TemplateObject
     {
+        // <--[object]
+        // @Type BarricadeTag
+        // @SubType EntityTag
+        // @Group Entities
+        // @Description Represents a spawned barricade in the world.
+        // -->
+
         public Transform Internal;
         public BarricadeData InternalData;
 

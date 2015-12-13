@@ -10,6 +10,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class ResourceAssetTag: TemplateObject
     {
+        // <--[object]
+        // @Type ResourceAssetTag
+        // @SubType TextTag
+        // @Group Assets
+        // @Description Represents an asset used to spawn a resource.
+        // -->
+
         public static List<ResourceAsset> Resources;
         public static Dictionary<string, ResourceAsset> ResourcesMap;
 

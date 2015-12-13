@@ -11,6 +11,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class AnimalTag : TemplateObject
     {
+        // <--[object]
+        // @Type AnimalTag
+        // @SubType EntityTag
+        // @Group Entities
+        // @Description Represents a spawned animal in the world.
+        // -->
+
         public Animal Internal;
 
         public AnimalTag(Animal animal)

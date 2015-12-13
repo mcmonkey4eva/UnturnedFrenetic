@@ -10,7 +10,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class PlayerTag : TemplateObject
     {
-        // <--[tag]
+        // <--[object]
         // @Type PlayerTag
         // @SubType EntityTag
         // @Group Entities

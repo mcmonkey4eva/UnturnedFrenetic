@@ -11,6 +11,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class ItemTag : TemplateObject
     {
+        // <--[object]
+        // @Type ItemTag
+        // @SubType EntityTag
+        // @Group Entities
+        // @Description Represents a spawned item in the world.
+        // -->
+
         public InteractableItem Internal;
 
         public ItemTag(InteractableItem item)

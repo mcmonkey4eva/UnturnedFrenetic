@@ -10,6 +10,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class ResourceTag : TemplateObject
     {
+        // <--[object]
+        // @Type ResourceTag
+        // @SubType EntityTag
+        // @Group Entities
+        // @Description Represents a spawned resource in the world.
+        // -->
+
         public ResourceSpawnpoint Internal;
 
         public ResourceTag(ResourceSpawnpoint resource)

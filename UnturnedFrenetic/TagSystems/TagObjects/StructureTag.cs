@@ -11,6 +11,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class StructureTag : TemplateObject
     {
+        // <--[object]
+        // @Type StructureTag
+        // @SubType EntityTag
+        // @Group Entities
+        // @Description Represents a spawned structure in the world.
+        // -->
+
         public Transform Internal;
         public StructureData InternalData;
 

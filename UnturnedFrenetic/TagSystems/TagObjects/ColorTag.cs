@@ -10,6 +10,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class ColorTag : TemplateObject
     {
+        // <--[object]
+        // @Type ColorTag
+        // @SubType TextTag
+        // @Group Mathematics
+        // @Description Represents the color of text.
+        // -->
+
         public Color Internal;
 
         public ColorTag(Color color)

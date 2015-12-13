@@ -10,6 +10,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class WorldObjectTag : TemplateObject
     {
+        // <--[object]
+        // @Type WorldObjectTag
+        // @SubType EntityTag
+        // @Group Entities
+        // @Description Represents a spawned world object in the world.
+        // -->
+
         public LevelObject Internal;
 
         public WorldObjectTag(LevelObject obj)

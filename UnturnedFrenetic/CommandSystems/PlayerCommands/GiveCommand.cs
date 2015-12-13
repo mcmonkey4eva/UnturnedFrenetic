@@ -22,7 +22,7 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
         // This adds the specified item with an optional amount argument (default 1).
         // TODO: Explain more!
         // @Example
-        // // This adds a single carrot mcmonkey's inventory.
+        // // This adds a single carrot to mcmonkey's inventory.
         // give mcmonkey carrot;
         // -->
 

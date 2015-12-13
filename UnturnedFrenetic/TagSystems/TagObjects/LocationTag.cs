@@ -11,6 +11,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class LocationTag: TemplateObject
     {
+        // <--[object]
+        // @Type LocationTag
+        // @SubType TextTag
+        // @Group Mathematics
+        // @Description Represents a 3D coordinate in the world, or a 3D vector.
+        // -->
+
         public float X;
 
         public float Y;
