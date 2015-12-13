@@ -27,7 +27,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             VehicleAssetTag itag = VehicleAssetTag.For(iname);
             if (itag == null)
             {
-                return new TextTag("{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}").Handle(data.Shrink());
             }
             return itag.Handle(data.Shrink());
         }

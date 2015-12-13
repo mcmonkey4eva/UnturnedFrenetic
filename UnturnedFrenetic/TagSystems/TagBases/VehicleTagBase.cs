@@ -31,7 +31,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             VehicleTag vtag = VehicleTag.For(Utilities.StringToInt(modif));
             if (vtag == null)
             {
-                return new TextTag("{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}").Handle(data.Shrink());
             }
             return vtag.Handle(data.Shrink());
         }

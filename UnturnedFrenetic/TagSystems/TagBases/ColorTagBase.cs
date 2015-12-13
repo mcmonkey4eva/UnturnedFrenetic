@@ -26,7 +26,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             ColorTag ctag = ColorTag.For(data.GetModifier(0));
             if (ctag == null)
             {
-                return new TextTag("{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}").Handle(data.Shrink());
             }
             return ctag.Handle(data.Shrink());
         }

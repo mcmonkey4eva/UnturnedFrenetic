@@ -31,7 +31,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             ZombieTag ztag = ZombieTag.For(Utilities.StringToInt(modif));
             if (ztag == null)
             {
-                return new TextTag("{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}").Handle(data.Shrink());
             }
             return ztag.Handle(data.Shrink());
         }

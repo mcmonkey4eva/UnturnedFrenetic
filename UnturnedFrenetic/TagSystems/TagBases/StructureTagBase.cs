@@ -31,7 +31,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             StructureTag stag = StructureTag.For(Utilities.StringToInt(modif));
             if (stag == null)
             {
-                return new TextTag("{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}").Handle(data.Shrink());
             }
             return stag.Handle(data.Shrink());
         }

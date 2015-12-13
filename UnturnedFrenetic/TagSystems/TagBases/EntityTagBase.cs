@@ -31,7 +31,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             EntityTag itag = EntityTag.For(Utilities.StringToInt(modif));
             if (itag == null)
             {
-                return new TextTag("{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}").Handle(data.Shrink());
             }
             return itag.Handle(data.Shrink());
         }

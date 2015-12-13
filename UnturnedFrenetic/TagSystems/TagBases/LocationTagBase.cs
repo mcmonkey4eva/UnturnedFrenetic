@@ -27,7 +27,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             LocationTag ltag = LocationTag.For(lname);
             if (ltag == null)
             {
-                return new TextTag("{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}").Handle(data.Shrink());
             }
             return ltag.Handle(data.Shrink());
         }

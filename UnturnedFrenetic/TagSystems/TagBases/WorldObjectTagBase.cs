@@ -31,7 +31,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             WorldObjectTag wotag = WorldObjectTag.For(Utilities.StringToInt(modif));
             if (wotag == null)
             {
-                return new TextTag("{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}").Handle(data.Shrink());
             }
             return wotag.Handle(data.Shrink());
         }

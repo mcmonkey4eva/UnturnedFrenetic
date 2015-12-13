@@ -31,7 +31,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             ResourceTag rtag = ResourceTag.For(Utilities.StringToInt(modif));
             if (rtag == null)
             {
-                return new TextTag("{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}").Handle(data.Shrink());
             }
             return rtag.Handle(data.Shrink());
         }

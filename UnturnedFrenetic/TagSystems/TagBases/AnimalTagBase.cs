@@ -31,7 +31,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             AnimalTag atag = AnimalTag.For(Utilities.StringToInt(modif));
             if (atag == null)
             {
-                return new TextTag("{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}").Handle(data.Shrink());
             }
             return atag.Handle(data.Shrink());
         }

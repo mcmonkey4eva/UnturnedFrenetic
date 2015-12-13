@@ -26,7 +26,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             AnimalAssetTag atag = AnimalAssetTag.For(data.GetModifier(0));
             if (atag == null)
             {
-                return new TextTag("{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}").Handle(data.Shrink());
             }
             return atag.Handle(data.Shrink());
         }

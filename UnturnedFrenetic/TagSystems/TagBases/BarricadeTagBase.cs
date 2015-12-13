@@ -31,7 +31,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             BarricadeTag btag = BarricadeTag.For(Utilities.StringToInt(modif));
             if (btag == null)
             {
-                return new TextTag("{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}").Handle(data.Shrink());
             }
             return btag.Handle(data.Shrink());
         }

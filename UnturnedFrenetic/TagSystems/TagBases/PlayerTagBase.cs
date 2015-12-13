@@ -27,7 +27,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             PlayerTag ptag = PlayerTag.For(pname);
             if (ptag == null)
             {
-                return new TextTag("{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}").Handle(data.Shrink());
             }
             return ptag.Handle(data.Shrink());
         }

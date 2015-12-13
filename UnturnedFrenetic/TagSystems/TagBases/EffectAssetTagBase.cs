@@ -26,7 +26,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             EffectAssetTag atag = EffectAssetTag.For(data.GetModifier(0));
             if (atag == null)
             {
-                return new TextTag("{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}").Handle(data.Shrink());
             }
             return atag.Handle(data.Shrink());
         }
