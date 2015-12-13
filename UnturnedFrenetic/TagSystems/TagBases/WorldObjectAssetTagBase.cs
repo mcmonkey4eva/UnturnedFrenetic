@@ -10,7 +10,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 {
     public class WorldObjectAssetTagBase : TemplateTags
     {
-        // <--[tag]
+        // <--[tagbase]
         // @Base world_object_asset[<TextTag>]
         // @Group Assets
         // @ReturnType WorldObjectAssetTag

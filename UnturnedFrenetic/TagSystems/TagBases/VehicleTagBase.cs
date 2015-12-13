@@ -10,9 +10,8 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 {
     public class VehicleTagBase : TemplateTags
     {
-        // <--[tag]
+        // <--[tagbase]
         // @Base vehicle[<TextTag>]
-        // @SubType EntityTag
         // @Group Entities
         // @ReturnType VehicleTag
         // @Returns the vehicle entity corresponding to the given name ID number.

@@ -10,7 +10,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 {
     public class PlayerTagBase : TemplateTags
     {
-        // <--[tag]
+        // <--[tagbase]
         // @Base player[<TextTag>]
         // @Group Entities
         // @ReturnType PlayerTag

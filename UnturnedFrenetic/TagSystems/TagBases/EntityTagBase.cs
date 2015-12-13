@@ -10,7 +10,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 {
     public class EntityTagBase : TemplateTags
     {
-        // <--[tag]
+        // <--[tagbase]
         // @Base entity[<TextTag>]
         // @Group Entities
         // @ReturnType EntityTag

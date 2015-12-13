@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace UnturnedFrenetic.TagSystems.TagObjects
 {
-    public class LocationTag: TemplateTags
+    public class LocationTag: TemplateObject
     {
         public float X;
 

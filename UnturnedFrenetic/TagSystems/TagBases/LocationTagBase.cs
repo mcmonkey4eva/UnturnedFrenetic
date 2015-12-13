@@ -10,7 +10,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 {
     class LocationTagBase : TemplateTags
     {
-        // <--[tag]
+        // <--[tagbase]
         // @Base location[<TextTag>]
         // @Group Mathematics
         // @ReturnType LocationTag

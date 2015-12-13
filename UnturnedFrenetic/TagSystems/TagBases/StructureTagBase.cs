@@ -10,9 +10,8 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 {
     public class StructureTagBase : TemplateTags
     {
-        // <--[tag]
+        // <--[tagbase]
         // @Base structure[<TextTag>]
-        // @SubType EntityTag
         // @Group Entities
         // @ReturnType StructureTag
         // @Returns the structure entity corresponding to the given ID number.

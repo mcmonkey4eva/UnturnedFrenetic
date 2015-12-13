@@ -10,9 +10,8 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 {
     public class ResourceTagBase : TemplateTags
     {
-        // <--[tag]
+        // <--[tagbase]
         // @Base resource[<TextTag>]
-        // @SubType EntityTag
         // @Group Entities
         // @ReturnType ResourceTag
         // @Returns the resource entity corresponding to the given ID number.

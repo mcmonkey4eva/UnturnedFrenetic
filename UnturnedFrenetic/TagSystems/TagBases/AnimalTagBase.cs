@@ -10,9 +10,8 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 {
     public class AnimalTagBase : TemplateTags
     {
-        // <--[tag]
+        // <--[tagbase]
         // @Base animal[<TextTag>]
-        // @SubType EntityTag
         // @Group Entities
         // @ReturnType AnimalTag
         // @Returns the animal entity corresponding to the given ID number.

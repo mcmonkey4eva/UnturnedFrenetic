@@ -10,7 +10,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 {
     public class ColorTagBase : TemplateTags
     {
-        // <--[tag]
+        // <--[tagbase]
         // @Base color[<TextTag>]
         // @Group Mathematics
         // @ReturnType ColorTag

@@ -10,9 +10,8 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 {
     public class BarricadeTagBase : TemplateTags
     {
-        // <--[tag]
+        // <--[tagbase]
         // @Base barricade[<TextTag>]
-        // @SubType EntityTag
         // @Group Entities
         // @ReturnType BarricadeTag
         // @Returns the barricade entity corresponding to the given ID number.

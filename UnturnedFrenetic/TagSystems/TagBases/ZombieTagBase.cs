@@ -10,9 +10,8 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 {
     public class ZombieTagBase : TemplateTags
     {
-        // <--[tag]
+        // <--[tagbase]
         // @Base zombie[<TextTag>]
-        // @SubType EntityTag
         // @Group Entities
         // @ReturnType ZombieTag
         // @Returns the zombie entity corresponding to the given ID number.

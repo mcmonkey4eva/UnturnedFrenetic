@@ -10,7 +10,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 {
     public class VehicleAssetTagBase : TemplateTags
     {
-        // <--[tag]
+        // <--[tagbase]
         // @Base vehicle_asset[<TextTag>]
         // @Group Assets
         // @ReturnType VehicleTag

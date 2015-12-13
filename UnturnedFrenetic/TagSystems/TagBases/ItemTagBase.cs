@@ -10,9 +10,8 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 {
     public class ItemTagBase : TemplateTags
     {
-        // <--[tag]
+        // <--[tagbase]
         // @Base item[<TextTag>]
-        // @SubType EntityTag
         // @Group Entities
         // @ReturnType ItemTag
         // @Returns the item entity corresponding to the given ID number.
