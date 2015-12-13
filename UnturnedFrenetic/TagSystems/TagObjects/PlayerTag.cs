@@ -10,6 +10,13 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 {
     public class PlayerTag : TemplateObject
     {
+        // <--[tag]
+        // @Type PlayerTag
+        // @SubType EntityTag
+        // @Group Entities
+        // @Description Represents a player currently spawned in the world as an entity.
+        // -->
+
         public SteamPlayer Internal;
 
         public string Name;
@@ -55,7 +62,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             }
             return new PlayerTag(p);
         }
-        
+
         public override string Handle(TagData data)
         {
             if (data.Input.Count == 0)

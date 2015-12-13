@@ -12,7 +12,6 @@ namespace UnturnedFrenetic.TagSystems.TagBases
     {
         // <--[tag]
         // @Base player[<TextTag>]
-        // @SubType EntityTag
         // @Group Entities
         // @ReturnType PlayerTag
         // @Returns the player corresponding to the given name.
