@@ -81,6 +81,7 @@ namespace UnturnedFrenetic
         {
             PlayerDamagedEventArgs evt = new PlayerDamagedEventArgs();
             evt.Player = new PlayerTag(player.channel.owner);
+            evt.Amount = new TextTag(amount); 
             UnturnedFreneticEvents.OnPlayerDamaged.Fire(evt);
             amount = Utilities.StringToByte(evt.Amount.ToString());
             return evt.Cancelled;
