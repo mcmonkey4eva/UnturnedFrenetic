@@ -26,6 +26,7 @@ namespace UnturnedFrenetic.CommandSystems
                 System.Output = output;
                 System.Init();
                 // Entity Commands
+                System.RegisterCommand(new LaunchCommand());
                 System.RegisterCommand(new SpawnCommand());
                 System.RegisterCommand(new TeleportCommand());
                 // Player Commands

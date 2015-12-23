@@ -9,7 +9,7 @@ using Frenetic.TagHandlers;
 
 namespace UnturnedFrenetic.CommandSystems.PlayerCommands
 {
-    class TakeCommand: AbstractCommand
+    public class TakeCommand: AbstractCommand
     {
         // <--[command]
         // @Name take
