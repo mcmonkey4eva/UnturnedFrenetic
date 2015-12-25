@@ -50,6 +50,7 @@ namespace UnturnedFrenetic.CommandSystems
                 System.TagSystem.Register(new PlayerTagBase());
                 System.TagSystem.Register(new ResourceAssetTagBase());
                 System.TagSystem.Register(new ResourceTagBase());
+                System.TagSystem.Register(new ServerTagBase());
                 System.TagSystem.Register(new StructureTagBase());
                 System.TagSystem.Register(new VehicleAssetTagBase());
                 System.TagSystem.Register(new VehicleTagBase());

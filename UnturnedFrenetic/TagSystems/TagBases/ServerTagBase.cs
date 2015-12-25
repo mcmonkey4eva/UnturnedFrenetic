@@ -57,9 +57,9 @@ namespace UnturnedFrenetic.TagSystems.TagBases
                 case "offline_players":
                     {
                         List<TemplateObject> players = new List<TemplateObject>();
-                        foreach (string playerFolder in ReadWrite.getFolders(ServerSavedata.directory + "/Players"))
+                        foreach (string playerFolder in ReadWrite.getFolders(ServerSavedata.directory + "/" + Provider.serverID + "/Players"))
                         {
-                            string[] split = playerFolder.Split('_');
+                            string[] split = playerFolder.Substring(playerFolder.LastIndexOf('\\') + 1).Split('_');
                             if (split.Length == 2)
                             {
                                 ulong steamID = Utilities.StringToULong(split[0]);

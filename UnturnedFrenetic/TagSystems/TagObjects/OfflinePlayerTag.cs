@@ -32,9 +32,9 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             }
             byte characterID = 255;
             // TODO: make more efficient? maybe cache on startup?
-            foreach (string playerFolder in ReadWrite.getFolders(ServerSavedata.directory + "/Players"))
+            foreach (string playerFolder in ReadWrite.getFolders(ServerSavedata.directory + "/" + Provider.serverID + "/Players"))
             {
-                string[] split = playerFolder.Split('_');
+                string[] split = playerFolder.Substring(playerFolder.LastIndexOf('\\') + 1).Split('_');
                 if (split[0] == steamID.ToString())
                 {
                     characterID = Utilities.StringToByte(split[1]);
@@ -107,7 +107,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 
         public override string ToString()
         {
-            return Internal.ToString();
+            return Internal.steamID.ToString();
         }
     }
 }
