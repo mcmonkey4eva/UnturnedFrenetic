@@ -46,6 +46,7 @@ namespace UnturnedFrenetic.CommandSystems
                 System.TagSystem.Register(new ItemAssetTagBase());
                 System.TagSystem.Register(new ItemTagBase());
                 System.TagSystem.Register(new LocationTagBase());
+                System.TagSystem.Register(new OfflinePlayerTagBase());
                 System.TagSystem.Register(new PlayerTagBase());
                 System.TagSystem.Register(new ResourceAssetTagBase());
                 System.TagSystem.Register(new ResourceTagBase());

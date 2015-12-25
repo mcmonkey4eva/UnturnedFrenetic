@@ -186,10 +186,28 @@ namespace UnturnedFrenetic
         }
 
         /// <summary>
+        /// Converts a string to a ulong. Returns 0 if the string is not a valid ulong.
+        /// </summary>
+        /// <param name="input">The string to convert.</param>
+        /// <returns>The converted ulong.</returns>
+        public static ulong StringToULong(string input)
+        {
+            ulong output;
+            if (ulong.TryParse(input, out output))
+            {
+                return output;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
         /// Converts a string to a byte. Returns 0 if the string is not a valid byte.
         /// </summary>
         /// <param name="input">The string to convert.</param>
-        /// <returns>The converted int.</returns>
+        /// <returns>The converted byte.</returns>
         public static byte StringToByte(string input)
         {
             byte output;
