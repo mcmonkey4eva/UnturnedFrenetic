@@ -30,6 +30,8 @@ namespace UnturnedFreneticInjector.Injectables
             MethodReference trackItemMethod = gamedef.ImportReference(GetMethod(itemTracker, "Track", 2));
             // (byte, byte, int)
             MethodReference untrackItemMethod = gamedef.ImportReference(GetMethod(itemTracker, "Untrack", 3));
+            // (byte, byte, List<ItemData>)
+            MethodReference resetItemsMethod = gamedef.ImportReference(GetMethod(itemTracker, "Reset", 3));
             // For getting 'point' property from ItemSpawnpoint objects
             MethodDefinition getPointProperty = GetMethod(gamedef.GetType("SDG.Unturned.ItemSpawnpoint"), "get_point", 0);
             // Track dropItem
@@ -45,16 +47,16 @@ namespace UnturnedFreneticInjector.Injectables
             });
             // Track generateItems
             MethodDefinition generateItemsMethod = GetMethod(type, "generateItems", 2);
-            InjectInstructions(generateItemsMethod.Body, 68, new Instruction[]
+            InjectInstructions(generateItemsMethod.Body, 123, new Instruction[]
             {
-                // Load: Item newItem
-                Instruction.Create(OpCodes.Ldloc, generateItemsMethod.Body.Variables[7]),
-                // Load: ItemSpawnpoint itemSpawnpoint2
-                Instruction.Create(OpCodes.Ldloc_S, generateItemsMethod.Body.Variables[5]),
-                // Call: 'get_point' on  itemSpawnpoint2 -> add the Vector3 result to the stack.
-                Instruction.Create(OpCodes.Callvirt, getPointProperty),
-                // Call: ItemModelTracker.Track(newItem, itemSpawnpoint2.point);
-                Instruction.Create(OpCodes.Call, trackItemMethod)
+                // Load: byte x
+                Instruction.Create(OpCodes.Ldarg_1),
+                // Load: byte y
+                Instruction.Create(OpCodes.Ldarg_2),
+                // Load: List<ItemData> list
+                Instruction.Create(OpCodes.Ldloc_0),
+                // Call: ItemModelTracker.Reset(x, y, list);
+                Instruction.Create(OpCodes.Call, resetItemsMethod)
             });
             // Track respawnItems
             MethodDefinition respawnItemsMethod = GetMethod(type, "respawnItems", 0);

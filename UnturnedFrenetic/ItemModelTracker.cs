@@ -33,5 +33,18 @@ namespace UnturnedFrenetic
             GameObject.Destroy(itemRegion.models[index].gameObject);
             itemRegion.models.RemoveAt(index);
         }
+
+        public static void Reset(byte x, byte y, List<ItemData> data)
+        {
+            ItemRegion itemRegion = ItemManager.regions[x, y];
+            for (int i = itemRegion.models.Count - 1; i >= 0; i--)
+            {
+                Untrack(x, y, i);
+            }
+            foreach (ItemData item in data)
+            {
+                Track(item.item, item.point);
+            }
+        }
     }
 }
