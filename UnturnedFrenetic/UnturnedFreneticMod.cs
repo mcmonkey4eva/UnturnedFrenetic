@@ -79,9 +79,25 @@ namespace UnturnedFrenetic
 
         public static bool PlayerDamaged(Player player, ref byte amount, ref Vector3 ragdoll, ref EDeathCause deathCause, ref ELimb limb, ref CSteamID killer)
         {
+            if (amount >= player.life.health)
+            {
+                PlayerDeathEventArgs deathevt = new PlayerDeathEventArgs();
+                deathevt.Player = new PlayerTag(player.channel.owner);
+                deathevt.Amount = new NumberTag(amount);
+                deathevt.Cause = new TextTag(deathCause.ToString());
+                deathevt.Limb = new TextTag(limb.ToString());
+                SteamPlayer steamkiller = PlayerTool.getSteamPlayer(killer);
+                deathevt.Killer = steamkiller != null ? new PlayerTag(steamkiller) : null;
+                UnturnedFreneticEvents.OnPlayerDeath.Fire(deathevt);
+                amount = (byte)deathevt.Amount.Internal;
+                deathCause = (EDeathCause)Enum.Parse(typeof(EDeathCause), deathevt.Cause.ToString().ToUpper());
+                limb = (ELimb)Enum.Parse(typeof(ELimb), deathevt.Limb.ToString().ToUpper());
+                killer = deathevt.Killer != null ? deathevt.Killer.Internal.playerID.steamID : Provider.server;
+                return deathevt.Cancelled;
+            }
             PlayerDamagedEventArgs evt = new PlayerDamagedEventArgs();
             evt.Player = new PlayerTag(player.channel.owner);
-            evt.Amount = new NumberTag(amount); 
+            evt.Amount = new NumberTag(amount);
             UnturnedFreneticEvents.OnPlayerDamaged.Fire(evt);
             amount = (byte)evt.Amount.Internal;
             return evt.Cancelled;

@@ -65,6 +65,7 @@
     <Compile Include="CommandSystems\WorldCommands\AnnounceCommand.cs" />
     <Compile Include="CommandSystems\WorldCommands\TimeCommand.cs" />
     <Compile Include="EntityType.cs" />
+    <Compile Include="EventSystems\PlayerEvents\PlayerDeathEvent.cs" />
     <Compile Include="EventSystems\PlayerEvents\PlayerDamagedEvent.cs" />
     <Compile Include="EventSystems\PlayerEvents\PlayerChatEvent.cs" />
     <Compile Include="EventSystems\PlayerEvents\PlayerDisconnectedEvent.cs" />

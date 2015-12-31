@@ -10,7 +10,7 @@ using Frenetic.TagHandlers;
 namespace UnturnedFrenetic.EventSystems.PlayerEvents
 {
     // <--[event]
-    // @Name PlayerDIsconnectedEvent
+    // @Name PlayerDisconnectedEvent
     // @Fired When a player has disconnected.
     // @Updated 2015/12/06
     // @Authors mcmonkey

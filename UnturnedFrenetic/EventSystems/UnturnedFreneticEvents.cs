@@ -16,6 +16,7 @@ namespace UnturnedFrenetic.EventSystems
             system.RegisterEvent(new PlayerConnectingScriptEvent(system));
             system.RegisterEvent(new PlayerConnectedScriptEvent(system));
             system.RegisterEvent(new PlayerDamagedScriptEvent(system));
+            system.RegisterEvent(new PlayerDeathScriptEvent(system));
             system.RegisterEvent(new PlayerDisconnectedScriptEvent(system));
         }
 
@@ -26,6 +27,8 @@ namespace UnturnedFrenetic.EventSystems
         public static FreneticEventHandler<PlayerConnectedEventArgs> OnPlayerConnected = new FreneticEventHandler<PlayerConnectedEventArgs>();
 
         public static FreneticEventHandler<PlayerDamagedEventArgs> OnPlayerDamaged = new FreneticEventHandler<PlayerDamagedEventArgs>();
+
+        public static FreneticEventHandler<PlayerDeathEventArgs> OnPlayerDeath = new FreneticEventHandler<PlayerDeathEventArgs>();
 
         public static FreneticEventHandler<PlayerDisconnectedEventArgs> OnPlayerDisconnected = new FreneticEventHandler<PlayerDisconnectedEventArgs>();
     }

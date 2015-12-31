@@ -9,7 +9,7 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 using SDG.Unturned;
 using Steamworks;
 
-namespace UnturnedFrenetic.CommandSystems.PlayerCommands
+namespace UnturnedFrenetic.CommandSystems.WorldCommands
 {
     public class AnnounceCommand: AbstractCommand
     {
