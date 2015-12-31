@@ -111,11 +111,12 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "alpha":
                     return new NumberTag(Internal.a).Handle(data.Shrink());
                 // <--[tag]
-                // @Name ColorTag.mix[<color>|...]
+                // @Name ColorTag.mix[<ColorTag>|...]
                 // @Group Mathematics
                 // @ReturnType ColorTag
                 // @Returns the result of mixing the specified color(s) with this one.
                 // @Example "blue" .mix[red] returns "0.5,0,0.5,1"
+                // -->
                 case "mix":
                     {
                         ListTag list = ListTag.For(data.GetModifier(0));
