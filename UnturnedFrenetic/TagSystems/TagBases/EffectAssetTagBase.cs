@@ -8,7 +8,7 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 
 namespace UnturnedFrenetic.TagSystems.TagBases
 {
-    public class EffectAssetTagBase : TemplateTags
+    public class EffectAssetTagBase : TemplateTagBase
     {
         // <--[tagbase]
         // @Base effect_asset[<TextTag>]

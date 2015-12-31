@@ -95,21 +95,21 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name ResourceAssetTag.id
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the internal ID of the resource asset.
                 // @Example "Bush_Jade" .id returns "14".
                 // -->
                 case "id":
-                    return new TextTag(Internal.id).Handle(data.Shrink());
+                    return new NumberTag(Internal.id).Handle(data.Shrink());
                 // <--[tag]
                 // @Name ResourceAssetTag.health
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the default health of the resource asset.
                 // @Example "Bush_Jade" .type returns "1".
                 // -->
                 case "health":
-                    return new TextTag(Internal.health).Handle(data.Shrink());
+                    return new NumberTag(Internal.health).Handle(data.Shrink());
                 default:
                     return new TextTag(ToString()).Handle(data);
             }

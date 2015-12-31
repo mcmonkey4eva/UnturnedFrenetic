@@ -77,39 +77,39 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name ColorTag.red
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the red value of this color.
                 // @Example "0.1,0.2,0.3,1.0" .red returns "0.1".
                 // -->
                 case "red":
-                    return new TextTag(Internal.r).Handle(data.Shrink());
+                    return new NumberTag(Internal.r).Handle(data.Shrink());
                 // <--[tag]
                 // @Name ColorTag.green
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the green value of this color.
                 // @Example "0.1,0.2,0.3,1.0" .green returns "0.2".
                 // -->
                 case "greem":
-                    return new TextTag(Internal.g).Handle(data.Shrink());
+                    return new NumberTag(Internal.g).Handle(data.Shrink());
                 // <--[tag]
                 // @Name ColorTag.blue
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the blue value of this color.
                 // @Example "0.1,0.2,0.3,1.0" .red returns "0.3".
                 // -->
                 case "blue":
-                    return new TextTag(Internal.b).Handle(data.Shrink());
+                    return new NumberTag(Internal.b).Handle(data.Shrink());
                 // <--[tag]
                 // @Name ColorTag.alpha
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the alpha value of this color.
                 // @Example "0.1,0.2,0.3,1.0" .red returns "1.0".
                 // -->
                 case "alpha":
-                    return new TextTag(Internal.a).Handle(data.Shrink());
+                    return new NumberTag(Internal.a).Handle(data.Shrink());
                 default:
                     return new TextTag(ToString()).Handle(data);
             }

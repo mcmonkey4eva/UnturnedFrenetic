@@ -104,21 +104,21 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name ItemAssetTag.is_pro
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType BooleanTag
                 // @Returns whether the item asset is considered pro.
                 // @Example "Rifle_Maple" .is_pro returns "false".
                 // -->
                 case "is_pro":
-                    return new TextTag(Internal.isPro).Handle(data.Shrink());
+                    return new BooleanTag(Internal.isPro).Handle(data.Shrink());
                 // <--[tag]
                 // @Name ItemAssetTag.id
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the internal ID of the item asset.
                 // @Example "Rifle_Maple" .id returns "474".
                 // -->
                 case "id":
-                    return new TextTag(Internal.id).Handle(data.Shrink());
+                    return new NumberTag(Internal.id).Handle(data.Shrink());
                 default:
                     return new TextTag(ToString()).Handle(data);
             }

@@ -95,12 +95,12 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name WorldObjectAssetTag.id
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the internal ID of the world object asset.
                 // @Example "Tower_Military_0" .id returns "227".
                 // -->
                 case "id":
-                    return new TextTag(Internal.id).Handle(data.Shrink());
+                    return new NumberTag(Internal.id).Handle(data.Shrink());
                 // <--[tag]
                 // @Name WorldObjectAssetTag.type
                 // @Group General Information

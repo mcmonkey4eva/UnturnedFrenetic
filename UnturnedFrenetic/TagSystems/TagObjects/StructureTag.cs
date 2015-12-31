@@ -92,12 +92,12 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name StructureTag.health
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the current health of the structure.
                 // @Example "2" .health returns "1".
                 // -->
                 case "health":
-                    return new TextTag(InternalData.structure.health).Handle(data.Shrink());
+                    return new NumberTag(InternalData.structure.health).Handle(data.Shrink());
                 default:
                     return new EntityTag(Internal.gameObject).Handle(data);
             }

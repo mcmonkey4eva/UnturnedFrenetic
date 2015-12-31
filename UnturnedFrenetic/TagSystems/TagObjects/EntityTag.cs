@@ -89,12 +89,12 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name EntityTag.iid
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns this entity's instance ID number.
                 // @Example "2" .iid returns "2".
                 // -->
                 case "iid":
-                    return new TextTag(Internal.GetInstanceID()).Handle(data.Shrink());
+                    return new NumberTag(Internal.GetInstanceID()).Handle(data.Shrink());
                 // <--[tag]
                 // @Name EntityTag.location
                 // @Group Status

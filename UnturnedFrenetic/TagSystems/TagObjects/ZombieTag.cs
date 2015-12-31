@@ -50,21 +50,21 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name ZombieTag.zid
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the zombie ID for this zombie in its region.
                 // @Example "2" .zid returns "1".
                 // -->
                 case "zid":
-                    return new TextTag(Internal.id).Handle(data.Shrink());
+                    return new NumberTag(Internal.id).Handle(data.Shrink());
                 // <--[tag]
                 // @Name ZombieTag.region
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the zombie region this zombie belongs to.
                 // @Example "2" .region returns "4"
                 // -->
                 case "region":
-                    return new TextTag(Internal.bound).Handle(data.Shrink());
+                    return new NumberTag(Internal.bound).Handle(data.Shrink());
                 // <--[tag]
                 // @Name ZombieTag.specialty
                 // @Group General Information

@@ -18,13 +18,13 @@ namespace UnturnedFrenetic.CommandSystems
         {
             if (mode <= DebugMode.MINIMAL)
             {
-                SysConsole.Output(OutputType.WARNING, TheMod.CommandSystem.System.TagSystem.ParseTagsFromText(tagged_text, "^r^3", null, mode));
+                SysConsole.Output(OutputType.WARNING, TheMod.CommandSystem.System.TagSystem.ParseTagsFromText(tagged_text, "^r^3", null, mode, (o) => { throw new Exception(o); }));
             }
         }
 
         public override void Good(string tagged_text, DebugMode mode)
         {
-            SysConsole.Output(OutputType.INFO, TheMod.CommandSystem.System.TagSystem.ParseTagsFromText(tagged_text, "^r^2", null, mode));
+            SysConsole.Output(OutputType.INFO, TheMod.CommandSystem.System.TagSystem.ParseTagsFromText(tagged_text, "^r^2", null, mode, (o) => { throw new Exception(o); }));
         }
 
         public override string ReadTextFile(string name)

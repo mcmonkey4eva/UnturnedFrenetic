@@ -41,7 +41,7 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
                 ShowUsage(entry);
                 return;
             }
-            ListTag players = new ListTag(entry.GetArgument(0));
+            ListTag players = ListTag.For(entry.GetArgument(0));
             string tcolor = entry.GetArgument(1);
             ColorTag color = ColorTag.For(tcolor);
             if (color == null)

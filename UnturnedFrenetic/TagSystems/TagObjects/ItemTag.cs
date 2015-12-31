@@ -64,21 +64,21 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name ItemTag.amount
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the amount of the item.
                 // @Example "2" .amount returns "1".
                 // -->
                 case "amount":
-                    return new TextTag(Internal.item.amount).Handle(data.Shrink());
+                    return new NumberTag(Internal.item.amount).Handle(data.Shrink());
                 // <--[tag]
                 // @Name ItemTag.quality
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the current quality of the item.
                 // @Example "2" .quality returns "91".
                 // -->
                 case "quality":
-                    return new TextTag(Internal.item.quality).Handle(data.Shrink());
+                    return new NumberTag(Internal.item.quality).Handle(data.Shrink());
                 default:
                     return new EntityTag(Internal.gameObject).Handle(data);
             }

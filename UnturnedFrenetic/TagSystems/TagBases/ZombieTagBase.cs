@@ -8,7 +8,7 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 
 namespace UnturnedFrenetic.TagSystems.TagBases
 {
-    public class ZombieTagBase : TemplateTags
+    public class ZombieTagBase : TemplateTagBase
     {
         // <--[tagbase]
         // @Base zombie[<TextTag>]

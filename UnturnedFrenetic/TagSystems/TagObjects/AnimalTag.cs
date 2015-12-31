@@ -57,21 +57,21 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name AnimalTag.aid
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the animal ID number of the animal.
                 // @Example "2" .aid returns "1".
                 // -->
                 case "aid":
-                    return new TextTag(Internal.index).Handle(data.Shrink());
+                    return new NumberTag(Internal.index).Handle(data.Shrink());
                 // <--[tag]
                 // @Name AnimalTag.health
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the animal's current health.
                 // @Example "2" .health returns "96".
                 // -->
                 case "health":
-                    return new TextTag(Internal.health).Handle(data.Shrink());
+                    return new NumberTag(Internal.health).Handle(data.Shrink());
                 // <--[tag]
                 // <--[tag]
                 // @Name AnimalTag.asset

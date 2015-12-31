@@ -8,7 +8,7 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 
 namespace UnturnedFrenetic.TagSystems.TagBases
 {
-    public class BarricadeTagBase : TemplateTags
+    public class BarricadeTagBase : TemplateTagBase
     {
         // <--[tagbase]
         // @Base barricade[<TextTag>]

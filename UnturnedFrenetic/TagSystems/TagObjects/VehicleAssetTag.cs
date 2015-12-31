@@ -95,12 +95,12 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name VehicleAssetTag.id
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the ID number of this vehicle asset.
                 // @Example "APC_Forest" .id returns "53".
                 // -->
                 case "id":
-                    return new TextTag(Internal.id).Handle(data.Shrink());
+                    return new NumberTag(Internal.id).Handle(data.Shrink());
                 default:
                     return new TextTag(ToString()).Handle(data);
             }

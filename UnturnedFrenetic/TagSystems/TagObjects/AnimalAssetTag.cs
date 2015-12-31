@@ -94,12 +94,12 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name AnimalAssetTag.id
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the ID number of the animal asset.
                 // @Example "Cow" .id returns "6".
                 // -->
                 case "id":
-                    return new TextTag(Internal.id).Handle(data.Shrink());
+                    return new NumberTag(Internal.id).Handle(data.Shrink());
                 // <--[tag]
                 // @Name AnimalAssetTag.pelt
                 // @Group General Information
@@ -121,12 +121,12 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name AnimalAssetTag.health
                 // @Group General Information
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the default health for this animal asset.
                 // @Example "Cow" .health returns "100".
                 // -->
                 case "health":
-                    return new TextTag(Internal.health).Handle(data.Shrink());
+                    return new NumberTag(Internal.health).Handle(data.Shrink());
                 default:
                     return new TextTag(ToString()).Handle(data);
             }
