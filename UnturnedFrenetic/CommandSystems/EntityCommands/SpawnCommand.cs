@@ -12,7 +12,7 @@ using Steamworks;
 
 namespace UnturnedFrenetic.CommandSystems.EntityCommands
 {
-    class SpawnCommand : AbstractCommand
+    public class SpawnCommand : AbstractCommand
     {
         // <--[command]
         // @Name spawn
@@ -132,7 +132,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                         });
                         AnimalManager.manager.channel.closeWrite("tellAnimals", player.playerID.steamID, ESteamPacket.UPDATE_RELIABLE_CHUNK_BUFFER);
                     }
-                    entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                    entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "! (" + animal.gameObject.GetInstanceID() + ")");
                     return;
                 }
                 else if (etype.Type == EntityAssetType.VEHICLE)

@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandSystems\EntityCommands\LaunchCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\TeleportCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\SpawnCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\TakeCommand.cs" />
@@ -71,6 +72,8 @@
     <Compile Include="EventSystems\UnturnedFreneticEvents.cs" />
     <Compile Include="ItemModelTracker.cs" />
     <Compile Include="SysConsole.cs" />
+    <Compile Include="TagSystems\TagBases\OfflinePlayerTagBase.cs" />
+    <Compile Include="TagSystems\TagBases\ServerTagBase.cs" />
     <Compile Include="TagSystems\TagBases\StructureTagBase.cs" />
     <Compile Include="TagSystems\TagBases\ColorTagBase.cs" />
     <Compile Include="TagSystems\TagBases\EffectAssetTagBase.cs" />
@@ -89,6 +92,7 @@
     <Compile Include="TagSystems\TagBases\ItemAssetTagBase.cs" />
     <Compile Include="TagSystems\TagBases\PlayerTagBase.cs" />
     <Compile Include="TagSystems\TagBases\ZombieTagBase.cs" />
+    <Compile Include="TagSystems\TagObjects\OfflinePlayerTag.cs" />
     <Compile Include="TagSystems\TagObjects\StructureTag.cs" />
     <Compile Include="TagSystems\TagObjects\ColorTag.cs" />
     <Compile Include="TagSystems\TagObjects\EffectAssetTag.cs" />

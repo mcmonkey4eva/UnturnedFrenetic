@@ -26,6 +26,7 @@ namespace UnturnedFrenetic.CommandSystems
                 System.Output = output;
                 System.Init();
                 // Entity Commands
+                System.RegisterCommand(new LaunchCommand());
                 System.RegisterCommand(new SpawnCommand());
                 System.RegisterCommand(new TeleportCommand());
                 // Player Commands
@@ -45,9 +46,11 @@ namespace UnturnedFrenetic.CommandSystems
                 System.TagSystem.Register(new ItemAssetTagBase());
                 System.TagSystem.Register(new ItemTagBase());
                 System.TagSystem.Register(new LocationTagBase());
+                System.TagSystem.Register(new OfflinePlayerTagBase());
                 System.TagSystem.Register(new PlayerTagBase());
                 System.TagSystem.Register(new ResourceAssetTagBase());
                 System.TagSystem.Register(new ResourceTagBase());
+                System.TagSystem.Register(new ServerTagBase());
                 System.TagSystem.Register(new StructureTagBase());
                 System.TagSystem.Register(new VehicleAssetTagBase());
                 System.TagSystem.Register(new VehicleTagBase());

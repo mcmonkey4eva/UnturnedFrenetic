@@ -8,7 +8,7 @@ using Frenetic.TagHandlers;
 
 namespace UnturnedFrenetic.CommandSystems.EntityCommands
 {
-    class TeleportCommand : AbstractCommand
+    public class TeleportCommand : AbstractCommand
     {
         // <--[command]
         // @Name teleport
@@ -63,7 +63,6 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 if (entity.TryGetZombie(out zombie))
                 {
                     zombie.Internal.transform.position = loc.ToVector3();
-                    zombie.Internal.updateStates();
                     entry.Good("Successfully teleported zombie " + TagParser.Escape(zombie.ToString()) + " to " + TagParser.Escape(loc.ToString()) + "!");
                     return;
                 }
@@ -71,7 +70,6 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 if (entity.TryGetAnimal(out animal)) 
                 {
                     animal.Internal.transform.position = loc.ToVector3();
-                    animal.Internal.updateStates();
                     entry.Good("Successfully teleported animal " + TagParser.Escape(animal.ToString()) + " to " + TagParser.Escape(loc.ToString()) + "!");
                     return;
                 }

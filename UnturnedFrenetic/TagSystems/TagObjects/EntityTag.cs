@@ -32,10 +32,10 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 
         public bool TryGetPlayer(out PlayerTag tag)
         {
-            SteamPlayer component = Internal.GetComponent<SteamPlayer>();
+            Player component = Internal.GetComponent<Player>();
             if (component != null)
             {
-                tag = new PlayerTag(component);
+                tag = new PlayerTag(component.channel.owner);
                 return true;
             }
             tag = null;

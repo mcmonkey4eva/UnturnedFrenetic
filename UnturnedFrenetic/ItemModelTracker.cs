@@ -11,6 +11,10 @@ namespace UnturnedFrenetic
     {
         public static void Track(Item item, Vector3 point)
         {
+            if (!Dedicator.isDedicated)
+            {
+                return;
+            }
             byte x;
             byte y;
             if (Regions.tryGetCoordinate(point, out x, out y))
@@ -21,6 +25,10 @@ namespace UnturnedFrenetic
 
         public static void Untrack(byte x, byte y, int index)
         {
+            if (!Dedicator.isDedicated)
+            {
+                return;
+            }
             ItemRegion itemRegion = ItemManager.regions[x, y];
             GameObject.Destroy(itemRegion.models[index].gameObject);
             itemRegion.models.RemoveAt(index);
