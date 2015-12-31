@@ -78,7 +78,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name OfflinePlayerTag.health
                 // @Group Status
-                // @ReturnType TextTag
+                // @ReturnType NumberTag
                 // @Returns the offline player's current health level. Maximum health level is 100.
                 // @Example "1000" .health returns "56".
                 // -->
@@ -96,10 +96,10 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                             // 4) byte - virus
                             // 5) boolean - isBleeding
                             // 6) boolean - isBroken
-                            return new TextTag(block.readByte()).Handle(data.Shrink());
+                            return new NumberTag(block.readByte()).Handle(data.Shrink());
                         }
                     }
-                    return new TextTag(100).Handle(data.Shrink());
+                    return new NumberTag(100).Handle(data.Shrink());
                 default:
                     return new TextTag(ToString()).Handle(data);
             }

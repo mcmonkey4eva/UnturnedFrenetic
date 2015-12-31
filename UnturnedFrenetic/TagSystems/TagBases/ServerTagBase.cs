@@ -10,7 +10,7 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 
 namespace UnturnedFrenetic.TagSystems.TagBases
 {
-    public class ServerTagBase : TemplateTags
+    public class ServerTagBase : TemplateTagBase
     {
         // <--[tagbase]
         // @Base server

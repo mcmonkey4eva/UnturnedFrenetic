@@ -88,7 +88,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         /// <summary>
         /// The amount of damage being done.
         /// </summary>
-        public TextTag Amount;
+        public NumberTag Amount;
 
         /// <summary>
         /// Get all variables according the script event's current values.
@@ -111,7 +111,12 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         {
             if (determLow.StartsWith("amount:"))
             {
-                Amount = new TextTag(determ.Substring("amount:".Length));
+                // TODO: Clean this!
+                NumberTag amt = NumberTag.For(new TagData(System.TagSystem, (List<TagBit>)null, "^r^7", null, DebugMode.FULL, (o) => { throw new Exception(o); }), determ.Substring("amount:".Length));
+                if (amt != null)
+                {
+                    Amount = amt;
+                }
             }
             else
             {
@@ -123,7 +128,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
     public class PlayerDamagedEventArgs : EventArgs
     {
         public PlayerTag Player;
-        public TextTag Amount;
+        public NumberTag Amount;
 
         public bool Cancelled = false;
     }

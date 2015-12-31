@@ -8,7 +8,7 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 
 namespace UnturnedFrenetic.TagSystems.TagBases
 {
-    public class OfflinePlayerTagBase : TemplateTags
+    public class OfflinePlayerTagBase : TemplateTagBase
     {
         // <--[tagbase]
         // @Base offline_player[<TextTag>]
