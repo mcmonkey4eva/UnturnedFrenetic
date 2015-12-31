@@ -34,6 +34,7 @@ namespace UnturnedFrenetic.CommandSystems
                 System.RegisterCommand(new TakeCommand());
                 System.RegisterCommand(new TellCommand());
                 // World Commands
+                System.RegisterCommand(new AnnounceCommand());
                 System.RegisterCommand(new EffectCommand());
                 System.RegisterCommand(new TimeCommand());
                 // Tag Objects

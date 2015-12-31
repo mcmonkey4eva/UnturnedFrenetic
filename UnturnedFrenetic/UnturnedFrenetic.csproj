@@ -62,6 +62,7 @@
     <Compile Include="CommandSystems\UnturnedFreneticCVars.cs" />
     <Compile Include="CommandSystems\UnturnedFreneticOutputter.cs" />
     <Compile Include="CommandSystems\WorldCommands\EffectCommand.cs" />
+    <Compile Include="CommandSystems\WorldCommands\AnnounceCommand.cs" />
     <Compile Include="CommandSystems\WorldCommands\TimeCommand.cs" />
     <Compile Include="EntityType.cs" />
     <Compile Include="EventSystems\PlayerEvents\PlayerDamagedEvent.cs" />

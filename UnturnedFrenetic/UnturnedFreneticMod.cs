@@ -58,7 +58,7 @@ namespace UnturnedFrenetic
             evt.Text = new TextTag(text);
             evt.Color = new ColorTag(color);
             UnturnedFreneticEvents.OnPlayerChat.Fire(evt);
-            mode = (EChatMode)Enum.Parse(typeof(EChatMode), evt.ChatMode.ToString());
+            mode = (EChatMode)Enum.Parse(typeof(EChatMode), evt.ChatMode.ToString().ToUpper());
             modeByte = (byte)mode;
             text = evt.Text.ToString();
             color = evt.Color.Internal;
