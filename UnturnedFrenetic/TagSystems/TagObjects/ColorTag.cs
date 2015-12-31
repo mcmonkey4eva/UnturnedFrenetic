@@ -90,7 +90,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Returns the green value of this color.
                 // @Example "0.1,0.2,0.3,1" .green returns "0.2".
                 // -->
-                case "greem":
+                case "green":
                     return new NumberTag(Internal.g).Handle(data.Shrink());
                 // <--[tag]
                 // @Name ColorTag.blue
