@@ -21,7 +21,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             Name = "world_object";
         }
 
-        public override string Handle(TagData data)
+        public override TemplateObject Handle(TagData data)
         {
             string modif = data.GetModifier(0);
             if (modif.StartsWith("e:"))

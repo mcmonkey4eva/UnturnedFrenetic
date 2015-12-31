@@ -21,7 +21,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             Name = "animal_asset";
         }
 
-        public override string Handle(TagData data)
+        public override TemplateObject Handle(TagData data)
         {
             AnimalAssetTag atag = AnimalAssetTag.For(data.GetModifier(0));
             if (atag == null)

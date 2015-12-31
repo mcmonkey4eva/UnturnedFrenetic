@@ -24,7 +24,12 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             Internal = color;
         }
 
-        public static ColorTag For(string nameorrgba)
+        public static ColorTag For(TagData data, TemplateObject obj)
+        {
+            return obj is ColorTag ? (ColorTag)obj : For(data, obj.ToString());
+        }
+
+        public static ColorTag For(TagData data, string nameorrgba)
         {
             string[] split = nameorrgba.Split(',');
             if (split.Length == 4)
@@ -63,14 +68,15 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         return new ColorTag(Color.yellow);
                 }
             }
+            data.Error("Invalid color tag input!");
             return null;
         }
 
-        public override string Handle(TagData data)
+        public override TemplateObject Handle(TagData data)
         {
             if (data.Input.Count == 0)
             {
-                return ToString();
+                return this;
             }
             switch (data.Input[0])
             {
@@ -119,11 +125,11 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "mix":
                     {
-                        ListTag list = ListTag.For(data.GetModifier(0));
+                        ListTag list = ListTag.For(data.GetModifierObject(0));
                         Color mixedColor = Internal;
                         foreach (TemplateObject tcolor in list.ListEntries)
                         {
-                            ColorTag color = ColorTag.For(tcolor.ToString());
+                            ColorTag color = ColorTag.For(data, tcolor);
                             if (color == null)
                             {
                                 SysConsole.Output(OutputType.ERROR, "Invalid color: " + TagParser.Escape(tcolor.ToString()));

@@ -58,11 +58,11 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             return new OfflinePlayerTag(new SteamPlayerID(new CSteamID(steamID), characterID, "&{NULL}", "&{NULL}", "&{NULL}", CSteamID.Nil));
         }
 
-        public override string Handle(TagData data)
+        public override TemplateObject Handle(TagData data)
         {
             if (data.Input.Count == 0)
             {
-                return ToString();
+                return this;
             }
             switch (data.Input[0])
             {

@@ -131,7 +131,9 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         {
             if (determLow.StartsWith("color:"))
             {
-                Color = ColorTag.For(determ.Substring("color:".Length));
+                string tcolor = determ.Substring("color:".Length);
+                // TODO: better way to get a tagdata
+                Color = ColorTag.For(new TagData(UnturnedFreneticMod.Instance.CommandSystem.System.TagSystem, (List<TagBit>)null, null, null, DebugMode.FULL, (o) => { throw new Exception(o); }), tcolor);
             }
             else if (determLow.StartsWith("text:"))
             {

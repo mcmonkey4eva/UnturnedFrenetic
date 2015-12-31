@@ -21,7 +21,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             Name = "location";
         }
 
-        public override string Handle(TagData data)
+        public override TemplateObject Handle(TagData data)
         {
             string lname = data.GetModifier(0);
             LocationTag ltag = LocationTag.For(lname);

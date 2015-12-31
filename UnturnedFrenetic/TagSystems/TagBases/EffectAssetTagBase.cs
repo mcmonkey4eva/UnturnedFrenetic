@@ -21,7 +21,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             Name = "effect_asset";
         }
 
-        public override string Handle(TagData data)
+        public override TemplateObject Handle(TagData data)
         {
             EffectAssetTag atag = EffectAssetTag.For(data.GetModifier(0));
             if (atag == null)

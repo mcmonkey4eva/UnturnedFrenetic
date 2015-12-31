@@ -21,7 +21,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             Name = "world_object_asset";
         }
 
-        public override string Handle(TagData data)
+        public override TemplateObject Handle(TagData data)
         {
             string iname = data.GetModifier(0);
             WorldObjectAssetTag itag = WorldObjectAssetTag.For(iname);

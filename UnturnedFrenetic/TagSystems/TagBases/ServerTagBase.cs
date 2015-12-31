@@ -24,12 +24,12 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             Name = "server";
         }
 
-        public override string Handle(TagData data)
+        public override TemplateObject Handle(TagData data)
         {
             data.Shrink();
             if (data.Input.Count == 0)
             {
-                return ToString();
+                return new TextTag(ToString());
             }
             switch (data.Input[0])
             {

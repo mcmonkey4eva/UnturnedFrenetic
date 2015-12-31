@@ -21,7 +21,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             Name = "player";
         }
 
-        public override string Handle(TagData data)
+        public override TemplateObject Handle(TagData data)
         {
             string pname = data.GetModifier(0);
             PlayerTag ptag = PlayerTag.For(pname);

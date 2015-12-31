@@ -285,12 +285,19 @@
             What marker was used. 0 = none, 1 = +, 2 = -, 3 = !
             </summary>
         </member>
-        <member name="M:Frenetic.CommandSystem.CommandEntry.GetArgument(System.Int32)">
+        <member name="M:Frenetic.CommandSystem.CommandEntry.GetArgumentObject(System.Int32)">
             <summary>
             Gets an argument at a specified place, handling any tags.
             </summary>
             <param name="place">The argument place number.</param>
             <returns>The parsed argument.</returns>
+        </member>
+        <member name="M:Frenetic.CommandSystem.CommandEntry.GetArgument(System.Int32)">
+            <summary>
+            Gets an argument at a specified place, handling any tags - returning a string.
+            </summary>
+            <param name="place">The argument place number.</param>
+            <returns>The parsed argument as a string.</returns>
         </member>
         <member name="M:Frenetic.CommandSystem.CommandEntry.AllArguments(System.Int32)">
             <summary>
@@ -1933,6 +1940,15 @@
             <param name="input">The input text to create a number from.</param>
             <returns>The number tag.</returns>
         </member>
+        <member name="M:Frenetic.TagHandlers.Objects.NumberTag.For(Frenetic.TagHandlers.TagData,Frenetic.TagHandlers.TemplateObject)">
+            <summary>
+            Get a number tag relevant to the specified input, erroring on the command system if invalid input is given (Returns 0 in that case).
+            Never null!
+            </summary>
+            <param name="dat">The TagData used to construct this NumberTag.</param>
+            <param name="input">The input text to create a number from.</param>
+            <returns>The number tag.</returns>
+        </member>
         <member name="M:Frenetic.TagHandlers.Objects.NumberTag.#ctor(System.Double)">
             <summary>
             Constructs a number tag.
@@ -1979,6 +1995,13 @@
             <param name="entries">The textual entries.</param>
         </member>
         <member name="M:Frenetic.TagHandlers.Objects.ListTag.For(System.String)">
+            <summary>
+            Constructs a list tag from text input.
+            </summary>
+            <param name="list">The text input.</param>
+            <returns>A valid list.</returns>
+        </member>
+        <member name="M:Frenetic.TagHandlers.Objects.ListTag.For(Frenetic.TagHandlers.TemplateObject)">
             <summary>
             Constructs a list tag from text input.
             </summary>
@@ -2068,6 +2091,15 @@
             </summary>
             <param name="dat">The TagData used to construct this BooleanTag.</param>
             <param name="input">The input text to create a boolean from.</param>
+            <returns>The boolean tag.</returns>
+        </member>
+        <member name="M:Frenetic.TagHandlers.Objects.BooleanTag.For(Frenetic.TagHandlers.TagData,Frenetic.TagHandlers.TemplateObject)">
+            <summary>
+            Get a boolean tag relevant to the specified input, erroring on the command system if invalid input is given (Returns false in that case).
+            Never null!
+            </summary>
+            <param name="dat">The TagData used to construct this BooleanTag.</param>
+            <param name="input">The input to create or get a boolean from.</param>
             <returns>The boolean tag.</returns>
         </member>
         <member name="M:Frenetic.TagHandlers.Objects.BooleanTag.#ctor(System.Boolean)">
@@ -2214,6 +2246,13 @@
             <returns>This object.</returns>
         </member>
         <member name="M:Frenetic.TagHandlers.TagData.GetModifier(System.Int32)">
+            <summary>
+            Gets the modifier at a specified place, handling any tags within - returning a string.
+            </summary>
+            <param name="place">What place to get a modifier from.</param>
+            <returns>The tag-parsed modifier as a string.</returns>
+        </member>
+        <member name="M:Frenetic.TagHandlers.TagData.GetModifierObject(System.Int32)">
             <summary>
             Gets the modifier at a specified place, handling any tags within.
             </summary>

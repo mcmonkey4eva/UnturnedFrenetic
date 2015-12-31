@@ -42,11 +42,12 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
                 return;
             }
             ListTag players = ListTag.For(entry.GetArgument(0));
-            string tcolor = entry.GetArgument(1);
-            ColorTag color = ColorTag.For(tcolor);
+            TemplateObject tcolor = entry.GetArgumentObject(1);
+            // TODO: better way to get a tagdata
+            ColorTag color = ColorTag.For(new TagData(entry.Command.CommandSystem.TagSystem, (List<TagBit>)null, null, null, DebugMode.FULL, (o) => { throw new Exception(o); }), tcolor);
             if (color == null)
             {
-                entry.Bad("Invalid color: " + TagParser.Escape(tcolor));
+                entry.Bad("Invalid color: " + TagParser.Escape(tcolor.ToString()));
                 return;
             }
             string tchatter = entry.GetArgument(2);

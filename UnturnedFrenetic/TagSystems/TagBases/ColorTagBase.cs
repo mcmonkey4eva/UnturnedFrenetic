@@ -21,12 +21,12 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             Name = "color";
         }
 
-        public override string Handle(TagData data)
+        public override TemplateObject Handle(TagData data)
         {
-            ColorTag ctag = ColorTag.For(data.GetModifier(0));
+            ColorTag ctag = ColorTag.For(data, data.GetModifierObject(0));
             if (ctag == null)
             {
-                return new TextTag("&{NULL}").Handle(data.Shrink());
+                return new TextTag("&{NULL}");
             }
             return ctag.Handle(data.Shrink());
         }
