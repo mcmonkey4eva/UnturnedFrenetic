@@ -79,7 +79,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Group General Information
                 // @ReturnType NumberTag
                 // @Returns the red value of this color.
-                // @Example "0.1,0.2,0.3,1.0" .red returns "0.1".
+                // @Example "0.1,0.2,0.3,1" .red returns "0.1".
                 // -->
                 case "red":
                     return new NumberTag(Internal.r).Handle(data.Shrink());
@@ -88,7 +88,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Group General Information
                 // @ReturnType NumberTag
                 // @Returns the green value of this color.
-                // @Example "0.1,0.2,0.3,1.0" .green returns "0.2".
+                // @Example "0.1,0.2,0.3,1" .green returns "0.2".
                 // -->
                 case "greem":
                     return new NumberTag(Internal.g).Handle(data.Shrink());
@@ -97,7 +97,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Group General Information
                 // @ReturnType NumberTag
                 // @Returns the blue value of this color.
-                // @Example "0.1,0.2,0.3,1.0" .red returns "0.3".
+                // @Example "0.1,0.2,0.3,1" .red returns "0.3".
                 // -->
                 case "blue":
                     return new NumberTag(Internal.b).Handle(data.Shrink());
@@ -106,10 +106,32 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Group General Information
                 // @ReturnType NumberTag
                 // @Returns the alpha value of this color.
-                // @Example "0.1,0.2,0.3,1.0" .red returns "1.0".
+                // @Example "0.1,0.2,0.3,1" .red returns "1".
                 // -->
                 case "alpha":
                     return new NumberTag(Internal.a).Handle(data.Shrink());
+                // <--[tag]
+                // @Name ColorTag.mix[<color>|...]
+                // @Group Mathematics
+                // @ReturnType ColorTag
+                // @Returns the result of mixing the specified color(s) with this one.
+                // @Example "blue" .mix[red] returns "0.5,0,0.5,1"
+                case "mix":
+                    {
+                        ListTag list = ListTag.For(data.GetModifier(0));
+                        Color mixedColor = Internal;
+                        foreach (TemplateObject tcolor in list.ListEntries)
+                        {
+                            ColorTag color = ColorTag.For(tcolor.ToString());
+                            if (color == null)
+                            {
+                                SysConsole.Output(OutputType.ERROR, "Invalid color: " + TagParser.Escape(tcolor.ToString()));
+                                continue;
+                            }
+                            mixedColor += color.Internal;
+                        }
+                        return new ColorTag(mixedColor / list.ListEntries.Count).Handle(data.Shrink());
+                    }
                 default:
                     return new TextTag(ToString()).Handle(data);
             }
