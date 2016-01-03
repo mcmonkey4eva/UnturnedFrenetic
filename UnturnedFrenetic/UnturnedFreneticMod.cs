@@ -10,6 +10,7 @@ using UnturnedFrenetic.EventSystems;
 using UnturnedFrenetic.EventSystems.PlayerEvents;
 using UnityEngine;
 using Frenetic.TagHandlers.Objects;
+using Frenetic.CommandSystem;
 using Steamworks;
 
 namespace UnturnedFrenetic
@@ -136,10 +137,10 @@ namespace UnturnedFrenetic
             {
                 try
                 {
-                    string cmd = File.ReadAllText(script).Replace("\r", "\n").Replace("\0", "\\0");
+                    string cmd = File.ReadAllText(script).Replace("\r", "").Replace("\0", "\\0");
                     if (cmd.StartsWith("/// AUTORUN\n"))
                     {
-                        CommandSystem.System.ExecuteCommands(cmd, null);
+                        CommandScript.SeparateCommands(script.Replace(Environment.CurrentDirectory, ""), cmd, CommandSystem.System).ToQueue(CommandSystem.System).Execute();
                     }
                 }
                 catch (Exception ex)
