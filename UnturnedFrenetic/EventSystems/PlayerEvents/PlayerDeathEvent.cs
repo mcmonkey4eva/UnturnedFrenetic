@@ -13,7 +13,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
 {
     // <--[event]
     // @Name PlayerDeathEvent
-    // @Fired When a player is damaged.
+    // @Fired When a player dies.
     // @Updated 2015/12/31
     // @Authors Morphan1
     // @Group Player
@@ -124,7 +124,10 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             vars.Add("amount", Amount);
             vars.Add("cause", Cause);
             vars.Add("limb", Limb);
-            vars.Add("killer", Killer);
+            if (Killer != null)
+            {
+                vars.Add("killer", Killer);
+            }
             return vars;
         }
 
