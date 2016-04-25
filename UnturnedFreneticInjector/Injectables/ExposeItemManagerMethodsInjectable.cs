@@ -24,6 +24,9 @@ namespace UnturnedFreneticInjector.Injectables
             FieldDefinition fieldregions = GetField(type, "regions");
             fieldregions.IsPrivate = false;
             fieldregions.IsPublic = true;
+            FieldDefinition fieldinstcount = GetField(type, "instanceCount");
+            fieldinstcount.IsPrivate = false;
+            fieldinstcount.IsPublic = true;
             // Keep track of items by using models
             TypeDefinition itemTracker = moddef.GetType("UnturnedFrenetic.ItemModelTracker");
             // (Item, Vector3)

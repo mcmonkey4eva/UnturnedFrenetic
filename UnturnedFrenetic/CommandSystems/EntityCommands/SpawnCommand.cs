@@ -178,7 +178,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     if (Regions.tryGetCoordinate(loc.ToVector3(), out x, out y))
                     {
                         Item item = new Item(asset.Internal.id, 1, asset.Internal.quality);
-                        ItemData data = new ItemData(item, 0 /* TODO: WHAT? */, loc.ToVector3(), Dedicator.isDedicated);
+                        ItemData data = new ItemData(item, ++ItemManager.instanceCount, loc.ToVector3(), Dedicator.isDedicated);
                         ItemManager.regions[x, y].items.Add(data);
                         ItemModelTracker.Track(data, loc.ToVector3());
                         ItemManager.manager.channel.send("tellItem", ESteamCall.CLIENTS, x, y, ItemManager.ITEM_REGIONS, ESteamPacket.UPDATE_RELIABLE_BUFFER, new object[]
