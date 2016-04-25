@@ -21,9 +21,12 @@ namespace UnturnedFreneticInjector.Injectables
             MethodDefinition chatmethod = GetMethod(managertype, "askChat", 3);
             MethodBody chatbody = chatmethod.Body;
             // Remove old color handling
-            for (int i = 113; i < 126; i++)
+            chatbody.Instructions[53].Operand = chatbody.Instructions[124];
+            chatbody.Instructions[81].Operand = chatbody.Instructions[124];
+            chatbody.Instructions[109].Operand = chatbody.Instructions[124];
+            for (int i = 111; i <= 123; i++)
             {
-                chatbody.Instructions.RemoveAt(113);
+                chatbody.Instructions.RemoveAt(111);
             }
             InjectInstructions(chatbody, 27, new Instruction[]
                 {
