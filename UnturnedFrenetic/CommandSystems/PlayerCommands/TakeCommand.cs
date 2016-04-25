@@ -60,7 +60,7 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
             PlayerInventory inventory = player.Internal.player.inventory;
             byte remainingAmount = amount;
             InventorySearch search;
-            while (remainingAmount > 0 && (search = inventory.has(item.Internal.id)) != null)
+            while (remainingAmount > 0 && (search = inventory.has(item.Internal.id)) != null) // TODO: Less awkward code!?
             {
                 if (search.jar.item.amount <= remainingAmount)
                 {

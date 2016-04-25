@@ -12,12 +12,12 @@ namespace UnturnedFreneticInjector.Injectables
         public override void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef)
         {
             // This injects a call to the mod's static PlayerChat method for the PlayerChatScriptEvent
-            TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
-            MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "PlayerChat", 5));
             TypeDefinition managertype = gamedef.GetType("SDG.Unturned.ChatManager");
             FieldDefinition managerfield = GetField(managertype, "manager");
             managerfield.IsPrivate = false;
             managerfield.IsPublic = true;
+            TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
+            MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "PlayerChat", 5));
             MethodDefinition chatmethod = GetMethod(managertype, "askChat", 3);
             MethodBody chatbody = chatmethod.Body;
             // Remove old color handling
@@ -25,7 +25,6 @@ namespace UnturnedFreneticInjector.Injectables
             {
                 chatbody.Instructions.RemoveAt(113);
             }
-            /*
             InjectInstructions(chatbody, 27, new Instruction[]
                 {
                     // Load "steamPlayer" onto the stack.
@@ -42,13 +41,9 @@ namespace UnturnedFreneticInjector.Injectables
                     Instruction.Create(OpCodes.Call, eventmethod),
                     // If the return is true, jump ahead to the original 27th instruction.
                     Instruction.Create(OpCodes.Brfalse, chatbody.Instructions[27]),
-                    // Otherwise,return now.
+                    // Otherwise, return now.
                     Instruction.Create(OpCodes.Ret)
                 });
-                */
-            // TODO: fix above, remove all -8 below
-            chatbody.Instructions[61 - 8] = Instruction.Create(OpCodes.Br, chatbody.Instructions[119 - 8]);
-            chatbody.Instructions[89 - 8] = Instruction.Create(OpCodes.Br, chatbody.Instructions[119 - 8]);
         }
     }
 }

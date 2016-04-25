@@ -22,8 +22,17 @@ namespace UnturnedFreneticInjector
             AssemblyDefinition assemblyCSharpdll = AssemblyDefinition.ReadAssembly("Assembly-CSharp.dll");
             ModuleDefinition gamedef = assemblyCSharpdll.MainModule;
             Console.WriteLine("Reading mod file and loading mod assembly...");
-            AssemblyDefinition unturnedFrenetic = AssemblyDefinition.ReadAssembly("UnturnedFrenetic.dll");
-            ModuleDefinition moddef = unturnedFrenetic.MainModule;
+            AssemblyDefinition unturnedFrenetic = null;
+            ModuleDefinition moddef = null;
+            try
+            {
+                unturnedFrenetic = AssemblyDefinition.ReadAssembly("UnturnedFrenetic.dll");
+                moddef = unturnedFrenetic.MainModule;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             Console.WriteLine("Loaded. Running all injectables...");
             Assembly thisasm = Assembly.GetCallingAssembly();
             gamedef.AssemblyReferences.Add(new AssemblyNameReference("UnturnedFrenetic", new Version(1, 0, 0, 0)));
