@@ -186,8 +186,9 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         {
                             for (byte y = 0; y < Regions.WORLD_SIZE; y++)
                             {
-                                foreach (Transform item in ItemManager.regions[x, y].models)
+                                foreach (ItemDrop drop in ItemManager.regions[x, y].drops)
                                 {
+                                    Transform item = drop.model;
                                     if ((item.position - vec3).sqrMagnitude <= range * range)
                                     {
                                         items.Add(new ItemTag(item.GetChild(0).gameObject.GetComponent<InteractableItem>()));

@@ -61,7 +61,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Example "2" .vid returns "1".
                 // -->
                 case "vid":
-                    return new NumberTag(Internal.index).Handle(data.Shrink());
+                    return new NumberTag(Internal.id).Handle(data.Shrink());
                 // <--[tag]
                 // @Name VehicleTag.asset
                 // @Group General Information

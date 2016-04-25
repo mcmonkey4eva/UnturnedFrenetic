@@ -15,7 +15,7 @@ namespace UnturnedFreneticInjector.Injectables
             // Then, add all items spawned internally to the item manager's model list as physical entities.
             // This allows us to have better control over items and make them more interactive.
             TypeDefinition type = gamedef.GetType("SDG.Unturned.ItemManager");
-            MethodDefinition spawnItemMethod = GetMethod(type, "spawnItem", 7);
+            MethodDefinition spawnItemMethod = GetMethod(type, "spawnItem", 8);
             spawnItemMethod.IsPrivate = false;
             spawnItemMethod.IsPublic = true;
             FieldDefinition managerField = GetField(type, "manager");
@@ -36,13 +36,13 @@ namespace UnturnedFreneticInjector.Injectables
             MethodDefinition getPointProperty = GetMethod(gamedef.GetType("SDG.Unturned.ItemSpawnpoint"), "get_point", 0);
             // Track dropItem
             MethodDefinition dropItemMethod = GetMethod(type, "dropItem", 5);
-            InjectInstructions(dropItemMethod.Body, 88, new Instruction[]
+            InjectInstructions(dropItemMethod.Body, 74, new Instruction[]
             {
-                // Load: Item item
-                Instruction.Create(OpCodes.Ldarg_0),
+                // Load: ItemData itemData
+                Instruction.Create(OpCodes.Ldloc_3),
                 // Load: Vector3 point
                 Instruction.Create(OpCodes.Ldarg_1),
-                // ItemModelTracker.Track(item, point);
+                // ItemModelTracker.Track(itemData, point);
                 Instruction.Create(OpCodes.Call, trackItemMethod)
             });
             // Track generateItems
@@ -60,19 +60,19 @@ namespace UnturnedFreneticInjector.Injectables
             });
             // Track respawnItems
             MethodDefinition respawnItemsMethod = GetMethod(type, "respawnItems", 0);
-            InjectInstructions(respawnItemsMethod.Body, 111, new Instruction[]
+            InjectInstructions(respawnItemsMethod.Body, 130, new Instruction[]
             {
-                // Load: Item item2
-                Instruction.Create(OpCodes.Ldloc_3),
+                // Load: ItemData itemData
+                Instruction.Create(OpCodes.Ldloc, respawnItemsMethod.Body.Variables[4]),
                 // Load: ItemSpawnpoint itemSpawnpoint
                 Instruction.Create(OpCodes.Ldloc_0),
                 // Call: 'get_point' on  itemSpawnpoint2 -> add the Vector3 result to the stack.
                 Instruction.Create(OpCodes.Callvirt, getPointProperty),
-                // Call: ItemModelTracker.Track(newItem, itemSpawnpoint2.point);
+                // Call: ItemModelTracker.Track(itemData, itemSpawnpoint2.point);
                 Instruction.Create(OpCodes.Call, trackItemMethod)
             });
             // Untrack askTakeItem
-            MethodDefinition askTakeItemMethod = GetMethod(type, "askTakeItem", 4);
+            MethodDefinition askTakeItemMethod = GetMethod(type, "askTakeItem", 8);
             InjectInstructions(askTakeItemMethod.Body, 95, new Instruction[]
             {
                 // Load: byte x

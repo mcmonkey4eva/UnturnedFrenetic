@@ -21,10 +21,11 @@ namespace UnturnedFreneticInjector.Injectables
             MethodDefinition chatmethod = GetMethod(managertype, "askChat", 3);
             MethodBody chatbody = chatmethod.Body;
             // Remove old color handling
-            for (int i = 105; i < 118; i++)
+            for (int i = 113; i < 126; i++)
             {
-                chatbody.Instructions.RemoveAt(105);
+                chatbody.Instructions.RemoveAt(113);
             }
+            /*
             InjectInstructions(chatbody, 27, new Instruction[]
                 {
                     // Load "steamPlayer" onto the stack.
@@ -44,9 +45,10 @@ namespace UnturnedFreneticInjector.Injectables
                     // Otherwise,return now.
                     Instruction.Create(OpCodes.Ret)
                 });
-            chatbody.Instructions[59] = Instruction.Create(OpCodes.Br, chatbody.Instructions[113]);
-            chatbody.Instructions[85] = Instruction.Create(OpCodes.Br, chatbody.Instructions[113]);
-            chatbody.Instructions[111] = Instruction.Create(OpCodes.Br, chatbody.Instructions[113]);
+                */
+            // TODO: fix above, remove all -8 below
+            chatbody.Instructions[61 - 8] = Instruction.Create(OpCodes.Br, chatbody.Instructions[119 - 8]);
+            chatbody.Instructions[89 - 8] = Instruction.Create(OpCodes.Br, chatbody.Instructions[119 - 8]);
         }
     }
 }

@@ -31,9 +31,9 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             {
                 for (byte y = 0; y < Regions.WORLD_SIZE; y++)
                 {
-                    foreach (Transform transform in ItemManager.regions[x, y].models)
+                    foreach (ItemDrop drop in ItemManager.regions[x, y].drops)
                     {
-                        InteractableItem item = transform.GetChild(0).gameObject.GetComponent<InteractableItem>();
+                        InteractableItem item = drop.interactableItem;
                         if (instanceID == item.gameObject.GetInstanceID())
                         {
                             return new ItemTag(item);
