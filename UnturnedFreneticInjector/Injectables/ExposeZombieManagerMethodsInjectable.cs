@@ -19,6 +19,13 @@ namespace UnturnedFreneticInjector.Injectables
             FieldDefinition field = GetField(type, "manager");
             field.IsPrivate = false;
             field.IsPublic = true;
+            TypeDefinition zombie = gamedef.GetType("SDG.Unturned.Zombie");
+            FieldDefinition health = GetField(zombie, "health");
+            health.IsPrivate = false;
+            health.IsPublic = true;
+            FieldDefinition maxHealth = GetField(zombie, "maxHealth");
+            maxHealth.IsPrivate = false;
+            maxHealth.IsPublic = true;
         }
     }
 }

@@ -74,6 +74,24 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "specialty":
                     return new TextTag(Internal.speciality.ToString()).Handle(data.Shrink());
+                // <--[tag]
+                // @Name ZombieTag.health
+                // @Group General Information
+                // @ReturnType NumberTag
+                // @Returns the zombie's current health.
+                // @Example "2" .health returns "96".
+                // -->
+                case "health":
+                    return new NumberTag(Internal.health).Handle(data.Shrink());
+                // <--[tag]
+                // @Name ZombieTag.max_health
+                // @Group General Information
+                // @ReturnType NumberTag
+                // @Returns the zombie's maximum health.
+                // @Example "2" .max_health returns "100".
+                // -->
+                case "max_health":
+                    return new NumberTag(Internal.maxHealth).Handle(data.Shrink());
                 default:
                     return new EntityTag(Internal.gameObject).Handle(data);
             }

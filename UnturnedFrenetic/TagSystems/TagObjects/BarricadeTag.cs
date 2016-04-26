@@ -89,6 +89,15 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "asset":
                     return ItemAssetTag.For(InternalData.barricade.id.ToString()).Handle(data.Shrink());
+                // <--[tag]
+                // @Name BarricadeTag.health
+                // @Group General Information
+                // @ReturnType NumberTag
+                // @Returns the barricade's current health.
+                // @Example "2" .health returns "96".
+                // -->
+                case "health":
+                    return new NumberTag(InternalData.barricade.health).Handle(data.Shrink());
                 default:
                     return new EntityTag(Internal.gameObject).Handle(data);
             }

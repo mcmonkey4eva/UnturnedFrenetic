@@ -78,6 +78,91 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             return false;
         }
 
+        public bool TryGetVehicle(out VehicleTag tag)
+        {
+            InteractableVehicle component = Internal.GetComponent<InteractableVehicle>();
+            if (component != null)
+            {
+                tag = new VehicleTag(component);
+                return true;
+            }
+            tag = null;
+            return false;
+        }
+
+        public bool TryGetBarricade(out BarricadeTag tag)
+        {
+            byte x;
+            byte y;
+            ushort plant;
+            ushort index;
+            BarricadeRegion region;
+            if (BarricadeManager.tryGetInfo(Internal.transform, out x, out y, out plant, out index, out region))
+            {
+                tag = new BarricadeTag(Internal.transform, region.barricades[index]);
+                return true;
+            }
+            tag = null;
+            return false;
+        }
+
+        public bool TryGetStructure(out StructureTag tag)
+        {
+            byte x;
+            byte y;
+            ushort index;
+            StructureRegion region;
+            if (StructureManager.tryGetInfo(Internal.transform, out x, out y, out index, out region))
+            {
+                tag = new StructureTag(Internal.transform, region.structures[index]);
+                return true;
+            }
+            tag = null;
+            return false;
+        }
+
+        public bool TryGetResource(out ResourceTag tag)
+        {
+            Transform transform = Internal.transform;
+            byte x;
+            byte y;
+            if (Regions.tryGetCoordinate(transform.position, out x, out y))
+            {
+                List<ResourceSpawnpoint> list = LevelGround.trees[x, y];
+                foreach (ResourceSpawnpoint resource in list)
+                {
+                    if (transform == resource.model)
+                    {
+                        tag = new ResourceTag(resource);
+                        return true;
+                    }
+                }
+            }
+            tag = null;
+            return false;
+        }
+
+        public bool TryGetWorldObject(out WorldObjectTag tag)
+        {
+            Transform transform = Internal.transform;
+            byte x;
+            byte y;
+            if (Regions.tryGetCoordinate(transform.position, out x, out y))
+            {
+                List<LevelObject> list = LevelObjects.objects[x, y];
+                foreach (LevelObject obj in list)
+                {
+                    if (transform == obj.transform)
+                    {
+                        tag = new WorldObjectTag(obj);
+                        return true;
+                    }
+                }
+            }
+            tag = null;
+            return false;
+        }
+
         public override TemplateObject Handle(TagData data)
         {
             if (data.Input.Count == 0)
