@@ -50,7 +50,7 @@ namespace UnturnedFreneticInjector.Injectables
             });
             // Track generateItems
             MethodDefinition generateItemsMethod = GetMethod(type, "generateItems", 2);
-            InjectInstructions(generateItemsMethod.Body, 123, new Instruction[]
+            InjectInstructions(generateItemsMethod.Body, 137, new Instruction[]
             {
                 // Load: byte x
                 Instruction.Create(OpCodes.Ldarg_1),
