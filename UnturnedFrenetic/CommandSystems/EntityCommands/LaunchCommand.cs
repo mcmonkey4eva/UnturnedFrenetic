@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Frenetic.CommandSystem;
+using FreneticScript.CommandSystem;
 using UnturnedFrenetic.TagSystems.TagObjects;
-using Frenetic.TagHandlers;
+using FreneticScript.TagHandlers;
 using UnityEngine;
 using System.Reflection;
 using SDG.Unturned;
@@ -20,6 +20,8 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // @Updated 2015/12/22
         // @Authors Morphan1
         // @Group Entity
+        // @Minimum 2
+        // @Maximum 2
         // @Description
         // This launches an entity in a direction, using the coordinates of the location
         // as a 3D vector for direction.
@@ -33,48 +35,59 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             Name = "launch";
             Arguments = "<entity> <location>";
             Description = "Launches an entity based on a vector.";
+            MinimumArguments = 2;
+            MaximumArguments = 2;
         }
 
-        public override void Execute(CommandEntry entry)
+        public override void Execute(CommandQueue queue, CommandEntry entry)
         {
             if (entry.Arguments.Count < 2)
             {
-                ShowUsage(entry);
+                ShowUsage(queue, entry);
                 return;
             }
             try
             {
-                LocationTag loc = LocationTag.For(entry.GetArgument(1));
+                LocationTag loc = LocationTag.For(entry.GetArgument(queue, 1));
                 if (loc == null)
                 {
-                    entry.Bad("Invalid location!");
+                    queue.HandleError(entry, "Invalid location!");
                     return;
                 }
-                EntityTag entity = EntityTag.For(Utilities.StringToInt(entry.GetArgument(0)));
+                EntityTag entity = EntityTag.For(Utilities.StringToInt(entry.GetArgument(queue, 0)));
                 if (entity  == null)
                 {
-                    entry.Bad("Invalid entity!");
+                    queue.HandleError(entry, "Invalid entity!");
                     return;
                 }
                 PlayerTag player;
                 if (entity.TryGetPlayer(out player))
                 {
                     player.Internal.player.gameObject.AddComponent<LaunchComponent>().LaunchPlayer(loc.ToVector3());
-                    entry.Good("Successfully launched player " + TagParser.Escape(player.ToString()) + " to " + TagParser.Escape(loc.ToString()) + "!");
+                    if (entry.ShouldShowGood(queue))
+                    {
+                        entry.Good(queue, "Successfully launched player " + TagParser.Escape(player.ToString()) + " to " + TagParser.Escape(loc.ToString()) + "!");
+                    }
                     return;
                 }
                 ZombieTag zombie;
                 if (entity.TryGetZombie(out zombie))
                 {
                     zombie.Internal.gameObject.AddComponent<LaunchComponent>().Launch(loc.ToVector3());
-                    entry.Good("Successfully launched zombie " + TagParser.Escape(zombie.ToString()) + " to " + TagParser.Escape(loc.ToString()) + "!");
+                    if (entry.ShouldShowGood(queue))
+                    {
+                        entry.Good(queue, "Successfully launched zombie " + TagParser.Escape(zombie.ToString()) + " to " + TagParser.Escape(loc.ToString()) + "!");
+                    }
                     return;
                 }
                 AnimalTag animal;
                 if (entity.TryGetAnimal(out animal))
                 {
                     animal.Internal.gameObject.AddComponent<LaunchComponent>().Launch(loc.ToVector3());
-                    entry.Good("Successfully launched animal " + TagParser.Escape(animal.ToString()) + " to " + TagParser.Escape(loc.ToString()) + "!");
+                    if (entry.ShouldShowGood(queue))
+                    {
+                        entry.Good(queue, "Successfully launched animal " + TagParser.Escape(animal.ToString()) + " to " + TagParser.Escape(loc.ToString()) + "!");
+                    }
                     return;
                 }
                 ItemTag item;
@@ -82,11 +95,11 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 {
                     // TODO: Find some way to teleport items, barricades, etc without voiding the InstanceID?
                 }
-                entry.Bad("That entity can't be launched!");
+                queue.HandleError(entry, "That entity can't be launched!");
             }
             catch (Exception ex)
             {
-                entry.Bad("Failed to launch entity: " + ex.ToString());
+                queue.HandleError(entry, "Failed to launch entity: " + ex.ToString());
             }
         }
 

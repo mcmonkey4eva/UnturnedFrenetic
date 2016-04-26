@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnturnedFrenetic.TagSystems.TagObjects;
-using Frenetic;
-using Frenetic.CommandSystem;
-using Frenetic.TagHandlers;
-using Frenetic.TagHandlers.Objects;
+using FreneticScript;
+using FreneticScript.CommandSystem;
+using FreneticScript.TagHandlers;
+using FreneticScript.TagHandlers.Objects;
 using SDG.Unturned;
 
 namespace UnturnedFrenetic.EventSystems.PlayerEvents
@@ -125,35 +125,35 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         /// Applies a determination string to the event.
         /// </summary>
         /// <param name="determ">What was determined.</param>
-        /// <param name="determLow">A lowercase copy of the determination.</param>
         /// <param name="mode">What debugmode to use.</param>
-        public override void ApplyDetermination(string determ, string determLow, DebugMode mode)
+        public override void ApplyDetermination(TemplateObject determ, DebugMode mode)
         {
+            string determLow = determ.ToString().ToLowerFast();
             if (determLow.StartsWith("color:"))
             {
-                string tcolor = determ.Substring("color:".Length);
+                string tcolor = determ.ToString().Substring("color:".Length);
                 // TODO: better way to get a tagdata
-                Color = ColorTag.For(new TagData(UnturnedFreneticMod.Instance.CommandSystem.System.TagSystem, (List<TagBit>)null, null, null, DebugMode.FULL, (o) => { throw new Exception(o); }), tcolor);
+                Color = ColorTag.For(tcolor);
             }
             else if (determLow.StartsWith("text:"))
             {
-                Text = new TextTag(determ.Substring("text:".Length));
+                Text = new TextTag(determ.ToString().Substring("text:".Length));
             }
             else if (determLow.StartsWith("chat_mode:"))
             {
                 try
                 {
-                    EChatMode chatmode = (EChatMode)Enum.Parse(typeof(EChatMode), determ.Substring("chat_mode:".Length).ToUpper());
+                    EChatMode chatmode = (EChatMode)Enum.Parse(typeof(EChatMode), determ.ToString().Substring("chat_mode:".Length).ToUpper());
                     ChatMode = new TextTag(chatmode.ToString());
                 }
                 catch (ArgumentException)
                 {
-                    System.Output.Bad("Unknown chat mode specified in '<{text_color.emphasis}>" + TagParser.Escape(determ) + "<{text_color.base}>'. Valid: GLOBAL, GROUP, LOCAL, SAY, WELCOME.", mode);
+                    System.Output.Bad("Unknown chat mode specified in '<{text_color.emphasis}>" + TagParser.Escape(determ.ToString()) + "<{text_color.base}>'. Valid: GLOBAL, GROUP, LOCAL, SAY, WELCOME.", mode);
                 }
             }
             else
             {
-                base.ApplyDetermination(determ, determLow, mode);
+                base.ApplyDetermination(determ, mode);
             }
         }
     }

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Frenetic.TagHandlers;
-using Frenetic.TagHandlers.Objects;
+using FreneticScript.TagHandlers;
+using FreneticScript.TagHandlers.Objects;
 using UnityEngine;
 
 namespace UnturnedFrenetic.TagSystems.TagObjects
@@ -24,12 +24,12 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             Internal = color;
         }
 
-        public static ColorTag For(TagData data, TemplateObject obj)
+        public static ColorTag For(TemplateObject obj)
         {
-            return obj is ColorTag ? (ColorTag)obj : For(data, obj.ToString());
+            return obj is ColorTag ? (ColorTag)obj : For(obj.ToString());
         }
 
-        public static ColorTag For(TagData data, string nameorrgba)
+        public static ColorTag For(string nameorrgba)
         {
             string[] split = nameorrgba.Split(',');
             if (split.Length == 4)
@@ -68,17 +68,16 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         return new ColorTag(Color.yellow);
                 }
             }
-            data.Error("Invalid color tag input!");
             return null;
         }
 
         public override TemplateObject Handle(TagData data)
         {
-            if (data.Input.Count == 0)
+            if (data.Remaining == 0)
             {
                 return this;
             }
-            switch (data.Input[0])
+            switch (data[0])
             {
                 // <--[tag]
                 // @Name ColorTag.red
@@ -129,7 +128,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         Color mixedColor = Internal;
                         foreach (TemplateObject tcolor in list.ListEntries)
                         {
-                            ColorTag color = ColorTag.For(data, tcolor);
+                            ColorTag color = ColorTag.For(tcolor);
                             if (color == null)
                             {
                                 SysConsole.Output(OutputType.ERROR, "Invalid color: " + TagParser.Escape(tcolor.ToString()));

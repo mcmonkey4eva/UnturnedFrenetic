@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Frenetic.TagHandlers;
-using Frenetic.TagHandlers.Objects;
+using FreneticScript.TagHandlers;
+using FreneticScript.TagHandlers.Objects;
 using UnturnedFrenetic.TagSystems.TagObjects;
 
 namespace UnturnedFrenetic.TagSystems.TagBases
@@ -23,7 +23,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
 
         public override TemplateObject Handle(TagData data)
         {
-            ColorTag ctag = ColorTag.For(data, data.GetModifierObject(0));
+            ColorTag ctag = ColorTag.For(data.GetModifierObject(0));
             if (ctag == null)
             {
                 return new TextTag("&{NULL}");

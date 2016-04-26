@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Frenetic.CommandSystem;
+using FreneticScript.CommandSystem;
 using SDG.Unturned;
 using UnturnedFrenetic.TagSystems.TagObjects;
-using Frenetic.TagHandlers;
+using FreneticScript.TagHandlers;
 
 namespace UnturnedFrenetic.CommandSystems.PlayerCommands
 {
@@ -18,6 +18,8 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
         // @Updated 2015/11/28
         // @Authors Morphan1
         // @Group World
+        // @Minimum 2
+        // @Maximum 3
         // @Description
         // This adds the specified item with an optional amount argument (default 1).
         // TODO: Explain more!
@@ -31,39 +33,44 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
             Name = "give";
             Arguments = "<player> <item> [amount]";
             Description = "Gives a player the specified item.";
+            MinimumArguments = 2;
+            MaximumArguments = 3;
         }
 
-        public override void Execute(CommandEntry entry)
+        public override void Execute(CommandQueue queue, CommandEntry entry)
         {
             if (entry.Arguments.Count < 2)
             {
-                ShowUsage(entry);
+                ShowUsage(queue, entry);
                 return;
             }
-            PlayerTag player = PlayerTag.For(entry.GetArgument(0));
+            PlayerTag player = PlayerTag.For(entry.GetArgument(queue, 0));
             if (player == null)
             {
-                entry.Bad("Invalid player!");
+                queue.HandleError(entry, "Invalid player!");
                 return;
             }
-            ItemAssetTag item = ItemAssetTag.For(entry.GetArgument(1));
+            ItemAssetTag item = ItemAssetTag.For(entry.GetArgument(queue, 1));
             if (item == null)
             {
-                entry.Bad("Invalid item!");
+                queue.HandleError(entry, "Invalid item!");
                 return;
             }
             byte amount = 1;
             if (entry.Arguments.Count > 2)
             {
-                amount = (byte)Utilities.StringToUInt(entry.GetArgument(2));
+                amount = (byte)Utilities.StringToUInt(entry.GetArgument(queue, 2));
             }
             if (ItemTool.tryForceGiveItem(player.Internal.player, item.Internal.id, amount))
             {
-                entry.Good("Successfully gave a " + TagParser.Escape(item.Internal.name) + "!");
+                if (entry.ShouldShowGood(queue))
+                {
+                    entry.Good(queue, "Successfully gave a " + TagParser.Escape(item.Internal.name) + "!");
+                }
             }
             else
             {
-                entry.Bad("Failed to give item (is the inventory full?)!");
+                queue.HandleError(entry, "Failed to give item (is the inventory full?)!");
             }
         }
     }

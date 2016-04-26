@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Frenetic;
-using Frenetic.CommandSystem;
+using FreneticScript;
+using FreneticScript.CommandSystem;
 using UnturnedFrenetic.TagSystems.TagObjects;
 using SDG.Unturned;
-using Frenetic.TagHandlers;
+using FreneticScript.TagHandlers;
 
 namespace UnturnedFrenetic.CommandSystems.WorldCommands
 {
@@ -19,6 +19,8 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
         // @Updated 2015/12/07
         // @Authors Morphan1
         // @Group World
+        // @Minimum 2
+        // @Maximum 2
         // @Description
         // This displays an effect at a location or plays an audio effect (or both) to players near a location in the world.
         // TODO: Explain more!
@@ -32,31 +34,36 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
             Name = "effect";
             Arguments = "<effect> <location>";
             Description = "Plays an effect at the specified location.";
+            MinimumArguments = 2;
+            MaximumArguments = 2;
         }
 
-        public override void Execute(CommandEntry entry)
+        public override void Execute(CommandQueue queue, CommandEntry entry)
         {
             if (entry.Arguments.Count < 2)
             {
-                ShowUsage(entry);
+                ShowUsage(queue, entry);
                 return;
             }
-            LocationTag loc = LocationTag.For(entry.GetArgument(1));
+            LocationTag loc = LocationTag.For(entry.GetArgument(queue, 1));
             if (loc == null)
             {
-                entry.Bad("Invalid location!");
+                queue.HandleError(entry, "Invalid location!");
                 return;
             }
-            string targetAssetType = entry.GetArgument(0).ToLower();
+            string targetAssetType = entry.GetArgument(queue, 0).ToLower();
             EffectAssetTag effectType = EffectAssetTag.For(targetAssetType);
             if (effectType == null)
             {
-                entry.Bad("Invalid effect type!");
+                queue.HandleError(entry, "Invalid effect type!");
                 return;
             }
             EffectManager.sendEffect(effectType.Internal.id, EffectManager.INSANE, loc.ToVector3());
             // TODO: radius option instead of always 512 units (INSANE)?
-            entry.Good("Played effect " + TagParser.Escape(effectType.ToString()) + " at " + TagParser.Escape(loc.ToString()) +  "!");
+            if (entry.ShouldShowGood(queue))
+            {
+                entry.Good(queue, "Played effect " + TagParser.Escape(effectType.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+            }
         }
     }
 }

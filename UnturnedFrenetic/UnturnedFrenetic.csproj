@@ -38,8 +38,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\UnturnedFreneticInjector\bin\Debug\Assembly-CSharp.Patched.dll</HintPath>
     </Reference>
-    <Reference Include="Frenetic">
-      <HintPath>.\Frenetic.dll</HintPath>
+    <Reference Include="FreneticScript">
+      <HintPath>.\FreneticScript.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

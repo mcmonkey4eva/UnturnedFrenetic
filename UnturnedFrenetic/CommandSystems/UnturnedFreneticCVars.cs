@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Frenetic;
-using Frenetic.CommandSystem;
+using FreneticScript;
+using FreneticScript.CommandSystem;
 
 namespace UnturnedFrenetic.CommandSystems
 {

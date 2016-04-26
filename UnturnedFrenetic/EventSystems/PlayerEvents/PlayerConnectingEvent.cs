@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnturnedFrenetic.TagSystems.TagObjects;
-using Frenetic;
-using Frenetic.CommandSystem;
-using Frenetic.TagHandlers;
-using Frenetic.TagHandlers.Objects;
+using FreneticScript;
+using FreneticScript.CommandSystem;
+using FreneticScript.TagHandlers;
+using FreneticScript.TagHandlers.Objects;
 
 namespace UnturnedFrenetic.EventSystems.PlayerEvents
 {
@@ -93,11 +93,10 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         /// Applies a determination string to the event.
         /// </summary>
         /// <param name="determ">What was determined.</param>
-        /// <param name="determLow">A lowercase copy of the determination.</param>
         /// <param name="mode">What debugmode to use.</param>
-        public override void ApplyDetermination(string determ, string determLow, DebugMode mode)
+        public override void ApplyDetermination(TemplateObject determ, DebugMode mode)
         {
-            base.ApplyDetermination(determ, determLow, mode);
+            base.ApplyDetermination(determ, mode);
         }
     }
 

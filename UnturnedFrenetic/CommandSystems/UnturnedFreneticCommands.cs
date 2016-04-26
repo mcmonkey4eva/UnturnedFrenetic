@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Frenetic;
-using Frenetic.CommandSystem;
+using FreneticScript;
+using FreneticScript.CommandSystem;
+using UnturnedFrenetic.EventSystems;
 using UnturnedFrenetic.CommandSystems.EntityCommands;
 using UnturnedFrenetic.CommandSystems.PlayerCommands;
 using UnturnedFrenetic.CommandSystems.WorldCommands;
@@ -17,12 +18,13 @@ namespace UnturnedFrenetic.CommandSystems
 
         public UnturnedFreneticMod TheMod;
 
-        public UnturnedFreneticCommands(UnturnedFreneticMod mod, Outputter output)
+        public UnturnedFreneticCommands(UnturnedFreneticMod mod, UnturnedFreneticOutputter output)
         {
             try
             {
                 TheMod = mod;
                 System = new Commands();
+                output.Syst = System;
                 System.Output = output;
                 System.Init();
                 // Entity Commands
@@ -60,6 +62,10 @@ namespace UnturnedFrenetic.CommandSystems
                 System.TagSystem.Register(new WorldObjectAssetTagBase());
                 System.TagSystem.Register(new WorldObjectTagBase());
                 System.TagSystem.Register(new ZombieTagBase());
+                // Events
+                UnturnedFreneticEvents.RegisterAll(System);
+                // Wrap up
+                System.PostInit();
             }
             catch (Exception ex)
             {

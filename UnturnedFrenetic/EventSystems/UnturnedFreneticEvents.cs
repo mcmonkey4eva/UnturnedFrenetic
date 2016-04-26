@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Frenetic;
+using FreneticScript;
 using UnturnedFrenetic.EventSystems.PlayerEvents;
-using Frenetic.CommandSystem;
+using FreneticScript.CommandSystem;
 
 namespace UnturnedFrenetic.EventSystems
 {
@@ -21,18 +21,18 @@ namespace UnturnedFrenetic.EventSystems
             system.RegisterEvent(new PlayerShootScriptEvent(system));
         }
 
-        public static FreneticEventHandler<PlayerChatEventArgs> OnPlayerChat = new FreneticEventHandler<PlayerChatEventArgs>();
+        public static FreneticScriptEventHandler<PlayerChatEventArgs> OnPlayerChat = new FreneticScriptEventHandler<PlayerChatEventArgs>();
 
-        public static FreneticEventHandler<PlayerConnectingEventArgs> OnPlayerConnecting = new FreneticEventHandler<PlayerConnectingEventArgs>();
+        public static FreneticScriptEventHandler<PlayerConnectingEventArgs> OnPlayerConnecting = new FreneticScriptEventHandler<PlayerConnectingEventArgs>();
 
-        public static FreneticEventHandler<PlayerConnectedEventArgs> OnPlayerConnected = new FreneticEventHandler<PlayerConnectedEventArgs>();
+        public static FreneticScriptEventHandler<PlayerConnectedEventArgs> OnPlayerConnected = new FreneticScriptEventHandler<PlayerConnectedEventArgs>();
 
-        public static FreneticEventHandler<PlayerDamagedEventArgs> OnPlayerDamaged = new FreneticEventHandler<PlayerDamagedEventArgs>();
+        public static FreneticScriptEventHandler<PlayerDamagedEventArgs> OnPlayerDamaged = new FreneticScriptEventHandler<PlayerDamagedEventArgs>();
 
-        public static FreneticEventHandler<PlayerDeathEventArgs> OnPlayerDeath = new FreneticEventHandler<PlayerDeathEventArgs>();
+        public static FreneticScriptEventHandler<PlayerDeathEventArgs> OnPlayerDeath = new FreneticScriptEventHandler<PlayerDeathEventArgs>();
 
-        public static FreneticEventHandler<PlayerDisconnectedEventArgs> OnPlayerDisconnected = new FreneticEventHandler<PlayerDisconnectedEventArgs>();
+        public static FreneticScriptEventHandler<PlayerDisconnectedEventArgs> OnPlayerDisconnected = new FreneticScriptEventHandler<PlayerDisconnectedEventArgs>();
 
-        public static FreneticEventHandler<PlayerShootEventArgs> OnPlayerShoot = new FreneticEventHandler<PlayerShootEventArgs>();
+        public static FreneticScriptEventHandler<PlayerShootEventArgs> OnPlayerShoot = new FreneticScriptEventHandler<PlayerShootEventArgs>();
     }
 }

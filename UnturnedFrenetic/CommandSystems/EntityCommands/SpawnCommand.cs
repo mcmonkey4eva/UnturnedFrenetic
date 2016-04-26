@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Frenetic.CommandSystem;
+using FreneticScript.CommandSystem;
 using SDG.Unturned;
 using UnturnedFrenetic.TagSystems.TagObjects;
-using Frenetic.TagHandlers;
+using FreneticScript.TagHandlers;
 using System.Reflection;
 using UnityEngine;
 using Steamworks;
@@ -21,6 +21,8 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // @Updated 2015/12/11
         // @Authors mcmonkey
         // @Group Entity
+        // @Minimum 2
+        // @Maximum 2
         // @Description
         // This spawns an entity into the world at the given location.
         // TODO: Explain more!
@@ -33,28 +35,30 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             Name = "spawn";
             Arguments = "<entity type> <location>"; // TODO: Direction!
             Description = "Spawns an entity at the location.";
+            MinimumArguments = 2;
+            MaximumArguments = 2;
         }
 
-        public override void Execute(CommandEntry entry)
+        public override void Execute(CommandQueue queue, CommandEntry entry)
         {
             if (entry.Arguments.Count < 2)
             {
-                ShowUsage(entry);
+                ShowUsage(queue, entry);
                 return;
             }
             try
             {
-                LocationTag loc = LocationTag.For(entry.GetArgument(1));
+                LocationTag loc = LocationTag.For(entry.GetArgument(queue, 1));
                 if (loc == null)
                 {
-                    entry.Bad("Invalid location!");
+                    queue.HandleError(entry, "Invalid location!");
                     return;
                 }
-                string targetAssetType = entry.GetArgument(0).ToLower();
+                string targetAssetType = entry.GetArgument(queue, 0).ToLower();
                 EntityType etype = EntityType.ValueOf(targetAssetType);
                 if (etype == null)
                 {
-                    entry.Bad("Invalid entity type!");
+                    queue.HandleError(entry, "Invalid entity type!");
                     return;
                 }
                 if (etype.Type == EntityAssetType.ZOMBIE)
@@ -100,14 +104,17 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                         ZombieManager.manager.channel.closeWrite("tellZombies", player.playerID.steamID, ESteamPacket.UPDATE_RELIABLE_CHUNK_BUFFER);
                     }
                     */
-                    entry.Good("Successfully spawned a zombie at " + TagParser.Escape(loc.ToString()) + "! (WARNING: IT WILL BE INVISIBLE CURRENTLY - SEE THE COMPLAINTS FILE)");
+                    if (entry.ShouldShowGood(queue))
+                    {
+                        entry.Good(queue, "Successfully spawned a zombie at " + TagParser.Escape(loc.ToString()) + "! (WARNING: IT WILL BE INVISIBLE CURRENTLY - SEE THE COMPLAINTS FILE)");
+                    }
                 }
                 else if (etype.Type == EntityAssetType.ANIMAL)
                 {
                     AnimalAssetTag asset = AnimalAssetTag.For(targetAssetType);
                     if (asset == null)
                     {
-                        entry.Bad("Invalid animal type!");
+                        queue.HandleError(entry, "Invalid animal type!");
                         return;
                     }
                     // TODO: Make this bit optional!
@@ -132,7 +139,10 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                         });
                         AnimalManager.manager.channel.closeWrite("tellAnimals", player.playerID.steamID, ESteamPacket.UPDATE_RELIABLE_CHUNK_BUFFER);
                     }
-                    entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "! (" + animal.gameObject.GetInstanceID() + ")");
+                    if (entry.ShouldShowGood(queue))
+                    {
+                        entry.Good(queue, "Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "! (" + animal.gameObject.GetInstanceID() + ")");
+                    }
                     return;
                 }
                 else if (etype.Type == EntityAssetType.VEHICLE)
@@ -140,7 +150,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     VehicleAssetTag asset = VehicleAssetTag.For(targetAssetType);
                     if (asset == null)
                     {
-                        entry.Bad("Invalid vehicle type!");
+                        queue.HandleError(entry, "Invalid vehicle type!");
                         return;
                     }
                     // TODO: Make this bit optional!
@@ -151,26 +161,29 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     }
                     // END TODO
                     VehicleManager.spawnVehicle(asset.Internal.id, loc.ToVector3(), Quaternion.identity);
-                    entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                    if (entry.ShouldShowGood(queue))
+                    {
+                        entry.Good(queue, "Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                    }
                 }
                 else if (etype.Type == EntityAssetType.WORLD_OBJECT)
                 {
                     WorldObjectAssetTag asset = WorldObjectAssetTag.For(targetAssetType);
                     if (asset == null)
                     {
-                        entry.Bad("Invalid world object type!");
+                        queue.HandleError(entry, "Invalid world object type!");
                         return;
                     }
                     LevelObjects.addObject(loc.ToVector3(), Quaternion.identity, asset.Internal.id);
                     // TODO: Network!
-                    entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) +"! (WARNING: IT WILL BE INVISIBLE CURRENTLY - SEE THE COMPLAINTS FILE)");
+                    entry.Good(queue, "Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) +"! (WARNING: IT WILL BE INVISIBLE CURRENTLY - SEE THE COMPLAINTS FILE)");
                 }
                 else if (etype.Type == EntityAssetType.ITEM)
                 {
                     ItemAssetTag asset = ItemAssetTag.For(targetAssetType);
                     if (asset == null)
                     {
-                        entry.Bad("Invalid item type!");
+                        queue.HandleError(entry, "Invalid item type!");
                         return;
                     }
                     byte x;
@@ -191,11 +204,14 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                             item.state,
                             loc.ToVector3()
                         });
-                        entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                        if (entry.ShouldShowGood(queue))
+                        {
+                            entry.Good(queue, "Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                        }
                     }
                     else
                     {
-                        entry.Bad("Trying to spawn item outside any valid item regions!");
+                        queue.HandleError(entry, "Trying to spawn item outside any valid item regions!");
                     }
                 }
                 else if (etype.Type == EntityAssetType.BARRICADE)
@@ -203,31 +219,37 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     ItemAssetTag asset = ItemAssetTag.For(targetAssetType.Substring("barricade_".Length));
                     if (asset == null || !(asset.Internal is ItemBarricadeAsset))
                     {
-                        entry.Bad("Invalid item barricade type!");
+                        queue.HandleError(entry, "Invalid item barricade type!");
                         return;
                     }
                     BarricadeManager.dropBarricade(new Barricade(asset.Internal.id), null, loc.ToVector3(), 0f, 0f, 0f, CSteamID.Nil.m_SteamID, CSteamID.Nil.m_SteamID);
-                    entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                    if (entry.ShouldShowGood(queue))
+                    {
+                        entry.Good(queue, "Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                    }
                 }
                 else if (etype.Type == EntityAssetType.STRUCTURE)
                 {
                     ItemAssetTag asset = ItemAssetTag.For(targetAssetType.Substring("structure_".Length));
                     if (asset == null || !(asset.Internal is ItemStructureAsset))
                     {
-                        entry.Bad("Invalid item structure type!");
+                        queue.HandleError(entry, "Invalid item structure type!");
                         return;
                     }
                     StructureManager.dropStructure(new Structure(asset.Internal.id), loc.ToVector3(), 0f, CSteamID.Nil.m_SteamID, CSteamID.Nil.m_SteamID);
-                    entry.Good("Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                    if (entry.ShouldShowGood(queue))
+                    {
+                        entry.Good(queue, "Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
+                    }
                 }
                 else
                 {
-                    entry.Bad("Invalid or unspawnable entity type!");
+                    queue.HandleError(entry, "Invalid or unspawnable entity type!");
                 }
             }
             catch (Exception ex)
             {
-                entry.Bad("Failed to spawn entity: " + ex.ToString());
+                queue.HandleError(entry, "Failed to spawn entity: " + ex.ToString());
             }
             // TODO: Maybe add the spawned object as a var to the current commandqueue.
         }

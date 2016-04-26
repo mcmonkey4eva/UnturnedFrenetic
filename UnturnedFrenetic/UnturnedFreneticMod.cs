@@ -9,8 +9,8 @@ using SDG.Unturned;
 using UnturnedFrenetic.EventSystems;
 using UnturnedFrenetic.EventSystems.PlayerEvents;
 using UnityEngine;
-using Frenetic.TagHandlers.Objects;
-using Frenetic.CommandSystem;
+using FreneticScript.TagHandlers.Objects;
+using FreneticScript.CommandSystem;
 using Steamworks;
 
 namespace UnturnedFrenetic
@@ -142,32 +142,21 @@ namespace UnturnedFrenetic
 
         public void AutorunScripts()
         {
-            string[] scripts = Directory.GetFiles(Environment.CurrentDirectory + "/scripts/", "*.cfg", SearchOption.AllDirectories);
-            foreach (string script in scripts)
+            string[] files = Directory.GetFiles(Environment.CurrentDirectory + "/data/scripts/server/", "*.cfg", SearchOption.AllDirectories);
+            foreach (string file in files)
             {
-                try
-                {
-                    string cmd = File.ReadAllText(script).Replace("\r", "").Replace("\0", "\\0");
-                    if (cmd.StartsWith("/// AUTORUN\n"))
-                    {
-                        CommandScript.SeparateCommands(script.Replace(Environment.CurrentDirectory, ""), cmd, CommandSystem.System).ToQueue(CommandSystem.System).Execute();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    SysConsole.Output("Handling autorun script '" + script.Replace(Environment.CurrentDirectory, "") + "'", ex);
-                }
+                string cmd = File.ReadAllText(file).Replace("\r", "").Replace("\0", "\\0");
+                CommandSystem.System.PrecalcScript(file.Replace(Environment.CurrentDirectory, ""), cmd);
             }
+            CommandSystem.System.RunPrecalculated();
         }
 
         public void Setup()
         {
             CommandSystem = new UnturnedFreneticCommands(this, new UnturnedFreneticOutputter() { TheMod = this });
-            UnturnedFreneticEvents.RegisterAll(CommandSystem.System);
             Provider.onEnemyConnected += (player) => UnturnedFreneticEvents.OnPlayerConnected.Fire(new PlayerConnectedEventArgs() { Player = new PlayerTag(player) });
             Provider.onEnemyDisconnected += (player) => UnturnedFreneticEvents.OnPlayerDisconnected.Fire(new PlayerDisconnectedEventArgs() { Player = new PlayerTag(player) });
             Level.onPostLevelLoaded += (o) => EnableForLevel();
-            AutorunScripts();
         }
     }
 }

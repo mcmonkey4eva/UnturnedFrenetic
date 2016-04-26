@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnturnedFrenetic.TagSystems.TagObjects;
-using Frenetic;
-using Frenetic.CommandSystem;
-using Frenetic.TagHandlers;
-using Frenetic.TagHandlers.Objects;
+using FreneticScript;
+using FreneticScript.CommandSystem;
+using FreneticScript.TagHandlers;
+using FreneticScript.TagHandlers.Objects;
 using SDG.Unturned;
 
 namespace UnturnedFrenetic.EventSystems.PlayerEvents
@@ -105,22 +105,22 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         /// Applies a determination string to the event.
         /// </summary>
         /// <param name="determ">What was determined.</param>
-        /// <param name="determLow">A lowercase copy of the determination.</param>
         /// <param name="mode">What debugmode to use.</param>
-        public override void ApplyDetermination(string determ, string determLow, DebugMode mode)
+        public override void ApplyDetermination(TemplateObject determ, DebugMode mode)
         {
+            string determLow = determ.ToString().ToLowerFast();
             if (determLow.StartsWith("amount:"))
             {
-                // TODO: Clean this!
-                NumberTag amt = NumberTag.For(new TagData(System.TagSystem, (List<TagBit>)null, "^r^7", null, DebugMode.FULL, (o) => { throw new Exception(o); }), determ.Substring("amount:".Length));
+                NumberTag amt = NumberTag.TryFor(determ.ToString().Substring("amount:".Length));
                 if (amt != null)
                 {
                     Amount = amt;
                 }
+                // TODO: else error?
             }
             else
             {
-                base.ApplyDetermination(determ, determLow, mode);
+                base.ApplyDetermination(determ, mode);
             }
         }
     }

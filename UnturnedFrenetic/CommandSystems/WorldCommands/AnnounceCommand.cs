@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Frenetic.CommandSystem;
-using Frenetic.TagHandlers;
-using Frenetic.TagHandlers.Objects;
+using FreneticScript.CommandSystem;
+using FreneticScript.TagHandlers;
+using FreneticScript.TagHandlers.Objects;
 using UnturnedFrenetic.TagSystems.TagObjects;
 using SDG.Unturned;
 using Steamworks;
@@ -20,6 +20,8 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
         // @Updated 2015/12/31
         // @Authors Morphan1
         // @Group World
+        // @Minimum 2
+        // @Maximum 3
         // @Description
         // This sends a chat message to all online players, in a specified color.
         // The default value for the 'mode' parameter is SAY.
@@ -35,34 +37,35 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
             Name = "announce";
             Arguments = "<color> <message> [mode]";
             Description = "Announces a message to all players (in chat).";
+            MinimumArguments = 2;
+            MaximumArguments = 3;
         }
 
-        public override void Execute(CommandEntry entry)
+        public override void Execute(CommandQueue queue, CommandEntry entry)
         {
             if (entry.Arguments.Count < 2)
             {
-                ShowUsage(entry);
+                ShowUsage(queue, entry);
                 return;
             }
-            TemplateObject tcolor = entry.GetArgumentObject(0);
-            // TODO: better way to get a tagdata
-            ColorTag color = ColorTag.For(new TagData(entry.Command.CommandSystem.TagSystem, (List<TagBit>)null, null, null, DebugMode.FULL, (o) => { throw new Exception(o); }), tcolor);
+            TemplateObject tcolor = entry.GetArgumentObject(queue, 0);
+            ColorTag color = ColorTag.For(tcolor);
             if (color == null)
             {
-                entry.Bad("Invalid color: " + TagParser.Escape(tcolor.ToString()));
+                queue.HandleError(entry, "Invalid color: " + TagParser.Escape(tcolor.ToString()));
                 return;
             }
-            string message = entry.GetArgument(1);
+            string message = entry.GetArgument(queue, 1);
             EChatMode chatMode = EChatMode.SAY;
             if (entry.Arguments.Count > 2)
             {
-                string mode = entry.GetArgument(2);
+                string mode = entry.GetArgument(queue, 2);
                 try
                 {
                     chatMode = (EChatMode)Enum.Parse(typeof(EChatMode), mode.ToUpper());
                 } catch (ArgumentException)
                 {
-                    entry.Bad("Invalid chat mode: " + mode);
+                    queue.HandleError(entry, "Invalid chat mode: " + mode);
                     return;
                 }
             }

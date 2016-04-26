@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnturnedFrenetic.TagSystems.TagObjects;
-using Frenetic;
-using Frenetic.CommandSystem;
-using Frenetic.TagHandlers;
-using Frenetic.TagHandlers.Objects;
+using FreneticScript;
+using FreneticScript.CommandSystem;
+using FreneticScript.TagHandlers;
+using FreneticScript.TagHandlers.Objects;
 using SDG.Unturned;
 
 namespace UnturnedFrenetic.EventSystems.PlayerEvents
@@ -137,44 +137,45 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         /// <param name="determ">What was determined.</param>
         /// <param name="determLow">A lowercase copy of the determination.</param>
         /// <param name="mode">What debugmode to use.</param>
-        public override void ApplyDetermination(string determ, string determLow, DebugMode mode)
+        public override void ApplyDetermination(TemplateObject determ, DebugMode mode)
         {
+            string determLow = determ.ToString().ToLowerFast();
             if (determLow.StartsWith("amount:"))
             {
-                // TODO: Clean this!
-                NumberTag amt = NumberTag.For(new TagData(System.TagSystem, (List<TagBit>)null, "^r^7", null, DebugMode.FULL, (o) => { throw new Exception(o); }), determ.Substring("amount:".Length));
+                NumberTag amt = NumberTag.TryFor(determ.ToString().Substring("amount:".Length));
                 if (amt != null)
                 {
                     Amount = amt;
                 }
+                // TODO: Else error?
             }
             else if (determLow.StartsWith("cause:"))
             {
                 try
                 {
-                    EDeathCause deathCause = (EDeathCause)Enum.Parse(typeof(EDeathCause), determ.Substring("cause:".Length).ToUpper());
+                    EDeathCause deathCause = (EDeathCause)Enum.Parse(typeof(EDeathCause), determ.ToString().Substring("cause:".Length).ToUpper());
                     Cause = new TextTag(deathCause.ToString());
                 }
                 catch (ArgumentException)
                 {
-                    System.Output.Bad("Unknown cause specified in '<{text_color.emphasis}>" + TagParser.Escape(determ) + "<{text_color.base}>'. Valid: BLEEDING, BONES, FREEZING, BURNING, FOOD, WATER, GUN, MELEE, ZOMBIE, ANIMAL, SUICIDE, KILL, INFECTION, PUNCH, BREATH, ROADKILL, VEHICLE, GRENADE, SHRED, LANDMINE.", mode);
+                    System.Output.Bad("Unknown cause specified in '<{text_color.emphasis}>" + TagParser.Escape(determ.ToString()) + "<{text_color.base}>'. Valid: BLEEDING, BONES, FREEZING, BURNING, FOOD, WATER, GUN, MELEE, ZOMBIE, ANIMAL, SUICIDE, KILL, INFECTION, PUNCH, BREATH, ROADKILL, VEHICLE, GRENADE, SHRED, LANDMINE.", mode);
                 }
             }
             else if (determLow.StartsWith("limb:"))
             {
                 try
                 {
-                    ELimb limb = (ELimb)Enum.Parse(typeof(ELimb), determ.Substring("limb:".Length).ToUpper());
+                    ELimb limb = (ELimb)Enum.Parse(typeof(ELimb), determ.ToString().Substring("limb:".Length).ToUpper());
                     Limb = new TextTag(limb.ToString());
                 }
                 catch (ArgumentException)
                 {
-                    System.Output.Bad("Unknown limb specified in '<{text_color.emphasis}>" + TagParser.Escape(determ) + "<{text_color.base}>'. Valid: LEFT_FOOT, LEFT_LEG, RIGHT_FOOT, RIGHT_LEG, LEFT_HAND, LEFT_ARM, RIGHT_HAND, RIGHT_ARM, LEFT_BACK, RIGHT_BACK, LEFT_FRONT, RIGHT_FRONT, SPINE, SKULL.", mode);
+                    System.Output.Bad("Unknown limb specified in '<{text_color.emphasis}>" + TagParser.Escape(determ.ToString()) + "<{text_color.base}>'. Valid: LEFT_FOOT, LEFT_LEG, RIGHT_FOOT, RIGHT_LEG, LEFT_HAND, LEFT_ARM, RIGHT_HAND, RIGHT_ARM, LEFT_BACK, RIGHT_BACK, LEFT_FRONT, RIGHT_FRONT, SPINE, SKULL.", mode);
                 }
             }
             else if (determLow.StartsWith("killer:"))
             {
-                PlayerTag killer = PlayerTag.For(determ.Substring("killer:".Length));
+                PlayerTag killer = PlayerTag.For(determ.ToString().Substring("killer:".Length));
                 if (killer != null)
                 {
                     Killer = killer;
@@ -182,7 +183,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             }
             else
             {
-                base.ApplyDetermination(determ, determLow, mode);
+                base.ApplyDetermination(determ, mode);
             }
         }
     }

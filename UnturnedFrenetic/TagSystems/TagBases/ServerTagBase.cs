@@ -1,5 +1,5 @@
-﻿using Frenetic.TagHandlers;
-using Frenetic.TagHandlers.Objects;
+﻿using FreneticScript.TagHandlers;
+using FreneticScript.TagHandlers.Objects;
 using SDG.Unturned;
 using Steamworks;
 using System;
@@ -27,11 +27,11 @@ namespace UnturnedFrenetic.TagSystems.TagBases
         public override TemplateObject Handle(TagData data)
         {
             data.Shrink();
-            if (data.Input.Count == 0)
+            if (data.Remaining == 0)
             {
                 return new TextTag(ToString());
             }
-            switch (data.Input[0])
+            switch (data[0])
             {
                 // <--[tag]
                 // @Name ServerTag.online_players

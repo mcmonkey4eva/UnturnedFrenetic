@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Frenetic;
-using Frenetic.CommandSystem;
-using Frenetic.TagHandlers;
+using FreneticScript;
+using FreneticScript.CommandSystem;
+using FreneticScript.TagHandlers;
 
 using System.IO;
 
@@ -14,17 +14,19 @@ namespace UnturnedFrenetic.CommandSystems
     {
         public UnturnedFreneticMod TheMod;
 
+        public Commands Syst;
+
         public override void Bad(string tagged_text, DebugMode mode)
         {
             if (mode <= DebugMode.MINIMAL)
             {
-                SysConsole.Output(OutputType.WARNING, TheMod.CommandSystem.System.TagSystem.ParseTagsFromText(tagged_text, "^r^3", null, mode, (o) => { throw new Exception(o); }));
+                SysConsole.Output(OutputType.WARNING, Syst.TagSystem.ParseTagsFromText(tagged_text, "^r^3", new Dictionary<string, TemplateObject>(), mode, (o) => { throw new Exception(o); }, true));
             }
         }
 
         public override void Good(string tagged_text, DebugMode mode)
         {
-            SysConsole.Output(OutputType.INFO, TheMod.CommandSystem.System.TagSystem.ParseTagsFromText(tagged_text, "^r^2", null, mode, (o) => { throw new Exception(o); }));
+            SysConsole.Output(OutputType.INFO, Syst.TagSystem.ParseTagsFromText(tagged_text, "^r^2", new Dictionary<string, TemplateObject>(), mode, (o) => { throw new Exception(o); }, true));
         }
 
         public override string ReadTextFile(string name)
@@ -34,7 +36,7 @@ namespace UnturnedFrenetic.CommandSystems
 
         public override void UnknownCommand(CommandQueue queue, string basecommand, string[] arguments)
         {
-            Bad("Invalid command: " + TagParser.Escape(basecommand) + "!", queue.Debug);
+            Bad("Invalid command: " + TagParser.Escape(basecommand) + "!", queue.CommandStack.Count > 0 ? queue.CommandStack.Peek().Debug : DebugMode.FULL);
         }
 
         public override void WriteLine(string text)

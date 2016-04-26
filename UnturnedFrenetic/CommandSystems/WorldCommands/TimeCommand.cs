@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Frenetic;
-using Frenetic.CommandSystem;
+using FreneticScript;
+using FreneticScript.CommandSystem;
 
 namespace UnturnedFrenetic.CommandSystems.WorldCommands
 {
@@ -16,6 +16,8 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
         // @Updated 2015/11/28
         // @Authors mcmonkey
         // @Group World
+        // @Minimum 1
+        // @Maximum 1
         // @Description
         // This sets the world time to the specified unsigned integer value.
         // TODO: Explain more!
@@ -32,18 +34,23 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
             Name = "time";
             Arguments = "<time>";
             Description = "Changes the current in-game time.";
+            MinimumArguments = 1;
+            MaximumArguments = 1;
         }
 
-        public override void Execute(CommandEntry entry)
+        public override void Execute(CommandQueue queue, CommandEntry entry)
         {
             if (entry.Arguments.Count < 1)
             {
-                ShowUsage(entry);
+                ShowUsage(queue, entry);
                 return;
             }
-            uint ti = Utilities.StringToUInt(entry.GetArgument(0));
+            uint ti = Utilities.StringToUInt(entry.GetArgument(queue, 0));
             SDG.Unturned.LightingManager.time = ti;
-            entry.Good("World time set to " + ti + "!");
+            if (entry.ShouldShowGood(queue))
+            {
+                entry.Good(queue, "World time set to " + ti + "!");
+            }
         }
     }
 }

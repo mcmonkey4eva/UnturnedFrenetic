@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Frenetic.TagHandlers;
-using Frenetic.TagHandlers.Objects;
+using FreneticScript.TagHandlers;
+using FreneticScript.TagHandlers.Objects;
 using SDG.Unturned;
 using Steamworks;
 
@@ -60,11 +60,11 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 
         public override TemplateObject Handle(TagData data)
         {
-            if (data.Input.Count == 0)
+            if (data.Remaining == 0)
             {
                 return this;
             }
-            switch (data.Input[0])
+            switch (data[0])
             {
                 // <--[tag]
                 // @Name OfflinePlayerTag.steam_id
