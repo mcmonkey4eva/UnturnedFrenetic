@@ -15,6 +15,15 @@ namespace UnturnedFreneticInjector.Injectables
             TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
             MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "PlayerDamaged", 6));
             TypeDefinition lifetype = gamedef.GetType("SDG.Unturned.PlayerLife");
+            FieldDefinition bleedingField = GetField(lifetype, "_isBleeding");
+            bleedingField.IsPrivate = false;
+            bleedingField.IsPublic = true;
+            FieldDefinition lastBleeding = GetField(lifetype, "lastBleeding");
+            lastBleeding.IsPrivate = false;
+            lastBleeding.IsPublic = true;
+            FieldDefinition lastBleed = GetField(lifetype, "lastBleed");
+            lastBleed.IsPrivate = false;
+            lastBleed.IsPublic = true;
             MethodDefinition damagemethod = GetMethod(lifetype, "askDamage", 6);
             MethodBody damagebody = damagemethod.Body;
             InjectInstructions(damagebody, 0, new Instruction[]
