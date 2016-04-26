@@ -18,6 +18,7 @@ namespace UnturnedFrenetic.EventSystems
             system.RegisterEvent(new PlayerDamagedScriptEvent(system));
             system.RegisterEvent(new PlayerDeathScriptEvent(system));
             system.RegisterEvent(new PlayerDisconnectedScriptEvent(system));
+            system.RegisterEvent(new PlayerShootScriptEvent(system));
         }
 
         public static FreneticEventHandler<PlayerChatEventArgs> OnPlayerChat = new FreneticEventHandler<PlayerChatEventArgs>();

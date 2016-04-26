@@ -16,22 +16,30 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
     {
         // <--[command]
         // @Name heal
-        // @Arguments <entity> <amount>
+        // @Arguments <entity> <amount> [bleeding] [broken]
         // @Short Heals an entity by a specified amount.
         // @Updated 2016/04/25
         // @Authors Morphan1
         // @Group Entity
         // @Description
         // This heals an entity a certain amount. Must be a positive number.
+        // You may also specify boolean values to determine whether you stop
+        // their bleeding or heal their bones.
         // TODO: Explain more!
         // @Example
         // // This heals the entity with ID 1 by 10.
         // heal 1 10;
+        // @Example
+        // // This heals the player to full health and stops their bleeding.
+        // heal <{player}> 100 true
+        // @Example
+        // // This heals the player by 1 and fixes their bones.
+        // heal <{player}> 1 false true
         // -->
         public HealCommand()
         {
             Name = "heal";
-            Arguments = "<entity> <amount>";
+            Arguments = "<entity> <amount> [bleeding] [broken]";
             Description = "Heals an entity by a specified amount.";
         }
 
@@ -44,6 +52,16 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             }
             try
             {
+                BooleanTag broken = null;
+                BooleanTag bleeding = null;
+                if (entry.Arguments.Count > 2) // TODO: BooleanTag.TryFor?
+                {
+                    if (entry.Arguments.Count > 3)
+                    {
+                        broken = new BooleanTag(entry.GetArgument(3).Substring(0, 1) == "t");
+                    }
+                    bleeding = new BooleanTag(entry.GetArgument(2).Substring(0, 1) == "t");
+                }
                 NumberTag num = new NumberTag(Utilities.StringToInt(entry.GetArgument(1))); // TODO: NumberTag.TryFor
                 if (num.Internal < 0.0)
                 {
@@ -59,7 +77,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 PlayerTag player;
                 if (entity.TryGetPlayer(out player))
                 {
-                    player.Internal.player.life.askHeal((byte)num.Internal, false, false);
+                    player.Internal.player.life.askHeal((byte)num.Internal, bleeding != null && bleeding.Internal, broken != null && broken.Internal);
                     entry.Good("Successfully healed player " + TagParser.Escape(player.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
                     return;
                 }
