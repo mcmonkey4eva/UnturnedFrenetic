@@ -720,6 +720,11 @@
             The determinations ran on the lowest level of this queue.
             </summary>
         </member>
+        <member name="F:FreneticScript.CommandSystem.CommandQueue.LowestVariables">
+            <summary>
+            The variables that ran on the lowest level of this queue.
+            </summary>
+        </member>
         <member name="F:FreneticScript.CommandSystem.CommandQueue.WaitingOn">
             <summary>
             Whether this Queue is waiting on the last command.
@@ -864,10 +869,11 @@
             A random number generator.
             </summary>
         </member>
-        <member name="M:FreneticScript.CommandSystem.Commands.ExecuteScript(FreneticScript.CommandSystem.CommandScript,System.Collections.Generic.Dictionary{System.String,FreneticScript.TagHandlers.TemplateObject},FreneticScript.CommandSystem.CommandQueue@,FreneticScript.CommandSystem.DebugMode)">
+        <member name="M:FreneticScript.CommandSystem.Commands.ExecuteScript(FreneticScript.CommandSystem.CommandScript,System.Collections.Generic.Dictionary{System.String,FreneticScript.TagHandlers.TemplateObject}@,FreneticScript.CommandSystem.CommandQueue@,FreneticScript.CommandSystem.DebugMode)">
             <summary>
             Executes a command script.
             Returns the determined value(s).
+            TODO: Out variables?
             </summary>
             <param name="script">The script to execute.</param>
             <param name="Variables">What variables to add to the commandqueue.</param>
@@ -1523,6 +1529,12 @@
             <summary>
             Quickly sorts the event handlers.
             </summary>
+        </member>
+        <member name="M:FreneticScript.CommandSystem.ScriptEvent.UpdateVariables(System.Collections.Generic.Dictionary{System.String,FreneticScript.TagHandlers.TemplateObject})">
+            <summary>
+            Update all variables from a ran script onto the event itself.
+            </summary>
+            <param name="vars">The vars to update.</param>
         </member>
         <member name="M:FreneticScript.CommandSystem.ScriptEvent.Call(System.Int32)">
             <summary>

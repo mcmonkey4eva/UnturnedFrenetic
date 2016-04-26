@@ -121,40 +121,11 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             return vars;
         }
 
-        /// <summary>
-        /// Applies a determination string to the event.
-        /// </summary>
-        /// <param name="determ">What was determined.</param>
-        /// <param name="mode">What debugmode to use.</param>
-        public override void ApplyDetermination(TemplateObject determ, DebugMode mode)
+        public override void UpdateVariables(Dictionary<string, TemplateObject> vars)
         {
-            string determLow = determ.ToString().ToLowerFast();
-            if (determLow.StartsWith("color:"))
-            {
-                string tcolor = determ.ToString().Substring("color:".Length);
-                // TODO: better way to get a tagdata
-                Color = ColorTag.For(tcolor);
-            }
-            else if (determLow.StartsWith("text:"))
-            {
-                Text = new TextTag(determ.ToString().Substring("text:".Length));
-            }
-            else if (determLow.StartsWith("chat_mode:"))
-            {
-                try
-                {
-                    EChatMode chatmode = (EChatMode)Enum.Parse(typeof(EChatMode), determ.ToString().Substring("chat_mode:".Length).ToUpper());
-                    ChatMode = new TextTag(chatmode.ToString());
-                }
-                catch (ArgumentException)
-                {
-                    System.Output.Bad("Unknown chat mode specified in '<{text_color.emphasis}>" + TagParser.Escape(determ.ToString()) + "<{text_color.base}>'. Valid: GLOBAL, GROUP, LOCAL, SAY, WELCOME.", mode);
-                }
-            }
-            else
-            {
-                base.ApplyDetermination(determ, mode);
-            }
+            Color = ColorTag.For(vars["color"]);
+            Text = new TextTag(vars["text"].ToString());
+            ChatMode = new TextTag(vars["chat_mode"].ToString());
         }
     }
 

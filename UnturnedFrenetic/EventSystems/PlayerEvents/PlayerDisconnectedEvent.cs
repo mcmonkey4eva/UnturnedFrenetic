@@ -85,16 +85,6 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             vars.Add("player", Player);
             return vars;
         }
-
-        /// <summary>
-        /// Applies a determination string to the event.
-        /// </summary>
-        /// <param name="determ">What was determined.</param>
-        /// <param name="mode">What debugmode to use.</param>
-        public override void ApplyDetermination(TemplateObject determ, DebugMode mode)
-        {
-            base.ApplyDetermination(determ, mode);
-        }
     }
 
     public class PlayerDisconnectedEventArgs : EventArgs

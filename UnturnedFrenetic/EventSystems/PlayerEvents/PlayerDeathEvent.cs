@@ -131,60 +131,13 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             return vars;
         }
 
-        /// <summary>
-        /// Applies a determination string to the event.
-        /// </summary>
-        /// <param name="determ">What was determined.</param>
-        /// <param name="determLow">A lowercase copy of the determination.</param>
-        /// <param name="mode">What debugmode to use.</param>
-        public override void ApplyDetermination(TemplateObject determ, DebugMode mode)
+        public override void UpdateVariables(Dictionary<string, TemplateObject> vars)
         {
-            string determLow = determ.ToString().ToLowerFast();
-            if (determLow.StartsWith("amount:"))
-            {
-                NumberTag amt = NumberTag.TryFor(determ.ToString().Substring("amount:".Length));
-                if (amt != null)
-                {
-                    Amount = amt;
-                }
-                // TODO: Else error?
-            }
-            else if (determLow.StartsWith("cause:"))
-            {
-                try
-                {
-                    EDeathCause deathCause = (EDeathCause)Enum.Parse(typeof(EDeathCause), determ.ToString().Substring("cause:".Length).ToUpper());
-                    Cause = new TextTag(deathCause.ToString());
-                }
-                catch (ArgumentException)
-                {
-                    System.Output.Bad("Unknown cause specified in '<{text_color.emphasis}>" + TagParser.Escape(determ.ToString()) + "<{text_color.base}>'. Valid: BLEEDING, BONES, FREEZING, BURNING, FOOD, WATER, GUN, MELEE, ZOMBIE, ANIMAL, SUICIDE, KILL, INFECTION, PUNCH, BREATH, ROADKILL, VEHICLE, GRENADE, SHRED, LANDMINE.", mode);
-                }
-            }
-            else if (determLow.StartsWith("limb:"))
-            {
-                try
-                {
-                    ELimb limb = (ELimb)Enum.Parse(typeof(ELimb), determ.ToString().Substring("limb:".Length).ToUpper());
-                    Limb = new TextTag(limb.ToString());
-                }
-                catch (ArgumentException)
-                {
-                    System.Output.Bad("Unknown limb specified in '<{text_color.emphasis}>" + TagParser.Escape(determ.ToString()) + "<{text_color.base}>'. Valid: LEFT_FOOT, LEFT_LEG, RIGHT_FOOT, RIGHT_LEG, LEFT_HAND, LEFT_ARM, RIGHT_HAND, RIGHT_ARM, LEFT_BACK, RIGHT_BACK, LEFT_FRONT, RIGHT_FRONT, SPINE, SKULL.", mode);
-                }
-            }
-            else if (determLow.StartsWith("killer:"))
-            {
-                PlayerTag killer = PlayerTag.For(determ.ToString().Substring("killer:".Length));
-                if (killer != null)
-                {
-                    Killer = killer;
-                }
-            }
-            else
-            {
-                base.ApplyDetermination(determ, mode);
-            }
+            Amount = NumberTag.TryFor(vars["amount"]);
+            // TODO: Verify amount is valid?
+            Cause = new TextTag(vars["cause"].ToString());
+            Limb = new TextTag(vars["limb"].ToString());
+            Killer = PlayerTag.For(vars["killer"].ToString()); // TODO: Scrap ToString here
         }
     }
 
