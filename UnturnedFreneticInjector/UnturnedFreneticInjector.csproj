@@ -60,6 +60,7 @@
     <Compile Include="Injectables\PlayerDamagedEventInjectable.cs" />
     <Compile Include="Injectables\PlayerChatEventInjectable.cs" />
     <Compile Include="Injectables\PlayerConnectingEventInjectable.cs" />
+    <Compile Include="Injectables\PlayerShootEventInjectable.cs" />
     <Compile Include="Injectables\StartTheModInjectable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

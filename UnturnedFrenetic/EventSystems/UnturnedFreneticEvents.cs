@@ -31,5 +31,7 @@ namespace UnturnedFrenetic.EventSystems
         public static FreneticEventHandler<PlayerDeathEventArgs> OnPlayerDeath = new FreneticEventHandler<PlayerDeathEventArgs>();
 
         public static FreneticEventHandler<PlayerDisconnectedEventArgs> OnPlayerDisconnected = new FreneticEventHandler<PlayerDisconnectedEventArgs>();
+
+        public static FreneticEventHandler<PlayerShootEventArgs> OnPlayerShoot = new FreneticEventHandler<PlayerShootEventArgs>();
     }
 }

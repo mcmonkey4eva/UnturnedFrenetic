@@ -104,6 +104,16 @@ namespace UnturnedFrenetic
             return evt.Cancelled;
         }
 
+        public static bool PlayerShoot(Player player, UseableGun gun)
+        {
+            PlayerShootEventArgs evt = new PlayerShootEventArgs();
+            evt.Player = new PlayerTag(player.channel.owner);
+            // TODO: make GunTag/WeaponTag/EquipmentTag/WhateverTag to store this more accurately?
+            evt.Gun = new ItemAssetTag(player.equipment.asset);
+            UnturnedFreneticEvents.OnPlayerShoot.Fire(evt);
+            return evt.Cancelled;
+        }
+
         public static long cID = 1;
         
         public void Tick(float delta)
