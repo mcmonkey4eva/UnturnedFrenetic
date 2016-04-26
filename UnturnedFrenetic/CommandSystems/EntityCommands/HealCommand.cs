@@ -26,7 +26,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // TODO: Explain more!
         // @Example
         // // This heals the entity with ID 1 by 10.
-        // launch 1 10;
+        // heal 1 10;
         // -->
         public HealCommand()
         {
@@ -133,7 +133,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             }
             catch (Exception ex)
             {
-                entry.Bad("Failed to launch entity: " + ex.ToString());
+                entry.Bad("Failed to heal entity: " + ex.ToString());
             }
         }
     }
