@@ -157,6 +157,7 @@ namespace UnturnedFrenetic
             Provider.onEnemyConnected += (player) => UnturnedFreneticEvents.OnPlayerConnected.Fire(new PlayerConnectedEventArgs() { Player = new PlayerTag(player) });
             Provider.onEnemyDisconnected += (player) => UnturnedFreneticEvents.OnPlayerDisconnected.Fire(new PlayerDisconnectedEventArgs() { Player = new PlayerTag(player) });
             Level.onPostLevelLoaded += (o) => EnableForLevel();
+            AutorunScripts();
         }
     }
 }
