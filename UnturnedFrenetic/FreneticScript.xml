@@ -540,13 +540,6 @@
             Get all variables according the script event's current values.
             </summary>
         </member>
-        <member name="M:FreneticScript.CommandSystem.CommandEvents.ScriptRanPreScriptEvent.ApplyDetermination(FreneticScript.TagHandlers.TemplateObject,FreneticScript.CommandSystem.DebugMode)">
-            <summary>
-            Applies a determination object to the event.
-            </summary>
-            <param name="determ">What was determined.</param>
-            <param name="mode">What debugmode to use.</param>
-        </member>
         <member name="T:FreneticScript.CommandSystem.CommandEvents.ScriptRanPostScriptEvent">
             <summary>
             ScriptRanPostEvent, called by the run command.
@@ -588,13 +581,6 @@
             Get all variables according the script event's current values.
             </summary>
         </member>
-        <member name="M:FreneticScript.CommandSystem.CommandEvents.ScriptRanPostScriptEvent.ApplyDetermination(FreneticScript.TagHandlers.TemplateObject,FreneticScript.CommandSystem.DebugMode)">
-            <summary>
-            Applies a determination object to the event.
-            </summary>
-            <param name="determ">What was determined.</param>
-            <param name="mode">What debugmode to use.</param>
-        </member>
         <member name="T:FreneticScript.CommandSystem.CommandEvents.ScriptRanScriptEvent">
             <summary>
             ScriptRanPreEvent, called by the run command.
@@ -635,13 +621,6 @@
             <summary>
             Get all variables according the script event's current values.
             </summary>
-        </member>
-        <member name="M:FreneticScript.CommandSystem.CommandEvents.ScriptRanScriptEvent.ApplyDetermination(FreneticScript.TagHandlers.TemplateObject,FreneticScript.CommandSystem.DebugMode)">
-            <summary>
-            Applies a determination object to the event.
-            </summary>
-            <param name="determ">What was determined.</param>
-            <param name="mode">What debugmode to use.</param>
         </member>
         <member name="T:FreneticScript.CommandSystem.CommandQueue">
             <summary>
@@ -713,11 +692,6 @@
             <summary>
             Recalculates and advances the command queue.
             <param name="Delta">The time that passed this tick.</param>
-            </summary>
-        </member>
-        <member name="F:FreneticScript.CommandSystem.CommandQueue.LastDeterminations">
-            <summary>
-            The determinations ran on the lowest level of this queue.
             </summary>
         </member>
         <member name="F:FreneticScript.CommandSystem.CommandQueue.LowestVariables">
@@ -1112,11 +1086,6 @@
             How much debug information this portion of the stack should show.
             </summary>
         </member>
-        <member name="F:FreneticScript.CommandSystem.CommandStackEntry.Determinations">
-            <summary>
-            What was returned by the determine command for this portion of the stack.
-            </summary>
-        </member>
         <member name="M:FreneticScript.CommandSystem.CommandStackEntry.Duplicate">
             <summary>
             Perfectly duplicates this stack entry.
@@ -1379,12 +1348,6 @@
             Do not edit.
             </summary>
         </member>
-        <member name="F:FreneticScript.CommandSystem.QueueCmds.ScriptRanPostEventArgs.Determinations">
-            <summary>
-            All determines of the script run.
-            Do not edit.
-            </summary>
-        </member>
         <member name="T:FreneticScript.CommandSystem.ErrorInducedException">
             <summary>
             Represents an exception induced by a script error. Should be ignored/re-thrown to let the error propogate up to the script level.
@@ -1540,13 +1503,6 @@
             <summary>
             Calls the event.
             </summary>
-        </member>
-        <member name="M:FreneticScript.CommandSystem.ScriptEvent.ApplyDetermination(FreneticScript.TagHandlers.TemplateObject,FreneticScript.CommandSystem.DebugMode)">
-            <summary>
-            Applies a determination object to the event.
-            </summary>
-            <param name="determ">What was determined.</param>
-            <param name="mode">What debugmode to use.</param>
         </member>
         <member name="M:FreneticScript.CommandSystem.ScriptEvent.GetVariables">
             <summary>

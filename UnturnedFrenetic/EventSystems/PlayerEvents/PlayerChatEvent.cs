@@ -126,6 +126,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             Color = ColorTag.For(vars["color"]);
             Text = new TextTag(vars["text"].ToString());
             ChatMode = new TextTag(vars["chat_mode"].ToString());
+            base.UpdateVariables(vars);
         }
     }
 

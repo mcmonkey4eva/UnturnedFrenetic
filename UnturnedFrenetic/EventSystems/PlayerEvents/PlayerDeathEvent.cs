@@ -138,6 +138,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             Cause = new TextTag(vars["cause"].ToString());
             Limb = new TextTag(vars["limb"].ToString());
             Killer = PlayerTag.For(vars["killer"].ToString()); // TODO: Scrap ToString here
+            base.UpdateVariables(vars);
         }
     }
 

@@ -104,7 +104,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         public override void UpdateVariables(Dictionary<string, TemplateObject> vars)
         {
             Amount = NumberTag.TryFor(vars["amount"]);
-            // TODO: Verify amount is valid?
+            base.UpdateVariables(vars);
         }
     }
 
