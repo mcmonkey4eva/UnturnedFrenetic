@@ -142,7 +142,7 @@ namespace UnturnedFrenetic
 
         public void AutorunScripts()
         {
-            string[] files = Directory.GetFiles(Environment.CurrentDirectory + "/data/scripts/server/", "*.cfg", SearchOption.AllDirectories);
+            string[] files = Directory.GetFiles(Environment.CurrentDirectory + "/scripts/", "*.cfg", SearchOption.AllDirectories);
             foreach (string file in files)
             {
                 string cmd = File.ReadAllText(file).Replace("\r", "").Replace("\0", "\\0");

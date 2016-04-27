@@ -12,7 +12,6 @@ A mod for Unturned; adds a full high-power script engine to allow dynamic moddin
 - 5. Use this new file to re-run the injector with.
 - 6. Copy the resultant patched file and replace the original Assembly file with it, in your Unturned directory.
 - 7. Launch your server :)
-- NOTE: This project heavily uses complicated internal code... if you can't figure out how to compile it from what's available in this repository, you probably shouldn't be editing the code.
 
 # Warnings
 
