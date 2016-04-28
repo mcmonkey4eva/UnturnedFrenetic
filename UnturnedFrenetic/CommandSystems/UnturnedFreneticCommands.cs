@@ -39,9 +39,11 @@ namespace UnturnedFrenetic.CommandSystems
                 System.RegisterCommand(new FoodCommand());
                 System.RegisterCommand(new GiveCommand());
                 System.RegisterCommand(new OxygenCommand());
+                System.RegisterCommand(new StaminaCommand());
                 System.RegisterCommand(new TakeCommand());
                 System.RegisterCommand(new TellCommand());
                 System.RegisterCommand(new VirusCommand());
+                System.RegisterCommand(new WarmthCommand());
                 System.RegisterCommand(new WaterCommand());
                 // World Commands
                 System.RegisterCommand(new AnnounceCommand());
