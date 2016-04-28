@@ -26,8 +26,6 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
     // @Var limb TextTag returns the specific limb that was damaged to kill the player. Can be: LEFT_FOOT, LEFT_LEG, RIGHT_FOOT, RIGHT_LEG, LEFT_HAND, LEFT_ARM, RIGHT_HAND, RIGHT_ARM, LEFT_BACK, RIGHT_BACK, LEFT_FRONT, RIGHT_FRONT, SPINE, SKULL.
     // @Var killer PlayerTag returns the player that killed this player, if any.
     // @Determination amount:<TextTag> sets the amount of damage to be done (possibly instead of dying).
-    // @Determination cause:<TextTag> changes the apparent reason the player is dying.
-    // @Determination killer:<PlayerTag> changes the apparent killer of the player.
     // -->
 
     /// <summary>
@@ -85,7 +83,6 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             evt.Call(prio);
             oevt.Amount = evt.Amount;
             oevt.Cause = evt.Cause;
-            oevt.Killer = evt.Killer;
             oevt.Cancelled = evt.Cancelled;
         }
 
@@ -105,9 +102,9 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         public TextTag Cause;
 
         /// <summary>
-        /// The player killing this player, if any.
+        /// The entity killing this player, if any.
         /// </summary>
-        public PlayerTag Killer;
+        public TemplateObject Killer;
 
         /// <summary>
         /// The specific limb that was damaged.
@@ -135,9 +132,6 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         {
             Amount = NumberTag.TryFor(vars["amount"]);
             // TODO: Verify amount is valid?
-            Cause = new TextTag(vars["cause"].ToString());
-            Limb = new TextTag(vars["limb"].ToString());
-            Killer = PlayerTag.For(vars["killer"].ToString()); // TODO: Scrap ToString here
             base.UpdateVariables(vars);
         }
     }
@@ -148,7 +142,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         public NumberTag Amount;
         public TextTag Cause;
         public TextTag Limb;
-        public PlayerTag Killer;
+        public TemplateObject Killer;
 
         public bool Cancelled = false;
     }

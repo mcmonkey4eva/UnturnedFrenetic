@@ -75,6 +75,9 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             evt.Cancelled = oevt.Cancelled;
             evt.Player = oevt.Player;
             evt.Amount = oevt.Amount;
+            evt.Cause = oevt.Cause;
+            evt.Attacker = oevt.Attacker;
+            evt.Limb = oevt.Limb;
             evt.Call(prio);
             oevt.Amount = evt.Amount;
             oevt.Cancelled = evt.Cancelled;
@@ -91,6 +94,21 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         public NumberTag Amount;
 
         /// <summary>
+        /// The reason the player is being damaged.
+        /// </summary>
+        public TextTag Cause;
+
+        /// <summary>
+        /// The entity attacking this player, if any.
+        /// </summary>
+        public TemplateObject Attacker;
+
+        /// <summary>
+        /// The specific limb that was damaged.
+        /// </summary>
+        public TextTag Limb;
+
+        /// <summary>
         /// Get all variables according the script event's current values.
         /// </summary>
         public override Dictionary<string, TemplateObject> GetVariables()
@@ -98,6 +116,9 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             Dictionary<string, TemplateObject> vars = base.GetVariables();
             vars.Add("player", Player);
             vars.Add("amount", Amount);
+            vars.Add("cause", Cause);
+            vars.Add("limb", Limb);
+            vars.Add("attacker", Attacker);
             return vars;
         }
 
@@ -112,6 +133,9 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
     {
         public PlayerTag Player;
         public NumberTag Amount;
+        public TextTag Cause;
+        public TextTag Limb;
+        public TemplateObject Attacker;
 
         public bool Cancelled = false;
     }

@@ -12,6 +12,7 @@ using UnityEngine;
 using FreneticScript.TagHandlers.Objects;
 using FreneticScript.CommandSystem;
 using Steamworks;
+using FreneticScript.TagHandlers;
 
 namespace UnturnedFrenetic
 {
@@ -78,8 +79,28 @@ namespace UnturnedFrenetic
             return evt.Cancelled;
         }
 
-        public static bool PlayerDamaged(Player player, ref byte amount, ref Vector3 ragdoll, ref EDeathCause deathCause, ref ELimb limb, ref CSteamID killer)
+        public static bool PlayerDamaged(Player player, ref byte amount, ref Vector3 ragdoll, ref EDeathCause deathCause, ref ELimb limb, CSteamID killer, object attacker)
         {
+            TemplateObject attackerTag = null;
+            if (killer != null && killer != CSteamID.Nil && killer != Provider.server)
+            {
+                SteamPlayer steamkiller = PlayerTool.getSteamPlayer(killer);
+                if (steamkiller != null)
+                {
+                    attackerTag = new PlayerTag(steamkiller);
+                }
+            }
+            else if (attacker != null)
+            {
+                if (attacker is Animal)
+                {
+                    attackerTag = new AnimalTag((Animal)attacker);
+                }
+                else if (attacker is Zombie)
+                {
+                    attackerTag = new ZombieTag((Zombie)attacker);
+                }
+            }
             if (amount >= player.life.health)
             {
                 PlayerDeathEventArgs deathevt = new PlayerDeathEventArgs();
@@ -87,18 +108,15 @@ namespace UnturnedFrenetic
                 deathevt.Amount = new NumberTag(amount);
                 deathevt.Cause = new TextTag(deathCause.ToString());
                 deathevt.Limb = new TextTag(limb.ToString());
-                SteamPlayer steamkiller = PlayerTool.getSteamPlayer(killer);
-                deathevt.Killer = steamkiller != null ? new PlayerTag(steamkiller) : null;
+                deathevt.Killer = attackerTag;
                 UnturnedFreneticEvents.OnPlayerDeath.Fire(deathevt);
                 amount = (byte)deathevt.Amount.Internal;
-                deathCause = (EDeathCause)Enum.Parse(typeof(EDeathCause), deathevt.Cause.ToString().ToUpper());
-                limb = (ELimb)Enum.Parse(typeof(ELimb), deathevt.Limb.ToString().ToUpper());
-                killer = deathevt.Killer != null ? deathevt.Killer.Internal.playerID.steamID : Provider.server;
                 return deathevt.Cancelled;
             }
             PlayerDamagedEventArgs evt = new PlayerDamagedEventArgs();
             evt.Player = new PlayerTag(player.channel.owner);
             evt.Amount = new NumberTag(amount);
+            evt.Attacker = attackerTag;
             UnturnedFreneticEvents.OnPlayerDamaged.Fire(evt);
             amount = (byte)evt.Amount.Internal;
             return evt.Cancelled;
