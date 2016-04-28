@@ -7,30 +7,30 @@ using FreneticScript.TagHandlers;
 
 namespace UnturnedFrenetic.CommandSystems.EntityCommands
 {
-    public class BleedingCommand : AbstractCommand
+    public class BrokenCommand : AbstractCommand
     {
         // <--[command]
-        // @Name bleeding
+        // @Name broken
         // @Arguments <player> <boolean>
-        // @Short Starts or stops a player's bleeding.
+        // @Short Breaks or mends a player's leg bones.
         // @Updated 2016/04/27
         // @Authors Morphan1
         // @Group Entity
         // @Minimum 2
         // @Maximum 2
         // @Description
-        // Specify a boolean value that when true makes a player
-        // bleed. When false, it stops their bleeding.
+        // Specify a boolean value that when true breaks a player's legs.
+        // When false, it fixes their broken legs.
         // TODO: Explain more!
         // @Example
-        // // This makes the player bleed.
-        // bleeding <{player}> true
+        // // This breaks the player's legs.
+        // broken <{var[player]}> true
         // -->
-        public BleedingCommand()
+        public BrokenCommand()
         {
-            Name = "bleeding";
+            Name = "broken";
             Arguments = "<player> <boolean>";
-            Description = "Starts or stops a player's bleeding.";
+            Description = "Breaks or mends a player's leg bones.";
             MinimumArguments = 2;
             MaximumArguments = 2;
         }
@@ -58,29 +58,30 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 }
                 bool value = boolean.Internal;
                 PlayerLife life = player.Internal.player.life;
-                if (life._isBleeding != value)
+                if (life.isBroken != value)
                 {
-                    life._isBleeding = value;
                     if (value)
                     {
-                        uint sim = life.player.input.simulation;
-                        life.lastBleeding = sim;
-                        life.lastBleed = sim;
+                        life.breakLegs();
                     }
-                    life.channel.send("tellBleeding", ESteamCall.OWNER, ESteamPacket.UPDATE_RELIABLE_BUFFER, new object[]
+                    else
                     {
-                        life.isBleeding
-                    });
-                    entry.Good(queue, "Successfully adjust the bleeding of player " + TagParser.Escape(player.ToString()) + " to " + TagParser.Escape(boolean.ToString()) + "!");
+                        life._isBroken = false;
+                        life.channel.send("tellBroken", ESteamCall.OWNER, ESteamPacket.UPDATE_RELIABLE_BUFFER, new object[]
+                        {
+                            life._isBroken
+                        });
+                    }
+                    entry.Good(queue, "Successfully adjust the broken legs of player " + TagParser.Escape(player.ToString()) + " to " + TagParser.Escape(boolean.ToString()) + "!");
                 }
                 else
                 {
-                    entry.Good(queue, "Player " + TagParser.Escape(player.ToString()) + " already has their bleeding set to " + TagParser.Escape(boolean.ToString()) + "!");
+                    entry.Good(queue, "Player " + TagParser.Escape(player.ToString()) + " already has their broken legs set to " + TagParser.Escape(boolean.ToString()) + "!");
                 }
             }
             catch (Exception ex)
             {
-                queue.HandleError(entry, "Failed to adjust player's bleeding state: " + ex.ToString());
+                queue.HandleError(entry, "Failed to adjust player's broken legs: " + ex.ToString());
             }
         }
     }
