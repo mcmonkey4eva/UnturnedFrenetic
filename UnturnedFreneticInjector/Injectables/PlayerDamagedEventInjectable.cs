@@ -12,8 +12,6 @@ namespace UnturnedFreneticInjector.Injectables
         public override void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef)
         {
             // This injects a call to the mod's static PlayerDamaged method for the PlayerDamagedScriptEvent
-            TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
-            MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "PlayerDamaged", 7));
             TypeDefinition lifetype = gamedef.GetType("SDG.Unturned.PlayerLife");
             FieldDefinition healthField = GetField(lifetype, "_health");
             healthField.IsPrivate = false;
@@ -30,6 +28,8 @@ namespace UnturnedFreneticInjector.Injectables
             FieldDefinition brokenField = GetField(lifetype, "_isBroken");
             brokenField.IsPrivate = false;
             brokenField.IsPublic = true;
+            TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
+            MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "PlayerDamaged", 7));
             MethodDefinition damagemethod = GetMethod(lifetype, "askDamage", 6);
             ParameterDefinition objectParam = new ParameterDefinition("obj", ParameterAttributes.Optional, gamedef.ImportReference(typeof(object)));
             damagemethod.Parameters.Add(objectParam);
