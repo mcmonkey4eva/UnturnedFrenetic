@@ -136,7 +136,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 case "length_squared":
                     return new NumberTag(ToVector3().sqrMagnitude).Handle(data.Shrink());
                 // <--[tag]
-                // @Name LocationTag.find_animals_within[<TextTag>]
+                // @Name LocationTag.find_animals_within[<NumberTag>]
                 // @Group World
                 // @ReturnType ListTag<AnimalTag>
                 // @Returns a list of all animals within the specified range (spherical).
@@ -146,7 +146,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     {
                         List<TemplateObject> animals = new List<TemplateObject>();
                         Vector3 vec3 = ToVector3();
-                        float range = Utilities.StringToFloat(data.GetModifier(0));
+                        float range = (float)NumberTag.For(data, data.GetModifierObject(0)).Internal;
                         foreach (Animal animal in AnimalManager.animals)
                         {
                             if ((animal.transform.position - vec3).sqrMagnitude <= range * range)
@@ -157,7 +157,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         return new ListTag(animals).Handle(data.Shrink());
                     }
                 // <--[tag]
-                // @Name LocationTag.find_zombies_within[<TextTag>]
+                // @Name LocationTag.find_zombies_within[<NumberTag>]
                 // @Group World
                 // @ReturnType ListTag<ZombieTag>
                 // @Returns a list of all zombies within the specified range (spherical).
@@ -167,7 +167,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     {
                         List<TemplateObject> zombies = new List<TemplateObject>();
                         Vector3 vec3 = ToVector3();
-                        float range = Utilities.StringToFloat(data.GetModifier(0));
+                        float range = (float)NumberTag.For(data, data.GetModifierObject(0)).Internal;
                         for (int i = 0; i < ZombieManager.regions.Length; i++)
                         {
                             foreach (Zombie zombie in ZombieManager.regions[i].zombies)
@@ -181,7 +181,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         return new ListTag(zombies).Handle(data.Shrink());
                     }
                 // <--[tag]
-                // @Name LocationTag.find_items_within[<TextTag>]
+                // @Name LocationTag.find_items_within[<NumberTag>]
                 // @Group World
                 // @ReturnType ListTag<ItemTag>
                 // @Returns a list of all items within the specified range (spherical).
@@ -191,7 +191,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     {
                         List<TemplateObject> items = new List<TemplateObject>();
                         Vector3 vec3 = ToVector3();
-                        float range = Utilities.StringToFloat(data.GetModifier(0));
+                        float range = (float)NumberTag.For(data, data.GetModifierObject(0)).Internal;
                         for (byte x = 0; x < Regions.WORLD_SIZE; x++)
                         {
                             for (byte y = 0; y < Regions.WORLD_SIZE; y++)
@@ -209,7 +209,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         return new ListTag(items).Handle(data.Shrink());
                     }
                 // <--[tag]
-                // @Name LocationTag.find_resources_within[<TextTag>]
+                // @Name LocationTag.find_resources_within[<NumberTag>]
                 // @Group World
                 // @ReturnType ListTag<ResourceTag>
                 // @Returns a list of all resources within the specified range (spherical).
@@ -219,7 +219,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     {
                         List<TemplateObject> resources = new List<TemplateObject>();
                         Vector3 vec3 = ToVector3();
-                        float range = Utilities.StringToFloat(data.GetModifier(0));
+                        float range = (float)NumberTag.For(data, data.GetModifierObject(0)).Internal;
                         for (byte x = 0; x < Regions.WORLD_SIZE; x++)
                         {
                             for (byte y = 0; y < Regions.WORLD_SIZE; y++)
@@ -236,7 +236,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         return new ListTag(resources).Handle(data.Shrink());
                     }
                 // <--[tag]
-                // @Name LocationTag.find_vehicles_within[<TextTag>]
+                // @Name LocationTag.find_vehicles_within[<NumberTag>]
                 // @Group World
                 // @ReturnType ListTag<VehicleTag>
                 // @Returns a list of all vehicles within the specified range (spherical).
@@ -246,7 +246,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     {
                         List<TemplateObject> vehicles = new List<TemplateObject>();
                         Vector3 vec3 = ToVector3();
-                        float range = Utilities.StringToFloat(data.GetModifier(0));
+                        float range = (float)NumberTag.For(data, data.GetModifierObject(0)).Internal;
                         foreach (InteractableVehicle veh in VehicleManager.vehicles)
                         {
                             if ((veh.gameObject.transform.position - vec3).sqrMagnitude <= range * range)
@@ -257,7 +257,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         return new ListTag(vehicles).Handle(data.Shrink());
                     }
                 // <--[tag]
-                // @Name LocationTag.find_world_objects_within[<TextTag>]
+                // @Name LocationTag.find_world_objects_within[<NumberTag>]
                 // @Group World
                 // @ReturnType ListTag<WorldObjectTag>
                 // @Returns a list of all world objects within the specified range (spherical).
@@ -268,7 +268,8 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     {
                         // TODO: handle this better, it makes me sad
                         List<TemplateObject> worldObjects = new List<TemplateObject>();
-                        Collider[] hitColliders = Physics.OverlapSphere(ToVector3(), Utilities.StringToFloat(data.GetModifier(0)));
+                        float range = (float)NumberTag.For(data, data.GetModifierObject(0)).Internal;
+                        Collider[] hitColliders = Physics.OverlapSphere(ToVector3(), range);
                         List<int> ids = new List<int>();
                         foreach (Collider collider in hitColliders)
                         {
