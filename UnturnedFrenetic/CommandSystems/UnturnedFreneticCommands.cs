@@ -42,6 +42,7 @@ namespace UnturnedFrenetic.CommandSystems
                 System.RegisterCommand(new StaminaCommand());
                 System.RegisterCommand(new TakeCommand());
                 System.RegisterCommand(new TellCommand());
+                System.RegisterCommand(new UseItemCommand());
                 System.RegisterCommand(new VirusCommand());
                 System.RegisterCommand(new WarmthCommand());
                 System.RegisterCommand(new WaterCommand());
