@@ -52,6 +52,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandSystems\EntityCommands\BrokenCommand.cs" />
+    <Compile Include="CommandSystems\EntityCommands\BleedingCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\DamageCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\HealCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\LaunchCommand.cs" />

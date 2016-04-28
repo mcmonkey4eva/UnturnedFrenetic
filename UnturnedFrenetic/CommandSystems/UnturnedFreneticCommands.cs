@@ -28,6 +28,8 @@ namespace UnturnedFrenetic.CommandSystems
                 System.Output = output;
                 System.Init();
                 // Entity Commands
+                System.RegisterCommand(new BleedingCommand());
+                System.RegisterCommand(new BrokenCommand());
                 System.RegisterCommand(new DamageCommand());
                 System.RegisterCommand(new HealCommand());
                 System.RegisterCommand(new LaunchCommand());

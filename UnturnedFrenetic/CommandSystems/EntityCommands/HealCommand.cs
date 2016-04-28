@@ -16,35 +16,27 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
     {
         // <--[command]
         // @Name heal
-        // @Arguments <entity> <amount> [bleeding] [bones]
+        // @Arguments <entity> <amount>
         // @Short Heals an entity by a specified amount.
         // @Updated 2016/04/25
         // @Authors Morphan1
         // @Group Entity
         // @Minimum 2
-        // @Maximum 4
+        // @Maximum 2
         // @Description
         // This heals an entity a certain amount. Must be a positive number.
-        // You may also specify boolean values to determine whether you stop
-        // a player's bleeding or heal their bones.
         // TODO: Explain more!
         // @Example
         // // This heals the entity with ID 1 by 10.
         // heal 1 10;
-        // @Example
-        // // This heals the player to full health and stops their bleeding.
-        // heal <{player.iid}> 100 true
-        // @Example
-        // // This heals the player by 1 and fixes their bones.
-        // heal <{player.iid}> 1 false true
         // -->
         public HealCommand()
         {
             Name = "heal";
-            Arguments = "<entity> <amount> [bleeding] [bones]";
+            Arguments = "<entity> <amount>";
             Description = "Heals an entity by a specified amount.";
             MinimumArguments = 2;
-            MaximumArguments = 4;
+            MaximumArguments = 2;
         }
 
         public override void Execute(CommandQueue queue, CommandEntry entry)
@@ -56,16 +48,6 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             }
             try
             {
-                BooleanTag bones = null;
-                BooleanTag bleeding = null;
-                if (entry.Arguments.Count > 2) // TODO: Named arguments?
-                {
-                    if (entry.Arguments.Count > 3)
-                    {
-                        bones = BooleanTag.TryFor(entry.GetArgumentObject(queue, 3));
-                    }
-                    bleeding = BooleanTag.TryFor(entry.GetArgumentObject(queue, 2));
-                }
                 NumberTag num = NumberTag.TryFor(entry.GetArgumentObject(queue, 1));
                 if (num.Internal < 0.0)
                 {
@@ -81,7 +63,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 PlayerTag player;
                 if (entity.TryGetPlayer(out player))
                 {
-                    player.Internal.player.life.askHeal((byte)num.Internal, bleeding != null && bleeding.Internal, bones != null && bones.Internal);
+                    player.Internal.player.life.askHeal((byte)num.Internal, false, false);
                     if (entry.ShouldShowGood(queue))
                     {
                         entry.Good(queue, "Successfully healed player " + TagParser.Escape(player.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
