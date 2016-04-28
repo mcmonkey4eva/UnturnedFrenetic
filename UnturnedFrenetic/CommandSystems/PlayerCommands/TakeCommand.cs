@@ -18,7 +18,7 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
         // @Short Takes the specified item from the player.
         // @Updated 2015/12/07
         // @Authors Morphan1
-        // @Group World
+        // @Group Player
         // @Minimum 2
         // @Maximum 3
         // @Description

@@ -159,7 +159,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 }
                 queue.HandleError(entry, "That entity can't be healed!");
             }
-            catch (Exception ex)
+            catch (Exception ex) // TODO: Necessity?
             {
                 queue.HandleError(entry, ("Failed to heal entity: " + ex.ToString()));
             }

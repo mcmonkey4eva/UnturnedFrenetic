@@ -16,7 +16,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // @Short Starts or stops a player's bleeding.
         // @Updated 2016/04/27
         // @Authors Morphan1
-        // @Group Entity
+        // @Group Player
         // @Minimum 2
         // @Maximum 2
         // @Description
@@ -25,7 +25,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // TODO: Explain more!
         // @Example
         // // This makes the player bleed.
-        // bleeding <{var[player]}> true
+        // bleeding <{var[player]}> true;
         // -->
         public BleedingCommand()
         {
@@ -82,7 +82,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     entry.Good(queue, "Player " + TagParser.Escape(player.ToString()) + " already has their bleeding set to " + TagParser.Escape(boolean.ToString()) + "!");
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) // TODO: Necessity?
             {
                 queue.HandleError(entry, "Failed to adjust player's bleeding state: " + ex.ToString());
             }

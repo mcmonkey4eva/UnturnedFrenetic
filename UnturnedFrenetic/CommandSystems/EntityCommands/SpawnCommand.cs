@@ -249,12 +249,12 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 {
                     queue.HandleError(entry, "Invalid or unspawnable entity type!");
                 }
+                // TODO: Maybe add the spawned object as a var to the current commandqueue.
             }
-            catch (Exception ex)
+            catch (Exception ex) // TODO: Necessity?
             {
                 queue.HandleError(entry, "Failed to spawn entity: " + ex.ToString());
             }
-            // TODO: Maybe add the spawned object as a var to the current commandqueue.
         }
     }
 }

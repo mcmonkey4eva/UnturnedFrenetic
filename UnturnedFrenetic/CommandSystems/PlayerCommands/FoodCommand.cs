@@ -16,7 +16,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // @Short Adds to or takes from a player's food level.
         // @Updated 2016/04/27
         // @Authors Morphan1
-        // @Group Entity
+        // @Group Player
         // @Minimum 2
         // @Maximum 2
         // @Description
@@ -24,10 +24,10 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // TODO: Explain more!
         // @Example
         // // This makes the player starve a lot.
-        // food <{var[player]}> -50
+        // food <{var[player]}> -50;
         // @Example
         // // This feeds the player a little.
-        // food <{[context].[player]}> 25
+        // food <{[context].[player]}> 25;
         // -->
         public FoodCommand()
         {
@@ -74,7 +74,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 }
                 entry.Good(queue, "Successfully adjusted the food level of player " + TagParser.Escape(player.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
             }
-            catch (Exception ex)
+            catch (Exception ex) // TODO: Necessity?
             {
                 queue.HandleError(entry, "Failed to adjust player's food level: " + ex.ToString());
             }

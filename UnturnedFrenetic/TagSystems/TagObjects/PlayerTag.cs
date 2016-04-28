@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FreneticScript;
 using FreneticScript.TagHandlers;
 using FreneticScript.TagHandlers.Objects;
 using SDG.Unturned;
@@ -29,10 +30,11 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 
         static SteamPlayer GetSteamPlayer(string nameorid)
         {
-            string noilow = nameorid.ToLower();
+            string noilow = nameorid.ToLowerFast();
             for (int i = 0; i < Provider.clients.Count; i++)
             {
-                if (Provider.clients[i].playerID.playerName.ToLower() == noilow || Provider.clients[i].playerID.steamID.ToString() == noilow)
+                // TODO: What if playerName matches a steamID?
+                if (Provider.clients[i].playerID.playerName.ToLowerFast() == noilow || Provider.clients[i].playerID.steamID.ToString() == noilow)
                 {
                     return Provider.clients[i];
                 }
@@ -44,7 +46,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
         {
             if (name.StartsWith("e:")) // TODO: Better way to separate entities from steam IDs!
             {
-                EntityTag e = EntityTag.For(Utilities.StringToInt(name));
+                EntityTag e = EntityTag.For(Utilities.StringToInt(name)); // TODO: use number tag?
                 if (e == null)
                 {
                     return null;

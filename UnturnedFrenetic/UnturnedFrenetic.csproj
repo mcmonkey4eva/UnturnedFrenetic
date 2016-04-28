@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandSystems\PlayerCommands\StaminaCommand.cs" />
+    <Compile Include="CommandSystems\PlayerCommands\UseItemCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\WarmthCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\OxygenCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\VirusCommand.cs" />

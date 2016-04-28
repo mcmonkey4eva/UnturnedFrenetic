@@ -16,7 +16,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // @Short Breaks or mends a player's leg bones.
         // @Updated 2016/04/27
         // @Authors Morphan1
-        // @Group Entity
+        // @Group Player
         // @Minimum 2
         // @Maximum 2
         // @Description
@@ -25,7 +25,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // TODO: Explain more!
         // @Example
         // // This breaks the player's legs.
-        // broken <{var[player]}> true
+        // broken <{var[player]}> true;
         // -->
         public BrokenCommand()
         {
@@ -83,7 +83,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     entry.Good(queue, "Player " + TagParser.Escape(player.ToString()) + " already has their broken legs set to " + TagParser.Escape(boolean.ToString()) + "!");
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) // TODO: Necessity?
             {
                 queue.HandleError(entry, "Failed to adjust player's broken legs: " + ex.ToString());
             }

@@ -16,7 +16,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // @Short Adds to or takes from a player's stamina level.
         // @Updated 2016/04/27
         // @Authors Morphan1
-        // @Group Entity
+        // @Group Player
         // @Minimum 2
         // @Maximum 2
         // @Description
@@ -24,10 +24,10 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // TODO: Explain more!
         // @Example
         // // This increases the player's stamina level.
-        // stamina <{var[player]}> 20
+        // stamina <{var[player]}> 20;
         // @Example
         // // This takes stamina from the player.
-        // stamina <{[context].[player]}> -35
+        // stamina <{[context].[player]}> -35;
         // -->
         public StaminaCommand()
         {
@@ -74,7 +74,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 }
                 entry.Good(queue, "Successfully adjusted the stamina level of player " + TagParser.Escape(player.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
             }
-            catch (Exception ex)
+            catch (Exception ex) // TODO: Necessity?
             {
                 queue.HandleError(entry, "Failed to adjust player's stamina level: " + ex.ToString());
             }

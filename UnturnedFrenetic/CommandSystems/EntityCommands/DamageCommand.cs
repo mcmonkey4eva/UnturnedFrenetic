@@ -146,7 +146,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 }
                 queue.HandleError(entry, "That entity can't be damaged!");
             }
-            catch (Exception ex)
+            catch (Exception ex) // TODO: Necessity?
             {
                 queue.HandleError(entry, "Failed to damage entity: " + ex.ToString());
             }

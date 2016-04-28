@@ -62,7 +62,7 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
                 return;
             }
             EffectManager.sendEffect(effectType.Internal.id, EffectManager.INSANE, loc.ToVector3());
-            // TODO: radius option instead of always 512 units (INSANE)?
+            // TODO: radius option instead of always 512 units (INSANE)!
             if (entry.ShouldShowGood(queue))
             {
                 entry.Good(queue, "Played effect " + TagParser.Escape(effectType.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
