@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Injectable.cs" />
     <Compile Include="Injectables\AllHashesLegalInjectable.cs" />
+    <Compile Include="Injectables\ResourceDamagedEventInjectable.cs" />
     <Compile Include="Injectables\CommandDebugInjectable.cs" />
     <Compile Include="Injectables\ExposeAnimalFieldsInjectable.cs" />
     <Compile Include="Injectables\ExposeStructureManagerMethodsInjectable.cs" />

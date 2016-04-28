@@ -16,6 +16,8 @@ namespace UnturnedFrenetic.EventSystems
             // Entity Events
             system.RegisterEvent(new AnimalDamagedScriptEvent(system));
             system.RegisterEvent(new AnimalDeathScriptEvent(system));
+            system.RegisterEvent(new ResourceDamagedScriptEvent(system));
+            system.RegisterEvent(new ResourceDeathScriptEvent(system));
             system.RegisterEvent(new ZombieDamagedScriptEvent(system));
             system.RegisterEvent(new ZombieDeathScriptEvent(system));
 
@@ -46,6 +48,10 @@ namespace UnturnedFrenetic.EventSystems
         public static FreneticScriptEventHandler<PlayerDisconnectedEventArgs> OnPlayerDisconnected = new FreneticScriptEventHandler<PlayerDisconnectedEventArgs>();
 
         public static FreneticScriptEventHandler<PlayerShootEventArgs> OnPlayerShoot = new FreneticScriptEventHandler<PlayerShootEventArgs>();
+
+        public static FreneticScriptEventHandler<ResourceDamagedEventArgs> OnResourceDamaged = new FreneticScriptEventHandler<ResourceDamagedEventArgs>();
+
+        public static FreneticScriptEventHandler<ResourceDeathEventArgs> OnResourceDeath = new FreneticScriptEventHandler<ResourceDeathEventArgs>();
 
         public static FreneticScriptEventHandler<ZombieDamagedEventArgs> OnZombieDamaged = new FreneticScriptEventHandler<ZombieDamagedEventArgs>();
 

@@ -173,6 +173,26 @@ namespace UnturnedFrenetic
             return evt.Cancelled;
         }
 
+        public static bool ResourceDamaged(ResourceSpawnpoint resource, ref ushort amount)
+        {
+            // TODO: causes?
+            if (amount >= resource.health)
+            {
+                ResourceDeathEventArgs deathevt = new ResourceDeathEventArgs();
+                deathevt.Resource = new ResourceTag(resource);
+                deathevt.Amount = new NumberTag(amount);
+                UnturnedFreneticEvents.OnResourceDeath.Fire(deathevt);
+                amount = (ushort)deathevt.Amount.Internal;
+                return deathevt.Cancelled;
+            }
+            ResourceDamagedEventArgs evt = new ResourceDamagedEventArgs();
+            evt.Resource = new ResourceTag(resource);
+            evt.Amount = new NumberTag(amount);
+            UnturnedFreneticEvents.OnResourceDamaged.Fire(evt);
+            amount = (ushort)evt.Amount.Internal;
+            return evt.Cancelled;
+        }
+
         public static long cID = 1;
         
         public void Tick(float delta)
