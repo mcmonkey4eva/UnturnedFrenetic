@@ -19,7 +19,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
     // @Cancellable true
     // @Description
     // This event will fire before a player connects to the server.
-    // @Var player_name TextTag returns the player that is connecting. TODO: SteamID, etc.
+    // @Context player_name TextTag returns the player that is connecting. TODO: SteamID, etc.
     // -->
     /// <summary>
     /// PlayerConnectingScriptEvent, called by player connection.

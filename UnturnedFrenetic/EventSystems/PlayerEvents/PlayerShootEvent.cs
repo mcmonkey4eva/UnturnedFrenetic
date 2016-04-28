@@ -20,8 +20,8 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
     // @Cancellable true
     // @Description
     // This event will fire when a player shoots with a gun.
-    // @Var player PlayerTag returns the player that is shooting the gun.
-    // @Var gun ItemAssetTag returns the item of the gun.
+    // @Context player PlayerTag returns the player that is shooting the gun.
+    // @Context gun ItemAssetTag returns the item of the gun.
     // -->
 
     /// <summary>

@@ -18,7 +18,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
     // @Cancellable false
     // @Description
     // This event will fire after a player disconnects from the server.
-    // @Var player PlayerTag returns the player that disconnected.
+    // @Context player PlayerTag returns the player that disconnected.
     // -->
     /// <summary>
     /// PlayerDisconnectedScriptEvent, called by player disconnection.

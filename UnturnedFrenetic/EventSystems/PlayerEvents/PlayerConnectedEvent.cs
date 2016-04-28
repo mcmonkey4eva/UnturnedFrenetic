@@ -18,7 +18,7 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
     // @Cancellable false
     // @Description
     // This event will fire after a player connects to the server.
-    // @Var player PlayerTag returns the player that connected.
+    // @Context player PlayerTag returns the player that connected.
     // -->
     /// <summary>
     /// PlayerConnectedScriptEvent, called by player connection.

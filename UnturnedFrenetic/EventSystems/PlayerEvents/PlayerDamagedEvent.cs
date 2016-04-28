@@ -20,9 +20,11 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
     // @Cancellable true
     // @Description
     // This event will fire when a player takes any form of damage.
-    // @Var player PlayerTag returns the player that is being damaged.
-    // @Var amount TextTag returns the amount of damage being done.
-    // @Determination amount:<TextTag> sets the amount of damage to be done.
+    // @Context player PlayerTag returns the player that is being damaged.
+    // @Context amount TextTag returns the amount of damage being done. Editable.
+    // @Context cause TextTag returns the cause of the damage. Can be: BLEEDING, BONES, FREEZING, BURNING, FOOD, WATER, GUN, MELEE, ZOMBIE, ANIMAL, SUICIDE, KILL, INFECTION, PUNCH, BREATH, ROADKILL, VEHICLE, GRENADE, SHRED, LANDMINE, ARENA.
+    // @Context attacker EntityTag returns the entity that attacked the player, if any.
+    // @Context limb TextTag returns the limb the player was hit in. Can be: LEFT_FOOT, LEFT_LEG, RIGHT_FOOT, RIGHT_LEG, LEFT_HAND, LEFT_ARM, RIGHT_HAND, RIGHT_ARM, LEFT_BACK, RIGHT_BACK, LEFT_FRONT, RIGHT_FRONT, SPINE, SKULL.
     // -->
 
     /// <summary>
@@ -118,7 +120,10 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             vars.Add("amount", Amount);
             vars.Add("cause", Cause);
             vars.Add("limb", Limb);
-            vars.Add("attacker", Attacker);
+            if (Attacker != null)
+            {
+                vars.Add("attacker", Attacker);
+            }
             return vars;
         }
 

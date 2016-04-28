@@ -20,13 +20,10 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
     // @Cancellable true
     // @Description
     // This event will fire when a player sends a chat message.
-    // @Var player PlayerTag returns the player that is chatting.
-    // @Var chat_mode TextTag returns the mode the player is chatting in. Can be: GLOBAL, GROUP, LOCAL, SAY, WELCOME.
-    // @Var text TextTag returns the text contents of the chat message.
-    // @Var color ColorTag returns the color of the chat message.
-    // @Determination chat_mode:<TextTag> sets the chat mode of the message. Valid: GLOBAL, GROUP, LOCAL, SAY, WELCOME.
-    // @Determination text:<TextTag> sets the text contents of the message.
-    // @Determination color:<ColorTag> sets the color message.
+    // @Context player PlayerTag returns the player that is chatting.
+    // @Context chat_mode TextTag returns the mode the player is chatting in. Editable. Can be: GLOBAL, GROUP, LOCAL, SAY, WELCOME.
+    // @Context text TextTag returns the text contents of the chat message. Editable.
+    // @Context color ColorTag returns the color of the chat message. Editable.
     // -->
 
     /// <summary>

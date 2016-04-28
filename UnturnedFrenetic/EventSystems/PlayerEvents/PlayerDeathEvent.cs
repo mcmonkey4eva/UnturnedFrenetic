@@ -20,12 +20,11 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
     // @Cancellable true
     // @Description
     // This event will fire when a player dies for any reason.
-    // @Var player PlayerTag returns the player that is dying.
-    // @Var amount TextTag returns the amount of damage being done to kill the player.
-    // @Var cause TextTag returns the reason the player is dying. Can be: BLEEDING, BONES, FREEZING, BURNING, FOOD, WATER, GUN, MELEE, ZOMBIE, ANIMAL, SUICIDE, KILL, INFECTION, PUNCH, BREATH, ROADKILL, VEHICLE, GRENADE, SHRED, LANDMINE.
-    // @Var limb TextTag returns the specific limb that was damaged to kill the player. Can be: LEFT_FOOT, LEFT_LEG, RIGHT_FOOT, RIGHT_LEG, LEFT_HAND, LEFT_ARM, RIGHT_HAND, RIGHT_ARM, LEFT_BACK, RIGHT_BACK, LEFT_FRONT, RIGHT_FRONT, SPINE, SKULL.
-    // @Var killer PlayerTag returns the player that killed this player, if any.
-    // @Determination amount:<TextTag> sets the amount of damage to be done (possibly instead of dying).
+    // @Context player PlayerTag returns the player that is dying.
+    // @Context amount TextTag returns the amount of damage being done to kill the player. Editable.
+    // @Context cause TextTag returns the reason the player is dying. Can be: BLEEDING, BONES, FREEZING, BURNING, FOOD, WATER, GUN, MELEE, ZOMBIE, ANIMAL, SUICIDE, KILL, INFECTION, PUNCH, BREATH, ROADKILL, VEHICLE, GRENADE, SHRED, LANDMINE, ARENA.
+    // @Context killer EntityTag returns the entity that killed this player, if any.
+    // @Context limb TextTag returns the specific limb that was damaged to kill the player. Can be: LEFT_FOOT, LEFT_LEG, RIGHT_FOOT, RIGHT_LEG, LEFT_HAND, LEFT_ARM, RIGHT_HAND, RIGHT_ARM, LEFT_BACK, RIGHT_BACK, LEFT_FRONT, RIGHT_FRONT, SPINE, SKULL.
     // -->
 
     /// <summary>
@@ -82,7 +81,6 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
             evt.Killer = oevt.Killer;
             evt.Call(prio);
             oevt.Amount = evt.Amount;
-            oevt.Cause = evt.Cause;
             oevt.Cancelled = evt.Cancelled;
         }
 
@@ -131,7 +129,6 @@ namespace UnturnedFrenetic.EventSystems.PlayerEvents
         public override void UpdateVariables(Dictionary<string, TemplateObject> vars)
         {
             Amount = NumberTag.TryFor(vars["amount"]);
-            // TODO: Verify amount is valid?
             base.UpdateVariables(vars);
         }
     }
