@@ -143,7 +143,7 @@ namespace UnturnedFrenetic
 
         public void EnableForLevel()
         {
-            UnityEngine.GameObject game = new UnityEngine.GameObject("UnturnedFreneticGameObject");
+            GameObject game = new GameObject("UnturnedFreneticGameObject");
             if (game.GetComponent<UnturnedFreneticTicker>() != null)
             {
                 return;
