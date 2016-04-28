@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FreneticScript.CommandSystem;
+using FreneticScript.TagHandlers.Objects;
 using SDG.Unturned;
 using UnturnedFrenetic.TagSystems.TagObjects;
 using FreneticScript.TagHandlers;
@@ -26,6 +27,9 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
         // @Example
         // // This adds a single carrot to mcmonkey's inventory.
         // give mcmonkey carrot;
+        // @Example
+        // // This adds five carrots to mcmonkey's inventory.
+        // give mcmonkey carrot 5;
         // -->
 
         public GiveCommand()
@@ -35,6 +39,15 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
             Description = "Gives a player the specified item.";
             MinimumArguments = 2;
             MaximumArguments = 3;
+            ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
+            {
+                (input) => input,
+                (input) => input,
+                (input) =>
+                {
+                    return NumberTag.TryFor(input);
+                }
+            };
         }
 
         public override void Execute(CommandQueue queue, CommandEntry entry)

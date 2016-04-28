@@ -11,7 +11,7 @@ namespace UnturnedFreneticInjector.Injectables
     {
         public override void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef)
         {
-            // This injects a call to the mod's static PlayerDamaged method for the PlayerDamagedScriptEvent
+            // This injects a call to the mod's static PlayerDamaged method for the PlayerDamagedScriptEvent, and exposes relevant fields.
             TypeDefinition lifetype = gamedef.GetType("SDG.Unturned.PlayerLife");
             FieldDefinition healthField = GetField(lifetype, "_health");
             healthField.IsPrivate = false;

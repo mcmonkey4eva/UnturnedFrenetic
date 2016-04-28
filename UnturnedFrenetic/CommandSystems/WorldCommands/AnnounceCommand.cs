@@ -39,6 +39,7 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
             Description = "Announces a message to all players (in chat).";
             MinimumArguments = 2;
             MaximumArguments = 3;
+            ObjectTypes = new List<Func<TemplateObject, TemplateObject>>(); // TODO: Some validate of data / types?
         }
 
         public override void Execute(CommandQueue queue, CommandEntry entry)

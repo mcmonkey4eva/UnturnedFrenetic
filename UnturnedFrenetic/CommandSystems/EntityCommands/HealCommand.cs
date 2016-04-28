@@ -37,6 +37,14 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             Description = "Heals an entity by a specified amount.";
             MinimumArguments = 2;
             MaximumArguments = 2;
+            ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
+            {
+                (input) => input,
+                (input) =>
+                {
+                    return NumberTag.TryFor(input);
+                }
+            };
         }
 
         public override void Execute(CommandQueue queue, CommandEntry entry)

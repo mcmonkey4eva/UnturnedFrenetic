@@ -5,8 +5,8 @@ using System.Text;
 using FreneticScript.CommandSystem;
 using SDG.Unturned;
 using UnturnedFrenetic.TagSystems.TagObjects;
+using FreneticScript;
 using FreneticScript.TagHandlers;
-using System.Reflection;
 using UnityEngine;
 using Steamworks;
 
@@ -37,6 +37,14 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             Description = "Spawns an entity at the location.";
             MinimumArguments = 2;
             MaximumArguments = 2;
+            ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
+            {
+                (input) => input, // TODO: Maybe validate entity type?
+                (input) =>
+                {
+                    return LocationTag.For(input);
+                }
+            };
         }
 
         public override void Execute(CommandQueue queue, CommandEntry entry)
@@ -49,7 +57,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     queue.HandleError(entry, "Invalid location!");
                     return;
                 }
-                string targetAssetType = entry.GetArgument(queue, 0).ToLower();
+                string targetAssetType = entry.GetArgument(queue, 0).ToLowerFast();
                 EntityType etype = EntityType.ValueOf(targetAssetType);
                 if (etype == null)
                 {

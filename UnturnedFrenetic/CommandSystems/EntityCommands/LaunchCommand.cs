@@ -37,6 +37,14 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             Description = "Launches an entity based on a vector.";
             MinimumArguments = 2;
             MaximumArguments = 2;
+            ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
+            {
+                (input) => input,
+                (input) =>
+                {
+                    return LocationTag.For(input);
+                }
+            };
         }
 
         public override void Execute(CommandQueue queue, CommandEntry entry)

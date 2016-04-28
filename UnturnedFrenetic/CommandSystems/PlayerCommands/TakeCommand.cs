@@ -6,6 +6,7 @@ using FreneticScript.CommandSystem;
 using SDG.Unturned;
 using UnturnedFrenetic.TagSystems.TagObjects;
 using FreneticScript.TagHandlers;
+using FreneticScript.TagHandlers.Objects;
 
 namespace UnturnedFrenetic.CommandSystems.PlayerCommands
 {
@@ -35,6 +36,15 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
             Description = "Takes the specified item from the player.";
             MinimumArguments = 2;
             MaximumArguments = 3;
+            ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
+            {
+                (input) => input,
+                (input) => input,
+                (input) =>
+                {
+                    return NumberTag.TryFor(input);
+                }
+            };
         }
 
         public override void Execute(CommandQueue queue, CommandEntry entry)

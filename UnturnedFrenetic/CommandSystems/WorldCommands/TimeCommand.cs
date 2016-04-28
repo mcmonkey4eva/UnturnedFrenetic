@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using FreneticScript;
 using FreneticScript.CommandSystem;
+using FreneticScript.TagHandlers;
+using FreneticScript.TagHandlers.Objects;
 
 namespace UnturnedFrenetic.CommandSystems.WorldCommands
 {
@@ -36,11 +38,20 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
             Description = "Changes the current in-game time.";
             MinimumArguments = 1;
             MaximumArguments = 1;
+            ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
+            {
+                (input) => input,
+                (input) =>
+                {
+                    return IntegerTag.TryFor(input);
+                }
+            };
         }
 
         public override void Execute(CommandQueue queue, CommandEntry entry)
         {
-            uint ti = Utilities.StringToUInt(entry.GetArgument(queue, 0));
+            IntegerTag itag = IntegerTag.TryFor(entry.GetArgumentObject(queue, 0));
+            uint ti = (uint)itag.Internal;
             SDG.Unturned.LightingManager.time = ti;
             if (entry.ShouldShowGood(queue))
             {

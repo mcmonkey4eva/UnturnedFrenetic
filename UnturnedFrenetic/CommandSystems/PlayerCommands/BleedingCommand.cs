@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FreneticScript.CommandSystem;
 using UnturnedFrenetic.TagSystems.TagObjects;
 using SDG.Unturned;
@@ -33,6 +34,14 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             Description = "Starts or stops a player's bleeding.";
             MinimumArguments = 2;
             MaximumArguments = 2;
+            ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
+            {
+                (input) => input,
+                (input) =>
+                {
+                    return BooleanTag.TryFor(input);
+                }
+            };
         }
 
         public override void Execute(CommandQueue queue, CommandEntry entry)

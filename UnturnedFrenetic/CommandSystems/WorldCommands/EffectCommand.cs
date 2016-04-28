@@ -36,6 +36,14 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
             Description = "Plays an effect at the specified location.";
             MinimumArguments = 2;
             MaximumArguments = 2;
+            ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
+            {
+                (input) => input, // TODO: Validate effect?
+                (input) =>
+                {
+                    return LocationTag.For(input);
+                }
+            };
         }
 
         public override void Execute(CommandQueue queue, CommandEntry entry)

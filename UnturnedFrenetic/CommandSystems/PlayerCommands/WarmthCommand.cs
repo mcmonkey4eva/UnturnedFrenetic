@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FreneticScript.CommandSystem;
 using UnturnedFrenetic.TagSystems.TagObjects;
 using SDG.Unturned;
@@ -35,6 +36,14 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             Description = "Adds to or takes from a player's warmth level.";
             MinimumArguments = 2;
             MaximumArguments = 2;
+            ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
+            {
+                (input) => input,
+                (input) =>
+                {
+                    return NumberTag.TryFor(input);
+                }
+            };
         }
 
         public override void Execute(CommandQueue queue, CommandEntry entry)

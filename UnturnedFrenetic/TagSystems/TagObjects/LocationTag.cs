@@ -32,10 +32,20 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             {
                 return null;
             }
+            // TODO: NumberTag.TryFor on each?
             return new LocationTag(Utilities.StringToFloat(inps[0].Trim()), Utilities.StringToFloat(inps[1].Trim()), Utilities.StringToFloat(inps[2].Trim()));
         }
 
-        public LocationTag(UnityEngine.Vector3 vec3)
+        public static LocationTag For(TemplateObject input)
+        {
+            if (input == null)
+            {
+                return null;
+            }
+            return (input is LocationTag) ? (LocationTag)input : For(input.ToString());
+        }
+
+        public LocationTag(Vector3 vec3)
             : this(vec3.x, vec3.y, vec3.z)
         {
         }
