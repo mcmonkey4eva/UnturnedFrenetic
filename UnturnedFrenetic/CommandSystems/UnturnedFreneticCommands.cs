@@ -38,6 +38,7 @@ namespace UnturnedFrenetic.CommandSystems
                 System.RegisterCommand(new BrokenCommand());
                 System.RegisterCommand(new FoodCommand());
                 System.RegisterCommand(new GiveCommand());
+                System.RegisterCommand(new OxygenCommand());
                 System.RegisterCommand(new TakeCommand());
                 System.RegisterCommand(new TellCommand());
                 System.RegisterCommand(new VirusCommand());

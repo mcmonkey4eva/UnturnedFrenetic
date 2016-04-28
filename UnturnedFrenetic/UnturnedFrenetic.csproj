@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandSystems\PlayerCommands\OxygenCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\VirusCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\WaterCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\FoodCommand.cs" />
