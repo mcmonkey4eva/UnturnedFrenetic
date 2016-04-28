@@ -133,6 +133,26 @@ namespace UnturnedFrenetic
             return evt.Cancelled;
         }
 
+        public static bool AnimalDamaged(Animal animal, ref byte amount, ref Vector3 ragdoll)
+        {
+            // TODO: causes?
+            if (amount >= animal.health)
+            {
+                AnimalDeathEventArgs deathevt = new AnimalDeathEventArgs();
+                deathevt.Animal = new AnimalTag(animal);
+                deathevt.Amount = new NumberTag(amount);
+                UnturnedFreneticEvents.OnAnimalDeath.Fire(deathevt);
+                amount = (byte)deathevt.Amount.Internal;
+                return deathevt.Cancelled;
+            }
+            AnimalDamagedEventArgs evt = new AnimalDamagedEventArgs();
+            evt.Animal = new AnimalTag(animal);
+            evt.Amount = new NumberTag(amount);
+            UnturnedFreneticEvents.OnAnimalDamaged.Fire(evt);
+            amount = (byte)evt.Amount.Internal;
+            return evt.Cancelled;
+        }
+
         public static bool ZombieDamaged(Zombie zombie, ref byte amount, ref Vector3 ragdoll)
         {
             // TODO: causes?

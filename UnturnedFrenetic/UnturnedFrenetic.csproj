@@ -75,6 +75,8 @@
     <Compile Include="CommandSystems\WorldCommands\AnnounceCommand.cs" />
     <Compile Include="CommandSystems\WorldCommands\TimeCommand.cs" />
     <Compile Include="EntityType.cs" />
+    <Compile Include="EventSystems\EntityEvents\AnimalDamagedEvent.cs" />
+    <Compile Include="EventSystems\EntityEvents\AnimalDeathEvent.cs" />
     <Compile Include="EventSystems\EntityEvents\ZombieDeathEvent.cs" />
     <Compile Include="EventSystems\EntityEvents\ZombieDamagedEvent.cs" />
     <Compile Include="EventSystems\PlayerEvents\PlayerShootEvent.cs" />
