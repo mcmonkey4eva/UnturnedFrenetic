@@ -7,32 +7,32 @@ using FreneticScript.TagHandlers;
 
 namespace UnturnedFrenetic.CommandSystems.EntityCommands
 {
-    public class FoodCommand : AbstractCommand
+    public class WaterCommand : AbstractCommand
     {
         // <--[command]
-        // @Name food
+        // @Name water
         // @Arguments <player> <amount>
-        // @Short Adds to or takes from a player's food level.
+        // @Short Adds to or takes from a player's water level.
         // @Updated 2016/04/27
         // @Authors Morphan1
         // @Group Entity
         // @Minimum 2
         // @Maximum 2
         // @Description
-        // Specify an amount to adjust the player's food level by.
+        // Specify an amount to adjust the player's water level by.
         // TODO: Explain more!
         // @Example
-        // // This makes the player starve a lot.
-        // food <{var[player]}> -50
+        // // This makes the player very thirsty.
+        // water <{var[player]}> -50
         // @Example
-        // // This feeds the player a little.
-        // food <{[context].[player]}> 25
+        // // This quenches some of the player's thirst.
+        // water <{[context].[player]}> 25
         // -->
-        public FoodCommand()
+        public WaterCommand()
         {
-            Name = "food";
+            Name = "water";
             Arguments = "<player> <amount>";
-            Description = "Adds to or takes from a player's food level.";
+            Description = "Adds to or takes from a player's water level.";
             MinimumArguments = 2;
             MaximumArguments = 2;
         }
@@ -57,17 +57,17 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 PlayerLife life = player.Internal.player.life;
                 if (amount >= 0)
                 {
-                    life.askEat((byte)amount);
+                    life.askDrink((byte)amount);
                 }
                 else
                 {
-                    life.askStarve((byte)-amount);
+                    life.askDehydrate((byte)-amount);
                 }
-                entry.Good(queue, "Successfully adjusted the food level of player " + TagParser.Escape(player.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                entry.Good(queue, "Successfully adjusted the water level of player " + TagParser.Escape(player.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
             }
             catch (Exception ex)
             {
-                queue.HandleError(entry, "Failed to adjust player's food level: " + ex.ToString());
+                queue.HandleError(entry, "Failed to adjust player's water level: " + ex.ToString());
             }
         }
     }

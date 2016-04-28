@@ -28,18 +28,19 @@ namespace UnturnedFrenetic.CommandSystems
                 System.Output = output;
                 System.Init();
                 // Entity Commands
-                System.RegisterCommand(new BleedingCommand());
-                System.RegisterCommand(new BrokenCommand());
                 System.RegisterCommand(new DamageCommand());
-                System.RegisterCommand(new FoodCommand());
                 System.RegisterCommand(new HealCommand());
                 System.RegisterCommand(new LaunchCommand());
                 System.RegisterCommand(new SpawnCommand());
                 System.RegisterCommand(new TeleportCommand());
                 // Player Commands
+                System.RegisterCommand(new BleedingCommand());
+                System.RegisterCommand(new BrokenCommand());
+                System.RegisterCommand(new FoodCommand());
                 System.RegisterCommand(new GiveCommand());
                 System.RegisterCommand(new TakeCommand());
                 System.RegisterCommand(new TellCommand());
+                System.RegisterCommand(new WaterCommand());
                 // World Commands
                 System.RegisterCommand(new AnnounceCommand());
                 System.RegisterCommand(new EffectCommand());

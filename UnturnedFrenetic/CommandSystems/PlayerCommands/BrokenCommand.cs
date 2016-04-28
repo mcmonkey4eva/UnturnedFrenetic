@@ -40,7 +40,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             try
             {
                 BooleanTag boolean = BooleanTag.TryFor(entry.GetArgumentObject(queue, 1));
-                if (boolean != null)
+                if (boolean == null)
                 {
                     queue.HandleError(entry, "Invalid boolean!");
                     return;
