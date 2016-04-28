@@ -262,7 +262,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @ReturnType ListTag<WorldObjectTag>
                 // @Returns a list of all world objects within the specified range (spherical).
                 // @Example "0,1,2" .find_world_objects_within[10] returns "2|3|17".
-                // @Note any overlap will count; the object's center does not need to be in the sphere.
+                // @Other Note that any overlap will count; the object's center does not need to be in the sphere.
                 // -->
                 case "find_world_objects_within":
                     {

@@ -68,7 +68,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
                 // @Group Server Information
                 // @ReturnType ListTag
                 // @Returns a list of all offline players.
-                // @Note This specifically excludes any online players.
+                // @Other This specifically excludes any online players.
                 // -->
                 case "offline_players":
                     {
