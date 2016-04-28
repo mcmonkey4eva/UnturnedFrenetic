@@ -5,6 +5,7 @@ using System.Text;
 using FreneticScript;
 using UnturnedFrenetic.EventSystems.PlayerEvents;
 using FreneticScript.CommandSystem;
+using UnturnedFrenetic.EventSystems.EntityEvents;
 
 namespace UnturnedFrenetic.EventSystems
 {
@@ -12,6 +13,11 @@ namespace UnturnedFrenetic.EventSystems
     {
         public static void RegisterAll(Commands system)
         {
+            // Entity Events
+            system.RegisterEvent(new ZombieDamagedScriptEvent(system));
+            system.RegisterEvent(new ZombieDeathScriptEvent(system));
+
+            // Player Events
             system.RegisterEvent(new PlayerChatScriptEvent(system));
             system.RegisterEvent(new PlayerConnectingScriptEvent(system));
             system.RegisterEvent(new PlayerConnectedScriptEvent(system));
@@ -34,5 +40,9 @@ namespace UnturnedFrenetic.EventSystems
         public static FreneticScriptEventHandler<PlayerDisconnectedEventArgs> OnPlayerDisconnected = new FreneticScriptEventHandler<PlayerDisconnectedEventArgs>();
 
         public static FreneticScriptEventHandler<PlayerShootEventArgs> OnPlayerShoot = new FreneticScriptEventHandler<PlayerShootEventArgs>();
+
+        public static FreneticScriptEventHandler<ZombieDamagedEventArgs> OnZombieDamaged = new FreneticScriptEventHandler<ZombieDamagedEventArgs>();
+
+        public static FreneticScriptEventHandler<ZombieDeathEventArgs> OnZombieDeath = new FreneticScriptEventHandler<ZombieDeathEventArgs>();
     }
 }

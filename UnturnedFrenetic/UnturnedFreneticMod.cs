@@ -13,6 +13,7 @@ using FreneticScript.TagHandlers.Objects;
 using FreneticScript.CommandSystem;
 using Steamworks;
 using FreneticScript.TagHandlers;
+using UnturnedFrenetic.EventSystems.EntityEvents;
 
 namespace UnturnedFrenetic
 {
@@ -129,6 +130,26 @@ namespace UnturnedFrenetic
             // TODO: make GunTag/WeaponTag/EquipmentTag/WhateverTag to store this more accurately?
             evt.Gun = new ItemAssetTag(player.equipment.asset);
             UnturnedFreneticEvents.OnPlayerShoot.Fire(evt);
+            return evt.Cancelled;
+        }
+
+        public static bool ZombieDamaged(Zombie zombie, ref byte amount, ref Vector3 ragdoll)
+        {
+            // TODO: causes?
+            if (amount >= zombie.health)
+            {
+                ZombieDeathEventArgs deathevt = new ZombieDeathEventArgs();
+                deathevt.Zombie = new ZombieTag(zombie);
+                deathevt.Amount = new NumberTag(amount);
+                UnturnedFreneticEvents.OnZombieDeath.Fire(deathevt);
+                amount = (byte)deathevt.Amount.Internal;
+                return deathevt.Cancelled;
+            }
+            ZombieDamagedEventArgs evt = new ZombieDamagedEventArgs();
+            evt.Zombie = new ZombieTag(zombie);
+            evt.Amount = new NumberTag(amount);
+            UnturnedFreneticEvents.OnZombieDamaged.Fire(evt);
+            amount = (byte)evt.Amount.Internal;
             return evt.Cancelled;
         }
 
