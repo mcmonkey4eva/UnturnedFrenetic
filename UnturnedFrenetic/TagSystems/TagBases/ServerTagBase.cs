@@ -34,6 +34,21 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             switch (data[0])
             {
                 // <--[tag]
+                // @Name ServerTag.item_assets
+                // @Group Server Information
+                // @ReturnType ListTag
+                // @Returns a list of all item assets in the game.
+                // -->
+                case "item_assets":
+                    {
+                        List<TemplateObject> items = new List<TemplateObject>();
+                        foreach (ItemAsset it in ItemAssetTag.Items)
+                        {
+                            items.Add(new ItemAssetTag(it));
+                        }
+                        return new ListTag(items).Handle(data.Shrink());
+                    }
+                // <--[tag]
                 // @Name ServerTag.online_players
                 // @Group Server Information
                 // @ReturnType ListTag
@@ -53,6 +68,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
                 // @Group Server Information
                 // @ReturnType ListTag
                 // @Returns a list of all offline players.
+                // @Note This specifically excludes any online players.
                 // -->
                 case "offline_players":
                     {
