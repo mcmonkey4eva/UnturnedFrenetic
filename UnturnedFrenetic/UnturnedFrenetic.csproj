@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandSystems\PlayerCommands\FoodCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\BrokenCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\BleedingCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\DamageCommand.cs" />

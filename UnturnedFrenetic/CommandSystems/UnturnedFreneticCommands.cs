@@ -31,6 +31,7 @@ namespace UnturnedFrenetic.CommandSystems
                 System.RegisterCommand(new BleedingCommand());
                 System.RegisterCommand(new BrokenCommand());
                 System.RegisterCommand(new DamageCommand());
+                System.RegisterCommand(new FoodCommand());
                 System.RegisterCommand(new HealCommand());
                 System.RegisterCommand(new LaunchCommand());
                 System.RegisterCommand(new SpawnCommand());

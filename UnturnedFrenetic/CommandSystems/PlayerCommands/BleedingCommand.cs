@@ -71,7 +71,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     {
                         life.isBleeding
                     });
-                    entry.Good(queue, "Successfully adjust the bleeding of player " + TagParser.Escape(player.ToString()) + " to " + TagParser.Escape(boolean.ToString()) + "!");
+                    entry.Good(queue, "Successfully adjusted the bleeding of player " + TagParser.Escape(player.ToString()) + " to " + TagParser.Escape(boolean.ToString()) + "!");
                 }
                 else
                 {

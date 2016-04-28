@@ -72,7 +72,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                             life._isBroken
                         });
                     }
-                    entry.Good(queue, "Successfully adjust the broken legs of player " + TagParser.Escape(player.ToString()) + " to " + TagParser.Escape(boolean.ToString()) + "!");
+                    entry.Good(queue, "Successfully adjusted the broken legs of player " + TagParser.Escape(player.ToString()) + " to " + TagParser.Escape(boolean.ToString()) + "!");
                 }
                 else
                 {
