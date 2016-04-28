@@ -40,11 +40,6 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
 
         public override void Execute(CommandQueue queue, CommandEntry entry)
         {
-            if (entry.Arguments.Count < 1)
-            {
-                ShowUsage(queue, entry);
-                return;
-            }
             uint ti = Utilities.StringToUInt(entry.GetArgument(queue, 0));
             SDG.Unturned.LightingManager.time = ti;
             if (entry.ShouldShowGood(queue))

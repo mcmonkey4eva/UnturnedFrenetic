@@ -40,11 +40,6 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
 
         public override void Execute(CommandQueue queue, CommandEntry entry)
         {
-            if (entry.Arguments.Count < 3)
-            {
-                ShowUsage(queue, entry);
-                return;
-            }
             ListTag players = ListTag.For(entry.GetArgument(queue, 0));
             TemplateObject tcolor = entry.GetArgumentObject(queue, 1);
             ColorTag color = ColorTag.For(tcolor);

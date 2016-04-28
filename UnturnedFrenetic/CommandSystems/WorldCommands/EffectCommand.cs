@@ -40,11 +40,6 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
 
         public override void Execute(CommandQueue queue, CommandEntry entry)
         {
-            if (entry.Arguments.Count < 2)
-            {
-                ShowUsage(queue, entry);
-                return;
-            }
             LocationTag loc = LocationTag.For(entry.GetArgument(queue, 1));
             if (loc == null)
             {

@@ -43,11 +43,6 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
 
         public override void Execute(CommandQueue queue, CommandEntry entry)
         {
-            if (entry.Arguments.Count < 2)
-            {
-                ShowUsage(queue, entry);
-                return;
-            }
             TemplateObject tcolor = entry.GetArgumentObject(queue, 0);
             ColorTag color = ColorTag.For(tcolor);
             if (color == null)
