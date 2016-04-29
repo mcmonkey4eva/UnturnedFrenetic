@@ -96,7 +96,7 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
                     player.Internal.player.equipment.useable.stopSecondary();
                 }
             }
-            //player.Internal.player.equipment.useable.tick();
+            player.Internal.player.equipment.useable.tick();
             player.Internal.player.equipment.useable.tock(player.Internal.player.input.clock);
             if (entry.ShouldShowGood(queue))
             {
