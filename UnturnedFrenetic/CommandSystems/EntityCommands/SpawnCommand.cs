@@ -29,6 +29,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // @Example
         // // This spawns a deer at the location (50, 50, 50).
         // spawn deer 50,50,50;
+        // @Var spawned <Dynamic> the entity spawned.
         // -->
         public SpawnCommand()
         {
@@ -51,6 +52,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         {
             try
             {
+                TemplateObject spawned = null;
                 LocationTag loc = LocationTag.For(entry.GetArgument(queue, 1));
                 if (loc == null)
                 {
@@ -111,6 +113,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     {
                         entry.Good(queue, "Successfully spawned a zombie at " + TagParser.Escape(loc.ToString()) + "! (WARNING: IT WILL BE INVISIBLE CURRENTLY - SEE THE COMPLAINTS FILE)");
                     }
+                    spawned = new ZombieTag(zombie);
                 }
                 else if (etype.Type == EntityAssetType.ANIMAL)
                 {
@@ -146,7 +149,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     {
                         entry.Good(queue, "Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "! (" + animal.gameObject.GetInstanceID() + ")");
                     }
-                    return;
+                    spawned = new AnimalTag(animal);
                 }
                 else if (etype.Type == EntityAssetType.VEHICLE)
                 {
@@ -168,6 +171,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     {
                         entry.Good(queue, "Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
                     }
+                    // TODO: Get the vehicle entity!
                 }
                 else if (etype.Type == EntityAssetType.WORLD_OBJECT)
                 {
@@ -180,6 +184,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     LevelObjects.addObject(loc.ToVector3(), Quaternion.identity, asset.Internal.id);
                     // TODO: Network!
                     entry.Good(queue, "Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) +"! (WARNING: IT WILL BE INVISIBLE CURRENTLY - SEE THE COMPLAINTS FILE)");
+                    // TODO: Get the world entity!
                 }
                 else if (etype.Type == EntityAssetType.ITEM)
                 {
@@ -211,6 +216,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                         {
                             entry.Good(queue, "Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
                         }
+                        // TODO: Get the item entity!
                     }
                     else
                     {
@@ -225,11 +231,13 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                         queue.HandleError(entry, "Invalid item barricade type!");
                         return;
                     }
-                    BarricadeManager.dropBarricade(new Barricade(asset.Internal.id), null, loc.ToVector3(), 0f, 0f, 0f, CSteamID.Nil.m_SteamID, CSteamID.Nil.m_SteamID);
+                    Barricade barric = new Barricade(asset.Internal.id);
+                    BarricadeManager.dropBarricade(barric, null, loc.ToVector3(), 0f, 0f, 0f, CSteamID.Nil.m_SteamID, CSteamID.Nil.m_SteamID);
                     if (entry.ShouldShowGood(queue))
                     {
                         entry.Good(queue, "Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
                     }
+                    // TODO: Get the game object!
                 }
                 else if (etype.Type == EntityAssetType.STRUCTURE)
                 {
@@ -244,12 +252,17 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     {
                         entry.Good(queue, "Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");
                     }
+                    // TODO: Get the game object!
                 }
                 else
                 {
                     queue.HandleError(entry, "Invalid or unspawnable entity type!");
+                    return;
                 }
-                // TODO: Maybe add the spawned object as a var to the current commandqueue.
+                if (spawned != null)
+                {
+                    queue.SetVariable("spawned", spawned);
+                }
             }
             catch (Exception ex) // TODO: Necessity?
             {
