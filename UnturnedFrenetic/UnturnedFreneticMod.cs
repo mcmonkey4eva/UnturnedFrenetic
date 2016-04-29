@@ -194,6 +194,26 @@ namespace UnturnedFrenetic
             return evt.Cancelled;
         }
 
+        public static bool BarricadeDamaged(Barricade barricade, ref ushort amount)
+        {
+            // TODO: causes?
+            if (amount >= barricade.health)
+            {
+                BarricadeDeathEventArgs deathevt = new BarricadeDeathEventArgs();
+                deathevt.Barricade = new BarricadeTag(barricade);
+                deathevt.Amount = new NumberTag(amount);
+                UnturnedFreneticEvents.OnBarricadeDeath.Fire(deathevt);
+                amount = (ushort)deathevt.Amount.Internal;
+                return deathevt.Cancelled;
+            }
+            BarricadeDamagedEventArgs evt = new BarricadeDamagedEventArgs();
+            evt.Barricade = new BarricadeTag(barricade);
+            evt.Amount = new NumberTag(amount);
+            UnturnedFreneticEvents.OnBarricadeDamaged.Fire(evt);
+            amount = (ushort)evt.Amount.Internal;
+            return evt.Cancelled;
+        }
+
         public static long cID = 1;
         
         public void Tick(float delta)

@@ -21,6 +21,26 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
         public Transform Internal;
         public BarricadeData InternalData;
 
+        public BarricadeTag(Barricade barricade)
+        {
+            for (byte x = 0; x < Regions.WORLD_SIZE; x++)
+            {
+                for (byte y = 0; y < Regions.WORLD_SIZE; y++)
+                {
+                    BarricadeRegion region = BarricadeManager.regions[x, y];
+                    for (int i = 0; i < region.barricades.Count; i++)
+                    {
+                        if (barricade == region.barricades[i].barricade)
+                        {
+                            Internal = region.models[i];
+                            InternalData = region.barricades[i];
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
         public BarricadeTag(Transform transform, BarricadeData data)
         {
             Internal = transform;

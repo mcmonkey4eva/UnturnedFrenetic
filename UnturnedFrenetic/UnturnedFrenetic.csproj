@@ -78,8 +78,10 @@
     <Compile Include="CommandSystems\WorldCommands\AnnounceCommand.cs" />
     <Compile Include="CommandSystems\WorldCommands\TimeCommand.cs" />
     <Compile Include="EntityType.cs" />
+    <Compile Include="EventSystems\EntityEvents\BarricadeDamagedEvent.cs" />
     <Compile Include="EventSystems\EntityEvents\ResourceDamagedEvent.cs" />
     <Compile Include="EventSystems\EntityEvents\AnimalDamagedEvent.cs" />
+    <Compile Include="EventSystems\EntityEvents\BarricadeDeathEvent.cs" />
     <Compile Include="EventSystems\EntityEvents\ResourceDeathEvent.cs" />
     <Compile Include="EventSystems\EntityEvents\AnimalDeathEvent.cs" />
     <Compile Include="EventSystems\EntityEvents\ZombieDeathEvent.cs" />
