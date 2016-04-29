@@ -122,20 +122,11 @@ namespace UnturnedFreneticInjector.Injectables
                     // Load "null" onto the stack.
                     Instruction.Create(OpCodes.Ldnull)
                 });
-
-            TypeDefinition animaltype = gamedef.GetType("SDG.Unturned.Animal");
-            MethodDefinition animalupdate = GetMethod(animaltype, "FixedUpdate", 0);
-            MethodBody animalupdatebody = animalupdate.Body;
-            InjectInstructions(animalupdatebody, 338, new Instruction[]
-                {
-                    // Load "this" onto the stack.
-                    Instruction.Create(OpCodes.Ldarg_0)
-                });
-
+            
             TypeDefinition barriertype = gamedef.GetType("SDG.Unturned.Barrier");
             MethodDefinition barriercollide = GetMethod(barriertype, "OnTriggerEnter", 1);
             MethodBody barriercollidebody = barriercollide.Body;
-            InjectInstructions(barriercollidebody, 26, new Instruction[]
+            InjectInstructions(barriercollidebody, 25, new Instruction[]
                 {
                     // Load "this" onto the stack.
                     Instruction.Create(OpCodes.Ldarg_0)
@@ -175,11 +166,19 @@ namespace UnturnedFreneticInjector.Injectables
                     // Load "null" onto the stack.
                     Instruction.Create(OpCodes.Ldnull)
                 });
-
+            
+            TypeDefinition animaltype = gamedef.GetType("SDG.Unturned.Animal");
+            MethodDefinition animalupdate = GetMethod(animaltype, "tick", 0);
+            MethodBody animalupdatebody = animalupdate.Body;
+            InjectInstructions(animalupdatebody, 154, new Instruction[]
+                {
+                    // Load "this" onto the stack.
+                    Instruction.Create(OpCodes.Ldarg_0)
+                });
             TypeDefinition zombietype = gamedef.GetType("SDG.Unturned.Zombie");
-            MethodDefinition zombieupdate = GetMethod(zombietype, "FixedUpdate", 0);
+            MethodDefinition zombieupdate = GetMethod(zombietype, "tick", 0);
             MethodBody zombieupdatebody = zombieupdate.Body;
-            InjectInstructions(zombieupdatebody, 1709, new Instruction[]
+            InjectInstructions(zombieupdatebody, 1450, new Instruction[]
                 {
                     // Load "this" onto the stack.
                     Instruction.Create(OpCodes.Ldarg_0)
