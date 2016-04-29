@@ -24,7 +24,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // TODO: Explain more!
         // @Example
         // // This teleports the entity with ID 1 at the location (50, 50, 50).
-        // spawn 1 50,50,50;
+        // teleport 1 50,50,50;
         // -->
         public TeleportCommand()
         {
@@ -33,6 +33,14 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             Description = "Teleports the entity to the location.";
             MinimumArguments = 2;
             MaximumArguments = 2;
+            ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
+            {
+                (input) => input,
+                (input) =>
+                {
+                    return LocationTag.For(input);
+                }
+            };
         }
 
         public override void Execute(CommandQueue queue, CommandEntry entry)
@@ -57,7 +65,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     player.Internal.player.sendTeleport(loc.ToVector3(), 0);
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully teleported player " + TagParser.Escape(player.ToString()) + " to " + TagParser.Escape(loc.ToString()) + "!");
+                        entry.Good(queue, "Successfully teleported a player to " + TagParser.Escape(loc.ToString()) + "!");
                     }
                     return;
                 }
@@ -67,7 +75,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     zombie.Internal.transform.position = loc.ToVector3();
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully teleported zombie " + TagParser.Escape(zombie.ToString()) + " to " + TagParser.Escape(loc.ToString()) + "!");
+                        entry.Good(queue, "Successfully teleported a zombie to " + TagParser.Escape(loc.ToString()) + "!");
                     }
                     return;
                 }
@@ -77,7 +85,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     animal.Internal.transform.position = loc.ToVector3();
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully teleported animal " + TagParser.Escape(animal.ToString()) + " to " + TagParser.Escape(loc.ToString()) + "!");
+                        entry.Good(queue, "Successfully teleported an animal to " + TagParser.Escape(loc.ToString()) + "!");
                     }
                     return;
                 }

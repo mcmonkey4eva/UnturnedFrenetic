@@ -33,6 +33,7 @@ namespace UnturnedFrenetic.CommandSystems
                 System.RegisterCommand(new LaunchCommand());
                 System.RegisterCommand(new SpawnCommand());
                 System.RegisterCommand(new TeleportCommand());
+                System.RegisterCommand(new WalkCommand());
                 // Player Commands
                 System.RegisterCommand(new BleedingCommand());
                 System.RegisterCommand(new BrokenCommand());

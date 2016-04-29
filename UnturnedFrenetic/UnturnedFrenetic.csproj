@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandSystems\EntityCommands\WalkCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\StaminaCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\UseItemCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\WarmthCommand.cs" />

@@ -11,10 +11,19 @@ namespace UnturnedFreneticInjector.Injectables
     {
         public override void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef)
         {
-            // This injects a call to the mod's static ZombieDamaged method for the ZombieDamagedScriptEvent
+            // This injects a call to the mod's static ZombieDamaged method for the ZombieDamagedScriptEvent. Also exposes some zombie variables.
+            TypeDefinition zombietype = gamedef.GetType("SDG.Unturned.Zombie");
+            FieldDefinition field = GetField(zombietype, "target");
+            field.IsPrivate = false;
+            field.IsPublic = true;
+            FieldDefinition fieldseeker = GetField(zombietype, "seeker");
+            fieldseeker.IsPrivate = false;
+            fieldseeker.IsPublic = true;
+            FieldDefinition fieldpath = GetField(zombietype, "path");
+            fieldpath.IsPrivate = false;
+            fieldpath.IsPublic = true;
             TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
             MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "ZombieDamaged", 3));
-            TypeDefinition zombietype = gamedef.GetType("SDG.Unturned.Zombie");
             MethodDefinition damagemethod = GetMethod(zombietype, "askDamage", 3);
             MethodBody damagebody = damagemethod.Body;
             InjectInstructions(damagebody, 0, new Instruction[]
