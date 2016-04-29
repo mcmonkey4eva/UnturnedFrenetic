@@ -64,7 +64,7 @@
     <Compile Include="Injectables\PlayerShootEventInjectable.cs" />
     <Compile Include="Injectables\StartTheModInjectable.cs" />
     <Compile Include="Injectables\AnimalDamagedEventInjectable.cs" />
-    <Compile Include="Injectables\ZombieDamagedEventInjectable.cs" />
+    <Compile Include="Injectables\ZombieInjectable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -23,7 +23,6 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // @Maximum 2
         // @Description
         // Enables or disables AI for an entity.
-        // Note that this does not override AI - meaning the AI will sometimes cause the entity to change path.
         // TODO: Explain more!
         // @Example
         // // This makes the animal with ID 1 no longer have AI.
@@ -58,7 +57,11 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             ZombieTag zombie;
             if (entity.TryGetZombie(out zombie))
             {
-                queue.HandleError(entry, "TODO"); // TODO: Implement me!
+                zombie.Internal.UFM_AIDisabled = !enable;
+                if (entry.ShouldShowGood(queue))
+                {
+                    entry.Good(queue, "AI for a zombie " + (enable ? "enabled!" : "disabled!"));
+                }
                 return;
             }
             AnimalTag animal;
