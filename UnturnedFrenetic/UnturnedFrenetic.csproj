@@ -137,6 +137,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnturnedFreneticTicker.cs" />
     <Compile Include="UnturnedGenericCommand.cs" />
+    <Compile Include="UnturnedReloadCommand.cs" />
     <Compile Include="UnturnedPreCommand.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>

@@ -33,6 +33,7 @@ namespace UnturnedFrenetic
         public static void InitSecondary()
         {
             Commander.commands.Insert(0, new UnturnedPreCommand());
+            Commander.commands.Add(new UnturnedReloadCommand());
             Commander.commands.Add(new UnturnedGenericCommand());
         }
 
