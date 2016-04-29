@@ -26,6 +26,7 @@ namespace UnturnedFreneticInjector.Injectables
             MethodDefinition isnullorempty = GetMethod(gamedef.TypeSystem.String.Resolve(), "IsNullOrEmpty", 1);
             MethodReference game_isnullorempty = gamedef.ImportReference(isnullorempty);
             MethodBody body = method.Body;
+            // TODO: use InjectInstructions here? Clean this up either way!
             // Load the parameter onto the stack.
             body.Instructions.Insert(3, Instruction.Create(OpCodes.Ldarg_S, paramstr));
             // Add whether the string 'is null or empty' to the stack.
