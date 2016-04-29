@@ -78,6 +78,9 @@
     <Compile Include="CommandSystems\WorldCommands\AnnounceCommand.cs" />
     <Compile Include="CommandSystems\WorldCommands\TimeCommand.cs" />
     <Compile Include="EntityType.cs" />
+    <Compile Include="EventSystems\EntityEvents\EntityDamagedEvent.cs" />
+    <Compile Include="EventSystems\EntityEvents\EntityDeathEvent.cs" />
+    <Compile Include="EventSystems\EntityEvents\EntityDestroyedEvent.cs" />
     <Compile Include="EventSystems\EntityEvents\VehicleDamagedEvent.cs" />
     <Compile Include="EventSystems\EntityEvents\VehicleDestroyedEvent.cs" />
     <Compile Include="EventSystems\EntityEvents\StructureDamagedEvent.cs" />

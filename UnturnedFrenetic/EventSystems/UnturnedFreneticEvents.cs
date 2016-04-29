@@ -18,6 +18,9 @@ namespace UnturnedFrenetic.EventSystems
             system.RegisterEvent(new AnimalDeathScriptEvent(system));
             system.RegisterEvent(new BarricadeDamagedScriptEvent(system));
             system.RegisterEvent(new BarricadeDestroyedScriptEvent(system));
+            system.RegisterEvent(new EntityDamagedScriptEvent(system));
+            system.RegisterEvent(new EntityDeathScriptEvent(system));
+            system.RegisterEvent(new EntityDestroyedScriptEvent(system));
             system.RegisterEvent(new ResourceDamagedScriptEvent(system));
             system.RegisterEvent(new ResourceDestroyedScriptEvent(system));
             system.RegisterEvent(new StructureDamagedScriptEvent(system));
@@ -44,6 +47,12 @@ namespace UnturnedFrenetic.EventSystems
         public static FreneticScriptEventHandler<BarricadeDamagedEventArgs> OnBarricadeDamaged = new FreneticScriptEventHandler<BarricadeDamagedEventArgs>();
 
         public static FreneticScriptEventHandler<BarricadeDestroyedEventArgs> OnBarricadeDestroyed = new FreneticScriptEventHandler<BarricadeDestroyedEventArgs>();
+
+        public static FreneticScriptEventHandler<EntityDamagedEventArgs> OnEntityDamaged = new FreneticScriptEventHandler<EntityDamagedEventArgs>();
+
+        public static FreneticScriptEventHandler<EntityDeathEventArgs> OnEntityDeath = new FreneticScriptEventHandler<EntityDeathEventArgs>();
+
+        public static FreneticScriptEventHandler<EntityDestroyedEventArgs> OnEntityDestroyed = new FreneticScriptEventHandler<EntityDestroyedEventArgs>();
 
         public static FreneticScriptEventHandler<PlayerChatEventArgs> OnPlayerChat = new FreneticScriptEventHandler<PlayerChatEventArgs>();
 

@@ -103,25 +103,26 @@ namespace UnturnedFrenetic
                     attackerTag = new ZombieTag((Zombie)attacker);
                 }
             }
+            PlayerTag playerTag = new PlayerTag(player.channel.owner);
             if (amount >= player.life.health)
             {
                 PlayerDeathEventArgs deathevt = new PlayerDeathEventArgs();
-                deathevt.Player = new PlayerTag(player.channel.owner);
+                deathevt.Player = playerTag;
                 deathevt.Amount = new NumberTag(amount);
                 deathevt.Cause = new TextTag(deathCause.ToString());
                 deathevt.Limb = new TextTag(limb.ToString());
                 deathevt.Killer = attackerTag;
                 UnturnedFreneticEvents.OnPlayerDeath.Fire(deathevt);
                 amount = (byte)deathevt.Amount.Internal;
-                return deathevt.Cancelled;
+                return deathevt.Cancelled || EntityDeath(playerTag, ref amount);
             }
             PlayerDamagedEventArgs evt = new PlayerDamagedEventArgs();
-            evt.Player = new PlayerTag(player.channel.owner);
+            evt.Player = playerTag;
             evt.Amount = new NumberTag(amount);
             evt.Attacker = attackerTag;
             UnturnedFreneticEvents.OnPlayerDamaged.Fire(evt);
             amount = (byte)evt.Amount.Internal;
-            return evt.Cancelled;
+            return evt.Cancelled || EntityDamaged(playerTag, ref amount);
         }
 
         public static bool PlayerShoot(Player player, UseableGun gun)
@@ -137,122 +138,172 @@ namespace UnturnedFrenetic
         public static bool AnimalDamaged(Animal animal, ref byte amount, ref Vector3 ragdoll)
         {
             // TODO: causes?
+            AnimalTag animalTag = new AnimalTag(animal);
             if (amount >= animal.health)
             {
                 AnimalDeathEventArgs deathevt = new AnimalDeathEventArgs();
-                deathevt.Animal = new AnimalTag(animal);
+                deathevt.Animal = animalTag;
                 deathevt.Amount = new NumberTag(amount);
                 UnturnedFreneticEvents.OnAnimalDeath.Fire(deathevt);
                 amount = (byte)deathevt.Amount.Internal;
-                return deathevt.Cancelled;
+                return deathevt.Cancelled || EntityDeath(animalTag, ref amount);
             }
             AnimalDamagedEventArgs evt = new AnimalDamagedEventArgs();
-            evt.Animal = new AnimalTag(animal);
+            evt.Animal = animalTag;
             evt.Amount = new NumberTag(amount);
             UnturnedFreneticEvents.OnAnimalDamaged.Fire(evt);
             amount = (byte)evt.Amount.Internal;
-            return evt.Cancelled;
+            return evt.Cancelled || EntityDamaged(animalTag, ref amount);
         }
 
         public static bool ZombieDamaged(Zombie zombie, ref byte amount, ref Vector3 ragdoll)
         {
             // TODO: causes?
+            ZombieTag zombieTag = new ZombieTag(zombie);
             if (amount >= zombie.health)
             {
                 ZombieDeathEventArgs deathevt = new ZombieDeathEventArgs();
-                deathevt.Zombie = new ZombieTag(zombie);
+                deathevt.Zombie = zombieTag;
                 deathevt.Amount = new NumberTag(amount);
                 UnturnedFreneticEvents.OnZombieDeath.Fire(deathevt);
                 amount = (byte)deathevt.Amount.Internal;
-                return deathevt.Cancelled;
+                return deathevt.Cancelled || EntityDeath(zombieTag, ref amount);
             }
             ZombieDamagedEventArgs evt = new ZombieDamagedEventArgs();
-            evt.Zombie = new ZombieTag(zombie);
+            evt.Zombie = zombieTag;
             evt.Amount = new NumberTag(amount);
             UnturnedFreneticEvents.OnZombieDamaged.Fire(evt);
             amount = (byte)evt.Amount.Internal;
-            return evt.Cancelled;
+            return evt.Cancelled || EntityDamaged(zombieTag, ref amount);
         }
 
         public static bool ResourceDamaged(ResourceSpawnpoint resource, ref ushort amount)
         {
             // TODO: causes?
+            ResourceTag resourceTag = new ResourceTag(resource);
             if (amount >= resource.health)
             {
                 ResourceDestroyedEventArgs deathevt = new ResourceDestroyedEventArgs();
-                deathevt.Resource = new ResourceTag(resource);
+                deathevt.Resource = resourceTag;
                 deathevt.Amount = new NumberTag(amount);
                 UnturnedFreneticEvents.OnResourceDestroyed.Fire(deathevt);
                 amount = (ushort)deathevt.Amount.Internal;
-                return deathevt.Cancelled;
+                return deathevt.Cancelled || EntityDestroyed(resourceTag, ref amount);
             }
             ResourceDamagedEventArgs evt = new ResourceDamagedEventArgs();
-            evt.Resource = new ResourceTag(resource);
+            evt.Resource = resourceTag;
             evt.Amount = new NumberTag(amount);
             UnturnedFreneticEvents.OnResourceDamaged.Fire(evt);
             amount = (ushort)evt.Amount.Internal;
-            return evt.Cancelled;
+            return evt.Cancelled || EntityDamaged(resourceTag, ref amount);
         }
 
         public static bool BarricadeDamaged(Barricade barricade, ref ushort amount)
         {
             // TODO: causes?
+            BarricadeTag barricadeTag = new BarricadeTag(barricade);
             if (amount >= barricade.health)
             {
                 BarricadeDestroyedEventArgs deathevt = new BarricadeDestroyedEventArgs();
-                deathevt.Barricade = new BarricadeTag(barricade);
+                deathevt.Barricade = barricadeTag;
                 deathevt.Amount = new NumberTag(amount);
                 UnturnedFreneticEvents.OnBarricadeDestroyed.Fire(deathevt);
                 amount = (ushort)deathevt.Amount.Internal;
-                return deathevt.Cancelled;
+                return deathevt.Cancelled || EntityDestroyed(barricadeTag, ref amount);
             }
             BarricadeDamagedEventArgs evt = new BarricadeDamagedEventArgs();
-            evt.Barricade = new BarricadeTag(barricade);
+            evt.Barricade = barricadeTag;
             evt.Amount = new NumberTag(amount);
             UnturnedFreneticEvents.OnBarricadeDamaged.Fire(evt);
             amount = (ushort)evt.Amount.Internal;
-            return evt.Cancelled;
+            return evt.Cancelled || EntityDamaged(barricadeTag, ref amount);
         }
 
         public static bool StructureDamaged(Structure structure, ref ushort amount)
         {
             // TODO: causes?
+            StructureTag structureTag = new StructureTag(structure);
             if (amount >= structure.health)
             {
                 StructureDestroyedEventArgs deathevt = new StructureDestroyedEventArgs();
-                deathevt.Structure = new StructureTag(structure);
+                deathevt.Structure = structureTag;
                 deathevt.Amount = new NumberTag(amount);
                 UnturnedFreneticEvents.OnStructureDestroyed.Fire(deathevt);
                 amount = (ushort)deathevt.Amount.Internal;
-                return deathevt.Cancelled;
+                return deathevt.Cancelled || EntityDestroyed(structureTag, ref amount);
             }
             StructureDamagedEventArgs evt = new StructureDamagedEventArgs();
-            evt.Structure = new StructureTag(structure);
+            evt.Structure = structureTag;
             evt.Amount = new NumberTag(amount);
             UnturnedFreneticEvents.OnStructureDamaged.Fire(evt);
             amount = (ushort)evt.Amount.Internal;
-            return evt.Cancelled;
+            return evt.Cancelled || EntityDamaged(structureTag, ref amount);
         }
 
         public static bool VehicleDamaged(InteractableVehicle vehicle, ref ushort amount, ref bool repairable)
         {
             // TODO: causes?
+            VehicleTag vehicleTag = new VehicleTag(vehicle);
             if (!repairable && (vehicle.isDead || amount >= vehicle.health))
             {
                 VehicleDestroyedEventArgs explodeevt = new VehicleDestroyedEventArgs();
-                explodeevt.Vehicle = new VehicleTag(vehicle);
+                explodeevt.Vehicle = vehicleTag;
                 explodeevt.Amount = new NumberTag(amount);
                 explodeevt.Repairable = new BooleanTag(repairable);
                 UnturnedFreneticEvents.OnVehicleDestroyed.Fire(explodeevt);
                 amount = (ushort)explodeevt.Amount.Internal;
                 repairable = explodeevt.Repairable.Internal;
-                return explodeevt.Cancelled;
+                return explodeevt.Cancelled || EntityDestroyed(vehicleTag, ref amount);
             }
             VehicleDamagedEventArgs evt = new VehicleDamagedEventArgs();
-            evt.Vehicle = new VehicleTag(vehicle);
+            evt.Vehicle = vehicleTag;
             evt.Amount = new NumberTag(amount);
             evt.Repairable = new BooleanTag(repairable);
             UnturnedFreneticEvents.OnVehicleDamaged.Fire(evt);
+            amount = (ushort)evt.Amount.Internal;
+            return evt.Cancelled || EntityDamaged(vehicleTag, ref amount);
+        }
+
+        public static bool EntityDamaged(TemplateObject entity, ref byte amount)
+        {
+            // TODO: causes?
+            EntityDamagedEventArgs evt = new EntityDamagedEventArgs();
+            evt.Entity = entity;
+            evt.Amount = new NumberTag(amount);
+            UnturnedFreneticEvents.OnEntityDamaged.Fire(evt);
+            amount = (byte)evt.Amount.Internal;
+            return evt.Cancelled;
+        }
+
+        public static bool EntityDamaged(TemplateObject entity, ref ushort amount)
+        {
+            // TODO: causes?
+            EntityDamagedEventArgs evt = new EntityDamagedEventArgs();
+            evt.Entity = entity;
+            evt.Amount = new NumberTag(amount);
+            UnturnedFreneticEvents.OnEntityDamaged.Fire(evt);
+            amount = (ushort)evt.Amount.Internal;
+            return evt.Cancelled;
+        }
+
+        public static bool EntityDeath(TemplateObject entity, ref byte amount)
+        {
+            // TODO: causes?
+            EntityDeathEventArgs evt = new EntityDeathEventArgs();
+            evt.Entity = entity;
+            evt.Amount = new NumberTag(amount);
+            UnturnedFreneticEvents.OnEntityDeath.Fire(evt);
+            amount = (byte)evt.Amount.Internal;
+            return evt.Cancelled;
+        }
+
+        public static bool EntityDestroyed(TemplateObject entity, ref ushort amount)
+        {
+            // TODO: causes?
+            EntityDestroyedEventArgs evt = new EntityDestroyedEventArgs();
+            evt.Entity = entity;
+            evt.Amount = new NumberTag(amount);
+            UnturnedFreneticEvents.OnEntityDestroyed.Fire(evt);
             amount = (ushort)evt.Amount.Internal;
             return evt.Cancelled;
         }
