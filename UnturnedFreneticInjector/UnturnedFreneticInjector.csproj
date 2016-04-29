@@ -51,7 +51,7 @@
     <Compile Include="Injectables\AllHashesLegalInjectable.cs" />
     <Compile Include="Injectables\ResourceDamagedEventInjectable.cs" />
     <Compile Include="Injectables\CommandDebugInjectable.cs" />
-    <Compile Include="Injectables\ExposeAnimalFieldsInjectable.cs" />
+    <Compile Include="Injectables\AnimalAIControlInjectable.cs" />
     <Compile Include="Injectables\ExposeStructureManagerMethodsInjectable.cs" />
     <Compile Include="Injectables\ExposeBarricadeManagerMethodsInjectable.cs" />
     <Compile Include="Injectables\ExposeObjectManagerMethodsInjectable.cs" />

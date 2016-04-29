@@ -121,7 +121,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 }
                 queue.HandleError(entry, "That entity can't be teleported!");
             }
-            catch (Exception ex)
+            catch (Exception ex) // TODO: Necessity of this?
             {
                 queue.HandleError(entry, "Failed to teleport entity: " + ex.ToString());
             }

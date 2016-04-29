@@ -5,34 +5,35 @@ using System.Text;
 using FreneticScript.CommandSystem;
 using UnturnedFrenetic.TagSystems.TagObjects;
 using FreneticScript.TagHandlers;
+using FreneticScript.TagHandlers.Objects;
 using SDG.Unturned;
 
 namespace UnturnedFrenetic.CommandSystems.EntityCommands
 {
-    class WalkCommand : AbstractCommand
+    class AICommand : AbstractCommand
     {
         // <--[command]
-        // @Name walk
-        // @Arguments <entity> <location>
-        // @Short Makes an entity walk to the given location.
+        // @Name ai
+        // @Arguments <entity> <boolean>
+        // @Short Enables or disables AI for an entity.
         // @Updated 2016/04/28
         // @Authors mcmonkey
         // @Group Entity
         // @Minimum 2
         // @Maximum 2
         // @Description
-        // Makes an entity walk to the given location.
+        // Enables or disables AI for an entity.
         // Note that this does not override AI - meaning the AI will sometimes cause the entity to change path.
         // TODO: Explain more!
         // @Example
-        // // This makes the entity with ID 1 walk to the location (50, 50, 50).
-        // walk 1 50,50,50;
+        // // This makes the animal with ID 1 no longer have AI.
+        // ai 1 false;
         // -->
-        public WalkCommand()
+        public AICommand()
         {
-            Name = "walk";
-            Arguments = "<entity> <location>";
-            Description = "Teleports the entity to the location.";
+            Name = "ai";
+            Arguments = "<entity> <boolean>";
+            Description = "Enables or disables AI for an entity.";
             MinimumArguments = 2;
             MaximumArguments = 2;
             ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
@@ -40,19 +41,14 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 (input) => input,
                 (input) =>
                 {
-                    return LocationTag.For(input);
+                    return BooleanTag.TryFor(input);
                 }
             };
         }
 
         public override void Execute(CommandQueue queue, CommandEntry entry)
         {
-            LocationTag loc = LocationTag.For(entry.GetArgument(queue, 1));
-            if (loc == null)
-            {
-                queue.HandleError(entry, "Invalid location!");
-                return;
-            }
+            bool enable = BooleanTag.TryFor(entry.GetArgumentObject(queue, 1)).Internal;
             EntityTag entity = EntityTag.For(Utilities.StringToInt(entry.GetArgument(queue, 0)));
             if (entity == null)
             {
@@ -62,27 +58,20 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             ZombieTag zombie;
             if (entity.TryGetZombie(out zombie))
             {
-                zombie.Internal.target.position = loc.ToVector3();
-                zombie.Internal.seeker.canMove = true;
-                zombie.Internal.seeker.canSearch = true;
-                zombie.Internal.path = EZombiePath.RUSH; // TODO: Option for this?
-                if (entry.ShouldShowGood(queue))
-                {
-                    entry.Good(queue, "Successfully started a zombie walking to " + TagParser.Escape(loc.ToString()) + "!");
-                }
+                queue.HandleError(entry, "TODO"); // TODO: Implement me!
                 return;
             }
             AnimalTag animal;
             if (entity.TryGetAnimal(out animal))
             {
-                animal.Internal.target = loc.ToVector3();
+                animal.Internal.UFM_AIDisabled = !enable;
                 if (entry.ShouldShowGood(queue))
                 {
-                    entry.Good(queue, "Successfully started an animal walking to " + TagParser.Escape(loc.ToString()) + "!");
+                    entry.Good(queue, "AI for an animal " + (enable ? "enabled!" : "disabled!"));
                 }
                 return;
             }
-            queue.HandleError(entry, "That entity can't be made to walk!");
+            queue.HandleError(entry, "That entity doesn't have AI!");
         }
     }
 }

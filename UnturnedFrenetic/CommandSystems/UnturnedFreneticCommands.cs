@@ -28,6 +28,7 @@ namespace UnturnedFrenetic.CommandSystems
                 System.Output = output;
                 System.Init();
                 // Entity Commands
+                System.RegisterCommand(new AICommand());
                 System.RegisterCommand(new DamageCommand());
                 System.RegisterCommand(new HealCommand());
                 System.RegisterCommand(new LaunchCommand());

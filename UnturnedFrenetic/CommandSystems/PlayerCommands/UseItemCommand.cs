@@ -33,7 +33,7 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
         // // This example causes a player to appear to aim down a gun's sights.
         // useitem <{var[player]}> secondary true;
         // @Example
-        // // This example causes a player to fires a gun.
+        // // This example causes a player to fire a gun.
         // useitem <{var[player]}> primary true;
         // wait 1;
         // useitem <{var[player]}> primary false;
