@@ -15,6 +15,9 @@ namespace UnturnedFreneticInjector.Injectables
             FieldDefinition field = GetField(type, "health");
             field.IsPrivate = false;
             field.IsPublic = true;
+            FieldDefinition fieldtarget = GetField(type, "target");
+            fieldtarget.IsPrivate = false;
+            fieldtarget.IsPublic = true;
         }
     }
 }

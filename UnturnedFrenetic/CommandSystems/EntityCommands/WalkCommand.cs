@@ -22,6 +22,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // @Maximum 2
         // @Description
         // Makes an entity walk to the given location.
+        // Note that this does not override AI - meaning the AI will sometimes cause the entity to change path.
         // TODO: Explain more!
         // @Example
         // // This makes the entity with ID 1 walk to the location (50, 50, 50).
@@ -76,7 +77,11 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 AnimalTag animal;
                 if (entity.TryGetAnimal(out animal))
                 {
-                    queue.HandleError(entry, "Animal walking is TODO!"); // TODO: Implement!
+                    animal.Internal.target = loc.ToVector3();
+                    if (entry.ShouldShowGood(queue))
+                    {
+                        entry.Good(queue, "Successfully started an animal walking to " + TagParser.Escape(loc.ToString()) + "!");
+                    }
                     return;
                 }
                 queue.HandleError(entry, "That entity can't be made to walk!");
