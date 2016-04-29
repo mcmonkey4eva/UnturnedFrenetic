@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandSystems\EntityCommands\AICommand.cs" />
+    <Compile Include="CommandSystems\EntityCommands\MaxHealthCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\WalkCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\StaminaCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\UseItemCommand.cs" />

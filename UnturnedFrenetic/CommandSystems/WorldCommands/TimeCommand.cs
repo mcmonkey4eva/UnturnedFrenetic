@@ -27,7 +27,7 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
         // // This sets the time to a daylight hour.
         // time 0;
         // @Example
-        // // This sets the time tot a nighttime hour.
+        // // This sets the time to a nighttime hour.
         // time 25000;
         // -->
 

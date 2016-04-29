@@ -6,7 +6,6 @@ using FreneticScript.CommandSystem;
 using UnturnedFrenetic.TagSystems.TagObjects;
 using FreneticScript.TagHandlers;
 using UnityEngine;
-using System.Reflection;
 using SDG.Unturned;
 using FreneticScript.TagHandlers.Objects;
 using Steamworks;
@@ -41,7 +40,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
             {
                 TemplateObject.Basic_For,
-                NumberTag.TryFor
+                IntegerTag.TryFor
             };
         }
 
@@ -49,8 +48,8 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         {
             try
             {
-                NumberTag num = NumberTag.TryFor(entry.GetArgumentObject(queue, 1));
-                if (num.Internal < 0.0)
+                IntegerTag num = IntegerTag.TryFor(entry.GetArgumentObject(queue, 1));
+                if (num.Internal < 0)
                 {
                     queue.HandleError(entry, "Must provide a non-negative number!");
                     return;

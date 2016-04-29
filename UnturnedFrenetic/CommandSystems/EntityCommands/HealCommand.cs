@@ -6,7 +6,6 @@ using FreneticScript.CommandSystem;
 using UnturnedFrenetic.TagSystems.TagObjects;
 using FreneticScript.TagHandlers;
 using UnityEngine;
-using System.Reflection;
 using SDG.Unturned;
 using FreneticScript.TagHandlers.Objects;
 
@@ -40,7 +39,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
             {
                 TemplateObject.Basic_For,
-                NumberTag.TryFor
+                IntegerTag.TryFor
             };
         }
 
@@ -48,8 +47,8 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         {
             try
             {
-                NumberTag num = NumberTag.TryFor(entry.GetArgumentObject(queue, 1));
-                if (num.Internal < 0.0)
+                IntegerTag num = IntegerTag.TryFor(entry.GetArgumentObject(queue, 1));
+                if (num.Internal < 0)
                 {
                     queue.HandleError(entry, "Must provide a non-negative number!");
                     return;
@@ -66,7 +65,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     player.Internal.player.life.askHeal((byte)num.Internal, false, false);
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully healed player " + TagParser.Escape(player.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                        entry.Good(queue, "Successfully healed a player to a new health value of " + player.Internal.player.life.health + "!");
                     }
                     return;
                 }
@@ -81,7 +80,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     }
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully healed zombie " + TagParser.Escape(zombie.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                        entry.Good(queue, "Successfully healed a zombie to a new health value of " + inZomb.health + "!");
                     }
                     return;
                 }
@@ -96,7 +95,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     }
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully healed animal " + TagParser.Escape(animal.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                        entry.Good(queue, "Successfully healed an animal to a new health value of " + inAnimal.health + "!");
                     }
                     return;
                 }
@@ -112,7 +111,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     }
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully healed barricade " + TagParser.Escape(barricade.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                        entry.Good(queue, "Successfully healed a barricade to a new health value of " + inBarricade.health + "!");
                     }
                     return;
                 }
@@ -128,7 +127,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     }
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully healed resource " + TagParser.Escape(resource.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                        entry.Good(queue, "Successfully healed a resource to a new health value of " + inResource.health + "!");
                     }
                     return;
                 }
@@ -144,7 +143,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     }
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully healed structure " + TagParser.Escape(structure.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                        entry.Good(queue, "Successfully healed a structure to a new health value of " + inStructure.health + "!");
                     }
                     return;
                 }
@@ -154,7 +153,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     vehicle.Internal.askRepair((ushort)num.Internal);
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully healed vehicle " + TagParser.Escape(vehicle.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                        entry.Good(queue, "Successfully healed a vehicle to a new health value of " + vehicle.Internal.health + "!");
                     }
                     return;
                 }

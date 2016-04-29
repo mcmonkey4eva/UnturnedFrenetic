@@ -6,7 +6,6 @@ using FreneticScript.CommandSystem;
 using UnturnedFrenetic.TagSystems.TagObjects;
 using FreneticScript.TagHandlers;
 using UnityEngine;
-using System.Reflection;
 using SDG.Unturned;
 
 namespace UnturnedFrenetic.CommandSystems.EntityCommands
