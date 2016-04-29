@@ -21,6 +21,26 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
         public Transform Internal;
         public StructureData InternalData;
 
+        public StructureTag(Structure structure)
+        {
+            for (byte x = 0; x < Regions.WORLD_SIZE; x++)
+            {
+                for (byte y = 0; y < Regions.WORLD_SIZE; y++)
+                {
+                    StructureRegion region = StructureManager.regions[x, y];
+                    for (int i = 0; i < region.structures.Count; i++)
+                    {
+                        if (structure == region.structures[i].structure)
+                        {
+                            Internal = region.models[i];
+                            InternalData = region.structures[i];
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
         public StructureTag(Transform transform, StructureData data)
         {
             Internal = transform;

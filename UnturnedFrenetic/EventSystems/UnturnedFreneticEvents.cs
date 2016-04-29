@@ -20,6 +20,8 @@ namespace UnturnedFrenetic.EventSystems
             system.RegisterEvent(new BarricadeDeathScriptEvent(system));
             system.RegisterEvent(new ResourceDamagedScriptEvent(system));
             system.RegisterEvent(new ResourceDeathScriptEvent(system));
+            system.RegisterEvent(new StructureDamagedScriptEvent(system));
+            system.RegisterEvent(new StructureDeathScriptEvent(system));
             system.RegisterEvent(new ZombieDamagedScriptEvent(system));
             system.RegisterEvent(new ZombieDeathScriptEvent(system));
 
@@ -58,6 +60,10 @@ namespace UnturnedFrenetic.EventSystems
         public static FreneticScriptEventHandler<ResourceDamagedEventArgs> OnResourceDamaged = new FreneticScriptEventHandler<ResourceDamagedEventArgs>();
 
         public static FreneticScriptEventHandler<ResourceDeathEventArgs> OnResourceDeath = new FreneticScriptEventHandler<ResourceDeathEventArgs>();
+
+        public static FreneticScriptEventHandler<StructureDamagedEventArgs> OnStructureDamaged = new FreneticScriptEventHandler<StructureDamagedEventArgs>();
+
+        public static FreneticScriptEventHandler<StructureDeathEventArgs> OnStructureDeath = new FreneticScriptEventHandler<StructureDeathEventArgs>();
 
         public static FreneticScriptEventHandler<ZombieDamagedEventArgs> OnZombieDamaged = new FreneticScriptEventHandler<ZombieDamagedEventArgs>();
 

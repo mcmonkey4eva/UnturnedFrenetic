@@ -214,6 +214,26 @@ namespace UnturnedFrenetic
             return evt.Cancelled;
         }
 
+        public static bool StructureDamaged(Structure structure, ref ushort amount)
+        {
+            // TODO: causes?
+            if (amount >= structure.health)
+            {
+                StructureDeathEventArgs deathevt = new StructureDeathEventArgs();
+                deathevt.Structure = new StructureTag(structure);
+                deathevt.Amount = new NumberTag(amount);
+                UnturnedFreneticEvents.OnStructureDeath.Fire(deathevt);
+                amount = (ushort)deathevt.Amount.Internal;
+                return deathevt.Cancelled;
+            }
+            StructureDamagedEventArgs evt = new StructureDamagedEventArgs();
+            evt.Structure = new StructureTag(structure);
+            evt.Amount = new NumberTag(amount);
+            UnturnedFreneticEvents.OnStructureDamaged.Fire(evt);
+            amount = (ushort)evt.Amount.Internal;
+            return evt.Cancelled;
+        }
+
         public static long cID = 1;
         
         public void Tick(float delta)
