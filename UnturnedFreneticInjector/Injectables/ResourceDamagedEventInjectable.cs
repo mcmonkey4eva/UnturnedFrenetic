@@ -11,7 +11,7 @@ namespace UnturnedFreneticInjector.Injectables
     {
         public override void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef)
         {
-            // This injects a call to the mod's static AnimalDamaged method for the AnimalDamagedScriptEvent
+            // This injects a call to the mod's static ResourceDamaged method for the ResourceDamagedScriptEvent
             TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
             MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "ResourceDamaged", 2));
             TypeDefinition resourcetype = gamedef.GetType("SDG.Unturned.ResourceSpawnpoint");

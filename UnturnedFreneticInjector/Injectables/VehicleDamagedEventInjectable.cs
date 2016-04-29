@@ -7,15 +7,15 @@ using Mono.Cecil.Cil;
 
 namespace UnturnedFreneticInjector.Injectables
 {
-    public class StructureDamagedEventInjectable : Injectable
+    public class VehicleDamagedEventInjectable : Injectable
     {
         public override void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef)
         {
-            // This injects a call to the mod's static StructureDamaged method for the StructureDamagedScriptEvent
+            // This injects a call to the mod's static VehicleDamaged method for the VehicleDamagedScriptEvent
             TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
-            MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "StructureDamaged", 2));
-            TypeDefinition resourcetype = gamedef.GetType("SDG.Unturned.Structure");
-            MethodDefinition damagemethod = GetMethod(resourcetype, "askDamage", 1);
+            MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "VehicleDamaged", 3));
+            TypeDefinition resourcetype = gamedef.GetType("SDG.Unturned.InteractableVehicle");
+            MethodDefinition damagemethod = GetMethod(resourcetype, "askDamage", 2);
             MethodBody damagebody = damagemethod.Body;
             InjectInstructions(damagebody, 0, new Instruction[]
             {
@@ -23,7 +23,9 @@ namespace UnturnedFreneticInjector.Injectables
                     Instruction.Create(OpCodes.Ldarg_0),
                     // Load "amount" onto the stack.
                     Instruction.Create(OpCodes.Ldarga_S, damagemethod.Parameters[0]),
-                    // Call the StructureDamaged method with the above parameters and return a bool.
+                    // Load "canRepair" onto the stack.
+                    Instruction.Create(OpCodes.Ldarga_S, damagemethod.Parameters[1]),
+                    // Call the VehicleDamaged method with the above parameters and return a bool.
                     Instruction.Create(OpCodes.Call, eventmethod),
                     // If the return is true, jump ahead to the original 0th instruction.
                     Instruction.Create(OpCodes.Brfalse, damagebody.Instructions[0]),

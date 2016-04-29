@@ -234,6 +234,29 @@ namespace UnturnedFrenetic
             return evt.Cancelled;
         }
 
+        public static bool VehicleDamaged(InteractableVehicle vehicle, ref ushort amount, ref bool repairable)
+        {
+            // TODO: causes?
+            if (!repairable && (vehicle.isDead || amount >= vehicle.health))
+            {
+                VehicleExplodeEventArgs explodeevt = new VehicleExplodeEventArgs();
+                explodeevt.Vehicle = new VehicleTag(vehicle);
+                explodeevt.Amount = new NumberTag(amount);
+                explodeevt.Repairable = new BooleanTag(repairable);
+                UnturnedFreneticEvents.OnVehicleExplode.Fire(explodeevt);
+                amount = (ushort)explodeevt.Amount.Internal;
+                repairable = explodeevt.Repairable.Internal;
+                return explodeevt.Cancelled;
+            }
+            VehicleDamagedEventArgs evt = new VehicleDamagedEventArgs();
+            evt.Vehicle = new VehicleTag(vehicle);
+            evt.Amount = new NumberTag(amount);
+            evt.Repairable = new BooleanTag(repairable);
+            UnturnedFreneticEvents.OnVehicleDamaged.Fire(evt);
+            amount = (ushort)evt.Amount.Internal;
+            return evt.Cancelled;
+        }
+
         public static long cID = 1;
         
         public void Tick(float delta)

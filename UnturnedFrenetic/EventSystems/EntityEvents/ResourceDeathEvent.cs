@@ -12,7 +12,7 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
     // <--[event]
     // @Name ResourceDeathEvent
     // @Fired When a resource dies.
-    // @Updated 2016/04/27
+    // @Updated 2016/04/29
     // @Authors Morphan1
     // @Group Player
     // @Cancellable true

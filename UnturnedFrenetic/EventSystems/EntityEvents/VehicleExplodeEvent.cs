@@ -10,26 +10,27 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 namespace UnturnedFrenetic.EventSystems.EntityEvents
 {
     // <--[event]
-    // @Name ResourceDamagedEvent
-    // @Fired When a resource is damaged.
+    // @Name VehicleExplodeEvent
+    // @Fired When a vehicle explodes.
     // @Updated 2016/04/29
     // @Authors Morphan1
-    // @Group Entity
+    // @Group Player
     // @Cancellable true
     // @Description
-    // This event will fire when a resource takes any form of damage.
-    // @Context resource ResourceTag returns the resource that is being damaged.
-    // @Context amount TextTag returns the amount of damage being done. Editable.
+    // This event will fire when a vehicle explodes for any reason.
+    // @Context vehicle VehicleTag returns the vehicle that is exploding.
+    // @Context amount TextTag returns the amount of damage being done to make the vehicle explode. Editable.
+    // @Context repairable BooleanTag returns whether the damage can be repaired. Always defaults to false in this event. Editable.
     // -->
 
-    public class ResourceDamagedScriptEvent : ScriptEvent
+    public class VehicleExplodeScriptEvent : ScriptEvent
     {
         /// <summary>
-        /// Constructs the ResourceDamaged script event.
+        /// Constructs the VehicleExplode script event.
         /// </summary>
         /// <param name="system">The relevant command system.</param>
-        public ResourceDamagedScriptEvent(Commands system)
-            : base(system, "resourcedamagedevent", true)
+        public VehicleExplodeScriptEvent(Commands system)
+            : base(system, "vehicleexplodeevent", true)
         {
         }
 
@@ -39,9 +40,9 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         /// <param name="prio">The priority.</param>
         public override void RegisterPriority(int prio)
         {
-            if (!UnturnedFreneticEvents.OnResourceDamaged.Contains(Run, prio))
+            if (!UnturnedFreneticEvents.OnVehicleExplode.Contains(Run, prio))
             {
-                UnturnedFreneticEvents.OnResourceDamaged.Add(Run, prio);
+                UnturnedFreneticEvents.OnVehicleExplode.Add(Run, prio);
             }
         }
 
@@ -51,9 +52,9 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         /// <param name="prio">The priority.</param>
         public override void DeregisterPriority(int prio)
         {
-            if (UnturnedFreneticEvents.OnResourceDamaged.Contains(Run, prio))
+            if (UnturnedFreneticEvents.OnVehicleExplode.Contains(Run, prio))
             {
-                UnturnedFreneticEvents.OnResourceDamaged.Remove(Run, prio);
+                UnturnedFreneticEvents.OnVehicleExplode.Remove(Run, prio);
             }
         }
 
@@ -63,21 +64,23 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         /// <param name="prio">The priority to run with.</param>
         /// <param name="oevt">The details of the script to be ran.</param>
         /// <returns>The event details after firing.</returns>
-        public void Run(int prio, ResourceDamagedEventArgs oevt)
+        public void Run(int prio, VehicleExplodeEventArgs oevt)
         {
-            ResourceDamagedScriptEvent evt = (ResourceDamagedScriptEvent)Duplicate();
+            VehicleExplodeScriptEvent evt = (VehicleExplodeScriptEvent)Duplicate();
             evt.Cancelled = oevt.Cancelled;
-            evt.Resource = oevt.Resource;
+            evt.Vehicle = oevt.Vehicle;
             evt.Amount = oevt.Amount;
+            evt.Repairable = oevt.Repairable;
             evt.Call(prio);
             oevt.Amount = evt.Amount;
+            oevt.Repairable = evt.Repairable;
             oevt.Cancelled = evt.Cancelled;
         }
 
         /// <summary>
-        /// The resource that is being damaged.
+        /// The vehicle that is exploding.
         /// </summary>
-        public ResourceTag Resource;
+        public VehicleTag Vehicle;
 
         /// <summary>
         /// The amount of damage being done.
@@ -85,27 +88,35 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         public NumberTag Amount;
 
         /// <summary>
+        /// Whether the damage can be repaired.
+        /// </summary>
+        public BooleanTag Repairable;
+
+        /// <summary>
         /// Get all variables according the script event's current values.
         /// </summary>
         public override Dictionary<string, TemplateObject> GetVariables()
         {
             Dictionary<string, TemplateObject> vars = base.GetVariables();
-            vars.Add("resource", Resource);
+            vars.Add("vehicle", Vehicle);
             vars.Add("amount", Amount);
+            vars.Add("repairable", Repairable);
             return vars;
         }
 
         public override void UpdateVariables(Dictionary<string, TemplateObject> vars)
         {
             Amount = NumberTag.TryFor(vars["amount"]);
+            Repairable = BooleanTag.TryFor(vars["repairable"]);
             base.UpdateVariables(vars);
         }
     }
 
-    public class ResourceDamagedEventArgs : EventArgs
+    public class VehicleExplodeEventArgs : EventArgs
     {
-        public ResourceTag Resource;
+        public VehicleTag Vehicle;
         public NumberTag Amount;
+        public BooleanTag Repairable;
 
         public bool Cancelled = false;
     }

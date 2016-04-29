@@ -22,6 +22,8 @@ namespace UnturnedFrenetic.EventSystems
             system.RegisterEvent(new ResourceDeathScriptEvent(system));
             system.RegisterEvent(new StructureDamagedScriptEvent(system));
             system.RegisterEvent(new StructureDeathScriptEvent(system));
+            system.RegisterEvent(new VehicleDamagedScriptEvent(system));
+            system.RegisterEvent(new VehicleExplodeScriptEvent(system));
             system.RegisterEvent(new ZombieDamagedScriptEvent(system));
             system.RegisterEvent(new ZombieDeathScriptEvent(system));
 
@@ -64,6 +66,10 @@ namespace UnturnedFrenetic.EventSystems
         public static FreneticScriptEventHandler<StructureDamagedEventArgs> OnStructureDamaged = new FreneticScriptEventHandler<StructureDamagedEventArgs>();
 
         public static FreneticScriptEventHandler<StructureDeathEventArgs> OnStructureDeath = new FreneticScriptEventHandler<StructureDeathEventArgs>();
+
+        public static FreneticScriptEventHandler<VehicleDamagedEventArgs> OnVehicleDamaged = new FreneticScriptEventHandler<VehicleDamagedEventArgs>();
+
+        public static FreneticScriptEventHandler<VehicleExplodeEventArgs> OnVehicleExplode = new FreneticScriptEventHandler<VehicleExplodeEventArgs>();
 
         public static FreneticScriptEventHandler<ZombieDamagedEventArgs> OnZombieDamaged = new FreneticScriptEventHandler<ZombieDamagedEventArgs>();
 
