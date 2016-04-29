@@ -10,27 +10,26 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 namespace UnturnedFrenetic.EventSystems.EntityEvents
 {
     // <--[event]
-    // @Name VehicleExplodeEvent
-    // @Fired When a vehicle explodes.
+    // @Name BarricadeDestroyedEvent
+    // @Fired When a barricade is destroyed.
     // @Updated 2016/04/29
     // @Authors Morphan1
     // @Group Player
     // @Cancellable true
     // @Description
-    // This event will fire when a vehicle explodes for any reason.
-    // @Context vehicle VehicleTag returns the vehicle that is exploding.
-    // @Context amount TextTag returns the amount of damage being done to make the vehicle explode. Editable.
-    // @Context repairable BooleanTag returns whether the damage can be repaired. Always defaults to false in this event. Editable.
+    // This event will fire when a barricade is destroyed for any reason.
+    // @Context barricade BarricadeTag returns the barricade that is being destroyed.
+    // @Context amount TextTag returns the amount of damage being done to destroy the barricade. Editable.
     // -->
 
-    public class VehicleExplodeScriptEvent : ScriptEvent
+    public class BarricadeDestroyedScriptEvent : ScriptEvent
     {
         /// <summary>
-        /// Constructs the VehicleExplode script event.
+        /// Constructs the BarricadeDestroyed script event.
         /// </summary>
         /// <param name="system">The relevant command system.</param>
-        public VehicleExplodeScriptEvent(Commands system)
-            : base(system, "vehicleexplodeevent", true)
+        public BarricadeDestroyedScriptEvent(Commands system)
+            : base(system, "barricadedestroyedevent", true)
         {
         }
 
@@ -40,9 +39,9 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         /// <param name="prio">The priority.</param>
         public override void RegisterPriority(int prio)
         {
-            if (!UnturnedFreneticEvents.OnVehicleExplode.Contains(Run, prio))
+            if (!UnturnedFreneticEvents.OnBarricadeDestroyed.Contains(Run, prio))
             {
-                UnturnedFreneticEvents.OnVehicleExplode.Add(Run, prio);
+                UnturnedFreneticEvents.OnBarricadeDestroyed.Add(Run, prio);
             }
         }
 
@@ -52,9 +51,9 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         /// <param name="prio">The priority.</param>
         public override void DeregisterPriority(int prio)
         {
-            if (UnturnedFreneticEvents.OnVehicleExplode.Contains(Run, prio))
+            if (UnturnedFreneticEvents.OnBarricadeDestroyed.Contains(Run, prio))
             {
-                UnturnedFreneticEvents.OnVehicleExplode.Remove(Run, prio);
+                UnturnedFreneticEvents.OnBarricadeDestroyed.Remove(Run, prio);
             }
         }
 
@@ -64,23 +63,21 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         /// <param name="prio">The priority to run with.</param>
         /// <param name="oevt">The details of the script to be ran.</param>
         /// <returns>The event details after firing.</returns>
-        public void Run(int prio, VehicleExplodeEventArgs oevt)
+        public void Run(int prio, BarricadeDestroyedEventArgs oevt)
         {
-            VehicleExplodeScriptEvent evt = (VehicleExplodeScriptEvent)Duplicate();
+            BarricadeDestroyedScriptEvent evt = (BarricadeDestroyedScriptEvent)Duplicate();
             evt.Cancelled = oevt.Cancelled;
-            evt.Vehicle = oevt.Vehicle;
+            evt.Barricade = oevt.Barricade;
             evt.Amount = oevt.Amount;
-            evt.Repairable = oevt.Repairable;
             evt.Call(prio);
             oevt.Amount = evt.Amount;
-            oevt.Repairable = evt.Repairable;
             oevt.Cancelled = evt.Cancelled;
         }
 
         /// <summary>
-        /// The vehicle that is exploding.
+        /// The barricade that is being destroyed.
         /// </summary>
-        public VehicleTag Vehicle;
+        public BarricadeTag Barricade;
 
         /// <summary>
         /// The amount of damage being done.
@@ -88,35 +85,27 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         public NumberTag Amount;
 
         /// <summary>
-        /// Whether the damage can be repaired.
-        /// </summary>
-        public BooleanTag Repairable;
-
-        /// <summary>
         /// Get all variables according the script event's current values.
         /// </summary>
         public override Dictionary<string, TemplateObject> GetVariables()
         {
             Dictionary<string, TemplateObject> vars = base.GetVariables();
-            vars.Add("vehicle", Vehicle);
+            vars.Add("barricade", Barricade);
             vars.Add("amount", Amount);
-            vars.Add("repairable", Repairable);
             return vars;
         }
 
         public override void UpdateVariables(Dictionary<string, TemplateObject> vars)
         {
             Amount = NumberTag.TryFor(vars["amount"]);
-            Repairable = BooleanTag.TryFor(vars["repairable"]);
             base.UpdateVariables(vars);
         }
     }
 
-    public class VehicleExplodeEventArgs : EventArgs
+    public class BarricadeDestroyedEventArgs : EventArgs
     {
-        public VehicleTag Vehicle;
+        public BarricadeTag Barricade;
         public NumberTag Amount;
-        public BooleanTag Repairable;
 
         public bool Cancelled = false;
     }

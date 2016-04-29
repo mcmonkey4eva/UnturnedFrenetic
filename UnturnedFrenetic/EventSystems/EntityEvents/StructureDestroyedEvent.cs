@@ -10,26 +10,26 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 namespace UnturnedFrenetic.EventSystems.EntityEvents
 {
     // <--[event]
-    // @Name StructureDeathEvent
-    // @Fired When a structure dies.
+    // @Name StructureDestroyedEvent
+    // @Fired When a structure is destroyed.
     // @Updated 2016/04/29
     // @Authors Morphan1
     // @Group Player
     // @Cancellable true
     // @Description
-    // This event will fire when a structure dies for any reason.
-    // @Context structure StructureTag returns the structure that is dying.
-    // @Context amount TextTag returns the amount of damage being done to kill the structure. Editable.
+    // This event will fire when a structure is destroyed for any reason.
+    // @Context structure StructureTag returns the structure that is being destroyed.
+    // @Context amount TextTag returns the amount of damage being done to destroy the structure. Editable.
     // -->
 
-    public class StructureDeathScriptEvent : ScriptEvent
+    public class StructureDestroyedScriptEvent : ScriptEvent
     {
         /// <summary>
-        /// Constructs the StructureDeath script event.
+        /// Constructs the StructureDestroyed script event.
         /// </summary>
         /// <param name="system">The relevant command system.</param>
-        public StructureDeathScriptEvent(Commands system)
-            : base(system, "structuredeathevent", true)
+        public StructureDestroyedScriptEvent(Commands system)
+            : base(system, "structuredestroyedevent", true)
         {
         }
 
@@ -39,9 +39,9 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         /// <param name="prio">The priority.</param>
         public override void RegisterPriority(int prio)
         {
-            if (!UnturnedFreneticEvents.OnStructureDeath.Contains(Run, prio))
+            if (!UnturnedFreneticEvents.OnStructureDestroyed.Contains(Run, prio))
             {
-                UnturnedFreneticEvents.OnStructureDeath.Add(Run, prio);
+                UnturnedFreneticEvents.OnStructureDestroyed.Add(Run, prio);
             }
         }
 
@@ -51,9 +51,9 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         /// <param name="prio">The priority.</param>
         public override void DeregisterPriority(int prio)
         {
-            if (UnturnedFreneticEvents.OnStructureDeath.Contains(Run, prio))
+            if (UnturnedFreneticEvents.OnStructureDestroyed.Contains(Run, prio))
             {
-                UnturnedFreneticEvents.OnStructureDeath.Remove(Run, prio);
+                UnturnedFreneticEvents.OnStructureDestroyed.Remove(Run, prio);
             }
         }
 
@@ -63,9 +63,9 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         /// <param name="prio">The priority to run with.</param>
         /// <param name="oevt">The details of the script to be ran.</param>
         /// <returns>The event details after firing.</returns>
-        public void Run(int prio, StructureDeathEventArgs oevt)
+        public void Run(int prio, StructureDestroyedEventArgs oevt)
         {
-            StructureDeathScriptEvent evt = (StructureDeathScriptEvent)Duplicate();
+            StructureDestroyedScriptEvent evt = (StructureDestroyedScriptEvent)Duplicate();
             evt.Cancelled = oevt.Cancelled;
             evt.Structure = oevt.Structure;
             evt.Amount = oevt.Amount;
@@ -75,7 +75,7 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         }
 
         /// <summary>
-        /// The structure that is dying.
+        /// The structure that is being destroyed.
         /// </summary>
         public StructureTag Structure;
 
@@ -102,7 +102,7 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         }
     }
 
-    public class StructureDeathEventArgs : EventArgs
+    public class StructureDestroyedEventArgs : EventArgs
     {
         public StructureTag Structure;
         public NumberTag Amount;

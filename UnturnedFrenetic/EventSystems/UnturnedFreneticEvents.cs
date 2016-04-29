@@ -17,13 +17,13 @@ namespace UnturnedFrenetic.EventSystems
             system.RegisterEvent(new AnimalDamagedScriptEvent(system));
             system.RegisterEvent(new AnimalDeathScriptEvent(system));
             system.RegisterEvent(new BarricadeDamagedScriptEvent(system));
-            system.RegisterEvent(new BarricadeDeathScriptEvent(system));
+            system.RegisterEvent(new BarricadeDestroyedScriptEvent(system));
             system.RegisterEvent(new ResourceDamagedScriptEvent(system));
-            system.RegisterEvent(new ResourceDeathScriptEvent(system));
+            system.RegisterEvent(new ResourceDestroyedScriptEvent(system));
             system.RegisterEvent(new StructureDamagedScriptEvent(system));
-            system.RegisterEvent(new StructureDeathScriptEvent(system));
+            system.RegisterEvent(new StructureDestroyedScriptEvent(system));
             system.RegisterEvent(new VehicleDamagedScriptEvent(system));
-            system.RegisterEvent(new VehicleExplodeScriptEvent(system));
+            system.RegisterEvent(new VehicleDestroyedScriptEvent(system));
             system.RegisterEvent(new ZombieDamagedScriptEvent(system));
             system.RegisterEvent(new ZombieDeathScriptEvent(system));
 
@@ -43,7 +43,7 @@ namespace UnturnedFrenetic.EventSystems
 
         public static FreneticScriptEventHandler<BarricadeDamagedEventArgs> OnBarricadeDamaged = new FreneticScriptEventHandler<BarricadeDamagedEventArgs>();
 
-        public static FreneticScriptEventHandler<BarricadeDeathEventArgs> OnBarricadeDeath = new FreneticScriptEventHandler<BarricadeDeathEventArgs>();
+        public static FreneticScriptEventHandler<BarricadeDestroyedEventArgs> OnBarricadeDestroyed = new FreneticScriptEventHandler<BarricadeDestroyedEventArgs>();
 
         public static FreneticScriptEventHandler<PlayerChatEventArgs> OnPlayerChat = new FreneticScriptEventHandler<PlayerChatEventArgs>();
 
@@ -61,15 +61,15 @@ namespace UnturnedFrenetic.EventSystems
 
         public static FreneticScriptEventHandler<ResourceDamagedEventArgs> OnResourceDamaged = new FreneticScriptEventHandler<ResourceDamagedEventArgs>();
 
-        public static FreneticScriptEventHandler<ResourceDeathEventArgs> OnResourceDeath = new FreneticScriptEventHandler<ResourceDeathEventArgs>();
+        public static FreneticScriptEventHandler<ResourceDestroyedEventArgs> OnResourceDestroyed = new FreneticScriptEventHandler<ResourceDestroyedEventArgs>();
 
         public static FreneticScriptEventHandler<StructureDamagedEventArgs> OnStructureDamaged = new FreneticScriptEventHandler<StructureDamagedEventArgs>();
 
-        public static FreneticScriptEventHandler<StructureDeathEventArgs> OnStructureDeath = new FreneticScriptEventHandler<StructureDeathEventArgs>();
+        public static FreneticScriptEventHandler<StructureDestroyedEventArgs> OnStructureDestroyed = new FreneticScriptEventHandler<StructureDestroyedEventArgs>();
 
         public static FreneticScriptEventHandler<VehicleDamagedEventArgs> OnVehicleDamaged = new FreneticScriptEventHandler<VehicleDamagedEventArgs>();
 
-        public static FreneticScriptEventHandler<VehicleExplodeEventArgs> OnVehicleExplode = new FreneticScriptEventHandler<VehicleExplodeEventArgs>();
+        public static FreneticScriptEventHandler<VehicleDestroyedEventArgs> OnVehicleDestroyed = new FreneticScriptEventHandler<VehicleDestroyedEventArgs>();
 
         public static FreneticScriptEventHandler<ZombieDamagedEventArgs> OnZombieDamaged = new FreneticScriptEventHandler<ZombieDamagedEventArgs>();
 

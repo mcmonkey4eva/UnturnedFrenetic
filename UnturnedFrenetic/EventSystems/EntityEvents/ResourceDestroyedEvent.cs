@@ -10,26 +10,26 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 namespace UnturnedFrenetic.EventSystems.EntityEvents
 {
     // <--[event]
-    // @Name ResourceDeathEvent
-    // @Fired When a resource dies.
+    // @Name ResourceDestroyedEvent
+    // @Fired When a resource is destroyed.
     // @Updated 2016/04/29
     // @Authors Morphan1
     // @Group Player
     // @Cancellable true
     // @Description
-    // This event will fire when a resource dies for any reason.
-    // @Context resource ResourceTag returns the resource that is dying.
-    // @Context amount TextTag returns the amount of damage being done to kill the resource. Editable.
+    // This event will fire when a resource is destroyed for any reason.
+    // @Context resource ResourceTag returns the resource that is being destroyed.
+    // @Context amount TextTag returns the amount of damage being done to destroy the resource. Editable.
     // -->
 
-    public class ResourceDeathScriptEvent : ScriptEvent
+    public class ResourceDestroyedScriptEvent : ScriptEvent
     {
         /// <summary>
-        /// Constructs the ResourceDeath script event.
+        /// Constructs the ResourceDestroyed script event.
         /// </summary>
         /// <param name="system">The relevant command system.</param>
-        public ResourceDeathScriptEvent(Commands system)
-            : base(system, "resourcedeathevent", true)
+        public ResourceDestroyedScriptEvent(Commands system)
+            : base(system, "resourcedestroyedevent", true)
         {
         }
 
@@ -39,9 +39,9 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         /// <param name="prio">The priority.</param>
         public override void RegisterPriority(int prio)
         {
-            if (!UnturnedFreneticEvents.OnResourceDeath.Contains(Run, prio))
+            if (!UnturnedFreneticEvents.OnResourceDestroyed.Contains(Run, prio))
             {
-                UnturnedFreneticEvents.OnResourceDeath.Add(Run, prio);
+                UnturnedFreneticEvents.OnResourceDestroyed.Add(Run, prio);
             }
         }
 
@@ -51,9 +51,9 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         /// <param name="prio">The priority.</param>
         public override void DeregisterPriority(int prio)
         {
-            if (UnturnedFreneticEvents.OnResourceDeath.Contains(Run, prio))
+            if (UnturnedFreneticEvents.OnResourceDestroyed.Contains(Run, prio))
             {
-                UnturnedFreneticEvents.OnResourceDeath.Remove(Run, prio);
+                UnturnedFreneticEvents.OnResourceDestroyed.Remove(Run, prio);
             }
         }
 
@@ -63,9 +63,9 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         /// <param name="prio">The priority to run with.</param>
         /// <param name="oevt">The details of the script to be ran.</param>
         /// <returns>The event details after firing.</returns>
-        public void Run(int prio, ResourceDeathEventArgs oevt)
+        public void Run(int prio, ResourceDestroyedEventArgs oevt)
         {
-            ResourceDeathScriptEvent evt = (ResourceDeathScriptEvent)Duplicate();
+            ResourceDestroyedScriptEvent evt = (ResourceDestroyedScriptEvent)Duplicate();
             evt.Cancelled = oevt.Cancelled;
             evt.Resource = oevt.Resource;
             evt.Amount = oevt.Amount;
@@ -75,7 +75,7 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         }
 
         /// <summary>
-        /// The resource that is dying.
+        /// The resource that is being destroyed.
         /// </summary>
         public ResourceTag Resource;
 
@@ -102,7 +102,7 @@ namespace UnturnedFrenetic.EventSystems.EntityEvents
         }
     }
 
-    public class ResourceDeathEventArgs : EventArgs
+    public class ResourceDestroyedEventArgs : EventArgs
     {
         public ResourceTag Resource;
         public NumberTag Amount;

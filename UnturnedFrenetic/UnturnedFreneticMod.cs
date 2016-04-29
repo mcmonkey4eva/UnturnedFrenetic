@@ -179,10 +179,10 @@ namespace UnturnedFrenetic
             // TODO: causes?
             if (amount >= resource.health)
             {
-                ResourceDeathEventArgs deathevt = new ResourceDeathEventArgs();
+                ResourceDestroyedEventArgs deathevt = new ResourceDestroyedEventArgs();
                 deathevt.Resource = new ResourceTag(resource);
                 deathevt.Amount = new NumberTag(amount);
-                UnturnedFreneticEvents.OnResourceDeath.Fire(deathevt);
+                UnturnedFreneticEvents.OnResourceDestroyed.Fire(deathevt);
                 amount = (ushort)deathevt.Amount.Internal;
                 return deathevt.Cancelled;
             }
@@ -199,10 +199,10 @@ namespace UnturnedFrenetic
             // TODO: causes?
             if (amount >= barricade.health)
             {
-                BarricadeDeathEventArgs deathevt = new BarricadeDeathEventArgs();
+                BarricadeDestroyedEventArgs deathevt = new BarricadeDestroyedEventArgs();
                 deathevt.Barricade = new BarricadeTag(barricade);
                 deathevt.Amount = new NumberTag(amount);
-                UnturnedFreneticEvents.OnBarricadeDeath.Fire(deathevt);
+                UnturnedFreneticEvents.OnBarricadeDestroyed.Fire(deathevt);
                 amount = (ushort)deathevt.Amount.Internal;
                 return deathevt.Cancelled;
             }
@@ -219,10 +219,10 @@ namespace UnturnedFrenetic
             // TODO: causes?
             if (amount >= structure.health)
             {
-                StructureDeathEventArgs deathevt = new StructureDeathEventArgs();
+                StructureDestroyedEventArgs deathevt = new StructureDestroyedEventArgs();
                 deathevt.Structure = new StructureTag(structure);
                 deathevt.Amount = new NumberTag(amount);
-                UnturnedFreneticEvents.OnStructureDeath.Fire(deathevt);
+                UnturnedFreneticEvents.OnStructureDestroyed.Fire(deathevt);
                 amount = (ushort)deathevt.Amount.Internal;
                 return deathevt.Cancelled;
             }
@@ -239,11 +239,11 @@ namespace UnturnedFrenetic
             // TODO: causes?
             if (!repairable && (vehicle.isDead || amount >= vehicle.health))
             {
-                VehicleExplodeEventArgs explodeevt = new VehicleExplodeEventArgs();
+                VehicleDestroyedEventArgs explodeevt = new VehicleDestroyedEventArgs();
                 explodeevt.Vehicle = new VehicleTag(vehicle);
                 explodeevt.Amount = new NumberTag(amount);
                 explodeevt.Repairable = new BooleanTag(repairable);
-                UnturnedFreneticEvents.OnVehicleExplode.Fire(explodeevt);
+                UnturnedFreneticEvents.OnVehicleDestroyed.Fire(explodeevt);
                 amount = (ushort)explodeevt.Amount.Internal;
                 repairable = explodeevt.Repairable.Internal;
                 return explodeevt.Cancelled;
