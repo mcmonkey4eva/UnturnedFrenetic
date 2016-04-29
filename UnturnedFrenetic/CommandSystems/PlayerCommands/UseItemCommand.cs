@@ -47,21 +47,20 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
             MaximumArguments = 3;
             ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
             {
-                (input) => input,
-                (input) =>
-                {
-                    string low = input.ToString().ToLowerFast();
-                    if (low == "primary" || low == "secondary")
-                    {
-                        return new TextTag(low);
-                    }
-                    return null;
-                },
-                (input) =>
-                {
-                    return BooleanTag.TryFor(input);
-                }
+                TemplateObject.Basic_For,
+                verify,
+                BooleanTag.TryFor
             };
+        }
+
+        TemplateObject verify(TemplateObject input)
+        {
+            string low = input.ToString().ToLowerFast();
+            if (low == "primary" || low == "secondary")
+            {
+                return new TextTag(low);
+            }
+            return null;
         }
 
         public override void Execute(CommandQueue queue, CommandEntry entry)

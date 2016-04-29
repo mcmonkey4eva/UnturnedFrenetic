@@ -1258,7 +1258,7 @@
             <para/>Fires when a a script is going to be ran, cancellable.
             <para/>Contains the name of the script only.
             <para/>Second: <see cref="F:FreneticScript.CommandSystem.QueueCmds.RunCommand.OnScriptRanEvent"/>.
-            <para/>Third: <see cref="F:FreneticScript.CommandSystem.QueueCmds.RunCommand.OnScriptRanPostEvent"/>
+            <para/>Third: <see cref="F:FreneticScript.CommandSystem.QueueCmds.RunCommand.OnScriptRanPostEvent"/>.
             </summary>
         </member>
         <member name="F:FreneticScript.CommandSystem.QueueCmds.RunCommand.OnScriptRanEvent">
@@ -2744,6 +2744,13 @@
             </summary>
             <param name="_text">The text to construct it from.</param>
         </member>
+        <member name="M:FreneticScript.TagHandlers.Objects.TextTag.For(FreneticScript.TagHandlers.TemplateObject)">
+            <summary>
+            Converts a template object to a text tag.
+            </summary>
+            <param name="text">The text input.</param>
+            <returns>A valid text tag.</returns>
+        </member>
         <member name="M:FreneticScript.TagHandlers.Objects.TextTag.Handle(FreneticScript.TagHandlers.TagData)">
             <summary>
             Parse any direct tag input values.
@@ -3172,6 +3179,13 @@
             Parse any direct tag input values.
             </summary>
             <param name="data">The input tag data.</param>
+        </member>
+        <member name="M:FreneticScript.TagHandlers.TemplateObject.Basic_For(FreneticScript.TagHandlers.TemplateObject)">
+            <summary>
+            Returns the input as-is, for use with ObjecTypes.
+            </summary>
+            <param name="obj">The object input.</param>
+            <returns>The object input.</returns>
         </member>
         <member name="M:FreneticScript.TagHandlers.TemplateObject.Set(System.String[],FreneticScript.TagHandlers.TemplateObject)">
             <summary>

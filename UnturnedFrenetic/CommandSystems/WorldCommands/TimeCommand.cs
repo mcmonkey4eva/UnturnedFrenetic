@@ -40,11 +40,8 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
             MaximumArguments = 1;
             ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
             {
-                (input) => input,
-                (input) =>
-                {
-                    return IntegerTag.TryFor(input);
-                }
+                TemplateObject.Basic_For,
+                IntegerTag.TryFor
             };
         }
 

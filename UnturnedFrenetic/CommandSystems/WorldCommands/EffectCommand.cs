@@ -38,11 +38,8 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
             MaximumArguments = 2;
             ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
             {
-                (input) => input, // TODO: Validate effect?
-                (input) =>
-                {
-                    return LocationTag.For(input);
-                }
+                TemplateObject.Basic_For,
+                LocationTag.For
             };
         }
 

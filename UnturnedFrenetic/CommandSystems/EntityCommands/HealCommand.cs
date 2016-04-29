@@ -39,11 +39,8 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             MaximumArguments = 2;
             ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
             {
-                (input) => input,
-                (input) =>
-                {
-                    return NumberTag.TryFor(input);
-                }
+                TemplateObject.Basic_For,
+                NumberTag.TryFor
             };
         }
 

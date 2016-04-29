@@ -40,11 +40,8 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             MaximumArguments = 2;
             ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
             {
-                (input) => input, // TODO: Maybe validate entity type?
-                (input) =>
-                {
-                    return LocationTag.For(input);
-                }
+                TemplateObject.Basic_For, // TODO: Maybe validate entity type?
+                LocationTag.For
             };
         }
 

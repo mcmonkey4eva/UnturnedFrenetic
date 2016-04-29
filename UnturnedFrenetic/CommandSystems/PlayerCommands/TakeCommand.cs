@@ -38,12 +38,9 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
             MaximumArguments = 3;
             ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
             {
-                (input) => input,
-                (input) => input,
-                (input) =>
-                {
-                    return NumberTag.TryFor(input);
-                }
+                TemplateObject.Basic_For,
+                TemplateObject.Basic_For,
+                NumberTag.TryFor
             };
         }
 
