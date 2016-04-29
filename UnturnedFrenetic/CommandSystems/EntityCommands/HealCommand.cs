@@ -117,6 +117,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     {
                         entry.Good(queue, "Successfully healed barricade " + TagParser.Escape(barricade.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
                     }
+                    return;
                 }
                 ResourceTag resource;
                 if (entity.TryGetResource(out resource))
@@ -132,6 +133,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     {
                         entry.Good(queue, "Successfully healed resource " + TagParser.Escape(resource.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
                     }
+                    return;
                 }
                 StructureTag structure;
                 if (entity.TryGetStructure(out structure))
@@ -147,6 +149,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     {
                         entry.Good(queue, "Successfully healed structure " + TagParser.Escape(structure.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
                     }
+                    return;
                 }
                 VehicleTag vehicle;
                 if (entity.TryGetVehicle(out vehicle))
@@ -156,6 +159,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     {
                         entry.Good(queue, "Successfully healed vehicle " + TagParser.Escape(vehicle.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
                     }
+                    return;
                 }
                 queue.HandleError(entry, "That entity can't be healed!");
             }
