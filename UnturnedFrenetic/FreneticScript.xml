@@ -1399,6 +1399,23 @@
             <param name="name">The filename to read.</param>
             <returns>The read text file.</returns>
         </member>
+        <member name="M:FreneticScript.CommandSystem.Outputter.ReadDataFile(System.String)">
+            <summary>
+            Used to read a text file, generally generic data for a script.
+            File format is along the lines of "mymap/mydata.yml".
+            Throw a System.IO.FileNotFoundException if file does not exist.
+            </summary>
+            <param name="name">The filename to read.</param>
+            <returns>The read data file.</returns>
+        </member>
+        <member name="M:FreneticScript.CommandSystem.Outputter.WriteDataFile(System.String,System.Byte[])">
+            <summary>
+            Used to write a text file, generally generic data for a script.
+            File format is along the lines of "mymap/mydata.yml".
+            </summary>
+            <param name="name">The filename to write.</param>
+            <param name="data">The data to write to file.</param>
+        </member>
         <member name="F:FreneticScript.CommandSystem.Outputter.Initializing">
             <summary>
             Whether the game is still setting up currently.
@@ -1901,6 +1918,11 @@
         <member name="T:FreneticScript.FreneticScriptUtilities">
             <summary>
             Utilities for FreneticScript.
+            </summary>
+        </member>
+        <member name="F:FreneticScript.FreneticScriptUtilities.Enc">
+            <summary>
+            The encoding used by FrenetiCScript.
             </summary>
         </member>
         <member name="M:FreneticScript.FreneticScriptUtilities.StringToLong(System.String)">
@@ -3336,6 +3358,144 @@
         </member>
         <member name="F:FreneticScript.TextStyle.Color_Importantinfo">
             <summary>Important information style: ^r^3</summary>
+        </member>
+        <member name="T:FreneticScript.YAMLConfiguration">
+            <summary>
+            Represents a "YAML Ain't Markup Language" data container.
+            </summary>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.#ctor(System.String)">
+            <summary>
+            Constructs a YAML configuration from the text of a YAML file.
+            </summary>
+            <param name="input">The text to construct from, or an empty string for an empty configuration.</param>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.#ctor(System.Collections.Generic.Dictionary{System.Object,System.Object})">
+            <summary>
+            Constructs a YAML configuration from known data.
+            </summary>
+            <param name="datas">The data to use.</param>
+        </member>
+        <member name="F:FreneticScript.YAMLConfiguration.Data">
+            <summary>
+            The internal data of this YAMLConfiguration.
+            </summary>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.IsList(System.String)">
+            <summary>
+            Returns whether a specified path is a list.
+            </summary>
+            <param name="path">The path to read.</param>
+            <returns>Whether it is a list.</returns>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.ReadStringList(System.String)">
+            <summary>
+            Reads a path as a string list.
+            </summary>
+            <param name="path">The path to read.</param>
+            <returns>The string list, or null.</returns>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.ReadList(System.String)">
+            <summary>
+            Reads a path as a list of objects.
+            </summary>
+            <param name="path">The path to read.</param>
+            <returns>The object list, or null.</returns>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.ReadFloat(System.String,System.Single)">
+            <summary>
+            Reads a path as a single-precision floating point number.
+            </summary>
+            <param name="path">The path to read.</param>
+            <param name="def">The default value to return if the path is invalid.</param>
+            <returns>The value.</returns>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.ReadDouble(System.String,System.Double)">
+            <summary>
+            Reads a path as a double-precision floating point number.
+            </summary>
+            <param name="path">The path to read.</param>
+            <param name="def">The default value to return if the path is invalid.</param>
+            <returns>The value.</returns>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.ReadInt(System.String,System.Int32)">
+            <summary>
+            Reads a path as a 32-bit integer number.
+            </summary>
+            <param name="path">The path to read.</param>
+            <param name="def">The default value to return if the path is invalid.</param>
+            <returns>The value.</returns>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.ReadLong(System.String,System.Int64)">
+            <summary>
+            Reads a path as a 64-bit integer number.
+            </summary>
+            <param name="path">The path to read.</param>
+            <param name="def">The default value to return if the path is invalid.</param>
+            <returns>The value.</returns>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.ReadString(System.String,System.String)">
+            <summary>
+            Reads a path as a string.
+            </summary>
+            <param name="path">The path to read.</param>
+            <param name="def">The default value to return if the path is invalid.</param>
+            <returns>The value.</returns>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.Read(System.String,System.Object)">
+            <summary>
+            Reads a path as an object.
+            </summary>
+            <param name="path">The path to read.</param>
+            <param name="def">The default value to return if the path is invalid.</param>
+            <returns>The value.</returns>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.HasKey(System.String,System.String)">
+            <summary>
+            Returns whether the key at the path exists.
+            </summary>
+            <param name="path">The base path, can be null.</param>
+            <param name="key">The key to use.</param>
+            <returns>Whether the key exists.</returns>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.GetKeys(System.String)">
+            <summary>
+            Gets a list of all keys at the specified path.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>The list of all keys.</returns>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.GetConfigurationSection(System.String)">
+            <summary>
+            Gets a section of this YAML configuration.
+            </summary>
+            <param name="path">The base path to use.</param>
+            <returns>The section.</returns>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.Default(System.String,System.Object)">
+            <summary>
+            Sets an object at a path if the path does not exist yet.
+            </summary>
+            <param name="path">The path.</param>
+            <param name="val">The object.</param>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.Set(System.String,System.Object)">
+            <summary>
+            Force-sets an object at a path.
+            </summary>
+            <param name="path">The path.</param>
+            <param name="val">The object.</param>
+        </member>
+        <member name="F:FreneticScript.YAMLConfiguration.Changed">
+            <summary>
+            Fired when the YAMLConfiguration changes.
+            </summary>
+        </member>
+        <member name="M:FreneticScript.YAMLConfiguration.SaveToString">
+            <summary>
+            Saves the entire YAML configuration to a file-ready string.
+            </summary>
+            <returns>The string.</returns>
         </member>
     </members>
 </doc>

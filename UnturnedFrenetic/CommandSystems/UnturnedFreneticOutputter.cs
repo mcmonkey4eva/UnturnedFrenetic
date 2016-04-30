@@ -43,5 +43,17 @@ namespace UnturnedFrenetic.CommandSystems
         {
             SysConsole.WriteLine(text);
         }
+
+        public override byte[] ReadDataFile(string name)
+        {
+            return File.ReadAllBytes(Environment.CurrentDirectory + "/script_data/" + name.Replace("..", "_")); // TODO: Proper sandbox!
+        }
+
+        public override void WriteDataFile(string name, byte[] data)
+        {
+            string path = Environment.CurrentDirectory + "/script_data/" + name.Replace("..", "_"); // TODO: Proper sandbox!
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            File.WriteAllBytes(path, data);
+        }
     }
 }
