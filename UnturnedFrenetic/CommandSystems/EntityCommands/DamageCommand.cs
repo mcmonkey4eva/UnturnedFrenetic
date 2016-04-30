@@ -80,7 +80,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     if (entry.ShouldShowGood(queue))
                     {
 
-                        entry.Good(queue, "Successfully damaged player " + TagParser.Escape(player.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                        entry.Good(queue, "Successfully damaged a player by " + TagParser.Escape(num.ToString()) + "!");
                     }
                     return;
                 }
@@ -90,7 +90,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     zombie.Internal.askDamage((byte)num.Internal, Vector3.zero, out kill);
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully damaged zombie " + TagParser.Escape(zombie.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                        entry.Good(queue, "Successfully damaged a zombie by " + TagParser.Escape(num.ToString()) + "!");
                     }
                     return;
                 }
@@ -100,7 +100,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     animal.Internal.askDamage((byte)num.Internal, Vector3.zero, out kill);
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully damaged animal " + TagParser.Escape(animal.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                        entry.Good(queue, "Successfully damaged an animal by " + TagParser.Escape(num.ToString()) + "!");
                     }
                     return;
                 }
@@ -110,7 +110,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     barricade.InternalData.barricade.askDamage((ushort)num.Internal);
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully damaged barricade " + TagParser.Escape(barricade.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                        entry.Good(queue, "Successfully damaged a barricade by " + TagParser.Escape(num.ToString()) + "!");
                     }
                     return;
                 }
@@ -120,7 +120,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     resource.Internal.askDamage((ushort)num.Internal);
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully damaged resource " + TagParser.Escape(resource.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                        entry.Good(queue, "Successfully damaged a resource by " + TagParser.Escape(num.ToString()) + "!");
                     }
                     return;
                 }
@@ -130,7 +130,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     structure.InternalData.structure.askDamage((ushort)num.Internal);
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully damaged structure " + TagParser.Escape(structure.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                        entry.Good(queue, "Successfully damaged a structure by " + TagParser.Escape(num.ToString()) + "!");
                     }
                     return;
                 }
@@ -140,7 +140,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     vehicle.Internal.askDamage((ushort)num.Internal, false);
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully damaged vehicle " + TagParser.Escape(vehicle.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                        entry.Good(queue, "Successfully damaged a vehicle by " + TagParser.Escape(num.ToString()) + "!");
                     }
                     return;
                 }
