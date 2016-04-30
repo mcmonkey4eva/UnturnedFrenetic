@@ -16,6 +16,9 @@ namespace UnturnedFreneticInjector.Injectables
             FieldDefinition field = GetField(zombietype, "target");
             field.IsPrivate = false;
             field.IsPublic = true;
+            FieldDefinition fieldistick = GetField(zombietype, "isTicking");
+            fieldistick.IsPrivate = false;
+            fieldistick.IsPublic = true;
             FieldDefinition fieldseeker = GetField(zombietype, "seeker");
             fieldseeker.IsPrivate = false;
             fieldseeker.IsPublic = true;

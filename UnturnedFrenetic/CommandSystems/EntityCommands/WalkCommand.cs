@@ -63,6 +63,11 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 zombie.Internal.seeker.canMove = true;
                 zombie.Internal.seeker.canSearch = true;
                 zombie.Internal.path = EZombiePath.RUSH; // TODO: Option for this?
+                if (!zombie.Internal.isTicking)
+                {
+                    zombie.Internal.isTicking = true;
+                    ZombieManager.tickingZombies.Add(zombie.Internal);
+                }
                 if (entry.ShouldShowGood(queue))
                 {
                     entry.Good(queue, "Successfully started a zombie walking to " + TagParser.Escape(loc.ToString()) + "!");
