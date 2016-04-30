@@ -16,6 +16,7 @@ using FreneticScript.TagHandlers;
 using UnturnedFrenetic.EventSystems.EntityEvents;
 using System.Threading;
 using System.Globalization;
+using UnturnedFrenetic.CommandSystems.EntityCommands;
 
 namespace UnturnedFrenetic
 {
@@ -84,7 +85,26 @@ namespace UnturnedFrenetic
             return evt.Cancelled;
         }
 
+        public static bool PlayerHealed(Player player, ref byte amount, ref bool healBleeding, ref bool healBroken)
+        {
+            // TODO: Event!
+            UFMHealthController healthController = player.gameObject.GetComponent<UFMHealthController>();
+            if (healthController != null)
+            {
+                healthController.Heal(amount);
+            }
+            return false;
+        }
+
         public static bool PlayerDamaged(Player player, ref byte amount, ref Vector3 ragdoll, ref EDeathCause deathCause, ref ELimb limb, CSteamID killer, object attacker)
+        {
+            uint uintAmount = amount;
+            bool cancelled = PlayerDamaged(player, ref uintAmount, ref ragdoll, ref deathCause, ref limb, killer, attacker, false);
+            amount = (byte)uintAmount;
+            return cancelled;
+        }
+
+        public static bool PlayerDamaged(Player player, ref uint amount, ref Vector3 ragdoll, ref EDeathCause deathCause, ref ELimb limb, CSteamID killer, object attacker, bool fromUFM)
         {
             TemplateObject attackerTag = null;
             if (killer != null && killer != CSteamID.Nil && killer != Provider.server)
@@ -107,7 +127,9 @@ namespace UnturnedFrenetic
                 }
             }
             PlayerTag playerTag = new PlayerTag(player.channel.owner);
-            if (amount >= player.life.health)
+            UFMHealthController healthController = player.gameObject.GetComponent<UFMHealthController>();
+            uint health = healthController != null ? healthController.health : player.life.health;
+            if (amount >= health)
             {
                 PlayerDeathEventArgs deathevt = new PlayerDeathEventArgs();
                 deathevt.Player = playerTag;
@@ -116,16 +138,30 @@ namespace UnturnedFrenetic
                 deathevt.Limb = new TextTag(limb.ToString());
                 deathevt.Killer = attackerTag;
                 UnturnedFreneticEvents.OnPlayerDeath.Fire(deathevt);
-                amount = (byte)deathevt.Amount.Internal;
-                return deathevt.Cancelled || EntityDeath(playerTag, ref amount);
+                amount = (uint)deathevt.Amount.Internal;
+                if (!deathevt.Cancelled && !EntityDeath(playerTag, ref amount) && healthController != null)
+                {
+                    healthController.Damage(amount);
+                    player.life.ragdoll = ragdoll;
+                    amount = (uint)(((double)amount / healthController.maxHealth) * 100.0);
+                    return false;
+                }
+                return true;
             }
             PlayerDamagedEventArgs evt = new PlayerDamagedEventArgs();
             evt.Player = playerTag;
             evt.Amount = new NumberTag(amount);
             evt.Attacker = attackerTag;
             UnturnedFreneticEvents.OnPlayerDamaged.Fire(evt);
-            amount = (byte)evt.Amount.Internal;
-            return evt.Cancelled || EntityDamaged(playerTag, ref amount);
+            amount = (uint)evt.Amount.Internal;
+            if (!evt.Cancelled && !EntityDamaged(playerTag, ref amount) && healthController != null)
+            {
+                healthController.Damage(amount);
+                player.life.ragdoll = ragdoll;
+                amount = (uint)(((double)amount / healthController.maxHealth) * 100.0);
+                return false;
+            }
+            return true;
         }
 
         public static bool PlayerShoot(Player player, UseableGun gun)
@@ -286,6 +322,28 @@ namespace UnturnedFrenetic
             evt.Amount = new NumberTag(amount);
             UnturnedFreneticEvents.OnEntityDamaged.Fire(evt);
             amount = (ushort)evt.Amount.Internal;
+            return evt.Cancelled;
+        }
+
+        public static bool EntityDamaged(TemplateObject entity, ref uint amount)
+        {
+            // TODO: causes?
+            EntityDamagedEventArgs evt = new EntityDamagedEventArgs();
+            evt.Entity = entity;
+            evt.Amount = new NumberTag(amount);
+            UnturnedFreneticEvents.OnEntityDamaged.Fire(evt);
+            amount = (uint)evt.Amount.Internal;
+            return evt.Cancelled;
+        }
+
+        public static bool EntityDeath(TemplateObject entity, ref uint amount)
+        {
+            // TODO: causes?
+            EntityDeathEventArgs evt = new EntityDeathEventArgs();
+            evt.Entity = entity;
+            evt.Amount = new NumberTag(amount);
+            UnturnedFreneticEvents.OnEntityDeath.Fire(evt);
+            amount = (uint)evt.Amount.Internal;
             return evt.Cancelled;
         }
 

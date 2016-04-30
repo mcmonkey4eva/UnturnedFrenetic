@@ -11,7 +11,7 @@ using FreneticScript.TagHandlers.Objects;
 
 namespace UnturnedFrenetic.CommandSystems.EntityCommands
 {
-    class MaxHealthCommand : AbstractCommand
+    public class MaxHealthCommand : AbstractCommand
     {
         // <--[command]
         // @Name maxhealth
@@ -73,7 +73,61 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 }
                 return;
             }
+            PlayerTag player;
+            if (entity.TryGetPlayer(out player))
+            {
+                GameObject playerObj = player.Internal.player.gameObject;
+                UFMHealthController controller = playerObj.GetComponent<UFMHealthController>();
+                if (controller == null)
+                {
+                    controller = playerObj.AddComponent<UFMHealthController>();
+                }
+                controller.maxHealth = (uint)num.Internal;
+                PlayerLife life = player.Internal.player.life;
+                byte curr = life.health;
+                controller.health = curr >= controller.maxHealth ? controller.maxHealth : curr;
+                life._health = (byte)(((double)controller.health / controller.maxHealth) * 100.0);
+                life.channel.send("tellHealth", ESteamCall.OWNER, ESteamPacket.UPDATE_RELIABLE_BUFFER, new object[]
+                {
+                    life.health
+                });
+                if (entry.ShouldShowGood(queue))
+                {
+                    entry.Good(queue, "Successfully set max health of a player to " + controller.maxHealth + "!");
+                }
+                return;
+            }
             queue.HandleError(entry, "That entity can't be healed!");
+        }
+    }
+
+    public class UFMHealthController : MonoBehaviour
+    {
+        public uint health;
+        public uint maxHealth;
+
+        public void Damage(uint amount)
+        {
+            if (amount >= health)
+            {
+                health = 0;
+            }
+            else
+            {
+                health -= amount;
+            }
+        }
+
+        public void Heal(uint amount)
+        {
+            if (amount >= maxHealth)
+            {
+                health = maxHealth;
+            }
+            else
+            {
+                health += amount;
+            }
         }
     }
 }

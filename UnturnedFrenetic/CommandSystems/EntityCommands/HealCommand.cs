@@ -62,10 +62,27 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 PlayerTag player;
                 if (entity.TryGetPlayer(out player))
                 {
-                    player.Internal.player.life.askHeal((byte)num.Internal, false, false);
+                    UFMHealthController healthController = player.Internal.player.gameObject.GetComponent<UFMHealthController>();
+                    uint amount = (uint)num.Internal;
+                    if (healthController != null)
+                    {
+                        healthController.Heal(amount);
+                        amount = (uint)(((double)amount / healthController.maxHealth) * 100.0);
+                    }
+                    PlayerLife life = player.Internal.player.life;
+                    life._health += (byte)amount;
+                    if (life.health > 100)
+                    {
+                        life._health = 100;
+                    }
+                    life.channel.send("tellHealth", ESteamCall.OWNER, ESteamPacket.UPDATE_RELIABLE_BUFFER, new object[]
+                    {
+                        life.health
+                    });
                     if (entry.ShouldShowGood(queue))
                     {
-                        entry.Good(queue, "Successfully healed a player to a new health value of " + player.Internal.player.life.health + "!");
+                        uint finalHealth = healthController != null ? healthController.health : life.health;
+                        entry.Good(queue, "Successfully healed a player to a new health value of " + finalHealth + "!");
                     }
                     return;
                 }

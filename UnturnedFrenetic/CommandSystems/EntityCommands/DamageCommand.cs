@@ -65,13 +65,31 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 if (entity.TryGetPlayer(out player))
                 {
                     PlayerLife life = player.Internal.player.life;
-                    if (num.Internal >= life.health)
+                    UFMHealthController healthController = player.Internal.player.GetComponent<UFMHealthController>();
+                    uint health = healthController != null ? healthController.health : life.health;
+                    if (num.Internal >= health)
                     {
-                        life.askDamage((byte)num.Internal, Vector3.zero, EDeathCause.KILL, ELimb.SPINE, CSteamID.Nil, out kill, null);
+                        uint amount = (uint)num.Internal;
+                        if (healthController != null)
+                        {
+                            healthController.health = 0;
+                        }
+                        if (amount >= byte.MaxValue) // TODO: better handling
+                        {
+                            life._health = 0;
+                            amount = 1;
+                        }
+                        life.askDamage((byte)amount, Vector3.zero, EDeathCause.KILL, ELimb.SPINE, CSteamID.Nil, out kill, null);
                     }
                     else
                     {
-                        life._health -= (byte)num.Internal;
+                        uint amount = (uint)num.Internal;
+                        if (healthController != null)
+                        {
+                            healthController.Damage((uint)num.Internal);
+                            amount = (uint)(((double)amount / healthController.maxHealth) * 100.0);
+                        }
+                        life._health -= (byte)amount;
                         life.channel.send("tellHealth", ESteamCall.OWNER, ESteamPacket.UPDATE_RELIABLE_BUFFER, new object[]
                         {
                             life.health

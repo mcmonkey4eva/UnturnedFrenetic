@@ -14,6 +14,7 @@ namespace UnturnedFrenetic
         public static EntityType DEER = new EntityType("Deer", EntityAssetType.ANIMAL);
         public static EntityType MOOSE = new EntityType("Moose", EntityAssetType.ANIMAL);
         public static EntityType PIG = new EntityType("Pig", EntityAssetType.ANIMAL);
+        public static EntityType REINDEER = new EntityType("Reindeer", EntityAssetType.ANIMAL);
         public static EntityType WOLF = new EntityType("Wolf", EntityAssetType.ANIMAL);
         public static EntityType ZOMBIE = new EntityType("Zombie", EntityAssetType.ZOMBIE);
 
@@ -39,6 +40,8 @@ namespace UnturnedFrenetic
                     return MOOSE;
                 case "pig":
                     return PIG;
+                case "reindeer":
+                    return REINDEER;
                 case "wolf":
                     return WOLF;
                 case "zombie":

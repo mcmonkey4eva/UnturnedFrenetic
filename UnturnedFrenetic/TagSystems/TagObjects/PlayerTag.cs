@@ -6,6 +6,7 @@ using FreneticScript;
 using FreneticScript.TagHandlers;
 using FreneticScript.TagHandlers.Objects;
 using SDG.Unturned;
+using UnturnedFrenetic.CommandSystems.EntityCommands;
 
 namespace UnturnedFrenetic.TagSystems.TagObjects
 {
@@ -113,11 +114,30 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Name PlayerTag.health
                 // @Group Status
                 // @ReturnType NumberTag
-                // @Returns the player's current health level. Maximum health level is 100.
+                // @Returns the player's current health level.
                 // @Example "bob" .health returns "56".
                 // -->
                 case "health":
+                    UFMHealthController healthController = Internal.player.gameObject.GetComponent<UFMHealthController>();
+                    if (healthController != null)
+                    {
+                        return new NumberTag(healthController.health).Handle(data.Shrink());
+                    }
                     return new NumberTag(Internal.player.life.health).Handle(data.Shrink());
+                // <--[tag]
+                // @Name PlayerTag.max_health
+                // @Group Status
+                // @ReturnType NumberTag
+                // @Returns the player's current maximum health level.
+                // @Example "bob" .health returns "100".
+                // -->
+                case "max_health":
+                    UFMHealthController controller = Internal.player.gameObject.GetComponent<UFMHealthController>();
+                    if (controller != null)
+                    {
+                        return new NumberTag(controller.maxHealth).Handle(data.Shrink());
+                    }
+                    return new NumberTag(100).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.food
                 // @Group Status
