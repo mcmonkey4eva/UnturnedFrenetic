@@ -63,7 +63,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             {
                 Zombie inZomb = zombie.Internal;
                 inZomb.maxHealth = (ushort)num.Internal;
-                if (inZomb.health < inZomb.maxHealth)
+                if (inZomb.health > inZomb.maxHealth)
                 {
                     inZomb.health = inZomb.maxHealth;
                 }
