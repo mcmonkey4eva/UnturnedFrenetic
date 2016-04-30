@@ -25,7 +25,7 @@ namespace UnturnedFreneticInjector.Injectables
                     Instruction.Create(OpCodes.Ldloc_0),
                     // "Call the connect method with parameter 'steamPending' and returning a bool.
                     Instruction.Create(OpCodes.Call, connectingmethod),
-                    // If the return is true, jump ahead to the original 45th instruction.
+                    // If the return is false, jump ahead to the original 45th instruction.
                     Instruction.Create(OpCodes.Brfalse, validatebody.Instructions[45]),
                     // Otherwise,return now.
                     Instruction.Create(OpCodes.Ret)

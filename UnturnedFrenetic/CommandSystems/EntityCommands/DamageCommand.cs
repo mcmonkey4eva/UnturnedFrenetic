@@ -87,9 +87,8 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                         if (healthController != null)
                         {
                             healthController.Damage((uint)num.Internal);
-                            amount = (uint)(((double)amount / healthController.maxHealth) * 100.0);
                         }
-                        life._health -= (byte)amount;
+                        life._health = healthController.Translate();
                         life.channel.send("tellHealth", ESteamCall.OWNER, ESteamPacket.UPDATE_RELIABLE_BUFFER, new object[]
                         {
                             life.health

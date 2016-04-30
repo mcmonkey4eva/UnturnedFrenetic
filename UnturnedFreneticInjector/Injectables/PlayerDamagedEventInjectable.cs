@@ -32,6 +32,10 @@ namespace UnturnedFreneticInjector.Injectables
             ragdollField.IsPrivate = false;
             ragdollField.IsPublic = true;
 
+            MethodDefinition damagemethod = GetMethod(lifetype, "askDamage", 6);
+            ParameterDefinition objectParam = new ParameterDefinition("obj", ParameterAttributes.None, gamedef.ImportReference(typeof(object)));
+            damagemethod.Parameters.Add(objectParam);
+
             TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
             MethodReference eventhealmethod = gamedef.ImportReference(GetMethod(modtype, "PlayerHealed", 4));
             MethodDefinition healmethod = GetMethod(lifetype, "askHeal", 3);
@@ -49,16 +53,13 @@ namespace UnturnedFreneticInjector.Injectables
                     Instruction.Create(OpCodes.Ldarga_S, healmethod.Parameters[2]),
                     // Call the PlayerHealed method with the above parameters and return a bool.
                     Instruction.Create(OpCodes.Call, eventhealmethod),
-                    // If the return is true, jump ahead to the original 0th instruction.
+                    // If the return is false, jump ahead to the original 0th instruction.
                     Instruction.Create(OpCodes.Brfalse, healbody.Instructions[0]),
                     // Otherwise,return now.
                     Instruction.Create(OpCodes.Ret)
                 });
 
             MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "PlayerDamaged", 7));
-            MethodDefinition damagemethod = GetMethod(lifetype, "askDamage", 6);
-            ParameterDefinition objectParam = new ParameterDefinition("obj", ParameterAttributes.None, gamedef.ImportReference(typeof(object)));
-            damagemethod.Parameters.Add(objectParam);
             MethodBody damagebody = damagemethod.Body;
             InjectInstructions(damagebody, 0, new Instruction[]
                 {
@@ -79,7 +80,7 @@ namespace UnturnedFreneticInjector.Injectables
                     Instruction.Create(OpCodes.Ldarg, objectParam),
                     // Call the PlayerDamaged method with the above parameters and return a bool.
                     Instruction.Create(OpCodes.Call, eventmethod),
-                    // If the return is true, jump ahead to the original 0th instruction.
+                    // If the return is false, jump ahead to the original 0th instruction.
                     Instruction.Create(OpCodes.Brfalse, damagebody.Instructions[0]),
                     // Otherwise,return now.
                     Instruction.Create(OpCodes.Ret)

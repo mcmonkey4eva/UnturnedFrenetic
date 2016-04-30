@@ -104,16 +104,16 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name PlayerTag.agro
                 // @Group Status
-                // @ReturnType NumberTag
+                // @ReturnType IntegerTag
                 // @Returns the number of zombies agro'd by this player currently.
                 // @Example "bob" .agro returns "5".
                 // -->
                 case "agro":
-                    return new NumberTag(Internal.player.agro).Handle(data.Shrink());
+                    return new IntegerTag(Internal.player.agro).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.health
                 // @Group Status
-                // @ReturnType NumberTag
+                // @ReturnType IntegerTag
                 // @Returns the player's current health level.
                 // @Example "bob" .health returns "56".
                 // -->
@@ -121,77 +121,77 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     UFMHealthController healthController = Internal.player.gameObject.GetComponent<UFMHealthController>();
                     if (healthController != null)
                     {
-                        return new NumberTag(healthController.health).Handle(data.Shrink());
+                        return new IntegerTag(healthController.health).Handle(data.Shrink());
                     }
-                    return new NumberTag(Internal.player.life.health).Handle(data.Shrink());
+                    return new IntegerTag(Internal.player.life.health).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.max_health
                 // @Group Status
-                // @ReturnType NumberTag
+                // @ReturnType IntegerTag
                 // @Returns the player's current maximum health level.
-                // @Example "bob" .health returns "100".
+                // @Example "bob" .max_health returns "100".
                 // -->
                 case "max_health":
                     UFMHealthController controller = Internal.player.gameObject.GetComponent<UFMHealthController>();
                     if (controller != null)
                     {
-                        return new NumberTag(controller.maxHealth).Handle(data.Shrink());
+                        return new IntegerTag(controller.maxHealth).Handle(data.Shrink());
                     }
-                    return new NumberTag(100).Handle(data.Shrink());
+                    return new IntegerTag(100).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.food
                 // @Group Status
-                // @ReturnType NumberTag
+                // @ReturnType IntegerTag
                 // @Returns the player's current food level. Maximum food level is 100.
                 // @Example "bob" .food returns "89".
                 // -->
                 case "food":
-                    return new NumberTag(Internal.player.life.food).Handle(data.Shrink());
+                    return new IntegerTag(Internal.player.life.food).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.water
                 // @Group Status
-                // @ReturnType NumberTag
+                // @ReturnType IntegerTag
                 // @Returns the player's current water level. Maximum water level is 100.
                 // @Example "bob" .water returns "74".
                 // -->
                 case "water":
-                    return new NumberTag(Internal.player.life.water).Handle(data.Shrink());
+                    return new IntegerTag(Internal.player.life.water).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.virus
                 // @Group Status
-                // @ReturnType NumberTag
+                // @ReturnType IntegerTag
                 // @Returns the player's current virus level. Maximum virus level is 100.
                 // @Example "bob" .virus returns "37".
                 // -->
                 case "virus":
-                    return new NumberTag(Internal.player.life.virus).Handle(data.Shrink());
+                    return new IntegerTag(Internal.player.life.virus).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.stamina
                 // @Group Status
-                // @ReturnType NumberTag
+                // @ReturnType IntegerTag
                 // @Returns the player's current stamina level. Maximum stamina level is 100.
                 // @Example "bob" .stamina returns "13".
                 // -->
                 case "stamina":
-                    return new NumberTag(Internal.player.life.stamina).Handle(data.Shrink());
+                    return new IntegerTag(Internal.player.life.stamina).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.oxygen
                 // @Group Status
-                // @ReturnType NumberTag
+                // @ReturnType IntegerTag
                 // @Returns the player's current oxygen level. Maximum oxygen level is 100.
                 // @Example "bob" .oxygen returns "42".
                 // -->
                 case "oxygen":
-                    return new NumberTag(Internal.player.life.oxygen).Handle(data.Shrink());
+                    return new IntegerTag(Internal.player.life.oxygen).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.vision
                 // @Group Status
-                // @ReturnType NumberTag
+                // @ReturnType IntegerTag
                 // @Returns the player's current vision obscurity level, for example caused by berries.
                 // @Example "bob" .vision returns "20".
                 // -->
                 case "vision":
-                    return new NumberTag(Internal.player.life.vision).Handle(data.Shrink());
+                    return new IntegerTag(Internal.player.life.vision).Handle(data.Shrink());
                 // <--[tag]
                 // @Name PlayerTag.is_bleeding
                 // @Group Status

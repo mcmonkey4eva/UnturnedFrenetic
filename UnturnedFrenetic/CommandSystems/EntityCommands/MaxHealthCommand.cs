@@ -86,7 +86,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 PlayerLife life = player.Internal.player.life;
                 byte curr = life.health;
                 controller.health = curr >= controller.maxHealth ? controller.maxHealth : curr;
-                life._health = (byte)(((double)controller.health / controller.maxHealth) * 100.0);
+                life._health = controller.Translate();
                 life.channel.send("tellHealth", ESteamCall.OWNER, ESteamPacket.UPDATE_RELIABLE_BUFFER, new object[]
                 {
                     life.health
@@ -105,6 +105,11 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
     {
         public uint health;
         public uint maxHealth;
+
+        public byte Translate()
+        {
+            return (byte)((health / (double)maxHealth) * 100.0);
+        }
 
         public void Damage(uint amount)
         {

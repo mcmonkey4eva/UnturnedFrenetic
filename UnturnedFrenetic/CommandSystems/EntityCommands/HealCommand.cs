@@ -70,11 +70,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                         amount = (uint)(((double)amount / healthController.maxHealth) * 100.0);
                     }
                     PlayerLife life = player.Internal.player.life;
-                    life._health += (byte)amount;
-                    if (life.health > 100)
-                    {
-                        life._health = 100;
-                    }
+                    life._health = healthController.Translate();
                     life.channel.send("tellHealth", ESteamCall.OWNER, ESteamPacket.UPDATE_RELIABLE_BUFFER, new object[]
                     {
                         life.health

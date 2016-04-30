@@ -26,7 +26,7 @@ namespace UnturnedFreneticInjector.Injectables
                     Instruction.Create(OpCodes.Ldarg_0),
                     // Call the PlayerShoot method with the above parameters and return a bool.
                     Instruction.Create(OpCodes.Call, eventmethod),
-                    // If the return is true, jump ahead to the original 0th instruction.
+                    // If the return is false, jump ahead to the original 0th instruction.
                     Instruction.Create(OpCodes.Brfalse, firebody.Instructions[0]),
                     // Otherwise, return now.
                     Instruction.Create(OpCodes.Ret)

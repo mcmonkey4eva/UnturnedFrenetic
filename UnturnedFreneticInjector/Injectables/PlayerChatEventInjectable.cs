@@ -42,7 +42,7 @@ namespace UnturnedFreneticInjector.Injectables
                     Instruction.Create(OpCodes.Ldarga_S, chatmethod.Parameters[2]),
                     // Call the PlayerChat method with the above parameters and return a bool.
                     Instruction.Create(OpCodes.Call, eventmethod),
-                    // If the return is true, jump ahead to the original 27th instruction.
+                    // If the return is false, jump ahead to the original 27th instruction.
                     Instruction.Create(OpCodes.Brfalse, chatbody.Instructions[27]),
                     // Otherwise, return now.
                     Instruction.Create(OpCodes.Ret)
