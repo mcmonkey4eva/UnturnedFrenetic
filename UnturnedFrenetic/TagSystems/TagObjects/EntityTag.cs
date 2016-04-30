@@ -34,6 +34,15 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 
         public static EntityTag For(string input)
         {
+            if (input.StartsWith("p:"))
+            {
+                PlayerTag pt = PlayerTag.For(input);
+                if (pt != null)
+                {
+                    return new EntityTag(pt.Internal.player.gameObject);
+                }
+                return null;
+            }
             if (input.StartsWith("e:"))
             {
                 input = input.Substring("e:".Length);
