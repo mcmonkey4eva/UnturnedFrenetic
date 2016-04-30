@@ -67,7 +67,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     PlayerLife life = player.Internal.player.life;
                     if (num.Internal >= life.health)
                     {
-                        life.askDamage((byte)num.Internal, Vector3.zero, EDeathCause.KILL, ELimb.SPINE, CSteamID.Nil, out kill);
+                        life.askDamage((byte)num.Internal, Vector3.zero, EDeathCause.KILL, ELimb.SPINE, CSteamID.Nil, out kill, null);
                     }
                     else
                     {

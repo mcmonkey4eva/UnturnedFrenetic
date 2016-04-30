@@ -73,6 +73,11 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             if (entity.TryGetAnimal(out animal))
             {
                 animal.Internal.target = loc.ToVector3();
+                if (!animal.Internal.isTicking)
+                {
+                    animal.Internal.isTicking = true;
+                    AnimalManager.tickingAnimals.Add(animal.Internal);
+                }
                 if (entry.ShouldShowGood(queue))
                 {
                     entry.Good(queue, "Successfully started an animal walking to " + TagParser.Escape(loc.ToString()) + "!");

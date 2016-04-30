@@ -31,7 +31,7 @@ namespace UnturnedFreneticInjector.Injectables
             TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
             MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "PlayerDamaged", 7));
             MethodDefinition damagemethod = GetMethod(lifetype, "askDamage", 6);
-            ParameterDefinition objectParam = new ParameterDefinition("obj", ParameterAttributes.Optional, gamedef.ImportReference(typeof(object)));
+            ParameterDefinition objectParam = new ParameterDefinition("obj", ParameterAttributes.None, gamedef.ImportReference(typeof(object)));
             damagemethod.Parameters.Add(objectParam);
             MethodBody damagebody = damagemethod.Body;
             InjectInstructions(damagebody, 0, new Instruction[]
