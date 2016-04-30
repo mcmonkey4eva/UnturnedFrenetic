@@ -14,6 +14,8 @@ using FreneticScript.CommandSystem;
 using Steamworks;
 using FreneticScript.TagHandlers;
 using UnturnedFrenetic.EventSystems.EntityEvents;
+using System.Threading;
+using System.Globalization;
 
 namespace UnturnedFrenetic
 {
@@ -24,6 +26,7 @@ namespace UnturnedFrenetic
         public static void Init()
         {
             Console.WriteLine("Unturned Frenetic mod loading...");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             SysConsole.Init();
             Instance = new UnturnedFreneticMod();
             Instance.Setup();
