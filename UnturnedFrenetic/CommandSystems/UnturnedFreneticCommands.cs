@@ -31,8 +31,10 @@ namespace UnturnedFrenetic.CommandSystems
                 System.RegisterCommand(new AICommand());
                 System.RegisterCommand(new DamageCommand());
                 System.RegisterCommand(new HealCommand());
+                System.RegisterCommand(new KillCommand());
                 System.RegisterCommand(new LaunchCommand());
                 System.RegisterCommand(new MaxHealthCommand());
+                System.RegisterCommand(new RemoveCommand());
                 System.RegisterCommand(new SpawnCommand());
                 System.RegisterCommand(new TeleportCommand());
                 System.RegisterCommand(new WalkCommand());

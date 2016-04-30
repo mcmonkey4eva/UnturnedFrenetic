@@ -107,6 +107,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 BarricadeTag barricade;
                 if (entity.TryGetBarricade(out barricade))
                 {
+                    // TODO: Use BarricadeManager?
                     barricade.InternalData.barricade.askDamage((ushort)num.Internal);
                     if (entry.ShouldShowGood(queue))
                     {
@@ -117,6 +118,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 ResourceTag resource;
                 if (entity.TryGetResource(out resource))
                 {
+                    // TODO: Use ResourceManager?
                     resource.Internal.askDamage((ushort)num.Internal);
                     if (entry.ShouldShowGood(queue))
                     {
@@ -127,6 +129,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 StructureTag structure;
                 if (entity.TryGetStructure(out structure))
                 {
+                    // TODO: Use StructureManager?
                     structure.InternalData.structure.askDamage((ushort)num.Internal);
                     if (entry.ShouldShowGood(queue))
                     {

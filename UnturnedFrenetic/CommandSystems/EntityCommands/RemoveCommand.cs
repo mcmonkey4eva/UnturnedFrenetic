@@ -12,29 +12,29 @@ using Steamworks;
 
 namespace UnturnedFrenetic.CommandSystems.EntityCommands
 {
-    public class KillCommand : AbstractCommand
+    public class RemoveCommand : AbstractCommand
     {
         // <--[command]
-        // @Name kill
+        // @Name remove
         // @Arguments <entity>
-        // @Short Immediately kills an entity.
+        // @Short Immediately fully removes an entity.
         // @Updated 2016/04/30
         // @Authors mcmonkey
         // @Group Entity
         // @Minimum 2
         // @Maximum 2
         // @Description
-        // Immediately kills an entity.
+        // Immediately fully removes an entity.
         // TODO: Explain more!
         // @Example
-        // // This kills the entity with ID 1.
+        // // This removes the entity with ID 1.
         // damage 1 10;
         // -->
-        public KillCommand()
+        public RemoveCommand()
         {
-            Name = "kill";
+            Name = "remove";
             Arguments = "<entity>";
-            Description = "Immediately kills an entity.";
+            Description = "Immediately fully removes an entity.";
             MinimumArguments = 1;
             MaximumArguments = 1;
             ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
@@ -51,49 +51,43 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 queue.HandleError(entry, "Invalid entity!");
                 return;
             }
-            EPlayerKill kill; // for use with "out EPlayerKill" parameters
             PlayerTag player;
-            if (entity.TryGetPlayer(out player))
+            if (entity.TryGetPlayer(out player)) // TODO: Kick?
             {
-                PlayerLife life = player.Internal.player.life;
-                life.askDamage(life.health, Vector3.zero, EDeathCause.KILL, ELimb.SPINE, CSteamID.Nil, out kill, null);
+                Provider.kick(player.Internal.playerID.steamID, "Removed forcibly.");
                 if (entry.ShouldShowGood(queue))
                 {
 
-                    entry.Good(queue, "Successfully killed a player!");
+                    entry.Good(queue, "Successfully removed a player!");
                 }
                 return;
             }
             ZombieTag zombie;
-            if (entity.TryGetZombie(out zombie))
+            if (entity.TryGetZombie(out zombie)) // TODO: Remove!
             {
-                while (!zombie.Internal.isDead)
-                {
-                    zombie.Internal.askDamage((byte)zombie.Internal.health, Vector3.zero, out kill);
-                }
+                zombie.Internal.health = 0;
+                ZombieManager.sendZombieDead(zombie.Internal, new Vector3(9999, 9999, -9999));
                 if (entry.ShouldShowGood(queue))
                 {
-                    entry.Good(queue, "Successfully killed a zombie!");
+                    entry.Good(queue, "Successfully removed a zombie!");
                 }
                 return;
             }
             AnimalTag animal;
             if (entity.TryGetAnimal(out animal))
             {
-                while (!animal.Internal.isDead)
-                {
-                    animal.Internal.askDamage((byte)animal.Internal.health, Vector3.zero, out kill);
-                }
+                animal.Internal.health = 0;
+                AnimalManager.sendAnimalDead(animal.Internal, new Vector3(9999, 9999, -9999));
                 if (entry.ShouldShowGood(queue))
                 {
-                    entry.Good(queue, "Successfully killed an animal!");
+                    entry.Good(queue, "Successfully removed an animal!");
                 }
                 return;
             }
             BarricadeTag barricade;
             if (entity.TryGetBarricade(out barricade))
             {
-                // TODO: Use BarricadeManager?
+                // TODO: Use BarricadeManager magic to remove properly?
                 barricade.InternalData.barricade.askDamage(barricade.InternalData.barricade.health);
                 if (entry.ShouldShowGood(queue))
                 {
@@ -102,9 +96,9 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 return;
             }
             ResourceTag resource;
-            if (entity.TryGetResource(out resource))
+            if (entity.TryGetResource(out resource)) // TODO: Remove!
             {
-                // TODO: Use ResourceManager?
+                // TODO: Use ResourceManager magic to remove properly?
                 resource.Internal.askDamage(resource.Internal.health);
                 if (entry.ShouldShowGood(queue))
                 {
@@ -113,9 +107,9 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 return;
             }
             StructureTag structure;
-            if (entity.TryGetStructure(out structure))
+            if (entity.TryGetStructure(out structure)) // TODO: Remove!
             {
-                // TODO: Use StructureManager?
+                // TODO: Use StructureManager magic to remove properly?
                 structure.InternalData.structure.askDamage(structure.InternalData.structure.health);
                 if (entry.ShouldShowGood(queue))
                 {
@@ -124,12 +118,13 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 return;
             }
             VehicleTag vehicle;
-            if (entity.TryGetVehicle(out vehicle))
+            if (entity.TryGetVehicle(out vehicle)) // TODO: Remove!
             {
-                vehicle.Internal.askDamage(vehicle.Internal.health, false);
+                vehicle.Internal.health = 0;
+                VehicleManager.sendVehicleExploded(vehicle.Internal);
                 if (entry.ShouldShowGood(queue))
                 {
-                    entry.Good(queue, "Successfully destroyed a vehicle!");
+                    entry.Good(queue, "Successfully removed a vehicle!");
                 }
                 return;
             }
