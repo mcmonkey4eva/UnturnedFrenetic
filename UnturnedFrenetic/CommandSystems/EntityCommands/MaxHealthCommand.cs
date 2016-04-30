@@ -108,7 +108,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
 
         public byte Translate()
         {
-            return (byte)((health / (double)maxHealth) * 100.0);
+            return (byte)Math.Ceiling((health / (double)maxHealth) * 100.0);
         }
 
         public void Damage(uint amount)
