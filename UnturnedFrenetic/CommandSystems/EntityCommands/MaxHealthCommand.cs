@@ -52,7 +52,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 queue.HandleError(entry, "Must provide a number that is greater than 0!");
                 return;
             }
-            EntityTag entity = EntityTag.For(Utilities.StringToInt(entry.GetArgument(queue, 0)));
+            EntityTag entity = EntityTag.For(entry.GetArgumentObject(queue, 0));
             if (entity == null)
             {
                 queue.HandleError(entry, "Invalid entity!");

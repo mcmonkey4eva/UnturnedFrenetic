@@ -66,7 +66,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 
         public override string ToString()
         {
-            return Internal.transform.gameObject.GetInstanceID().ToString();
+            return new EntityTag(Internal.transform.gameObject).ToString();
         }
     }
 }

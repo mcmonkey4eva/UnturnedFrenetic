@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnturnedFrenetic.TagSystems.TagObjects;
+using FreneticScript;
 
 namespace UnturnedFrenetic
 {
@@ -25,7 +26,7 @@ namespace UnturnedFrenetic
 
         public static EntityType ValueOf(string name)
         {
-            name = name.ToLower();
+            name = name.ToLowerFast();
             switch (name)
             {
                 case "bear":

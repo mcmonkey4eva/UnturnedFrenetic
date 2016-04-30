@@ -24,14 +24,11 @@ namespace UnturnedFrenetic.TagSystems.TagBases
         public override TemplateObject Handle(TagData data)
         {
             string modif = data.GetModifier(0);
-            if (modif.StartsWith("e:"))
-            {
-                modif = modif.Substring("e:".Length);
-            }
-            EntityTag itag = EntityTag.For(Utilities.StringToInt(modif));
+            EntityTag itag = EntityTag.For(modif);
             if (itag == null)
             {
-                return new TextTag("&{NULL}").Handle(data.Shrink());
+                data.Error("Invalid entity!");
+                return new NullTag().Handle(data.Shrink());
             }
             return itag.Handle(data.Shrink());
         }

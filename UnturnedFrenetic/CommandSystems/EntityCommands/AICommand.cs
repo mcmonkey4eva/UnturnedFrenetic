@@ -45,7 +45,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         public override void Execute(CommandQueue queue, CommandEntry entry)
         {
             bool enable = BooleanTag.TryFor(entry.GetArgumentObject(queue, 1)).Internal;
-            EntityTag entity = EntityTag.For(Utilities.StringToInt(entry.GetArgument(queue, 0)));
+            EntityTag entity = EntityTag.For(entry.GetArgumentObject(queue, 0));
             if (entity == null)
             {
                 queue.HandleError(entry, "Invalid entity!");

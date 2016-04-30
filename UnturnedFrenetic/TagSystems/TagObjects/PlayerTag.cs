@@ -206,7 +206,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
 
         public override string ToString()
         {
-            return Internal.playerID.steamID.ToString();
+            return new EntityTag(Internal.player.gameObject).ToString();
         }
     }
 }

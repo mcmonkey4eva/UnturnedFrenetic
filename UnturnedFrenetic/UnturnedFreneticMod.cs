@@ -311,7 +311,7 @@ namespace UnturnedFrenetic
             return evt.Cancelled;
         }
 
-        public static long cID = 1;
+        public static long cID = 1; // TODO: What is this?
         
         public void Tick(float delta)
         {

@@ -18,6 +18,29 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             Internal = obj;
         }
 
+        public static EntityTag For(TemplateObject input)
+        {
+            if (input is EntityTag)
+            {
+                return (EntityTag)input;
+            }
+            else if (input is ZombieTag)
+            {
+                return new EntityTag(((ZombieTag)input).Internal.gameObject);
+            }
+            // TODO: Other common entity types!
+            return For(input.ToString());
+        }
+
+        public static EntityTag For(string input)
+        {
+            if (input.StartsWith("e:"))
+            {
+                input = input.Substring("e:".Length);
+            }
+            return For(Utilities.StringToInt(input));
+        }
+
         public static EntityTag For(int instanceID)
         {
             foreach (GameObject obj in Resources.FindObjectsOfTypeAll<GameObject>())
