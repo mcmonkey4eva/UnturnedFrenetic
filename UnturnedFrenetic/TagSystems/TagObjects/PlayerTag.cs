@@ -75,6 +75,15 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             switch (data[0])
             {
                 // <--[tag]
+                // @Name PlayerTag.is_valid
+                // @Group General Information
+                // @ReturnType BooleanTag
+                // @Returns whether the player is still online and valid.
+                // @Example "bob" .is_valid returns "true".
+                // -->
+                case "is_valid":
+                    return new BooleanTag(PlayerTool.getSteamPlayer(Internal.playerID.steamID) != null).Handle(data.Shrink());
+                // <--[tag]
                 // @Name PlayerTag.name
                 // @Group General Information
                 // @ReturnType TextTag
