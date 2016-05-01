@@ -13,15 +13,9 @@ namespace UnturnedFreneticInjector.Injectables
         {
             // Expose some fields in Animal for easier use. Then, add an AI disabled check to animal update methods.
             TypeDefinition type = gamedef.GetType("SDG.Unturned.Animal");
-            FieldDefinition field = GetField(type, "health");
-            field.IsPrivate = false;
-            field.IsPublic = true;
-            FieldDefinition fieldistick = GetField(type, "isTicking");
-            fieldistick.IsPrivate = false;
-            fieldistick.IsPublic = true;
-            FieldDefinition fieldtarget = GetField(type, "target");
-            fieldtarget.IsPrivate = false;
-            fieldtarget.IsPublic = true;
+            MakePublic(GetField(type, "health"));
+            MakePublic(GetField(type, "isTicking"));
+            MakePublic(GetField(type, "target"));
             FieldDefinition aidisabledfield = new FieldDefinition("UFM_AIDisabled", FieldAttributes.Public, gamedef.TypeSystem.Boolean);
             type.Fields.Add(aidisabledfield);
             foreach (MethodDefinition tmethod in type.Methods)

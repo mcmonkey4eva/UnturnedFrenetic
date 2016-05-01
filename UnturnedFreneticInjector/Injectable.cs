@@ -9,6 +9,18 @@ namespace UnturnedFreneticInjector
 {
     public abstract class Injectable
     {
+        public void MakePublic(FieldDefinition field)
+        {
+            field.IsPrivate = false;
+            field.IsPublic = true;
+        }
+
+        public void MakePublic(MethodDefinition method)
+        {
+            method.IsPrivate = false;
+            method.IsPublic = true;
+        }
+
         public MethodDefinition GetMethod(TypeDefinition type, string name, int paramscount = -1)
         {
             foreach (MethodDefinition method in type.Methods)
