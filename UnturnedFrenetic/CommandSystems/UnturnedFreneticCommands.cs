@@ -5,6 +5,7 @@ using System.Text;
 using FreneticScript;
 using FreneticScript.CommandSystem;
 using UnturnedFrenetic.EventSystems;
+using UnturnedFrenetic.CommandSystems.CommonCommands;
 using UnturnedFrenetic.CommandSystems.EntityCommands;
 using UnturnedFrenetic.CommandSystems.PlayerCommands;
 using UnturnedFrenetic.CommandSystems.WorldCommands;
@@ -27,6 +28,8 @@ namespace UnturnedFrenetic.CommandSystems
                 output.Syst = System;
                 System.Output = output;
                 System.Init();
+                // Common Commands
+                System.RegisterCommand(new AddCommandCommand());
                 // Entity Commands
                 System.RegisterCommand(new AICommand());
                 System.RegisterCommand(new AnimateCommand());

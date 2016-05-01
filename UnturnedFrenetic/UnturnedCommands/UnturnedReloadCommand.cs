@@ -6,7 +6,7 @@ using SDG.Unturned;
 using FreneticScript;
 using FreneticScript.CommandSystem;
 
-namespace UnturnedFrenetic
+namespace UnturnedFrenetic.UnturnedCommands
 {
     class UnturnedReloadCommand : Command
     {
@@ -35,6 +35,13 @@ namespace UnturnedFrenetic
                 }
             }
             sys.Functions.Clear();
+            for (int i = Commander.commands.Count - 1; i >= 0; i--)
+            {
+                if (Commander.commands[i] is UnturnedCustomCommand)
+                {
+                    Commander.commands.RemoveAt(i);
+                }
+            }
             UnturnedFreneticMod.Instance.AutorunScripts();
         }
     }

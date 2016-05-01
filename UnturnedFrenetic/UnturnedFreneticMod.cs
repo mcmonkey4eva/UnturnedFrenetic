@@ -17,6 +17,7 @@ using UnturnedFrenetic.EventSystems.EntityEvents;
 using System.Threading;
 using System.Globalization;
 using UnturnedFrenetic.CommandSystems.EntityCommands;
+using UnturnedFrenetic.UnturnedCommands;
 
 namespace UnturnedFrenetic
 {

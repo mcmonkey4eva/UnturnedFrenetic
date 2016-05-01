@@ -28,7 +28,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // TODO: Explain more!
         // @Example
         // // This kills the entity with ID 1.
-        // damage 1 10;
+        // kill 1;
         // -->
         public KillCommand()
         {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using SDG.Unturned;
 
-namespace UnturnedFrenetic
+namespace UnturnedFrenetic.UnturnedCommands
 {
     class UnturnedGenericCommand : Command
     {
