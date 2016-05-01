@@ -88,128 +88,74 @@ namespace UnturnedFreneticInjector.Injectables
 
             MethodDefinition suicidemethod = GetMethod(lifetype, "askSuicide", 1);
             MethodBody suicidebody = suicidemethod.Body;
-            InjectInstructions(suicidebody, 19, new Instruction[]
-                {
-                    // Load "null" onto the stack.
-                    Instruction.Create(OpCodes.Ldnull)
-                });
+           // Load "null" onto the stack.
+            InjectInstructions(suicidebody, 19, Instruction.Create(OpCodes.Ldnull));
 
             MethodDefinition landedmethod = GetMethod(lifetype, "onLanded", 1);
             MethodBody landedbody = landedmethod.Body;
-            InjectInstructions(landedbody, 34, new Instruction[]
-                {
-                    // Load "null" onto the stack.
-                    Instruction.Create(OpCodes.Ldnull)
-                });
+            // Load "null" onto the stack.
+            InjectInstructions(landedbody, 34, Instruction.Create(OpCodes.Ldnull));
 
             MethodDefinition simulatemethod = GetMethod(lifetype, "simulate", 1);
             MethodBody simulatebody = simulatemethod.Body;
-            InjectInstructions(simulatebody, 986, new Instruction[]
-                {
-                    // Load "null" onto the stack.
-                    Instruction.Create(OpCodes.Ldnull)
-                });
-            InjectInstructions(simulatebody, 814, new Instruction[]
-                {
-                    // Load "null" onto the stack.
-                    Instruction.Create(OpCodes.Ldnull)
-                });
-            InjectInstructions(simulatebody, 714, new Instruction[]
-                {
-                    // Load "null" onto the stack.
-                    Instruction.Create(OpCodes.Ldnull)
-                });
-            InjectInstructions(simulatebody, 626, new Instruction[]
-                {
-                    // Load "null" onto the stack.
-                    Instruction.Create(OpCodes.Ldnull)
-                });
-            InjectInstructions(simulatebody, 340, new Instruction[]
-                {
-                    // Load "null" onto the stack.
-                    Instruction.Create(OpCodes.Ldnull)
-                });
-            InjectInstructions(simulatebody, 201, new Instruction[]
-                {
-                    // Load "null" onto the stack.
-                    Instruction.Create(OpCodes.Ldnull)
-                });
-            InjectInstructions(simulatebody, 158, new Instruction[]
-                {
-                    // Load "null" onto the stack.
-                    Instruction.Create(OpCodes.Ldnull)
-                });
-            InjectInstructions(simulatebody, 136, new Instruction[]
-                {
-                    // Load "null" onto the stack.
-                    Instruction.Create(OpCodes.Ldnull)
-                });
-            InjectInstructions(simulatebody, 83, new Instruction[]
-                {
-                    // Load "null" onto the stack.
-                    Instruction.Create(OpCodes.Ldnull)
-                });
+            // Load "null" onto the stack.
+            InjectInstructions(simulatebody, 986, Instruction.Create(OpCodes.Ldnull));
+            // Load "null" onto the stack.
+            InjectInstructions(simulatebody, 814, Instruction.Create(OpCodes.Ldnull));
+            // Load "null" onto the stack.
+            InjectInstructions(simulatebody, 714, Instruction.Create(OpCodes.Ldnull));
+            // Load "null" onto the stack.
+            InjectInstructions(simulatebody, 626, Instruction.Create(OpCodes.Ldnull));
+            // Load "null" onto the stack.
+            InjectInstructions(simulatebody, 340, Instruction.Create(OpCodes.Ldnull));
+            // Load "null" onto the stack.
+            InjectInstructions(simulatebody, 201, Instruction.Create(OpCodes.Ldnull));
+            // Load "null" onto the stack.
+            InjectInstructions(simulatebody, 158, Instruction.Create(OpCodes.Ldnull));
+            // Load "null" onto the stack.
+            InjectInstructions(simulatebody, 136, Instruction.Create(OpCodes.Ldnull));
+            // Load "null" onto the stack.
+            InjectInstructions(simulatebody, 83, Instruction.Create(OpCodes.Ldnull));
             
             TypeDefinition barriertype = gamedef.GetType("SDG.Unturned.Barrier");
             MethodDefinition barriercollide = GetMethod(barriertype, "OnTriggerEnter", 1);
             MethodBody barriercollidebody = barriercollide.Body;
-            InjectInstructions(barriercollidebody, 25, new Instruction[]
-                {
-                    // Load "this" onto the stack.
-                    Instruction.Create(OpCodes.Ldarg_0)
-                });
+            // Load "this" onto the stack.
+            InjectInstructions(barriercollidebody, 25, Instruction.Create(OpCodes.Ldarg_0));
 
             TypeDefinition slaytype = gamedef.GetType("SDG.Unturned.CommandSlay");
             MethodDefinition slayexecute = GetMethod(slaytype, "execute", 2);
             MethodBody slayexecutebody = slayexecute.Body;
-            InjectInstructions(slayexecutebody, 67, new Instruction[]
-                {
-                    // Load "this" onto the stack.
-                    Instruction.Create(OpCodes.Ldarg_0)
-                });
+            // Load "this" onto the stack.
+            InjectInstructions(slayexecutebody, 67, Instruction.Create(OpCodes.Ldarg_0));
 
             TypeDefinition damagetooltype = gamedef.GetType("SDG.Unturned.DamageTool");
             MethodDefinition damagetooldamage = GetMethod(damagetooltype, "damage", 8);
             MethodBody damagetooldamagebody = damagetooldamage.Body;
-            InjectInstructions(damagetooldamagebody, 24, new Instruction[]
-                {
-                    // Load "null" onto the stack.
-                    Instruction.Create(OpCodes.Ldnull)
-                });
+            // Load "null" onto the stack.
+            InjectInstructions(damagetooldamagebody, 24, Instruction.Create(OpCodes.Ldnull));
 
             TypeDefinition levelmanagertype = gamedef.GetType("SDG.Unturned.LevelManager");
             MethodDefinition levelmanagerplay = GetMethod(levelmanagertype, "arenaPlay", 0);
             MethodBody levelmanagerplaybody = levelmanagerplay.Body;
-            InjectInstructions(levelmanagerplaybody, 217, new Instruction[]
-                {
-                    // Load "null" onto the stack.
-                    Instruction.Create(OpCodes.Ldnull)
-                });
+            // Load "null" onto the stack.
+            InjectInstructions(levelmanagerplaybody, 217, Instruction.Create(OpCodes.Ldnull));
 
             MethodDefinition levelmanagerrestart = GetMethod(levelmanagertype, "arenaRestart", 0);
             MethodBody levelmanagerrestartbody = levelmanagerrestart.Body;
-            InjectInstructions(levelmanagerrestartbody, 82, new Instruction[]
-                {
-                    // Load "null" onto the stack.
-                    Instruction.Create(OpCodes.Ldnull)
-                });
+            // Load "null" onto the stack.
+            InjectInstructions(levelmanagerrestartbody, 82, Instruction.Create(OpCodes.Ldnull));
             
             TypeDefinition animaltype = gamedef.GetType("SDG.Unturned.Animal");
             MethodDefinition animalupdate = GetMethod(animaltype, "tick", 0);
             MethodBody animalupdatebody = animalupdate.Body;
-            InjectInstructions(animalupdatebody, 154, new Instruction[]
-                {
-                    // Load "this" onto the stack.
-                    Instruction.Create(OpCodes.Ldarg_0)
-                });
+            // Load "this" onto the stack.
+            InjectInstructions(animalupdatebody, 154, Instruction.Create(OpCodes.Ldarg_0));
             TypeDefinition zombietype = gamedef.GetType("SDG.Unturned.Zombie");
             MethodDefinition zombieupdate = GetMethod(zombietype, "tick", 0);
             MethodBody zombieupdatebody = zombieupdate.Body;
-            InjectInstructions(zombieupdatebody, 1450, new Instruction[]
-                {
-                    // Load "this" onto the stack.
-                    Instruction.Create(OpCodes.Ldarg_0)
-                });
+            // Load "this" onto the stack.
+            InjectInstructions(zombieupdatebody, 1450, Instruction.Create(OpCodes.Ldarg_0));
         }
     }
 }

@@ -13,9 +13,7 @@ namespace UnturnedFreneticInjector.Injectables
         {
             // Expose the "manager" method in ObjectManager for easier use.
             TypeDefinition type = gamedef.GetType("SDG.Unturned.ObjectManager");
-            FieldDefinition field = GetField(type, "manager");
-            field.IsPrivate = false;
-            field.IsPublic = true;
+            MakePublic(GetField(type, "manager"));
         }
     }
 }

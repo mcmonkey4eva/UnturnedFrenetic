@@ -45,7 +45,7 @@ namespace UnturnedFreneticInjector
             return null;
         }
 
-        public void InjectInstructions(MethodBody body, int line, Instruction[] instructions)
+        public void InjectInstructions(MethodBody body, int line, params Instruction[] instructions)
         {
             foreach (Instruction instr in instructions)
             {
