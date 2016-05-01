@@ -96,7 +96,6 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     }
                     if (entry.ShouldShowGood(queue))
                     {
-
                         entry.Good(queue, "Successfully damaged a player by " + TagParser.Escape(num.ToString()) + "!");
                     }
                     return;

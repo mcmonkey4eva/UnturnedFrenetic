@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandSystems\EntityCommands\AICommand.cs" />
+    <Compile Include="CommandSystems\EntityCommands\AnimateCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\RemoveCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\KillCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\MaxHealthCommand.cs" />
