@@ -31,7 +31,7 @@ namespace UnturnedFrenetic.CommandSystems
 
         public override string ReadTextFile(string name)
         {
-            return File.ReadAllText(Environment.CurrentDirectory + "/scripts/" + name.Replace("..", "_")); // TODO: Proper sandbox!
+            return File.ReadAllText(Environment.CurrentDirectory + "/frenetic/scripts/" + name.Replace("..", "_")); // TODO: Proper sandbox!
         }
 
         public override void UnknownCommand(CommandQueue queue, string basecommand, string[] arguments)
@@ -46,12 +46,12 @@ namespace UnturnedFrenetic.CommandSystems
 
         public override byte[] ReadDataFile(string name)
         {
-            return File.ReadAllBytes(Environment.CurrentDirectory + "/script_data/" + name.Replace("..", "_")); // TODO: Proper sandbox!
+            return File.ReadAllBytes(Environment.CurrentDirectory + "/frenetic/script_data/" + name.Replace("..", "_")); // TODO: Proper sandbox!
         }
 
         public override void WriteDataFile(string name, byte[] data)
         {
-            string path = Environment.CurrentDirectory + "/script_data/" + name.Replace("..", "_"); // TODO: Proper sandbox!
+            string path = Environment.CurrentDirectory + "/frenetic/script_data/" + name.Replace("..", "_"); // TODO: Proper sandbox!
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             File.WriteAllBytes(path, data);
         }
