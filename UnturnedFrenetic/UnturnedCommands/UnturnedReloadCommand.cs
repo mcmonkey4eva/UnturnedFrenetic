@@ -42,6 +42,7 @@ namespace UnturnedFrenetic.UnturnedCommands
                     Commander.commands.RemoveAt(i);
                 }
             }
+            UnturnedFreneticMod.Instance.PlayerCommands.Clear();
             UnturnedFreneticMod.Instance.AutorunScripts();
             SysConsole.Output(OutputType.INFO, "Reloaded succesfully!");
         }
