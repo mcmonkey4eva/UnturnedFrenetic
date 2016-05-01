@@ -219,6 +219,15 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "temperature":
                     return new TextTag(Internal.player.life.temperature.ToString()).Handle(data.Shrink());
+                // <--[tag]
+                // @Name PlayerTag.experience
+                // @Group Status
+                // @ReturnType IntegerTag
+                // @Returns the player's current experience points.
+                // @Example "bob" .experience returns "5".
+                // -->
+                case "experience":
+                    return new IntegerTag(Internal.player.skills.experience).Handle(data.Shrink());
                 default:
                     return new EntityTag(Internal.player.gameObject).Handle(data);
             }
