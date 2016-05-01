@@ -40,6 +40,7 @@ namespace UnturnedFrenetic.CommandSystems
                 System.RegisterCommand(new TeleportCommand());
                 System.RegisterCommand(new WalkCommand());
                 // Player Commands
+                System.RegisterCommand(new AwardExperienceCommand());
                 System.RegisterCommand(new BleedingCommand());
                 System.RegisterCommand(new BrokenCommand());
                 System.RegisterCommand(new FoodCommand());

@@ -24,10 +24,10 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // TODO: Explain more!
         // @Example
         // // This makes the player very thirsty.
-        // water <{var[player]}> -50
+        // water <{var[player]}> -50;
         // @Example
         // // This quenches some of the player's thirst.
-        // water <{[context].[player]}> 25
+        // water <{[context].[player]}> 25;
         // -->
         public WaterCommand()
         {
@@ -47,7 +47,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         {
             try
             {
-                NumberTag num = NumberTag.TryFor(entry.GetArgumentObject(queue, 1));
+                IntegerTag num = IntegerTag.TryFor(entry.GetArgumentObject(queue, 1));
                 if (num == null)
                 {
                     queue.HandleError(entry, "Invalid amount number!");
@@ -69,7 +69,10 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 {
                     life.askDehydrate((byte)-amount);
                 }
-                entry.Good(queue, "Successfully adjusted the water level of player " + TagParser.Escape(player.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                if (entry.ShouldShowGood(queue))
+                {
+                    entry.Good(queue, "Successfully adjusted the water level of a player!");
+                }
             }
             catch (Exception ex) // TODO: Necessity?
             {

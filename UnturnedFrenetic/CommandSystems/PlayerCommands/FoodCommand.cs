@@ -47,7 +47,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         {
             try
             {
-                NumberTag num = NumberTag.TryFor(entry.GetArgumentObject(queue, 1));
+                IntegerTag num = IntegerTag.TryFor(entry.GetArgumentObject(queue, 1));
                 if (num == null)
                 {
                     queue.HandleError(entry, "Invalid amount number!");
@@ -69,7 +69,10 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 {
                     life.askStarve((byte)-amount);
                 }
-                entry.Good(queue, "Successfully adjusted the food level of player " + TagParser.Escape(player.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                if (entry.ShouldShowGood(queue))
+                {
+                    entry.Good(queue, "Successfully adjusted the food level of a player!");
+                }
             }
             catch (Exception ex) // TODO: Necessity?
             {

@@ -24,10 +24,10 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // TODO: Explain more!
         // @Example
         // // This disinfects the player completely.
-        // virus <{var[player]}> -100
+        // virus <{var[player]}> -100;
         // @Example
         // // This infects the player greatly.
-        // virus <{[context].[player]}> 50
+        // virus <{[context].[player]}> 50;
         // -->
         public VirusCommand()
         {
@@ -47,7 +47,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         {
             try
             {
-                NumberTag num = NumberTag.TryFor(entry.GetArgumentObject(queue, 1));
+                IntegerTag num = IntegerTag.TryFor(entry.GetArgumentObject(queue, 1));
                 if (num == null)
                 {
                     queue.HandleError(entry, "Invalid amount number!");
@@ -69,7 +69,10 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 {
                     life.askDisinfect((byte)-amount);
                 }
-                entry.Good(queue, "Successfully adjusted the virus level of player " + TagParser.Escape(player.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                if (entry.ShouldShowGood(queue))
+                {
+                    entry.Good(queue, "Successfully adjusted the virus level of a player!");
+                }
             }
             catch (Exception ex) // TODO: Necessity?
             {

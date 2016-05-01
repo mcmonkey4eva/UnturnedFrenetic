@@ -24,10 +24,10 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         // TODO: Explain more!
         // @Example
         // // This increases the player's warmth level.
-        // warmth <{var[player]}> 20
+        // warmth <{var[player]}> 20;
         // @Example
         // // This takes warmth from the player.
-        // warmth <{[context].[player]}> -35
+        // warmth <{[context].[player]}> -35;
         // -->
         public WarmthCommand()
         {
@@ -47,7 +47,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
         {
             try
             {
-                NumberTag num = NumberTag.TryFor(entry.GetArgumentObject(queue, 1));
+                IntegerTag num = IntegerTag.TryFor(entry.GetArgumentObject(queue, 1));
                 if (num == null)
                 {
                     queue.HandleError(entry, "Invalid amount number!");
@@ -60,7 +60,10 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     return;
                 }
                 player.Internal.player.life.askWarm((uint)num.Internal);
-                entry.Good(queue, "Successfully adjusted the warmth level of player " + TagParser.Escape(player.ToString()) + " by " + TagParser.Escape(num.ToString()) + "!");
+                if (entry.ShouldShowGood(queue))
+                {
+                    entry.Good(queue, "Successfully adjusted the warmth level of a player!");
+                }
             }
             catch (Exception ex) // TODO: Necessity?
             {
