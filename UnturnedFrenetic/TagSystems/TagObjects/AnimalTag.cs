@@ -46,6 +46,15 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             switch (data[0])
             {
                 // <--[tag]
+                // @Name AnimalTag.is_alive
+                // @Group General Information
+                // @ReturnType BooleanTag
+                // @Returns whether the animal is still alive.
+                // @Example "2" .is_alive returns "true".
+                // -->
+                case "is_alive":
+                    return new BooleanTag(!Internal.isDead).Handle(data.Shrink());
+                // <--[tag]
                 // @Name AnimalTag.name
                 // @Group General Information
                 // @ReturnType TextTag

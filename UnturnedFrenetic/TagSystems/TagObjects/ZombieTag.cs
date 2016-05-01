@@ -48,6 +48,15 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             switch (data[0])
             {
                 // <--[tag]
+                // @Name ZombieTag.is_alive
+                // @Group General Information
+                // @ReturnType BooleanTag
+                // @Returns whether the zombie is still alive.
+                // @Example "2" .is_alive returns "true".
+                // -->
+                case "is_alive":
+                    return new BooleanTag(!Internal.isDead).Handle(data.Shrink());
+                // <--[tag]
                 // @Name ZombieTag.zid
                 // @Group General Information
                 // @ReturnType NumberTag
