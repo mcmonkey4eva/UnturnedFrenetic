@@ -11,14 +11,10 @@ namespace UnturnedFreneticInjector.Injectables
     {
         public override void InjectInto(ModuleDefinition gamedef, ModuleDefinition moddef)
         {
-            // Expose the "addAnimal" method in AnimalManager for easier use.
+            // Expose some things in AnimalManager for easier use.
             TypeDefinition type = gamedef.GetType("SDG.Unturned.AnimalManager");
-            MethodDefinition method = GetMethod(type, "addAnimal", 4);
-            method.IsPrivate = false;
-            method.IsPublic = true;
-            FieldDefinition field = GetField(type, "manager");
-            field.IsPrivate = false;
-            field.IsPublic = true;
+            MakePublic(GetMethod(type, "addAnimal", 4));
+            MakePublic(GetField(type, "manager"));
         }
     }
 }
