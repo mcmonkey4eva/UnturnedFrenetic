@@ -21,20 +21,20 @@ namespace UnturnedFrenetic.CommandSystems.CommonCommands
 
         // <--[command]
         // @Name addcommand
-        // @Arguments <name> <help>
+        // @Arguments 'player'/'server' <name> <help>
         // @Short Registers a command into the game itself.
         // @Updated 2016/04/30
         // @Authors mcmonkey
         // @Group Common
         // @Braces Always
-        // @Minimum 2
-        // @Maximum 2
+        // @Minimum 3
+        // @Maximum 3
         // @Description
         // Registers a command into the game itself.
         // TODO: Explain more!
         // @Example
         // // This adds the "hello" command.
-        // addcommand "hello" "Says hello to the console"
+        // addcommand server "hello" "Says hello to the console"
         // {
         //     echo "hello";
         // }
@@ -46,12 +46,13 @@ namespace UnturnedFrenetic.CommandSystems.CommonCommands
         public AddCommandCommand()
         {
             Name = "addcommand";
-            Arguments = "<name> <help>";
+            Arguments = "'player'/'server' <name> <help>";
             Description = "Registers a command into the game itself.";
             MinimumArguments = 1;
-            MaximumArguments = 2;
+            MaximumArguments = 3;
             ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
             {
+                TextTag.For,
                 TextTag.For,
                 TextTag.For
             };
@@ -63,8 +64,14 @@ namespace UnturnedFrenetic.CommandSystems.CommonCommands
             {
                 return;
             }
-            string name = entry.GetArgument(queue, 0).ToLowerFast();
-            string help = entry.GetArgument(queue, 1);
+            if (entry.Arguments.Count < 3)
+            {
+                ShowUsage(queue, entry);
+                return;
+            }
+            bool servermode = entry.GetArgument(queue, 0).ToLowerFast() == "server";
+            string name = entry.GetArgument(queue, 1).ToLowerFast();
+            string help = entry.GetArgument(queue, 2);
             if (entry.InnerCommandBlock == null)
             {
                 queue.HandleError(entry, "Event command invalid: No block follows!");
@@ -73,7 +80,14 @@ namespace UnturnedFrenetic.CommandSystems.CommonCommands
             // NOTE: Commands are compiled!
             CommandScript script = new CommandScript("ut_command_" + name, entry.InnerCommandBlock, entry.BlockStart, queue.CurrentEntry.Types, true) { Debug = DebugMode.MINIMAL };
             UnturnedCustomCommand ucc = new UnturnedCustomCommand(name, help, script);
-            Commander.commands.Insert(1, ucc);
+            if (servermode)
+            {
+                Commander.commands.Insert(1, ucc);
+            }
+            else
+            {
+                UnturnedFreneticMod.Instance.PlayerCommands.Add(ucc);
+            }
             if (entry.ShouldShowGood(queue))
             {
                 entry.Good(queue, "Registered command!");

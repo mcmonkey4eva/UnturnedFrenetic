@@ -43,6 +43,7 @@ namespace UnturnedFrenetic.UnturnedCommands
                 }
             }
             UnturnedFreneticMod.Instance.AutorunScripts();
+            SysConsole.Output(OutputType.INFO, "Reloaded succesfully!");
         }
     }
 }

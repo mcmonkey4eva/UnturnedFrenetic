@@ -50,8 +50,38 @@ namespace UnturnedFrenetic
             }
         }
 
+        public List<Command> PlayerCommands = new List<Command>();
+
         public static bool PlayerChat(SteamPlayer steamPlayer, ref byte modeByte, ref EChatMode mode, ref Color color, ref string text)
         {
+            if (text.StartsWith("@") && steamPlayer.isAdmin)
+            {
+                // Send the admin command through.
+                return false;
+            }
+            if (text.StartsWith("/"))
+            {
+                SysConsole.Output(OutputType.CLIENTINFO, "Player [" + steamPlayer.player.name + "] executing player command: " + text);
+                string cmd = text.Substring(1);
+                int splitPos = cmd.IndexOf(' ');
+                string args = "";
+                if (splitPos > 0)
+                {
+                    args = cmd.Substring(splitPos + 1);
+                    cmd = cmd.Substring(0, splitPos);
+                }
+                for (int i = 0; i < Instance.PlayerCommands.Count; i++)
+                {
+                    if (Instance.PlayerCommands[i].check(steamPlayer.playerID.steamID, cmd, args))
+                    {
+                        return true;
+                    }
+                }
+                // TODO: if (CVars.g_showinvalidplayercommand.ValueB)
+                ChatManager.manager.channel.send("tellChat", steamPlayer.playerID.steamID, ESteamPacket.UPDATE_UNRELIABLE_BUFFER, steamPlayer.playerID.steamID, (byte)0, Color.red, "Unknown command!");
+                // Processed a local command.
+                return true;
+            }
             color = Color.white;
             if (steamPlayer.isAdmin)
             {
