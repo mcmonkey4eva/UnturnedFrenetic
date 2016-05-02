@@ -126,7 +126,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Example "2" .powered returns "true".
                 // -->
                 case "powered":
-                    Interactable power = Internal.gameObject.GetComponent<InteractablePower>();
+                    Interactable power = Internal.gameObject.GetComponent<Interactable>();
                     if (power != null)
                     {
                         if (power is InteractableDoor)
