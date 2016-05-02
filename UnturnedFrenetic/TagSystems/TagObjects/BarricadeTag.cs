@@ -126,18 +126,17 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Example "2" .powered returns "true".
                 // -->
                 case "powered":
-                    InteractablePower power = Internal.gameObject.GetComponent<InteractablePower>();
+                    Interactable power = Internal.gameObject.GetComponent<InteractablePower>();
                     if (power != null)
                     {
-                        switch (power.GetType().Name)
+                        if (power is InteractableDoor)
                         {
-                            case "InteractableDoor":
-                                return new BooleanTag(InternalData.barricade.state[16] == 1).Handle(data.Shrink());
-                            case "InteractableFire":
-                            case "InteractableGenerator":
-                            case "InteractableSafezone":
-                            case "InteractableSpot":
-                                return new BooleanTag(InternalData.barricade.state[0] == 1).Handle(data.Shrink());
+                            return new BooleanTag(InternalData.barricade.state[16] == 1).Handle(data.Shrink());
+                        }
+                        else if (power is InteractableFire || power is InteractableGenerator
+                            || power is InteractableSafezone || power is InteractableSpot)
+                        {
+                            return new BooleanTag(InternalData.barricade.state[0] == 1).Handle(data.Shrink());
                         }
                     }
                     data.Error("Read 'powered' tag on non-powerable object!");
