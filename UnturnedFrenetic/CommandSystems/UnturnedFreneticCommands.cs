@@ -38,6 +38,7 @@ namespace UnturnedFrenetic.CommandSystems
                 System.RegisterCommand(new KillCommand());
                 System.RegisterCommand(new LaunchCommand());
                 System.RegisterCommand(new MaxHealthCommand());
+                System.RegisterCommand(new PowerCommand());
                 System.RegisterCommand(new RemoveCommand());
                 System.RegisterCommand(new SpawnCommand());
                 System.RegisterCommand(new TeleportCommand());

@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandSystems\CommonCommands\AddCommandCommand.cs" />
+    <Compile Include="CommandSystems\EntityCommands\PowerCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\AICommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\AnimateCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\RemoveCommand.cs" />

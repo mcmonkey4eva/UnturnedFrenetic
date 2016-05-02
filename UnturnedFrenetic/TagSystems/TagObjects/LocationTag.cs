@@ -257,6 +257,35 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                         return new ListTag(vehicles).Handle(data.Shrink());
                     }
                 // <--[tag]
+                // @Name LocationTag.find_barricades_within[<NumberTag>]
+                // @Group World
+                // @ReturnType ListTag<BarricadeTag>
+                // @Returns a list of all barricades within the specified range (spherical).
+                // @Example "0,1,2" .find_barricades_within[10] returns "2|3|17".
+                // -->
+                case "find_barricades_within":
+                    {
+                        List<TemplateObject> barricades = new List<TemplateObject>();
+                        Vector3 vec3 = ToVector3();
+                        float range = (float)NumberTag.For(data, data.GetModifierObject(0)).Internal;
+                        for (byte x = 0; x < Regions.WORLD_SIZE; x++)
+                        {
+                            for (byte y = 0; y < Regions.WORLD_SIZE; y++)
+                            {
+                                BarricadeRegion region = BarricadeManager.regions[x, y];
+                                for (int i = 0; i < region.models.Count; i++)
+                                {
+                                    Transform model = region.models[i];
+                                    if ((model.position - vec3).sqrMagnitude <= range * range)
+                                    {
+                                        barricades.Add(new BarricadeTag(model, region.barricades[i]));
+                                    }
+                                }
+                            }
+                        }
+                        return new ListTag(barricades).Handle(data.Shrink());
+                    }
+                // <--[tag]
                 // @Name LocationTag.find_world_objects_within[<NumberTag>]
                 // @Group World
                 // @ReturnType ListTag<WorldObjectTag>

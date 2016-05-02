@@ -128,6 +128,11 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             byte y;
             ushort plant;
             ushort index;
+            return TryGetBarricade(out tag, out x, out y, out plant, out index);
+        }
+
+        public bool TryGetBarricade(out BarricadeTag tag, out byte x, out byte y, out ushort plant, out ushort index)
+        {
             BarricadeRegion region;
             if (BarricadeManager.tryGetInfo(Internal.transform, out x, out y, out plant, out index, out region))
             {
