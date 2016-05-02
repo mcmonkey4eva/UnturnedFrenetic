@@ -118,6 +118,30 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "health":
                     return new NumberTag(InternalData.barricade.health).Handle(data.Shrink());
+                // <--[tag]
+                // @Name BarricadeTag.powered
+                // @Group General Information
+                // @ReturnType BooleanTag
+                // @Returns whether the barricade is currently powered, open, or lit, etc.
+                // @Example "2" .powered returns "true".
+                // -->
+                case "powered":
+                    InteractablePower power = Internal.gameObject.GetComponent<InteractablePower>();
+                    if (power != null)
+                    {
+                        switch (power.GetType().Name)
+                        {
+                            case "InteractableDoor":
+                                return new BooleanTag(InternalData.barricade.state[16] == 1).Handle(data.Shrink());
+                            case "InteractableFire":
+                            case "InteractableGenerator":
+                            case "InteractableSafezone":
+                            case "InteractableSpot":
+                                return new BooleanTag(InternalData.barricade.state[0] == 1).Handle(data.Shrink());
+                        }
+                    }
+                    data.Error("Read 'powered' tag on non-powerable object!");
+                    return new NullTag();
                 default:
                     return new EntityTag(Internal.gameObject).Handle(data);
             }
