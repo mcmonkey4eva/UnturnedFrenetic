@@ -63,7 +63,7 @@
     <Compile Include="CommandSystems\EntityCommands\KillCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\MaxHealthCommand.cs" />
     <Compile Include="CommandSystems\EntityCommands\WalkCommand.cs" />
-    <Compile Include="CommandSystems\PlayerCommands\AwardExperienceCommand.cs" />
+    <Compile Include="CommandSystems\PlayerCommands\ExperienceCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\StaminaCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\UseItemCommand.cs" />
     <Compile Include="CommandSystems\PlayerCommands\WarmthCommand.cs" />

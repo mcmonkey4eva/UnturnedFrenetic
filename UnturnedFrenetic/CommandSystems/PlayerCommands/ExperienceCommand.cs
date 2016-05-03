@@ -7,30 +7,31 @@ using UnturnedFrenetic.TagSystems.TagObjects;
 using SDG.Unturned;
 using FreneticScript.TagHandlers.Objects;
 using FreneticScript.TagHandlers;
+using FreneticScript;
 
 namespace UnturnedFrenetic.CommandSystems.PlayerCommands
 {
-    public class AwardExperienceCommand : AbstractCommand
+    public class ExperienceCommand : AbstractCommand
     {
         // <--[command]
-        // @Name awardexperience
-        // @Arguments <player> <amount>
-        // @Short Gives a player experience points.
-        // @Updated 2016/04/30
+        // @Name experience
+        // @Arguments <player> 'award'/'take' <amount>
+        // @Short Awards or takes a player's experience points.
+        // @Updated 2016/05/02
         // @Authors mcmonkey
         // @Group Player
-        // @Minimum 2
-        // @Maximum 2
+        // @Minimum 3
+        // @Maximum 3
         // @Description
-        // Gives a player experience points.
+        // Awards or takes a player's experience points.
         // TODO: Explain more!
         // @Example
         // // This gives the player 50 xp.
-        // water <{var[player]}> 50;
+        // experience award <{var[player]}> 50;
         // -->
-        public AwardExperienceCommand()
+        public ExperienceCommand()
         {
-            Name = "awardexperience";
+            Name = "experience";
             Arguments = "<player> <amount>";
             Description = "Gives a player experience points.";
             MinimumArguments = 2;
@@ -38,13 +39,24 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
             ObjectTypes = new List<Func<TemplateObject, TemplateObject>>()
             {
                 TemplateObject.Basic_For,
+                verify,
                 NumberTag.TryFor
             };
         }
 
+        TemplateObject verify(TemplateObject input)
+        {
+            string low = input.ToString().ToLowerFast();
+            if (low == "award" || low == "take")
+            {
+                return new TextTag(low);
+            }
+            return null;
+        }
+
         public override void Execute(CommandQueue queue, CommandEntry entry)
         {
-            IntegerTag num = IntegerTag.TryFor(entry.GetArgumentObject(queue, 1));
+            IntegerTag num = IntegerTag.TryFor(entry.GetArgumentObject(queue, 2));
             if (num == null)
             {
                 queue.HandleError(entry, "Invalid amount number!");
@@ -56,9 +68,22 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
                 queue.HandleError(entry, "Invalid player!");
                 return;
             }
+            bool award = entry.GetArgument(queue, 1) == "award";
             if (num.Internal > 0)
             {
-                player.Internal.player.skills.askAward((uint)num.Internal);
+                PlayerSkills skills = player.Internal.player.skills;
+                if (award)
+                {
+                    skills._experience += (uint)num.Internal;
+                }
+                else
+                {
+                    skills._experience -= (uint)num.Internal;
+                }
+                skills.channel.send("tellExperience", ESteamCall.OWNER, ESteamPacket.UPDATE_RELIABLE_BUFFER, new object[]
+                {
+                    skills.experience
+                });
             }
             else
             {
@@ -67,7 +92,7 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
             }
             if (entry.ShouldShowGood(queue))
             {
-                entry.Good(queue, "Successfully gave experience to a player!");
+                entry.Good(queue, "Successfully " + (award ? "awarded experience to" : "took experience from") + " a player!");
             }
         }
     }

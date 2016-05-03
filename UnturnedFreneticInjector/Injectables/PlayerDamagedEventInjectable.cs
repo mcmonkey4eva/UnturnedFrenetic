@@ -13,24 +13,15 @@ namespace UnturnedFreneticInjector.Injectables
         {
             // This injects a call to the mod's static PlayerDamaged method for the PlayerDamagedScriptEvent, and exposes relevant fields. It also adds a new parameter to 'PlayerLife.askDamage'.
             TypeDefinition lifetype = gamedef.GetType("SDG.Unturned.PlayerLife");
-            FieldDefinition healthField = GetField(lifetype, "_health");
-            healthField.IsPrivate = false;
-            healthField.IsPublic = true;
-            FieldDefinition bleedingField = GetField(lifetype, "_isBleeding");
-            bleedingField.IsPrivate = false;
-            bleedingField.IsPublic = true;
-            FieldDefinition lastBleeding = GetField(lifetype, "lastBleeding");
-            lastBleeding.IsPrivate = false;
-            lastBleeding.IsPublic = true;
-            FieldDefinition lastBleed = GetField(lifetype, "lastBleed");
-            lastBleed.IsPrivate = false;
-            lastBleed.IsPublic = true;
-            FieldDefinition brokenField = GetField(lifetype, "_isBroken");
-            brokenField.IsPrivate = false;
-            brokenField.IsPublic = true;
-            FieldDefinition ragdollField = GetField(lifetype, "ragdoll");
-            ragdollField.IsPrivate = false;
-            ragdollField.IsPublic = true;
+            MakePublic(GetField(lifetype, "_health"));
+            MakePublic(GetField(lifetype, "_isBleeding"));
+            MakePublic(GetField(lifetype, "lastBleeding"));
+            MakePublic(GetField(lifetype, "lastBleed"));
+            MakePublic(GetField(lifetype, "_isBroken"));
+            MakePublic(GetField(lifetype, "ragdoll"));
+
+            TypeDefinition skillstype = gamedef.GetType("SDG.Unturned.PlayerSkills");
+            MakePublic(GetField(skillstype, "_experience"));
 
             MethodDefinition damagemethod = GetMethod(lifetype, "askDamage", 6);
             ParameterDefinition objectParam = new ParameterDefinition("obj", ParameterAttributes.None, gamedef.ImportReference(typeof(object)));
