@@ -40,8 +40,8 @@ namespace UnturnedFreneticInjector.Injectables
             }
             // TODO: Disable things in the update methods too.
             TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
-            MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "ZombieDamaged", 3));
-            MethodDefinition damagemethod = GetMethod(zombietype, "askDamage", 3);
+            MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "ZombieDamaged", 4));
+            MethodDefinition damagemethod = GetMethod(zombietype, "askDamage", 4);
             MethodBody damagebody = damagemethod.Body;
             InjectInstructions(damagebody, 0, new Instruction[]
             {
@@ -51,6 +51,8 @@ namespace UnturnedFreneticInjector.Injectables
                     Instruction.Create(OpCodes.Ldarga_S, damagemethod.Parameters[0]),
                     // Load "newRagdoll" onto the stack.
                     Instruction.Create(OpCodes.Ldarga_S, damagemethod.Parameters[1]),
+                    // Load "xp" onto the stack
+                    Instruction.Create(OpCodes.Ldarga_S, damagemethod.Parameters[3]),
                     // Call the ZombieDamaged method with the above parameters and return a bool.
                     Instruction.Create(OpCodes.Call, eventmethod),
                     // If the return is false, jump ahead to the original 0th instruction.

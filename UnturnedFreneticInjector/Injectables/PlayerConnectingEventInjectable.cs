@@ -16,7 +16,7 @@ namespace UnturnedFreneticInjector.Injectables
             TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
             MethodReference connectingmethod = gamedef.ImportReference(GetMethod(modtype, "PlayerConnecting", 1));
             TypeDefinition providertype = gamedef.GetType("SDG.Unturned.Provider");
-            MethodDefinition validatemethod = GetMethod(providertype, "onValidateAuthTicketResponse", 1);
+            MethodDefinition validatemethod = GetMethod(providertype, "handleValidateAuthTicketResponse", 1);
             MethodBody validatebody = validatemethod.Body;
             // Call: the mod's wrapper method.
             InjectInstructions(validatebody, 45, new Instruction[]

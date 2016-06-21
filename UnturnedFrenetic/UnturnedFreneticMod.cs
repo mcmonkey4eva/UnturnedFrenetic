@@ -205,7 +205,7 @@ namespace UnturnedFrenetic
             return evt.Cancelled;
         }
 
-        public static bool AnimalDamaged(Animal animal, ref byte amount, ref Vector3 ragdoll)
+        public static bool AnimalDamaged(Animal animal, ref byte amount, ref Vector3 ragdoll, ref uint xp)
         {
             // TODO: causes?
             AnimalTag animalTag = new AnimalTag(animal);
@@ -226,7 +226,7 @@ namespace UnturnedFrenetic
             return evt.Cancelled || EntityDamaged(animalTag, ref amount);
         }
 
-        public static bool ZombieDamaged(Zombie zombie, ref byte amount, ref Vector3 ragdoll)
+        public static bool ZombieDamaged(Zombie zombie, ref byte amount, ref Vector3 ragdoll, ref uint xp)
         {
             // TODO: causes?
             ZombieTag zombieTag = new ZombieTag(zombie);
