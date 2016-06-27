@@ -22,7 +22,7 @@ namespace UnturnedFreneticInjector.Injectables
             // Call: the mod initialization.
             awakebody.Instructions.Insert(0, Instruction.Create(OpCodes.Call, initmethod));
             // Call: the mod secondary initialization.
-            awakebody.Instructions.Insert(113, Instruction.Create(OpCodes.Call, initmethod2));
+            awakebody.Instructions.Insert(117, Instruction.Create(OpCodes.Call, initmethod2));
         }
     }
 }
