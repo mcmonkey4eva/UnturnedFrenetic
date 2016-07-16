@@ -98,12 +98,12 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
             return false;
         }
 
-        public bool TryGetItem(out ItemTag tag)
+        public bool TryGetItem(out ItemEntityTag tag)
         {
             InteractableItem component = Internal.GetComponent<InteractableItem>();
             if (component != null)
             {
-                tag = new ItemTag(component);
+                tag = new ItemEntityTag(component);
                 return true;
             }
             tag = null;

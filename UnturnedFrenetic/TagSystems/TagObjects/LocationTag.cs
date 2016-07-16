@@ -183,7 +183,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name LocationTag.find_items_within[<NumberTag>]
                 // @Group World
-                // @ReturnType ListTag<ItemTag>
+                // @ReturnType ListTag<ItemEntityTag>
                 // @Returns a list of all items within the specified range (spherical).
                 // @Example "0,1,2" .find_items_within[10] returns "2|3|17".
                 // -->
@@ -201,7 +201,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                                     Transform item = drop.model;
                                     if ((item.position - vec3).sqrMagnitude <= range * range)
                                     {
-                                        items.Add(new ItemTag(item.GetChild(0).gameObject.GetComponent<InteractableItem>()));
+                                        items.Add(new ItemEntityTag(item.GetChild(0).gameObject.GetComponent<InteractableItem>()));
                                     }
                                 }
                             }

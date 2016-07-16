@@ -18,7 +18,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
         // -->
         public ItemTagBase()
         {
-            Name = "item";
+            Name = "item_entity";
         }
 
         public override TemplateObject Handle(TagData data)
@@ -28,7 +28,7 @@ namespace UnturnedFrenetic.TagSystems.TagBases
             {
                 modif = modif.Substring("e:".Length);
             }
-            ItemTag itag = ItemTag.For(Utilities.StringToInt(modif));
+            ItemEntityTag itag = ItemEntityTag.For(Utilities.StringToInt(modif));
             if (itag == null)
             {
                 return new TextTag("&{NULL}").Handle(data.Shrink());

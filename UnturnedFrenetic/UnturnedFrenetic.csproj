@@ -133,6 +133,8 @@
     <Compile Include="TagSystems\TagBases\ItemAssetTagBase.cs" />
     <Compile Include="TagSystems\TagBases\PlayerTagBase.cs" />
     <Compile Include="TagSystems\TagBases\ZombieTagBase.cs" />
+    <Compile Include="TagSystems\TagObjects\InventoryTag.cs" />
+    <Compile Include="TagSystems\TagObjects\ItemTag.cs" />
     <Compile Include="TagSystems\TagObjects\OfflinePlayerTag.cs" />
     <Compile Include="TagSystems\TagObjects\StructureTag.cs" />
     <Compile Include="TagSystems\TagObjects\ColorTag.cs" />
@@ -148,7 +150,7 @@
     <Compile Include="TagSystems\TagObjects\VehicleTag.cs" />
     <Compile Include="TagSystems\TagObjects\VehicleAssetTag.cs" />
     <Compile Include="TagSystems\TagObjects\ItemAssetTag.cs" />
-    <Compile Include="TagSystems\TagObjects\ItemTag.cs" />
+    <Compile Include="TagSystems\TagObjects\ItemEntityTag.cs" />
     <Compile Include="TagSystems\TagObjects\LocationTag.cs" />
     <Compile Include="TagSystems\TagObjects\PlayerTag.cs" />
     <Compile Include="TagSystems\TagObjects\ZombieTag.cs" />

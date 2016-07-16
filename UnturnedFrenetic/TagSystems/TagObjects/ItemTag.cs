@@ -1,11 +1,10 @@
-﻿using System;
+﻿using FreneticScript.TagHandlers;
+using FreneticScript.TagHandlers.Objects;
+using SDG.Unturned;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FreneticScript.TagHandlers;
-using FreneticScript.TagHandlers.Objects;
-using SDG.Unturned;
-using UnityEngine;
 
 namespace UnturnedFrenetic.TagSystems.TagObjects
 {
@@ -13,35 +12,21 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
     {
         // <--[object]
         // @Type ItemTag
-        // @SubType EntityTag
-        // @Group Entities
-        // @Description Represents a spawned item in the world.
+        // @SubType ItemAssetTag
+        // @Group Inventories
+        // @Description Represents an item in an inventory.
         // -->
 
-        public InteractableItem Internal;
+        public ItemJar Internal;
 
-        public ItemTag(InteractableItem item)
+        public ItemTag(ItemJar item)
         {
             Internal = item;
         }
-
-        public static ItemTag For(int instanceID)
+        
+        public ItemAsset GetAsset()
         {
-            for (byte x = 0; x < Regions.WORLD_SIZE; x++)
-            {
-                for (byte y = 0; y < Regions.WORLD_SIZE; y++)
-                {
-                    foreach (ItemDrop drop in ItemManager.regions[x, y].drops)
-                    {
-                        InteractableItem item = drop.interactableItem;
-                        if (instanceID == item.gameObject.GetInstanceID())
-                        {
-                            return new ItemTag(item);
-                        }
-                    }
-                }
-            }
-            return null;
+            return (ItemAsset)Assets.find(EAssetType.ITEM, Internal.item.id);
         }
 
         public override TemplateObject Handle(TagData data)
@@ -55,18 +40,18 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // <--[tag]
                 // @Name ItemTag.asset
                 // @Group General Information
-                // @ReturnType ItemAssetTag
+                // @ReturnType ItemTag
                 // @Returns the item asset that this item is based off.
-                // @Example "2" .asset returns "Rifle_Maple".
+                // @Example <{var[player].inventory.item[2].asset}> returns "Rifle_Maple".
                 // -->
                 case "asset":
-                    return new ItemAssetTag(Internal.asset).Handle(data.Shrink());
+                    return new ItemAssetTag(GetAsset()).Handle(data.Shrink());
                 // <--[tag]
                 // @Name ItemTag.amount
                 // @Group General Information
                 // @ReturnType NumberTag
                 // @Returns the amount of the item.
-                // @Example "2" .amount returns "1".
+                // @Example <{var[player].inventory.item[2].amount}> returns "1".
                 // -->
                 case "amount":
                     return new NumberTag(Internal.item.amount).Handle(data.Shrink());
@@ -75,18 +60,18 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // @Group General Information
                 // @ReturnType NumberTag
                 // @Returns the current quality of the item.
-                // @Example "2" .quality returns "91".
+                // @Example <{var[player].inventory.item[2].quality}> returns "91".
                 // -->
                 case "quality":
                     return new NumberTag(Internal.item.quality).Handle(data.Shrink());
                 default:
-                    return new EntityTag(Internal.gameObject).Handle(data);
+                    return new ItemAssetTag(GetAsset()).Handle(data);
             }
         }
 
         public override string ToString()
         {
-            return Internal.gameObject.GetInstanceID().ToString();
+            return new ItemAssetTag(GetAsset()).ToString();
         }
     }
 }

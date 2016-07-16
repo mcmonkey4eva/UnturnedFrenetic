@@ -89,7 +89,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                     }
                     return;
                 }
-                ItemTag item;
+                ItemEntityTag item;
                 if (entity.TryGetItem(out item))
                 {
                     // TODO: Find some way to teleport items, barricades, etc without voiding the InstanceID?

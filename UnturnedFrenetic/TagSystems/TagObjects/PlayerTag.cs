@@ -237,6 +237,8 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                 // -->
                 case "experience":
                     return new IntegerTag(Internal.player.skills.experience).Handle(data.Shrink());
+                case "inventory":
+                    return new InventoryTag(Internal.player.inventory.items);
                 default:
                     return new EntityTag(Internal.player.gameObject).Handle(data);
             }

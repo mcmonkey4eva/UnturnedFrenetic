@@ -27,6 +27,10 @@ namespace UnturnedFreneticInjector.Injectables
             FieldDefinition fieldinstcount = GetField(type, "instanceCount");
             fieldinstcount.IsPrivate = false;
             fieldinstcount.IsPublic = true;
+            TypeDefinition plInvType = gamedef.GetType("SDG.Unturned.PlayerInventory");
+            FieldDefinition plInvItems = GetField(plInvType, "items");
+            plInvItems.IsPrivate = false;
+            plInvItems.IsPublic = true;
             // Keep track of items by using models
             TypeDefinition itemTracker = moddef.GetType("UnturnedFrenetic.ItemModelTracker");
             // (Item, Vector3)
