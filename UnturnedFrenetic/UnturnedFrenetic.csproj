@@ -134,7 +134,6 @@
     <Compile Include="TagSystems\TagBases\PlayerTagBase.cs" />
     <Compile Include="TagSystems\TagBases\ZombieTagBase.cs" />
     <Compile Include="TagSystems\TagObjects\InventoryTag.cs" />
-    <Compile Include="TagSystems\TagObjects\ItemTag.cs" />
     <Compile Include="TagSystems\TagObjects\OfflinePlayerTag.cs" />
     <Compile Include="TagSystems\TagObjects\StructureTag.cs" />
     <Compile Include="TagSystems\TagObjects\ColorTag.cs" />
