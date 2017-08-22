@@ -177,7 +177,7 @@ namespace UnturnedFrenetic
                     amount = (uint)(((double)amount / healthController.maxHealth) * 100.0);
                     return false;
                 }
-                return true;
+                return deathevt.Cancelled;
             }
             PlayerDamagedEventArgs evt = new PlayerDamagedEventArgs();
             evt.Player = playerTag;
