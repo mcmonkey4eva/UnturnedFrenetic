@@ -91,7 +91,7 @@ namespace UnturnedFreneticInjector.Injectables
             MethodDefinition landedmethod = GetMethod(lifetype, "onLanded", 1);
             MethodBody landedbody = landedmethod.Body;
             // Load "null" onto the stack.
-            InjectInstructions(landedbody, 34, Instruction.Create(OpCodes.Ldnull));
+            InjectInstructions(landedbody, 38, Instruction.Create(OpCodes.Ldnull));
 
             MethodDefinition simulatemethod = GetMethod(lifetype, "simulate", 1);
             MethodBody simulatebody = simulatemethod.Body;

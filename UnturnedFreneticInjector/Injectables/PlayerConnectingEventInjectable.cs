@@ -19,14 +19,14 @@ namespace UnturnedFreneticInjector.Injectables
             MethodDefinition validatemethod = GetMethod(providertype, "handleValidateAuthTicketResponse", 1);
             MethodBody validatebody = validatemethod.Body;
             // Call: the mod's wrapper method.
-            InjectInstructions(validatebody, 45, new Instruction[]
+            InjectInstructions(validatebody, 78, new Instruction[]
                 {
                     // Load "steamPending" onto the stack.
-                    Instruction.Create(OpCodes.Ldloc_0),
+                    Instruction.Create(OpCodes.Ldloc_1),
                     // "Call the connect method with parameter 'steamPending' and returning a bool.
                     Instruction.Create(OpCodes.Call, connectingmethod),
-                    // If the return is false, jump ahead to the original 45th instruction.
-                    Instruction.Create(OpCodes.Brfalse, validatebody.Instructions[45]),
+                    // If the return is false, jump ahead to the original 78th instruction.
+                    Instruction.Create(OpCodes.Brfalse, validatebody.Instructions[78]),
                     // Otherwise,return now.
                     Instruction.Create(OpCodes.Ret)
                 });

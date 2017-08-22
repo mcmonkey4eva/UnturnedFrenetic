@@ -192,7 +192,7 @@ namespace UnturnedFrenetic
                 amount = (uint)(((double)amount / healthController.maxHealth) * 100.0);
                 return false;
             }
-            return true;
+            return evt.Cancelled;
         }
 
         public static bool PlayerShoot(Player player, UseableGun gun)

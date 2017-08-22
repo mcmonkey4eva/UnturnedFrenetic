@@ -43,10 +43,10 @@ namespace UnturnedFreneticInjector.Injectables
             MethodDefinition getPointProperty = GetMethod(gamedef.GetType("SDG.Unturned.ItemSpawnpoint"), "get_point", 0);
             // Track dropItem
             MethodDefinition dropItemMethod = GetMethod(type, "dropItem", 5);
-            InjectInstructions(dropItemMethod.Body, 74, new Instruction[]
+            InjectInstructions(dropItemMethod.Body, 104, new Instruction[]
             {
                 // Load: ItemData itemData
-                Instruction.Create(OpCodes.Ldloc_3),
+                Instruction.Create(OpCodes.Ldloc, dropItemMethod.Body.Variables[5]),
                 // Load: Vector3 point
                 Instruction.Create(OpCodes.Ldarg_1),
                 // ItemModelTracker.Track(itemData, point);
@@ -54,7 +54,7 @@ namespace UnturnedFreneticInjector.Injectables
             });
             // Track generateItems
             MethodDefinition generateItemsMethod = GetMethod(type, "generateItems", 2);
-            InjectInstructions(generateItemsMethod.Body, 137, new Instruction[]
+            InjectInstructions(generateItemsMethod.Body, 164, new Instruction[]
             {
                 // Load: byte x
                 Instruction.Create(OpCodes.Ldarg_1),
@@ -67,10 +67,10 @@ namespace UnturnedFreneticInjector.Injectables
             });
             // Track respawnItems
             MethodDefinition respawnItemsMethod = GetMethod(type, "respawnItems", 0);
-            InjectInstructions(respawnItemsMethod.Body, 130, new Instruction[]
+            InjectInstructions(respawnItemsMethod.Body, 128, new Instruction[]
             {
                 // Load: ItemData itemData
-                Instruction.Create(OpCodes.Ldloc, respawnItemsMethod.Body.Variables[4]),
+                Instruction.Create(OpCodes.Ldloc, respawnItemsMethod.Body.Variables[6]),
                 // Load: ItemSpawnpoint itemSpawnpoint
                 Instruction.Create(OpCodes.Ldloc_0),
                 // Call: 'get_point' on  itemSpawnpoint2 -> add the Vector3 result to the stack.
@@ -93,7 +93,7 @@ namespace UnturnedFreneticInjector.Injectables
             });
             // Untrack despawnItems
             MethodDefinition despawnItemsMethod = GetMethod(type, "despawnItems", 0);
-            InjectInstructions(despawnItemsMethod.Body, 50, new Instruction[]
+            InjectInstructions(despawnItemsMethod.Body, 55, new Instruction[]
             {
                 // Load: ItemManager.despawnItems_X
                 Instruction.Create(OpCodes.Ldsfld, GetField(type, "despawnItems_X")),
