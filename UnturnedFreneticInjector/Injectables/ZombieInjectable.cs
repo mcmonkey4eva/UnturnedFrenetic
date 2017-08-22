@@ -41,7 +41,7 @@ namespace UnturnedFreneticInjector.Injectables
             // TODO: Disable things in the update methods too.
             TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
             MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "ZombieDamaged", 4));
-            MethodDefinition damagemethod = GetMethod(zombietype, "askDamage", 4);
+            MethodDefinition damagemethod = GetMethod(zombietype, "askDamage", 6);
             MethodBody damagebody = damagemethod.Body;
             InjectInstructions(damagebody, 0, new Instruction[]
             {

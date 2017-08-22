@@ -43,7 +43,7 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
             };
         }
 
-        public override void Execute(CommandQueue queue, CommandEntry entry)
+        public override void Execute(FreneticScript.CommandSystem.CommandQueue queue, CommandEntry entry)
         {
             LocationTag loc = LocationTag.For(entry.GetArgument(queue, 1));
             if (loc == null)

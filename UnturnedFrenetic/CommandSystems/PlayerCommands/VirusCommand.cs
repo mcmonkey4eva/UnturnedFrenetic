@@ -43,7 +43,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             };
         }
 
-        public override void Execute(CommandQueue queue, CommandEntry entry)
+        public override void Execute(FreneticScript.CommandSystem.CommandQueue queue, CommandEntry entry)
         {
             try
             {

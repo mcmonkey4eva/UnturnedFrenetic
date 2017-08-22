@@ -25,7 +25,7 @@ namespace UnturnedFrenetic.UnturnedCommands
 
         protected override void execute(CSteamID executorID, string parameter)
         {
-            CommandQueue queue = ExecScript.ToQueue(UnturnedFreneticMod.Instance.CommandSystem.System);
+            FreneticScript.CommandSystem.CommandQueue queue = ExecScript.ToQueue(UnturnedFreneticMod.Instance.CommandSystem.System);
             MapTag map = new MapTag();
             if (executorID == CSteamID.Nil)
             {

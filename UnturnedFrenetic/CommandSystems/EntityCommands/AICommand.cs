@@ -6,7 +6,6 @@ using FreneticScript.CommandSystem;
 using UnturnedFrenetic.TagSystems.TagObjects;
 using FreneticScript.TagHandlers;
 using FreneticScript.TagHandlers.Objects;
-using SDG.Unturned;
 
 namespace UnturnedFrenetic.CommandSystems.EntityCommands
 {
@@ -42,7 +41,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             };
         }
 
-        public override void Execute(CommandQueue queue, CommandEntry entry)
+        public override void Execute(FreneticScript.CommandSystem.CommandQueue queue, CommandEntry entry)
         {
             bool enable = BooleanTag.TryFor(entry.GetArgumentObject(queue, 1)).Internal;
             EntityTag entity = EntityTag.For(entry.GetArgumentObject(queue, 0));

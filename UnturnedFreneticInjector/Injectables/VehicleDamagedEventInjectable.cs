@@ -32,6 +32,9 @@ namespace UnturnedFreneticInjector.Injectables
                     // Otherwise, return now.
                     Instruction.Create(OpCodes.Ret)
             });
+            MethodDefinition explodemethod = GetMethod(resourcetype, "explode");
+            MethodBody explodebody = explodemethod.Body;
+            InjectInstructions(explodebody, 71, Instruction.Create(OpCodes.Ldarg_0));
         }
     }
 }

@@ -63,7 +63,7 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
             return null;
         }
 
-        public override void Execute(CommandQueue queue, CommandEntry entry)
+        public override void Execute(FreneticScript.CommandSystem.CommandQueue queue, CommandEntry entry)
         {
             PlayerTag player = PlayerTag.For(entry.GetArgument(queue, 0));
             bool primary = entry.GetArgument(queue, 1) == "primary";

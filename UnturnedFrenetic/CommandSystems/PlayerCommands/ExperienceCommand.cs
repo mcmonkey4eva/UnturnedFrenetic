@@ -54,7 +54,7 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
             return null;
         }
 
-        public override void Execute(CommandQueue queue, CommandEntry entry)
+        public override void Execute(FreneticScript.CommandSystem.CommandQueue queue, CommandEntry entry)
         {
             IntegerTag num = IntegerTag.TryFor(entry.GetArgumentObject(queue, 2));
             if (num == null)

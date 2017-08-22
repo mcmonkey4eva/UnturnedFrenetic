@@ -45,7 +45,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             };
         }
 
-        public override void Execute(CommandQueue queue, CommandEntry entry)
+        public override void Execute(FreneticScript.CommandSystem.CommandQueue queue, CommandEntry entry)
         {
             try
             {
@@ -178,7 +178,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                         queue.HandleError(entry, "Invalid world object type!");
                         return;
                     }
-                    LevelObjects.addObject(loc.ToVector3(), Quaternion.identity, asset.Internal.id);
+                    LevelObjects.addObject(loc.ToVector3(), Quaternion.identity, Vector3.one, asset.Internal.id, asset.Internal.name, asset.Internal.GUID, ELevelObjectPlacementOrigin.MANUAL);
                     // TODO: Network!
                     entry.Good(queue, "Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) +"! (WARNING: IT WILL BE INVISIBLE CURRENTLY - SEE THE COMPLAINTS FILE)");
                     // TODO: Get the world entity!
@@ -244,7 +244,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                         queue.HandleError(entry, "Invalid item structure type!");
                         return;
                     }
-                    StructureManager.dropStructure(new Structure(asset.Internal.id), loc.ToVector3(), 0f, CSteamID.Nil.m_SteamID, CSteamID.Nil.m_SteamID);
+                    StructureManager.dropStructure(new Structure(asset.Internal.id), loc.ToVector3(), 0f, 0f, 0f, CSteamID.Nil.m_SteamID, CSteamID.Nil.m_SteamID);
                     if (entry.ShouldShowGood(queue))
                     {
                         entry.Good(queue, "Successfully spawned a " + TagParser.Escape(asset.ToString()) + " at " + TagParser.Escape(loc.ToString()) + "!");

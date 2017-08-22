@@ -44,7 +44,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             };
         }
 
-        public override void Execute(CommandQueue queue, CommandEntry entry)
+        public override void Execute(FreneticScript.CommandSystem.CommandQueue queue, CommandEntry entry)
         {
             IntegerTag num = IntegerTag.TryFor(entry.GetArgumentObject(queue, 1));
             if (num.Internal <= 0)

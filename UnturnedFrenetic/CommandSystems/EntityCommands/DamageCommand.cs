@@ -44,7 +44,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             };
         }
 
-        public override void Execute(CommandQueue queue, CommandEntry entry)
+        public override void Execute(FreneticScript.CommandSystem.CommandQueue queue, CommandEntry entry)
         {
             try
             {
@@ -103,7 +103,8 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 ZombieTag zombie;
                 if (entity.TryGetZombie(out zombie))
                 {
-                    zombie.Internal.askDamage((byte)num.Internal, Vector3.zero, out kill);
+                    uint xp;
+                    zombie.Internal.askDamage((byte)num.Internal, Vector3.zero, out kill, out xp);
                     if (entry.ShouldShowGood(queue))
                     {
                         entry.Good(queue, "Successfully damaged a zombie by " + TagParser.Escape(num.ToString()) + "!");
@@ -113,7 +114,8 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
                 AnimalTag animal;
                 if (entity.TryGetAnimal(out animal))
                 {
-                    animal.Internal.askDamage((byte)num.Internal, Vector3.zero, out kill);
+                    uint xp;
+                    animal.Internal.askDamage((byte)num.Internal, Vector3.zero, out kill, out xp);
                     if (entry.ShouldShowGood(queue))
                     {
                         entry.Good(queue, "Successfully damaged an animal by " + TagParser.Escape(num.ToString()) + "!");

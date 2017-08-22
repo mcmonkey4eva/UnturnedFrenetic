@@ -34,7 +34,7 @@ namespace UnturnedFrenetic.CommandSystems
             return File.ReadAllText(Environment.CurrentDirectory + "/frenetic/scripts/" + name.Replace("..", "_")); // TODO: Proper sandbox!
         }
 
-        public override void UnknownCommand(CommandQueue queue, string basecommand, string[] arguments)
+        public override void UnknownCommand(FreneticScript.CommandSystem.CommandQueue queue, string basecommand, string[] arguments)
         {
             Bad("Invalid command: " + TagParser.Escape(basecommand) + "!", queue.CommandStack.Count > 0 ? queue.CommandStack.Peek().Debug : DebugMode.FULL);
         }

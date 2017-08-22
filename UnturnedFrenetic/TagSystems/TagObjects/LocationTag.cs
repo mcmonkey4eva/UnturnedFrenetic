@@ -273,9 +273,9 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                             for (byte y = 0; y < Regions.WORLD_SIZE; y++)
                             {
                                 BarricadeRegion region = BarricadeManager.regions[x, y];
-                                for (int i = 0; i < region.models.Count; i++)
+                                for (int i = 0; i < region.drops.Count; i++)
                                 {
-                                    Transform model = region.models[i];
+                                    Transform model = region.drops[i].model;
                                     if ((model.position - vec3).sqrMagnitude <= range * range)
                                     {
                                         barricades.Add(new BarricadeTag(model, region.barricades[i]));

@@ -45,7 +45,7 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
             };
         }
 
-        public override void Execute(CommandQueue queue, CommandEntry entry)
+        public override void Execute(FreneticScript.CommandSystem.CommandQueue queue, CommandEntry entry)
         {
             IntegerTag itag = IntegerTag.TryFor(entry.GetArgumentObject(queue, 0));
             uint ti = (uint)itag.Internal;

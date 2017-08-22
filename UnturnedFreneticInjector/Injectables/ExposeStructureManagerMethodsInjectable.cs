@@ -15,9 +15,9 @@ namespace UnturnedFreneticInjector.Injectables
             FieldDefinition field = GetField(type, "manager");
             field.IsPrivate = false;
             field.IsPublic = true;
-            FieldDefinition regions = GetField(type, "regions");
-            regions.IsPrivate = false;
-            regions.IsPublic = true;
+            //FieldDefinition regions = GetField(type, "regions");
+            //regions.IsPrivate = false;
+            //regions.IsPublic = true;
         }
     }
 }

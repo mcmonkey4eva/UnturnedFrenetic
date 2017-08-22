@@ -43,7 +43,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             };
         }
 
-        public override void Execute(CommandQueue queue, CommandEntry entry)
+        public override void Execute(FreneticScript.CommandSystem.CommandQueue queue, CommandEntry entry)
         {
             EntityTag entity = EntityTag.For(entry.GetArgumentObject(queue, 0));
             if (entity == null)
@@ -69,7 +69,8 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             {
                 while (!zombie.Internal.isDead)
                 {
-                    zombie.Internal.askDamage((byte)zombie.Internal.health, Vector3.zero, out kill);
+                    uint xp;
+                    zombie.Internal.askDamage((byte)zombie.Internal.health, Vector3.zero, out kill, out xp);
                 }
                 if (entry.ShouldShowGood(queue))
                 {
@@ -82,7 +83,8 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             {
                 while (!animal.Internal.isDead)
                 {
-                    animal.Internal.askDamage((byte)animal.Internal.health, Vector3.zero, out kill);
+                    uint xp;
+                    animal.Internal.askDamage((byte)animal.Internal.health, Vector3.zero, out kill, out xp);
                 }
                 if (entry.ShouldShowGood(queue))
                 {

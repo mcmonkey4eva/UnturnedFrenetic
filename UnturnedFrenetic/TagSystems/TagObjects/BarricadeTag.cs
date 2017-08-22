@@ -32,7 +32,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     {
                         if (barricade == region.barricades[i].barricade)
                         {
-                            Internal = region.models[i];
+                            Internal = region.drops[i].model;
                             InternalData = region.barricades[i];
                             return;
                         }
@@ -82,9 +82,9 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     BarricadeRegion region = BarricadeManager.regions[x, y];
                     for (int i = 0; i < region.barricades.Count; i++)
                     {
-                        if (instanceID == region.models[i].gameObject.GetInstanceID())
+                        if (instanceID == region.drops[i].model.gameObject.GetInstanceID())
                         {
-                            return new BarricadeTag(region.models[i], region.barricades[i]);
+                            return new BarricadeTag(region.drops[i].model, region.barricades[i]);
                         }
                     }
                 }

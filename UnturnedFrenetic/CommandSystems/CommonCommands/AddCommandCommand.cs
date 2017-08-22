@@ -58,7 +58,7 @@ namespace UnturnedFrenetic.CommandSystems.CommonCommands
             };
         }
 
-        public override void Execute(CommandQueue queue, CommandEntry entry)
+        public override void Execute(FreneticScript.CommandSystem.CommandQueue queue, CommandEntry entry)
         {
             if (entry.Arguments[0].ToString() == "\0CALLBACK")
             {

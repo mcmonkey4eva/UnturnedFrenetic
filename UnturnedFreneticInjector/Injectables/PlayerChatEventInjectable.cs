@@ -21,14 +21,14 @@ namespace UnturnedFreneticInjector.Injectables
             MethodDefinition chatmethod = GetMethod(managertype, "askChat", 3);
             MethodBody chatbody = chatmethod.Body;
             // Remove old color handling
-            chatbody.Instructions[53].Operand = chatbody.Instructions[124];
-            chatbody.Instructions[81].Operand = chatbody.Instructions[124];
-            chatbody.Instructions[109].Operand = chatbody.Instructions[124];
-            for (int i = 111; i <= 123; i++)
+            chatbody.Instructions[63].Operand = chatbody.Instructions[136];
+            chatbody.Instructions[91].Operand = chatbody.Instructions[136];
+            chatbody.Instructions[119].Operand = chatbody.Instructions[136];
+            for (int i = 121; i <= 135; i++)
             {
-                chatbody.Instructions.RemoveAt(111);
+                chatbody.Instructions.RemoveAt(121);
             }
-            InjectInstructions(chatbody, 27, new Instruction[]
+            InjectInstructions(chatbody, 37, new Instruction[]
                 {
                     // Load "steamPlayer" onto the stack.
                     Instruction.Create(OpCodes.Ldloc_0),
@@ -42,8 +42,8 @@ namespace UnturnedFreneticInjector.Injectables
                     Instruction.Create(OpCodes.Ldarga_S, chatmethod.Parameters[2]),
                     // Call the PlayerChat method with the above parameters and return a bool.
                     Instruction.Create(OpCodes.Call, eventmethod),
-                    // If the return is false, jump ahead to the original 27th instruction.
-                    Instruction.Create(OpCodes.Brfalse, chatbody.Instructions[27]),
+                    // If the return is false, jump ahead to the original 37th instruction.
+                    Instruction.Create(OpCodes.Brfalse, chatbody.Instructions[37]),
                     // Otherwise, return now.
                     Instruction.Create(OpCodes.Ret)
                 });

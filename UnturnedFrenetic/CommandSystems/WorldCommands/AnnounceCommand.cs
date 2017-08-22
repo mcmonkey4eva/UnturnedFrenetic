@@ -42,7 +42,7 @@ namespace UnturnedFrenetic.CommandSystems.WorldCommands
             ObjectTypes = new List<Func<TemplateObject, TemplateObject>>(); // TODO: Some validate of data / types?
         }
 
-        public override void Execute(CommandQueue queue, CommandEntry entry)
+        public override void Execute(FreneticScript.CommandSystem.CommandQueue queue, CommandEntry entry)
         {
             TemplateObject tcolor = entry.GetArgumentObject(queue, 0);
             ColorTag color = ColorTag.For(tcolor);

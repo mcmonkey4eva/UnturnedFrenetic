@@ -39,7 +39,7 @@ namespace UnturnedFrenetic.CommandSystems.PlayerCommands
             ObjectTypes = new List<Func<TemplateObject, TemplateObject>>(); // TODO: Some validation of data / types.
         }
 
-        public override void Execute(CommandQueue queue, CommandEntry entry)
+        public override void Execute(FreneticScript.CommandSystem.CommandQueue queue, CommandEntry entry)
         {
             ListTag players = ListTag.For(entry.GetArgument(queue, 0));
             TemplateObject tcolor = entry.GetArgumentObject(queue, 1);

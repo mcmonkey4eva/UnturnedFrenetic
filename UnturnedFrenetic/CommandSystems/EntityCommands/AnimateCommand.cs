@@ -44,7 +44,7 @@ namespace UnturnedFrenetic.CommandSystems.EntityCommands
             };
         }
 
-        public override void Execute(CommandQueue queue, CommandEntry entry)
+        public override void Execute(FreneticScript.CommandSystem.CommandQueue queue, CommandEntry entry)
         {
             string animation = entry.GetArgument(queue, 1).ToUpperInvariant();
             EntityTag entity = EntityTag.For(entry.GetArgumentObject(queue, 0));

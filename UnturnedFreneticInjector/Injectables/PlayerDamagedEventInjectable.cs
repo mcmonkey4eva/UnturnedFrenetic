@@ -27,6 +27,10 @@ namespace UnturnedFreneticInjector.Injectables
             ParameterDefinition objectParam = new ParameterDefinition("obj", ParameterAttributes.None, gamedef.ImportReference(typeof(object)));
             damagemethod.Parameters.Add(objectParam);
 
+            MethodDefinition dodamagemethod = GetMethod(lifetype, "doDamage", 6);
+            ParameterDefinition doobjectParam = new ParameterDefinition("obj", ParameterAttributes.None, gamedef.ImportReference(typeof(object)));
+            dodamagemethod.Parameters.Add(doobjectParam);
+
             TypeDefinition modtype = moddef.GetType("UnturnedFrenetic.UnturnedFreneticMod");
             MethodReference eventhealmethod = gamedef.ImportReference(GetMethod(modtype, "PlayerHealed", 4));
             MethodDefinition healmethod = GetMethod(lifetype, "askHeal", 3);
@@ -52,27 +56,29 @@ namespace UnturnedFreneticInjector.Injectables
 
             MethodReference eventmethod = gamedef.ImportReference(GetMethod(modtype, "PlayerDamaged", 7));
             MethodBody damagebody = damagemethod.Body;
-            InjectInstructions(damagebody, 0, new Instruction[]
+            InjectInstructions(damagebody, 22, Instruction.Create(OpCodes.Ldarg, objectParam));
+            MethodBody dodamagebody = dodamagemethod.Body;
+            InjectInstructions(dodamagebody, 0, new Instruction[]
                 {
                     // Load "base.player" onto the stack.
                     Instruction.Create(OpCodes.Ldarg_0),
                     Instruction.Create(OpCodes.Call, GetMethod(gamedef.GetType("SDG.Unturned.PlayerCaller"), "get_player", 0)),
                     // Load "amount" onto the stack.
-                    Instruction.Create(OpCodes.Ldarga_S, damagemethod.Parameters[0]),
+                    Instruction.Create(OpCodes.Ldarga_S, dodamagemethod.Parameters[0]),
                     // Load "newRagdoll" onto the stack.
-                    Instruction.Create(OpCodes.Ldarga_S, damagemethod.Parameters[1]),
+                    Instruction.Create(OpCodes.Ldarga_S, dodamagemethod.Parameters[1]),
                     // Load "newCause" onto the stack.
-                    Instruction.Create(OpCodes.Ldarga_S, damagemethod.Parameters[2]),
+                    Instruction.Create(OpCodes.Ldarga_S, dodamagemethod.Parameters[2]),
                     // Load "newLimb" onto the stack.
-                    Instruction.Create(OpCodes.Ldarga_S, damagemethod.Parameters[3]),
+                    Instruction.Create(OpCodes.Ldarga_S, dodamagemethod.Parameters[3]),
                     // Load "newKiller" onto the stack.
-                    Instruction.Create(OpCodes.Ldarg, damagemethod.Parameters[4]),
+                    Instruction.Create(OpCodes.Ldarg, dodamagemethod.Parameters[4]),
                     // Load our custom "obj" onto the stack
                     Instruction.Create(OpCodes.Ldarg, objectParam),
                     // Call the PlayerDamaged method with the above parameters and return a bool.
                     Instruction.Create(OpCodes.Call, eventmethod),
                     // If the return is false, jump ahead to the original 0th instruction.
-                    Instruction.Create(OpCodes.Brfalse, damagebody.Instructions[0]),
+                    Instruction.Create(OpCodes.Brfalse, dodamagebody.Instructions[0]),
                     // Otherwise,return now.
                     Instruction.Create(OpCodes.Ret)
                 });
@@ -80,7 +86,7 @@ namespace UnturnedFreneticInjector.Injectables
             MethodDefinition suicidemethod = GetMethod(lifetype, "askSuicide", 1);
             MethodBody suicidebody = suicidemethod.Body;
            // Load "null" onto the stack.
-            InjectInstructions(suicidebody, 19, Instruction.Create(OpCodes.Ldnull));
+            InjectInstructions(suicidebody, 35, Instruction.Create(OpCodes.Ldnull));
 
             MethodDefinition landedmethod = GetMethod(lifetype, "onLanded", 1);
             MethodBody landedbody = landedmethod.Body;
@@ -90,23 +96,27 @@ namespace UnturnedFreneticInjector.Injectables
             MethodDefinition simulatemethod = GetMethod(lifetype, "simulate", 1);
             MethodBody simulatebody = simulatemethod.Body;
             // Load "null" onto the stack.
-            InjectInstructions(simulatebody, 986, Instruction.Create(OpCodes.Ldnull));
+            InjectInstructions(simulatebody, 1170, Instruction.Create(OpCodes.Ldnull));
             // Load "null" onto the stack.
-            InjectInstructions(simulatebody, 814, Instruction.Create(OpCodes.Ldnull));
+            InjectInstructions(simulatebody, 992, Instruction.Create(OpCodes.Ldnull));
             // Load "null" onto the stack.
-            InjectInstructions(simulatebody, 714, Instruction.Create(OpCodes.Ldnull));
+            InjectInstructions(simulatebody, 900, Instruction.Create(OpCodes.Ldnull));
             // Load "null" onto the stack.
-            InjectInstructions(simulatebody, 626, Instruction.Create(OpCodes.Ldnull));
+            InjectInstructions(simulatebody, 875, Instruction.Create(OpCodes.Ldnull));
             // Load "null" onto the stack.
-            InjectInstructions(simulatebody, 340, Instruction.Create(OpCodes.Ldnull));
+            InjectInstructions(simulatebody, 802, Instruction.Create(OpCodes.Ldnull));
             // Load "null" onto the stack.
-            InjectInstructions(simulatebody, 201, Instruction.Create(OpCodes.Ldnull));
+            InjectInstructions(simulatebody, 721, Instruction.Create(OpCodes.Ldnull));
             // Load "null" onto the stack.
-            InjectInstructions(simulatebody, 158, Instruction.Create(OpCodes.Ldnull));
+            InjectInstructions(simulatebody, 646, Instruction.Create(OpCodes.Ldnull));
             // Load "null" onto the stack.
-            InjectInstructions(simulatebody, 136, Instruction.Create(OpCodes.Ldnull));
+            InjectInstructions(simulatebody, 193, Instruction.Create(OpCodes.Ldnull));
             // Load "null" onto the stack.
-            InjectInstructions(simulatebody, 83, Instruction.Create(OpCodes.Ldnull));
+            InjectInstructions(simulatebody, 150, Instruction.Create(OpCodes.Ldnull));
+            // Load "null" onto the stack.
+            InjectInstructions(simulatebody, 128, Instruction.Create(OpCodes.Ldnull));
+            // Load "null" onto the stack.
+            InjectInstructions(simulatebody, 75, Instruction.Create(OpCodes.Ldnull));
             
             TypeDefinition barriertype = gamedef.GetType("SDG.Unturned.Barrier");
             MethodDefinition barriercollide = GetMethod(barriertype, "OnTriggerEnter", 1);
@@ -118,13 +128,19 @@ namespace UnturnedFreneticInjector.Injectables
             MethodDefinition slayexecute = GetMethod(slaytype, "execute", 2);
             MethodBody slayexecutebody = slayexecute.Body;
             // Load "this" onto the stack.
-            InjectInstructions(slayexecutebody, 67, Instruction.Create(OpCodes.Ldarg_0));
+            InjectInstructions(slayexecutebody, 111, Instruction.Create(OpCodes.Ldarg_0));
+
+            TypeDefinition killtype = gamedef.GetType("SDG.Unturned.CommandKill");
+            MethodDefinition killexecute = GetMethod(killtype, "execute", 2);
+            MethodBody killexecutebody = killexecute.Body;
+            // Load "this" onto the stack.
+            InjectInstructions(killexecutebody, 40, Instruction.Create(OpCodes.Ldarg_0));
 
             TypeDefinition damagetooltype = gamedef.GetType("SDG.Unturned.DamageTool");
             MethodDefinition damagetooldamage = GetMethod(damagetooltype, "damage", 8);
             MethodBody damagetooldamagebody = damagetooldamage.Body;
             // Load "null" onto the stack.
-            InjectInstructions(damagetooldamagebody, 24, Instruction.Create(OpCodes.Ldnull));
+            InjectInstructions(damagetooldamagebody, 30, Instruction.Create(OpCodes.Ldnull));
 
             TypeDefinition levelmanagertype = gamedef.GetType("SDG.Unturned.LevelManager");
             MethodDefinition levelmanagerplay = GetMethod(levelmanagertype, "arenaPlay", 0);
@@ -141,12 +157,12 @@ namespace UnturnedFreneticInjector.Injectables
             MethodDefinition animalupdate = GetMethod(animaltype, "tick", 0);
             MethodBody animalupdatebody = animalupdate.Body;
             // Load "this" onto the stack.
-            InjectInstructions(animalupdatebody, 154, Instruction.Create(OpCodes.Ldarg_0));
+            InjectInstructions(animalupdatebody, 167, Instruction.Create(OpCodes.Ldarg_0));
             TypeDefinition zombietype = gamedef.GetType("SDG.Unturned.Zombie");
             MethodDefinition zombieupdate = GetMethod(zombietype, "tick", 0);
             MethodBody zombieupdatebody = zombieupdate.Body;
             // Load "this" onto the stack.
-            InjectInstructions(zombieupdatebody, 1450, Instruction.Create(OpCodes.Ldarg_0));
+            InjectInstructions(zombieupdatebody, 2116, Instruction.Create(OpCodes.Ldarg_0));
         }
     }
 }

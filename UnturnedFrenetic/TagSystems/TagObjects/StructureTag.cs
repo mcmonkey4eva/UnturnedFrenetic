@@ -32,7 +32,7 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     {
                         if (structure == region.structures[i].structure)
                         {
-                            Internal = region.models[i];
+                            Internal = region.drops[i].model;
                             InternalData = region.structures[i];
                             return;
                         }
@@ -82,9 +82,9 @@ namespace UnturnedFrenetic.TagSystems.TagObjects
                     StructureRegion region = StructureManager.regions[x, y];
                     for (int i = 0; i < region.structures.Count; i++)
                     {
-                        if (instanceID == region.models[i].gameObject.GetInstanceID())
+                        if (instanceID == region.drops[i].model.gameObject.GetInstanceID())
                         {
-                            return new StructureTag(region.models[i], region.structures[i]);
+                            return new StructureTag(region.drops[i].model, region.structures[i]);
                         }
                     }
                 }
